@@ -1,0 +1,62 @@
+import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+import { logger } from 'hono/logger'
+import { serveStatic } from '@hono/node-server/serve-static'
+import { blog } from './api/blog'
+import { resume } from './api/resume'
+
+const app = new Hono()
+
+// Middleware
+app.use('*', logger())
+app.use('*', cors())
+
+// Health check
+app.get('/api/health', (c) => {
+  return c.json({ status: 'ok' })
+})
+
+// API routes
+app.route('/api/blog', blog)
+app.route('/api/resume', resume)
+
+// Serve static assets from Vite build
+app.use('/assets/*', serveStatic({ 
+  root: './dist/client',
+  rewriteRequestPath: (path) => path.replace(/^\/assets/, '/assets')
+}))
+
+// Serve other static files (favicon, etc.)
+app.use('/favicon.ico', serveStatic({ path: './dist/client/favicon.ico' }))
+app.use('/vite.svg', serveStatic({ path: './dist/client/vite.svg' }))
+
+// 404 handler for API routes - must come before SPA fallback
+app.all('/api/*', (c) => {
+  return c.json({ error: 'API endpoint not found' }, 404)
+})
+
+// SPA fallback - serve index.html for all non-API routes
+// This ensures React Router can handle client-side routing
+app.get('*', serveStatic({ 
+  path: './dist/client/index.html',
+  onNotFound: (path, c) => {
+    // If index.html is not found, return a basic HTML with error message
+    c.html(`
+      <!DOCTYPE html>
+      <html>
+        <head><title>hashiiiii.com</title></head>
+        <body>
+          <h1>Build Required</h1>
+          <p>Please run "npm run build:frontend" first to generate the React SPA.</p>
+        </body>
+      </html>
+    `)
+  }
+}))
+
+// General 404 handler
+app.notFound((c) => {
+  return c.json({ error: 'Not Found' }, 404)
+})
+
+export { app }

@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tokyo Night Dark mode colors (default) */
+  --tn-bg-primary: #1a1b26;
+  --tn-bg-secondary: #16161e;
+  --tn-bg-tertiary: #1e202e;
+  --tn-bg-hover: #14141b;
+  --tn-fg-primary: #a9b1d6;
+  --tn-fg-secondary: #787c99;
+  --tn-fg-muted: #515670;
+  --tn-border: #101014;
+  --tn-selection: #515c7e4d;
+  --tn-highlight: #3d59a1;
+  --tn-comment: #515c7e;
+  /* Tokyo Night accent colors */
+  --tn-blue: #7aa2f7;
+  --tn-cyan: #7dcfff;
+  --tn-green: #9ece6a;
+  --tn-yellow: #e0af68;
+  --tn-magenta: #bb9af7;
+  --tn-red: #f7768e;
+  --tn-orange: #ff9e64;
+}
+
+.light {
+  /* Tokyo Night Light mode colors */
+  --tn-bg-primary: #e6e7ed;
+  --tn-bg-secondary: #d6d8df;
+  --tn-bg-tertiary: #dcdee3;
+  --tn-bg-hover: #dadce3;
+  --tn-fg-primary: #343b59;
+  --tn-fg-secondary: #363c4d;
+  --tn-fg-muted: #707280;
+  --tn-border: #c1c2c7;
+  --tn-selection: #acb0bf40;
+  --tn-highlight: #2959aa;
+  --tn-comment: #888b94;
+  /* Tokyo Night Light accent colors */
+  --tn-blue: #2959aa;
+  --tn-cyan: #0f4b6e;
+  --tn-green: #385f0d;
+  --tn-yellow: #8f5e15;
+  --tn-magenta: #65359d;
+  --tn-red: #8c4351;
+  --tn-orange: #965027;
+}
+
+@layer base {
+  * {
+    @apply border-tn-border;
+  }
+  
+  body {
+    @apply bg-tn-bg-primary text-tn-fg-primary;
+    @apply transition-colors duration-200;
+  }
+  
+  ::selection {
+    @apply bg-tn-selection;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+  
+  .btn-primary {
+    @apply bg-tn-blue text-white hover:bg-tn-cyan;
+    @apply px-6 py-3 rounded-lg font-medium;
+    @apply transition-all duration-200;
+    @apply hover:shadow-lg;
+    @apply border border-tn-blue hover:border-tn-cyan;
+    box-shadow: 0 10px 15px -3px rgba(122, 162, 247, 0.3);
+  }
+  
+  .btn-secondary {
+    @apply bg-tn-bg-tertiary text-tn-fg-primary hover:bg-tn-bg-hover;
+    @apply px-6 py-3 rounded-lg font-medium;
+    @apply border border-tn-border hover:border-tn-fg-muted;
+    @apply transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-tn-bg-secondary rounded-xl p-6;
+    @apply border border-tn-border;
+    @apply hover:border-tn-comment;
+    @apply transition-all duration-200;
+    @apply hover:shadow-lg;
+  }
+  
+  .link {
+    @apply text-tn-blue hover:text-tn-cyan;
+    @apply underline-offset-2 hover:underline;
+    @apply transition-colors duration-200;
+  }
+  
+  .tag {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-tn-bg-tertiary text-tn-cyan;
+    @apply border border-tn-border;
+  }
+}
