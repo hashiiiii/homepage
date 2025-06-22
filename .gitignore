@@ -46,3 +46,6 @@ yarn-error.log*
 # AWS
 .aws-sam/
 samconfig.toml
+
+# Documentation (temporarily ignored)
+docs/
