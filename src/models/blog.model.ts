@@ -1,15 +1,10 @@
 export interface BlogPost {
   id: string;
   title: string;
-  content: string;
   excerpt: string;
+  date: string;
   tags: string[];
-  category: string;
-  publishedAt: Date;
-  updatedAt: Date;
-  isPublished: boolean;
-  slug: string;
-  viewCount: number;
+  readTime: string;
 }
 
 export interface BlogCategory {

@@ -2,6 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Highlight.js unified - same for both dark/light themes */
+.hljs {
+  background: #16161e !important;
+  color: #a9b1d6 !important;
+}
+
+
+/* Code block unified styles - darker than main background for distinction */
+.markdown-content pre {
+  background: #16161e !important;
+  margin: 1.5rem 0 !important;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+
+/* Inline code unified styling - same for both dark/light themes */
+.markdown-content code:not(pre code) {
+  background: #24283b !important;
+  color: #9ece6a !important;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Code inside pre blocks */
+.markdown-content pre code {
+  background: transparent !important;
+}
+
+/* Remove margin from code block wrapper divs */
+.markdown-content div:has(pre) {
+  margin: 0 !important;
+}
+
+/* Task list styles */
+.markdown-content input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: var(--tn-green);
+}
+
+.markdown-content li:has(input[type="checkbox"]:checked) {
+  color: var(--tn-text-muted);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.markdown-content li:has(input[type="checkbox"]:not(:checked)) {
+  color: var(--tn-text-secondary);
+}
+
+
+/* Image styling */
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling for proper rounded corners */
+.markdown-content table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.markdown-content tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.markdown-content tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* Remove bottom border from last row to avoid double border */
+.markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Mermaid diagram styling - unified with code blocks */
+.markdown-content .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0 !important;
+  padding: 1rem;
+  background: #16161e !important; /* Same as code blocks */
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+.markdown-content .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Alert styling with Tokyo Night colors */
+.alert-note {
+  background-color: rgba(122, 162, 247, 0.1) !important; /* Tokyo Night blue with transparency */
+  border-color: #7aa2f7 !important; /* Tokyo Night blue */
+}
+
+.alert-tip {
+  background-color: rgba(158, 206, 106, 0.1) !important; /* Tokyo Night green with transparency */
+  border-color: #9ece6a !important; /* Tokyo Night green */
+}
+
+.alert-warning {
+  background-color: rgba(224, 175, 104, 0.1) !important; /* Tokyo Night yellow with transparency */
+  border-color: #e0af68 !important; /* Tokyo Night yellow */
+}
+
+.alert-danger {
+  background-color: rgba(247, 118, 142, 0.1) !important; /* Tokyo Night red with transparency */
+  border-color: #f7768e !important; /* Tokyo Night red */
+}
+
 :root {
   /* Tokyo Night Dark mode colors (default) */
   --tn-bg-primary: #1a1b26;
@@ -60,6 +177,16 @@
   
   ::selection {
     @apply bg-tn-selection;
+  }
+  
+  /* Color variable aliases for consistency */
+  :root {
+    --tn-text-primary: var(--tn-fg-primary);
+    --tn-text-secondary: var(--tn-fg-secondary);
+    --tn-text-muted: var(--tn-fg-muted);
+    --tn-accent-blue: var(--tn-blue);
+    --tn-accent-green: var(--tn-green);
+    --tn-accent-red: var(--tn-red);
   }
 }
 

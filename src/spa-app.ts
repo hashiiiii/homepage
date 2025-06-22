@@ -22,13 +22,17 @@ app.route('/api/resume', resume)
 
 // Serve static assets from Vite build
 app.use('/assets/*', serveStatic({ 
-  root: './dist/client',
-  rewriteRequestPath: (path) => path.replace(/^\/assets/, '/assets')
+  root: './dist/client'
 }))
 
-// Serve other static files (favicon, etc.)
+// Serve favicon and vite assets from dist/client
 app.use('/favicon.ico', serveStatic({ path: './dist/client/favicon.ico' }))
 app.use('/vite.svg', serveStatic({ path: './dist/client/vite.svg' }))
+
+// Serve public files using explicit paths
+app.use('/sample-image.png', serveStatic({ path: './public/sample-image.png' }))
+app.use('/sample-image.svg', serveStatic({ path: './public/sample-image.svg' }))
+app.use('/code-example.svg', serveStatic({ path: './public/code-example.svg' }))
 
 // 404 handler for API routes - must come before SPA fallback
 app.all('/api/*', (c) => {

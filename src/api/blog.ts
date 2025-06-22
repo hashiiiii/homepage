@@ -1,51 +1,41 @@
 import { Hono } from 'hono'
+import { getAllBlogPostsMetadata, getBlogPostById } from '@/lib/markdown-loader'
 
 const blog = new Hono()
 
-// Mock blog data - later this can be connected to a real database
-const mockPosts = [
-  {
-    id: '1',
-    title: 'Building Modern Web Applications with Hono',
-    excerpt: 'Explore how to create lightning-fast web applications using Hono, a small, simple, and ultra-fast web framework for the Edge.',
-    content: 'Full blog post content here...',
-    date: '2024-01-15',
-    tags: ['Hono', 'TypeScript', 'Edge'],
-    readTime: '5 min read',
-  },
-  {
-    id: '2',
-    title: 'AWS Lambda Best Practices',
-    excerpt: 'Learn the best practices for building scalable and cost-effective serverless applications with AWS Lambda.',
-    content: 'Full blog post content here...',
-    date: '2024-01-10',
-    tags: ['AWS', 'Serverless', 'Cloud'],
-    readTime: '8 min read',
-  },
-  {
-    id: '3',
-    title: 'Tokyo Night Theme: A Developer\'s Dream',
-    excerpt: 'Deep dive into why Tokyo Night has become one of the most popular color themes among developers.',
-    content: 'Full blog post content here...',
-    date: '2024-01-05',
-    tags: ['Design', 'Productivity', 'Tools'],
-    readTime: '4 min read',
-  },
-]
-
-blog.get('/', (c) => {
-  return c.json(mockPosts.map(({ content: _content, ...post }) => post))
+blog.get('/', async (c) => {
+  try {
+    // Markdownファイルから記事を読み込み
+    const posts = getAllBlogPostsMetadata()
+    
+    if (posts.length === 0) {
+      console.warn('No markdown files found')
+      return c.json([])
+    }
+    
+    return c.json(posts)
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    return c.json({ error: 'Failed to fetch blog posts' }, 500)
+  }
 })
 
-blog.get('/:id', (c) => {
+blog.get('/:id', async (c) => {
   const id = c.req.param('id')
-  const post = mockPosts.find(p => p.id === id)
-  
-  if (!post) {
-    return c.json({ error: 'Post not found' }, 404)
+
+  try {
+    // Markdownファイルから記事を読み込み
+    const post = getBlogPostById(id)
+
+    if (!post) {
+      return c.json({ error: 'Post not found' }, 404)
+    }
+
+    return c.json(post)
+  } catch (error) {
+    console.error('Error fetching blog post:', error)
+    return c.json({ error: 'Failed to fetch blog post' }, 500)
   }
-  
-  return c.json(post)
 })
 
 export { blog }

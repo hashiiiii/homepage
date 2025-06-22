@@ -30,6 +30,14 @@ export default {
         'tn-magenta': 'var(--tn-magenta)',
         'tn-red': 'var(--tn-red)',
         'tn-orange': 'var(--tn-orange)',
+        // Text color aliases for consistency
+        'tn-text-primary': 'var(--tn-text-primary)',
+        'tn-text-secondary': 'var(--tn-text-secondary)',
+        'tn-text-muted': 'var(--tn-text-muted)',
+        // Accent color aliases
+        'tn-accent-blue': 'var(--tn-accent-blue)',
+        'tn-accent-green': 'var(--tn-accent-green)',
+        'tn-accent-red': 'var(--tn-accent-red)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
@@ -51,5 +59,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }
