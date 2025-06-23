@@ -1,15 +1,46 @@
 import React from 'react'
 
+type DescriptionItem = string | { text: string; items?: DescriptionItem[] }
+
 interface TimelineItem {
   title: string
   company: string
   period: string
-  description: string[]
+  description: DescriptionItem[]
   current?: boolean
 }
 
 interface TimelineProps {
   items: TimelineItem[]
+}
+
+const renderDescriptionItems = (items: DescriptionItem[], level: number = 0): React.ReactNode => {
+  const marginClass = level === 0 ? '' : level === 1 ? 'ml-6' : level === 2 ? 'ml-12' : 'ml-18'
+  
+  return items.map((item, index) => {
+    if (typeof item === 'string') {
+      return (
+        <div key={index} className={`text-tn-fg-secondary flex items-start ${marginClass}`}>
+          <span className="text-tn-cyan mr-2">▸</span>
+          <span>{item}</span>
+        </div>
+      )
+    } else {
+      return (
+        <div key={index} className={marginClass}>
+          <div className="text-tn-fg-secondary flex items-start">
+            <span className="text-tn-cyan mr-2">▸</span>
+            <span>{item.text}</span>
+          </div>
+          {item.items && (
+            <div className="mt-1">
+              {renderDescriptionItems(item.items, level + 1)}
+            </div>
+          )}
+        </div>
+      )
+    }
+  })
 }
 
 export const Timeline: React.FC<TimelineProps> = ({ items }) => {
@@ -19,10 +50,10 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
       
       {items.map((item, index) => (
         <div key={index} className="relative mb-8 ml-10">
-          <div className={`absolute -left-[26px] w-3 h-3 rounded-full border-2 ${
+          <div className={`absolute -left-[29px] w-1.5 h-6 ${
             item.current 
-              ? 'bg-tn-green border-tn-green shadow-lg shadow-tn-green/30' 
-              : 'bg-tn-blue border-tn-blue'
+              ? 'bg-tn-green shadow-lg shadow-tn-green/30' 
+              : 'bg-tn-blue'
           }`}></div>
           
           <div className="card">
@@ -43,14 +74,9 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
               <span>{item.period}</span>
             </div>
             
-            <ul className="space-y-1">
-              {item.description.map((desc, i) => (
-                <li key={i} className="text-tn-fg-secondary flex items-start">
-                  <span className="text-tn-cyan mr-2">▸</span>
-                  <span>{desc}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-1">
+              {renderDescriptionItems(item.description, 0)}
+            </div>
           </div>
         </div>
       ))}

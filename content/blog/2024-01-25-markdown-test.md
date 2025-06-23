@@ -58,7 +58,7 @@ console.log(message)
 
 ### 画像
 
-![Tokyo Night テーマのサンプル画像](/sample-image.png "Tokyo Night Sample Image")
+![Tokyo Night テーマのサンプル画像](/images/blog/sample-image.png "Tokyo Night Sample Image")
 
 ### タスクリスト
 
@@ -98,7 +98,7 @@ result = hello_world()
 
 ### もう一つの画像例
 
-![TypeScript コード例](/code-example.svg "TypeScript Code Example")
+![TypeScript コード例](/images/blog/code-example.svg "TypeScript Code Example")
 
 ### Mermaid図表のテスト
 

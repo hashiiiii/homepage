@@ -49,3 +49,6 @@ samconfig.toml
 
 # Documentation (temporarily ignored)
 docs/
+
+# Generated files
+src/generated/

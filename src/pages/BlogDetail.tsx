@@ -3,12 +3,16 @@ import { useParams, Link } from 'react-router-dom'
 import type { BlogPost } from '@/models/blog.model'
 import { fetchBlogPost } from '@/lib/api-client'
 import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 export function BlogDetail() {
   const { id } = useParams<{ id: string }>()
   const [post, setPost] = useState<(BlogPost & { content: string, html: string }) | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  // Set page title when post is loaded
+  usePageTitle(post?.title)
 
   useEffect(() => {
     if (!id) return

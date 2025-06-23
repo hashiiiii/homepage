@@ -2,9 +2,11 @@ import React from 'react'
 import { BlogCard } from '../components/blog/BlogCard'
 import { BlogSidebar } from '../components/blog/BlogSidebar'
 import { fetchBlogPosts } from '@/lib/api-client'
+import { usePageTitle } from '../hooks/usePageTitle'
 import type { BlogPost } from '@/models/blog.model'
 
 export const Blog: React.FC = () => {
+  usePageTitle('Blog')
   const [allPosts, setAllPosts] = React.useState<BlogPost[]>([])
   const [filteredPosts, setFilteredPosts] = React.useState<BlogPost[]>([])
   const [displayedPosts, setDisplayedPosts] = React.useState<BlogPost[]>([])
@@ -109,12 +111,9 @@ export const Blog: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-          <p className="text-xl text-tn-fg-secondary">
-            Thoughts on web development, cloud architecture, and technology
-          </p>
           {(selectedTags.length > 0 || selectedArchive) && (
             <div className="mt-4">
               <span className="text-tn-text-secondary">

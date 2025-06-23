@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
-import mermaid from 'mermaid'
 import 'highlight.js/styles/tokyo-night-dark.css'
 import 'katex/dist/katex.min.css'
 
@@ -16,10 +15,16 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mermaidLoaded, setMermaidLoaded] = useState(false);
+  const mermaidRef = useRef<any>(null);
 
-  // Initialize mermaid
+  // Dynamically import mermaid when needed
   useEffect(() => {
-    mermaid.initialize({
+    const hasMermaid = content.includes('```mermaid');
+    if (hasMermaid && !mermaidLoaded) {
+      import('mermaid').then((module) => {
+        mermaidRef.current = module.default;
+        mermaidRef.current.initialize({
       startOnLoad: true,
       theme: 'base',
       themeVariables: {
@@ -72,12 +77,15 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
         activationBkgColor: '#bb9af7',    // Tokyo Night magenta (subtle accent)
         activationBorderColor: '#bb9af7', // Same as background (no border)
       },
-    });
-  }, []);
+        });
+        setMermaidLoaded(true);
+      });
+    }
+  }, [content, mermaidLoaded]);
 
   // Process mermaid diagrams after render
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef.current && mermaidLoaded && mermaidRef.current) {
       const mermaidElements = containerRef.current.querySelectorAll('code.language-mermaid');
       mermaidElements.forEach((element, index) => {
         const code = element.textContent || '';
@@ -90,10 +98,10 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
       
       // Re-initialize and render mermaid
       if (mermaidElements.length > 0) {
-        mermaid.run();
+        mermaidRef.current.run();
       }
     }
-  }, [content]);
+  }, [content, mermaidLoaded]);
 
   // Define custom components first so we can reference them
   const customParagraph = ({ children }: any) => (
@@ -156,11 +164,11 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
             
             // Check if first element is a paragraph with alert format
             if (React.isValidElement(firstElement) && firstElement.type === customParagraph) {
-              const pChildren = React.Children.toArray(firstElement.props.children);
+              const pChildren = React.Children.toArray((firstElement.props as any).children);
               const firstText = pChildren[0];
               
               if (React.isValidElement(firstText) && firstText.type === 'strong') {
-                const alertType = React.Children.toArray(firstText.props.children)[0];
+                const alertType = React.Children.toArray((firstText.props as any).children)[0];
                 
                 if (typeof alertType === 'string') {
                   // Use Tokyo Night colors for alerts

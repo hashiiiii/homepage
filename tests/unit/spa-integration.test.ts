@@ -33,7 +33,7 @@ describe('Hono + React SPA Integration', () => {
       
       const html = await response.text()
       expect(html).toContain('<div id="root"></div>')
-      expect(html).toContain('hashiiiii - Full Stack Developer')
+      expect(html).toContain('hashiiiii.com')
     })
 
     it('should serve React SPA for any client-side route (SPA fallback)', async () => {
@@ -150,7 +150,7 @@ describe('Hono + React SPA Integration', () => {
       expect(html).toContain('/assets/main-')
       
       // Check that the page title is correctly set
-      expect(html).toContain('hashiiiii - Full Stack Developer')
+      expect(html).toContain('hashiiiii.com')
     })
   })
 })

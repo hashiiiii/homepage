@@ -1,28 +1,40 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './contexts/ThemeContext'
+import { LanguageProvider } from './contexts/LanguageContext'
 import { Layout } from './components/common/Layout'
-import { Landing } from './pages/Landing'
-import { Blog } from './pages/Blog'
-import { BlogDetail } from './pages/BlogDetail'
-import { Resume } from './pages/Resume'
-import { MarkdownGuide } from './pages/MarkdownGuide'
 import './styles/globals.css'
+
+// Lazy load pages for better code splitting
+const Landing = lazy(() => import('./pages/Landing').then(m => ({ default: m.Landing })))
+const Blog = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })))
+const BlogDetail = lazy(() => import('./pages/BlogDetail').then(m => ({ default: m.BlogDetail })))
+const Resume = lazy(() => import('./pages/Resume').then(m => ({ default: m.Resume })))
+
+// Loading component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="text-tn-text-muted">Loading...</div>
+  </div>
+)
 
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogDetail />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/markdown-guide" element={<MarkdownGuide />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <Layout>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/resume" element={<Resume />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </Router>
+      </LanguageProvider>
     </ThemeProvider>
   )
 }

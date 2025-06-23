@@ -25,14 +25,16 @@ app.use('/assets/*', serveStatic({
   root: './dist/client'
 }))
 
-// Serve favicon and vite assets from dist/client
-app.use('/favicon.ico', serveStatic({ path: './dist/client/favicon.ico' }))
-app.use('/vite.svg', serveStatic({ path: './dist/client/vite.svg' }))
+// Serve favicon files from public directory
+app.use('/favicon.ico', serveStatic({ path: './public/favicon.ico' }))
+app.use('/favicon_16px-16px.png', serveStatic({ path: './public/images/common/favicon_16px-16px.png' }))
+app.use('/favicon_32px-32px.png', serveStatic({ path: './public/images/common/favicon_32px-32px.png' }))
 
-// Serve public files using explicit paths
-app.use('/sample-image.png', serveStatic({ path: './public/sample-image.png' }))
-app.use('/sample-image.svg', serveStatic({ path: './public/sample-image.svg' }))
-app.use('/code-example.svg', serveStatic({ path: './public/code-example.svg' }))
+// Serve images from public/images directory
+app.use('/images/*', serveStatic({ 
+  root: './public',
+  rewriteRequestPath: (path) => path
+}))
 
 // 404 handler for API routes - must come before SPA fallback
 app.all('/api/*', (c) => {

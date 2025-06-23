@@ -6,7 +6,7 @@
  */
 
 import type { BlogPost } from '@/models/blog.model'
-import { extractBlogPost, markdownToHtml } from '@/utils/markdown'
+import { extractBlogPost } from '@/utils/markdown'
 
 // Temporary: Import markdown content directly
 // In production, this would be handled by a build process
@@ -69,17 +69,13 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
 /**
  * Get a single blog post by ID
  */
-export async function getBlogPostById(id: string): Promise<(BlogPost & { content: string, html: string }) | null> {
+export async function getBlogPostById(id: string): Promise<(BlogPost & { content: string }) | null> {
   const markdown = blogPosts[id]
   if (!markdown) return null
   
   const post = extractBlogPost(markdown)
-  const html = await markdownToHtml(post.content)
   
-  return {
-    ...post,
-    html
-  }
+  return post
 }
 
 /**
