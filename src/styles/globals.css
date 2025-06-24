@@ -129,7 +129,7 @@
   --tn-fg-secondary: #787c99;
   --tn-fg-muted: #515670;
   --tn-border: #101014;
-  --tn-selection: #515c7e4d;
+  --tn-selection: #7aa2f740; /* Tokyo Night blue with 25% opacity */
   --tn-highlight: #3d59a1;
   --tn-comment: #515c7e;
   /* Tokyo Night accent colors */
@@ -152,7 +152,7 @@
   --tn-fg-secondary: #363c4d;
   --tn-fg-muted: #707280;
   --tn-border: #c1c2c7;
-  --tn-selection: #acb0bf40;
+  --tn-selection: #2959aa30; /* Tokyo Night Light blue with 19% opacity */
   --tn-highlight: #2959aa;
   --tn-comment: #888b94;
   /* Tokyo Night Light accent colors */
@@ -176,7 +176,13 @@
   }
   
   ::selection {
-    @apply bg-tn-selection;
+    background-color: var(--tn-selection);
+    color: var(--tn-fg-primary);
+  }
+  
+  ::-moz-selection {
+    background-color: var(--tn-selection);
+    color: var(--tn-fg-primary);
   }
   
   /* Color variable aliases for consistency */
