@@ -11,6 +11,7 @@
     "start": "npm run build && node -r tsx/esm src/spa-server.ts",
     "test": "vitest",
     "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "typecheck": "tsc --noEmit"
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
     "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/coverage-v8": "^1.6.1",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",

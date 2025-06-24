@@ -3,7 +3,7 @@ import type { BlogPost } from '@/models/blog.model'
 
 export interface MarkdownFile {
   content: string
-  data: Record<string, any>
+  data: Record<string, unknown>
 }
 
 /**
@@ -21,12 +21,12 @@ export function extractBlogPost(fileContent: string): BlogPost & { content: stri
   const { content, data } = parseMarkdown(fileContent)
   
   return {
-    id: data.id || '',
-    title: data.title || '',
-    excerpt: data.excerpt || '',
+    id: String(data.id || ''),
+    title: String(data.title || ''),
+    excerpt: String(data.excerpt || ''),
     content,
-    date: data.date || new Date().toISOString(),
-    tags: data.tags || [],
-    readTime: data.readTime || '5 min read',
+    date: String(data.date || new Date().toISOString()),
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    readTime: String(data.readTime || '5 min read'),
   }
 }

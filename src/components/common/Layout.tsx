@@ -51,6 +51,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
               Resume
             </Link>
+            <Link
+              to="/product"
+              className={`transition-colors ${
+                isActive('/product') ? 'text-tn-blue' : 'text-tn-fg-secondary hover:text-tn-fg-primary'
+              }`}
+            >
+              Product
+            </Link>
             <LanguageToggle />
             <ThemeToggle />
           </div>

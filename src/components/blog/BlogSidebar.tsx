@@ -23,10 +23,6 @@ interface YearlyArchive {
   totalCount: number
 }
 
-interface TagCount {
-  tag: string
-  count: number
-}
 
 export function BlogSidebar({ posts, selectedTags, selectedArchive, onTagFilter, onArchiveFilter }: BlogSidebarProps) {
   const [expandedYears, setExpandedYears] = React.useState<Set<number>>(new Set())

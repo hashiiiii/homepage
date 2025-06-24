@@ -16,6 +16,7 @@ interface MarkdownRendererProps {
 export function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mermaidLoaded, setMermaidLoaded] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mermaidRef = useRef<any>(null);
 
   // Dynamically import mermaid when needed
@@ -104,11 +105,12 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
   }, [content, mermaidLoaded]);
 
   // Define custom components first so we can reference them
-  const customParagraph = ({ children }: any) => (
-    <p className="text-tn-text-secondary mb-4 leading-relaxed">
+  const customParagraph = ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p className="text-tn-text-secondary mb-4 leading-relaxed" {...props}>
       {children}
     </p>
   );
+
   
   return (
     <div ref={containerRef} className={`markdown-content ${className}`}>
@@ -117,46 +119,47 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
         rehypePlugins={[rehypeRaw, rehypeKatex, rehypeHighlight]}
         components={{
           // カスタムコンポーネント
-          h1: ({ children }) => (
-            <h1 className="text-3xl font-bold text-tn-text-primary mb-6 border-b border-tn-border pb-3">
+          h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+            <h1 className="text-3xl font-bold text-tn-text-primary mb-6 border-b border-tn-border pb-3" {...props}>
               {children}
             </h1>
           ),
-          h2: ({ children }) => (
-            <h2 className="text-2xl font-semibold text-tn-text-primary mb-4 mt-8">
+          h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+            <h2 className="text-2xl font-semibold text-tn-text-primary mb-4 mt-8" {...props}>
               {children}
             </h2>
           ),
-          h3: ({ children }) => (
-            <h3 className="text-xl font-semibold text-tn-text-primary mb-3 mt-6">
+          h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+            <h3 className="text-xl font-semibold text-tn-text-primary mb-3 mt-6" {...props}>
               {children}
             </h3>
           ),
           p: customParagraph,
-          a: ({ href, children }) => (
+          a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
             <a 
               href={href} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-tn-accent-blue hover:underline"
+              {...props}
             >
               {children}
             </a>
           ),
-          ul: ({ children }) => (
-            <ul className="list-disc list-inside mb-4 space-y-2 text-tn-text-secondary ml-4">
+          ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+            <ul className="list-disc list-inside mb-4 space-y-2 text-tn-text-secondary ml-4" {...props}>
               {children}
             </ul>
           ),
-          ol: ({ children }) => (
-            <ol className="list-decimal list-inside mb-4 space-y-2 text-tn-text-secondary ml-4">
+          ol: ({ children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+            <ol className="list-decimal list-inside mb-4 space-y-2 text-tn-text-secondary ml-4" {...props}>
               {children}
             </ol>
           ),
-          li: ({ children }) => (
-            <li className="leading-relaxed">{children}</li>
+          li: ({ children, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => (
+            <li className="leading-relaxed" {...props}>{children}</li>
           ),
-          blockquote: ({ children }) => {
+          blockquote: ({ children, ..._props }: React.HTMLAttributes<HTMLQuoteElement>) => {
             const childrenArray = React.Children.toArray(children);
             
             // Find the first React element (skip whitespace text nodes)
@@ -164,11 +167,11 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
             
             // Check if first element is a paragraph with alert format
             if (React.isValidElement(firstElement) && firstElement.type === customParagraph) {
-              const pChildren = React.Children.toArray((firstElement.props as any).children);
+              const pChildren = React.Children.toArray((firstElement.props as { children: React.ReactNode }).children);
               const firstText = pChildren[0];
               
               if (React.isValidElement(firstText) && firstText.type === 'strong') {
-                const alertType = React.Children.toArray((firstText.props as any).children)[0];
+                const alertType = React.Children.toArray((firstText.props as { children: React.ReactNode }).children)[0];
                 
                 if (typeof alertType === 'string') {
                   // Use Tokyo Night colors for alerts
@@ -221,7 +224,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
               </blockquote>
             );
           },
-          code: ({ className, children, ...props }: any) => {
+          code: ({ className, children, ...props }: React.HTMLAttributes<HTMLElement> & { className?: string }) => {
             const inline = !className;
             const match = /language-(\w+)/.exec(className || '')
             const language = match ? match[1] : ''
@@ -249,31 +252,31 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
               </div>
             )
           },
-          table: ({ children }) => (
+          table: ({ children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
             <div className="overflow-x-auto my-4">
-              <table className="min-w-full border-separate border-spacing-0 border border-tn-border rounded-lg">
+              <table className="min-w-full border-separate border-spacing-0 border border-tn-border rounded-lg" {...props}>
                 {children}
               </table>
             </div>
           ),
-          thead: ({ children }) => (
-            <thead className="bg-tn-bg-tertiary">
+          thead: ({ children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
+            <thead className="bg-tn-bg-tertiary" {...props}>
               {children}
             </thead>
           ),
-          th: ({ children }) => (
-            <th className="border-r border-b border-tn-border px-4 py-2 text-left text-tn-text-primary font-semibold first:rounded-tl-lg last:rounded-tr-lg last:border-r-0">
+          th: ({ children, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+            <th className="border-r border-b border-tn-border px-4 py-2 text-left text-tn-text-primary font-semibold first:rounded-tl-lg last:rounded-tr-lg last:border-r-0" {...props}>
               {children}
             </th>
           ),
-          td: ({ children }) => (
-            <td className="border-r border-b border-tn-border px-4 py-2 text-tn-text-secondary last:border-r-0">
+          td: ({ children, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+            <td className="border-r border-b border-tn-border px-4 py-2 text-tn-text-secondary last:border-r-0" {...props}>
               {children}
             </td>
           ),
           
           // 画像の処理
-          img: ({ src, alt, title, ...props }) => (
+          img: ({ src, alt, title, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
             <img 
               src={src} 
               alt={alt || ''}
@@ -284,7 +287,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
           ),
           
           // タスクリストの処理
-          input: ({ type, checked, ...props }) => {
+          input: ({ type, checked, ...props }: React.InputHTMLAttributes<HTMLInputElement>) => {
             if (type === 'checkbox') {
               return (
                 <input 
@@ -298,6 +301,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
             }
             return <input type={type} {...props} />
           },
+          
           
         }}
       >

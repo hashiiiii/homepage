@@ -30,14 +30,14 @@ export function markdownPlugin(): Plugin {
           const html = await marked(content)
           
           posts.push({
-            id: data.id || file.replace('.md', ''),
-            title: data.title || 'Untitled',
-            excerpt: data.excerpt || '',
+            id: String(data.id || file.replace('.md', '')),
+            title: String(data.title || 'Untitled'),
+            excerpt: String(data.excerpt || ''),
             content,
             html,
-            date: data.date || new Date().toISOString(),
-            tags: data.tags || [],
-            readTime: data.readTime || '5 min read',
+            date: String(data.date || new Date().toISOString()),
+            tags: Array.isArray(data.tags) ? data.tags : [],
+            readTime: String(data.readTime || '5 min read'),
           })
         }
         

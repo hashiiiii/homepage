@@ -35,6 +35,13 @@ export const PAGE_MULTILINGUAL_CONFIG: Record<string, PageMultilingualConfig> = 
     availableLanguages: ['en', 'ja'],
     showToggle: true,
   },
+  
+  // Product page - full multilingual support
+  '/product': {
+    enabled: true,
+    availableLanguages: ['en', 'ja'],
+    showToggle: true,
+  },
 }
 
 /**

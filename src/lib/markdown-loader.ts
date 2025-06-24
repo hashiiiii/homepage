@@ -59,7 +59,7 @@ export function getAllBlogPostsMetadata(): BlogPost[] {
   const posts = loadMarkdownFiles()
   
   return Array.from(posts.values())
-    .map(({ content, ...metadata }) => metadata)
+    .map(({ content: _content, ...metadata }) => metadata)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 

@@ -22,7 +22,7 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'Game Development',
-        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'WebGL', 'Photon', 'Steam', 'fingger'],
+        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'IAP', 'WebGL', 'Photon', 'Steam', 'fingger'],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {
@@ -57,7 +57,7 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'ゲーム開発',
-        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'WebGL', 'Photon', 'Steam', 'fingger'],
+        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'IAP', 'WebGL', 'Photon', 'Steam', 'fingger'],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {

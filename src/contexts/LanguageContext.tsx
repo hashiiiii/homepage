@@ -5,7 +5,7 @@ export type Language = 'en' | 'ja'
 interface LanguageContextType {
   language: Language
   setLanguage: (language: Language) => void
-  t: (key: string, data?: Record<string, any>) => string
+  t: (key: string, data?: Record<string, unknown>) => string
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -31,7 +31,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, [language])
 
   // Translation function (basic implementation)
-  const t = (key: string, data?: Record<string, any>): string => {
+  const t = (key: string, _data?: Record<string, unknown>): string => {
     // This will be enhanced with actual translation data
     // For now, return the key as fallback
     return key

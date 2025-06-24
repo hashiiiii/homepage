@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Timeline } from '../components/resume/Timeline'
 import { SkillSection } from '../components/resume/SkillSection'
+import { TabNavigation, Tab } from '../components/common/TabNavigation'
 import { usePageTitle } from '../hooks/usePageTitle'
 import { useTranslation } from '../contexts/LanguageContext'
 import { resumeData } from '../locales/resume'
@@ -8,8 +9,16 @@ import { resumeData } from '../locales/resume'
 export const Resume: React.FC = () => {
   const { language } = useTranslation()
   const data = resumeData[language]
+  const [activeTab, setActiveTab] = useState<'main' | 'side'>('main')
   
   usePageTitle(data.title)
+
+  const tabs: Tab[] = [
+    { id: 'main', label: data.sections.workExperience },
+    { id: 'side', label: data.sections.freelance },
+  ]
+
+  const currentExperience = activeTab === 'main' ? data.experience : data.freelance
 
   return (
     <div className="animate-fade-in max-w-6xl mx-auto">
@@ -25,17 +34,24 @@ export const Resume: React.FC = () => {
       <div className="grid gap-12 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-12">
           <section>
-            <h2 className="text-2xl font-bold mb-6">{data.sections.workExperience}</h2>
-            <Timeline items={data.experience} />
+            <h2 className="text-2xl font-bold mb-6">{data.sections.workExperienceTitle}</h2>
+            <TabNavigation 
+              tabs={tabs}
+              activeTab={activeTab}
+              onTabChange={(tabId) => setActiveTab(tabId as 'main' | 'side')}
+            />
+            <Timeline items={currentExperience} />
           </section>
           
-          <section>
-            <h2 className="text-2xl font-bold mb-6">{data.sections.education}</h2>
-            <div className="card">
-              <h3 className="text-xl font-semibold mb-2">{data.education.degree}</h3>
-              <p className="text-tn-fg-secondary">{data.education.university} • {data.education.period}</p>
-            </div>
-          </section>
+          {activeTab === 'main' && (
+            <section>
+              <h2 className="text-2xl font-bold mb-6">{data.sections.education}</h2>
+              <div className="card">
+                <h3 className="text-xl font-semibold mb-2">{data.education.degree}</h3>
+                <p className="text-tn-fg-secondary">{data.education.university} • {data.education.period}</p>
+              </div>
+            </section>
+          )}
         </div>
         
         <div className="lg:col-span-1">

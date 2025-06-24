@@ -56,7 +56,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   const posts = Object.values(blogPosts).map(content => {
     const post = extractBlogPost(content)
     // Return without content for list view
-    const { content: _, ...postWithoutContent } = post
+    const { content: _content, ...postWithoutContent } = post
     return postWithoutContent
   })
   

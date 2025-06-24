@@ -7,13 +7,22 @@ export interface ResumeData {
   subtitle: string
   sections: {
     workExperience: string
+    workExperienceTitle: string
+    freelance: string
     education: string
     contact: string
   }
   experience: Array<{
     title: string
-    company: string
-    period: string
+    company?: string
+    period?: string
+    current?: boolean
+    description: DescriptionItem[]
+  }>
+  freelance: Array<{
+    title: string
+    company?: string
+    period?: string
     current?: boolean
     description: DescriptionItem[]
   }>
@@ -34,7 +43,9 @@ export const resumeData: Record<Language, ResumeData> = {
     title: 'Resume',
     subtitle: '',
     sections: {
-      workExperience: 'Work Experience',
+      workExperienceTitle: 'Work Experience',
+      workExperience: 'Corporate',
+      freelance: 'Freelance',
       education: 'Education',
       contact: 'Contact',
     },
@@ -46,7 +57,7 @@ export const resumeData: Record<Language, ResumeData> = {
         current: true,
         description: [
           {
-            text: 'Server-side development with Ruby on Rails + MySQL/Redis + AWS/GCP services',
+            text: 'Server-side development with Ruby on Rails + MySQL / Redis + AWS / GCP services',
             items: [
               'Worker implementation',
               'API development and admin panel feature additions',
@@ -143,7 +154,7 @@ export const resumeData: Record<Language, ResumeData> = {
             items: [
               'Master data infrastructure development',
               'Steam integration implementation',
-              'CI/CD pipeline implementation with GitHub Actions (Steam, fingger)',
+              'CI / CD pipeline implementation with GitHub Actions (Steam, fingger)',
             ],
           }
         ],
@@ -175,7 +186,7 @@ export const resumeData: Record<Language, ResumeData> = {
           {
             text: 'Client-side development with Unity (Android, iOS) + C#',
             items: [
-              'MVP/DDD maintenance',
+              'MVP / DDD maintenance',
               'Real-time multi-battle system implementation',
               'UI and animation implementation',
               'System logic implementation (missions, matching, GvG features)',
@@ -192,10 +203,28 @@ export const resumeData: Record<Language, ResumeData> = {
           {
             text: 'DevOps',
             items: [
-              'CI/CD pipeline improvements with Jenkins',
+              'CI / CD pipeline improvements with Jenkins',
               'Unity major upgrade (2018 LTS -> 2020 LTS)',
-              'iOS/Android platform support and store review handling',
+              'iOS / Android platform support and store review handling',
               'Build server construction and operations',
+            ],
+          }
+        ],
+      },
+    ],
+    freelance: [
+      {
+        title: 'Web3 New Game / Game Client Engineer',
+        description: [
+          {
+            text: 'Client-side development with Unity (Android, iOS) + C#',
+            items: [
+              'Architecture design assistance and code review',
+              'Various UI feature implementations',
+              'In-App Purchase (IAP) functionality implementation',
+              'System logic implementations (Gacha, Shop)',
+              'Asset infrastructure implementation using Addressable Asset System',
+              'AssetBundle build pipeline construction using GitHub Actions + GCS',
             ],
           }
         ],
@@ -216,7 +245,9 @@ export const resumeData: Record<Language, ResumeData> = {
     title: 'Resume',
     subtitle: '',
     sections: {
-      workExperience: '職歴',
+      workExperienceTitle: '職歴',
+      workExperience: '会社',
+      freelance: '個人',
       education: '学歴',
       contact: '連絡先',
     },
@@ -378,6 +409,24 @@ export const resumeData: Record<Language, ResumeData> = {
               'Unity 大型アップデート対応（2018 LTS -> 2020 LTS）',
               'iOS / Android プラットフォーム対応、ストア審査対応',
               'ビルドサーバーの構築と運用',
+            ],
+          }
+        ],
+      },
+    ],
+    freelance: [
+      {
+        title: 'Web 3 新規ゲーム / ゲームクライアントエンジニア',
+        description: [
+          {
+            text: 'Unity（Android, iOS）+ C# によるクライアントサイド開発',
+            items: [
+              'アーキテクチャの設計補助, コードレビュー',
+              '各種 UI 機能の実装',
+              'IAP（In-App Purchase）機能の実装',
+              '各種システムロジックの実装（ガチャ, SHOP）',
+              'Addressable Asset System を用いた Asset 基盤の実装',
+              'Github Actions + GCS を用いた AssetBundle ビルドパイプラインの構築',
             ],
           }
         ],

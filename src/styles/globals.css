@@ -49,6 +49,7 @@
   opacity: 0.7;
 }
 
+
 .markdown-content li:has(input[type="checkbox"]:not(:checked)) {
   color: var(--tn-text-secondary);
 }

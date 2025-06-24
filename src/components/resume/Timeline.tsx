@@ -4,8 +4,8 @@ type DescriptionItem = string | { text: string; items?: DescriptionItem[] }
 
 interface TimelineItem {
   title: string
-  company: string
-  period: string
+  company?: string
+  period?: string
   description: DescriptionItem[]
   current?: boolean
 }
@@ -68,11 +68,13 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
               )}
             </div>
             
-            <div className="flex items-center gap-2 mb-3 text-tn-fg-secondary">
-              <span className="font-medium">{item.company}</span>
-              <span>•</span>
-              <span>{item.period}</span>
-            </div>
+            {(item.company || item.period) && (
+              <div className="flex items-center gap-2 mb-3 text-tn-fg-secondary">
+                {item.company && <span className="font-medium">{item.company}</span>}
+                {item.company && item.period && <span>•</span>}
+                {item.period && <span>{item.period}</span>}
+              </div>
+            )}
             
             <div className="space-y-1">
               {renderDescriptionItems(item.description, 0)}
