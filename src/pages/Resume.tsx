@@ -21,9 +21,9 @@ export const Resume: React.FC = () => {
   const currentExperience = activeTab === 'main' ? data.experience : data.freelance
 
   return (
-    <div className="animate-fade-in max-w-6xl mx-auto">
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.title}</h1>
+    <div className="animate-fade-in w-full">
+      <div className="mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{data.title}</h1>
         {data.subtitle && (
           <p className="text-xl text-tn-fg-secondary">
             {data.subtitle}
@@ -31,10 +31,10 @@ export const Resume: React.FC = () => {
         )}
       </div>
       
-      <div className="grid gap-12 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-12">
+      <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-8 sm:space-y-10 lg:space-y-12">
           <section>
-            <h2 className="text-2xl font-bold mb-6">{data.sections.workExperienceTitle}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{data.sections.workExperienceTitle}</h2>
             <TabNavigation 
               tabs={tabs}
               activeTab={activeTab}
@@ -45,7 +45,7 @@ export const Resume: React.FC = () => {
           
           {activeTab === 'main' && (
             <section>
-              <h2 className="text-2xl font-bold mb-6">{data.sections.education}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{data.sections.education}</h2>
               <div className="card">
                 <h3 className="text-xl font-semibold mb-2">{data.education.degree}</h3>
                 <p className="text-tn-fg-secondary">{data.education.university} • {data.education.period}</p>
@@ -57,8 +57,8 @@ export const Resume: React.FC = () => {
         <div className="lg:col-span-1">
           <SkillSection />
           
-          <section className="mt-12">
-            <h2 className="text-2xl font-bold mb-6">{data.sections.contact}</h2>
+          <section className="mt-8 sm:mt-10 lg:mt-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">{data.sections.contact}</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-tn-fg-secondary">
                 <span>📧</span>

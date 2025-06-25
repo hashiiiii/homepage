@@ -111,9 +111,9 @@ export const Blog: React.FC = () => {
 
   return (
     <div className="animate-fade-in">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+      <div className="w-full">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Blog</h1>
           {(selectedTags.length > 0 || selectedArchive) && (
             <div className="mt-4">
               <span className="text-tn-text-secondary">
@@ -161,10 +161,10 @@ export const Blog: React.FC = () => {
           )}
         </div>
         
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* メインコンテンツ */}
           <main className="flex-1 min-w-0">
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {displayedPosts.length > 0 ? (
                 displayedPosts.map((post) => (
                   <BlogCard key={post.id} post={post} />
@@ -186,10 +186,10 @@ export const Blog: React.FC = () => {
             </div>
             
             {hasMorePosts && (
-              <div className="mt-12 text-center">
+              <div className="mt-8 sm:mt-12 text-center">
                 <button 
                   onClick={handleLoadMore}
-                  className="btn-secondary"
+                  className="btn-secondary w-full sm:w-auto"
                 >
                   Load More Posts ({filteredPosts.length - displayedPosts.length}件残り)
                 </button>

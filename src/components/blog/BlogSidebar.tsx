@@ -129,10 +129,10 @@ export function BlogSidebar({ posts, selectedTags, selectedArchive, onTagFilter,
   }
 
   return (
-    <aside className="w-full lg:w-80 space-y-8">
+    <aside className="w-full lg:w-80 space-y-6 lg:space-y-8">
       {/* 最近の記事 */}
-      <section className="bg-tn-bg-secondary rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-tn-text-primary mb-4 flex items-center">
+      <section className="bg-tn-bg-secondary rounded-lg p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-tn-text-primary mb-3 sm:mb-4 flex items-center">
           <span className="mr-2">📝</span>
           最近の記事
         </h3>
@@ -159,8 +159,8 @@ export function BlogSidebar({ posts, selectedTags, selectedArchive, onTagFilter,
       </section>
 
       {/* 年別アーカイブ */}
-      <section className="bg-tn-bg-secondary rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-tn-text-primary mb-4 flex items-center">
+      <section className="bg-tn-bg-secondary rounded-lg p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-tn-text-primary mb-3 sm:mb-4 flex items-center">
           <span className="mr-2">📅</span>
           アーカイブ
         </h3>
@@ -278,8 +278,8 @@ export function BlogSidebar({ posts, selectedTags, selectedArchive, onTagFilter,
       </section>
 
       {/* タグフィルター */}
-      <section className="bg-tn-bg-secondary rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-tn-text-primary mb-4 flex items-center">
+      <section className="bg-tn-bg-secondary rounded-lg p-4 sm:p-6">
+        <h3 className="text-base sm:text-lg font-semibold text-tn-text-primary mb-3 sm:mb-4 flex items-center">
           <span className="mr-2">🏷️</span>
           タグ
           {selectedTags.length > 0 && (

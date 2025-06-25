@@ -11,17 +11,17 @@ export const Product: React.FC = () => {
   usePageTitle(data.title)
 
   return (
-    <div className="animate-fade-in max-w-6xl mx-auto">
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.title}</h1>
+    <div className="animate-fade-in w-full">
+      <div className="mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{data.title}</h1>
       </div>
 
       {/* Open Source Projects Section */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">
+      <section className="mb-12 sm:mb-16">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
           {data.sections.ossProjects}
         </h2>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           {data.ossProjects.map((project) => (
             <article key={project.id} className="card group">
               <div className="flex items-start justify-between mb-4">
@@ -45,7 +45,7 @@ export const Product: React.FC = () => {
                 ))}
               </div>
               
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}
@@ -65,10 +65,10 @@ export const Product: React.FC = () => {
 
       {/* Presentations Section */}
       <section>
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
           {data.sections.presentations}
         </h2>
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {data.presentations.map((presentation) => (
             <article key={presentation.id} className="card">
               <div className="mb-4">
@@ -93,7 +93,7 @@ export const Product: React.FC = () => {
                 ))}
               </div>
               
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 {presentation.slidesUrl && (
                   <a
                     href={presentation.slidesUrl}

@@ -52,3 +52,4 @@ docs/
 
 # Generated files
 src/generated/
+.vercel

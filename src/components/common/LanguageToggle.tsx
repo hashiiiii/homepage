@@ -36,7 +36,7 @@ export const LanguageToggle: React.FC = () => {
   }
 
   const getLanguageDisplay = (lang: Language): string => {
-    return lang === 'en' ? '🇺🇸 EN' : '🇯🇵 JP'
+    return lang === 'en' ? '🇺🇸' : '🇯🇵'
   }
 
   const getAriaLabel = (): string => {
@@ -51,16 +51,16 @@ export const LanguageToggle: React.FC = () => {
     <button
       onClick={toggleLanguage}
       disabled={isDisabled}
-      className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+      className={`p-2 rounded-lg transition-all duration-200 ${
         isDisabled
-          ? 'bg-tn-bg-tertiary/50 text-tn-fg-muted cursor-not-allowed opacity-50'
-          : 'bg-tn-bg-tertiary hover:bg-tn-accent-blue/10 text-tn-fg-secondary hover:text-tn-accent-blue'
+          ? 'bg-tn-bg-secondary/50 cursor-not-allowed opacity-50'
+          : 'bg-tn-bg-secondary hover:bg-tn-bg-hover'
       }`}
       aria-label={getAriaLabel()}
     >
-      <span className="text-sm font-medium">
+      <div className="h-5 w-5 flex items-center justify-center text-base">
         {getLanguageDisplay(displayLanguage)}
-      </span>
+      </div>
     </button>
   )
 }
