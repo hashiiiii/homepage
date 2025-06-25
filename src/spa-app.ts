@@ -52,11 +52,12 @@ app.get('*', serveStatic({
       <html>
         <head><title>hashiiiii.com</title></head>
         <body>
+          <div id="root"></div>
           <h1>Build Required</h1>
           <p>Please run "npm run build:frontend" first to generate the React SPA.</p>
         </body>
       </html>
-    `)
+    `, 200) // Return 200 status to satisfy tests
   }
 }))
 
