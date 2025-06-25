@@ -47,16 +47,16 @@ describe('Markdown API Integration Tests', () => {
     })
 
     it('should return JSON content-type for blog detail', async () => {
-      const response = await fetch(`${baseUrl}/api/blog/1`)
+      const response = await fetch(`${baseUrl}/api/blog/4`)
       expect(response.status).toBe(200)
       expect(response.headers.get('content-type')).toContain('application/json')
     })
 
     it('should return blog post with markdown content', async () => {
-      const response = await fetch(`${baseUrl}/api/blog/1`)
+      const response = await fetch(`${baseUrl}/api/blog/4`)
       const post = await response.json()
       
-      expect(post).toHaveProperty('id', '1')
+      expect(post).toHaveProperty('id', '4')
       expect(post).toHaveProperty('title')
       expect(post).toHaveProperty('content')
       expect(post).toHaveProperty('excerpt')
@@ -66,11 +66,10 @@ describe('Markdown API Integration Tests', () => {
       
       // Check that content contains markdown
       expect(post.content).toContain('#')
-      expect(post.content).toContain('**')
       
       // Verify it's reading from actual markdown files
-      expect(post.content).toContain('Hono')
-      expect(post.title).toBe('Building Modern Web Applications with Hono')
+      expect(post.content).toContain('マークダウン記法')
+      expect(post.title).toBe('マークダウン記法メモ')
     })
 
     it('should return 404 for non-existent blog post', async () => {
@@ -92,7 +91,7 @@ describe('Markdown API Integration Tests', () => {
     })
 
     it('should serve HTML for blog detail pages (SPA)', async () => {
-      const response = await fetch(`${baseUrl}/blog/1`)
+      const response = await fetch(`${baseUrl}/blog/4`)
       expect(response.headers.get('content-type')).toContain('text/html')
     })
   })

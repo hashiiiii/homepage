@@ -40,11 +40,11 @@ describe('Integrated API Endpoints', () => {
     })
 
     it('should return specific blog post by id', async () => {
-      const res = await app.request('/api/blog/1')
+      const res = await app.request('/api/blog/4')
       expect(res.status).toBe(200)
       
       const post = await res.json()
-      expect(post).toHaveProperty('id')
+      expect(post).toHaveProperty('id', '4')
       expect(post).toHaveProperty('title')
       expect(post).toHaveProperty('content')
     })

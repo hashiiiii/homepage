@@ -233,11 +233,17 @@ npm run test
 - [ ] PWA対応
 - [ ] SSR/SSG検討（SEO強化）
 
-## デプロイ構成（予定）
-- **ホスティング**: Vercel/Netlify/AWS
-- **データベース**: PlanetScale/Supabase
-- **ドメイン**: hashiiiii.com (Route53)
-- **CI/CD**: GitHub Actions
+## デプロイ構成
+- **ホスティング**: Vercel (手動デプロイ)
+- **ドメイン**: hashiiiii.com
+- **CI/CD**: GitHub Actions (テスト自動化、デプロイ手動化)
+- **デプロイ方式**: 
+  - 自動デプロイ無効化（意図しないデプロイを防止）
+  - GitHub Actions経由での手動デプロイ
+  - Vercel CLI経由での手動デプロイ
+
+### デプロイ手順
+詳細は [docs/vercel-deployment-setup.md](./docs/vercel-deployment-setup.md) を参照
 
 ## トラブルシューティング
 

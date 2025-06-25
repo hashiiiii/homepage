@@ -38,14 +38,15 @@ describe('Product Page', () => {
     expect(screen.getByText('OSS')).toBeInTheDocument()
   })
 
-  it('should render presentations section', () => {
+  it('should not render presentations section when empty', () => {
     render(
       <TestWrapper>
         <Product />
       </TestWrapper>
     )
     
-    expect(screen.getByText('Presentations')).toBeInTheDocument()
+    // Since presentations array is empty, section should not be rendered
+    expect(screen.queryByText('Presentations')).not.toBeInTheDocument()
   })
 
   it('should display OSS projects with links', () => {
@@ -64,15 +65,15 @@ describe('Product Page', () => {
     expect(githubLinks.length).toBeGreaterThan(0)
   })
 
-  it('should display presentations with slides', () => {
+  it('should only display OSS project articles when presentations are empty', () => {
     render(
       <TestWrapper>
         <Product />
       </TestWrapper>
     )
     
-    // Check for presentation items
-    const presentations = screen.getAllByRole('article')
-    expect(presentations.length).toBeGreaterThan(0)
+    // Check for OSS project articles only (since presentations are empty)
+    const articles = screen.getAllByRole('article')
+    expect(articles.length).toBe(5) // We have 5 OSS projects
   })
 })

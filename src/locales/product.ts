@@ -87,7 +87,7 @@ export const productData: Record<Language, ProductData> = {
     title: 'Products',
     sections: {
       ossProjects: 'OSS',
-      presentations: '発表資料',
+      presentations: '資料',
     },
     labels: {
       github: 'GitHub',

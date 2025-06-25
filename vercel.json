@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:frontend",
   "outputDirectory": "dist/client",
   "devCommand": "npm run dev:frontend",
   "framework": "vite",

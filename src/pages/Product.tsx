@@ -64,12 +64,13 @@ export const Product: React.FC = () => {
       </section>
 
       {/* Presentations Section */}
-      <section>
-        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-          {data.sections.presentations}
-        </h2>
-        <div className="space-y-4 sm:space-y-6">
-          {data.presentations.map((presentation) => (
+      {data.presentations.length > 0 && (
+        <section>
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
+            {data.sections.presentations}
+          </h2>
+          <div className="space-y-4 sm:space-y-6">
+            {data.presentations.map((presentation) => (
             <article key={presentation.id} className="card">
               <div className="mb-4">
                 <h3 className="text-xl font-semibold text-tn-fg-primary mb-2">
@@ -121,6 +122,7 @@ export const Product: React.FC = () => {
           ))}
         </div>
       </section>
+      )}
     </div>
   )
 }

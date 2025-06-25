@@ -12,23 +12,23 @@ describe('Markdown Loader', () => {
 
     it('should parse frontmatter correctly', () => {
       const posts = loadMarkdownFiles()
-      const firstPost = posts.get('1')
+      const firstPost = posts.get('4')
       
       expect(firstPost).toBeDefined()
-      expect(firstPost?.id).toBe('1')
-      expect(firstPost?.title).toBe('Building Modern Web Applications with Hono')
-      expect(firstPost?.tags).toContain('Hono')
-      expect(firstPost?.tags).toContain('TypeScript')
+      expect(firstPost?.id).toBe('4')
+      expect(firstPost?.title).toBe('マークダウン記法メモ')
+      expect(firstPost?.tags).toContain('Markdown')
+      expect(firstPost?.tags).toContain('Test')
     })
 
     it('should include markdown content', () => {
       const posts = loadMarkdownFiles()
-      const firstPost = posts.get('1')
+      const firstPost = posts.get('4')
       
       expect(firstPost).toBeDefined()
-      expect(firstPost?.content).toContain('# Building Modern Web Applications with Hono')
-      expect(firstPost?.content).toContain('## なぜHono？')
-      expect(firstPost?.content).toContain('```typescript')
+      expect(firstPost?.content).toContain('# 概要')
+      expect(firstPost?.content).toContain('## マークダウン記法')
+      expect(firstPost?.content).toContain('### h3')
     })
   })
 
@@ -65,12 +65,12 @@ describe('Markdown Loader', () => {
 
   describe('getBlogPostById', () => {
     it('should return specific blog post with content', () => {
-      const post = getBlogPostById('1')
+      const post = getBlogPostById('4')
       
       expect(post).toBeDefined()
-      expect(post?.id).toBe('1')
-      expect(post?.title).toBe('Building Modern Web Applications with Hono')
-      expect(post?.content).toContain('# Building Modern Web Applications with Hono')
+      expect(post?.id).toBe('4')
+      expect(post?.title).toBe('マークダウン記法メモ')
+      expect(post?.content).toContain('# 概要')
     })
 
     it('should return null for non-existent post', () => {
@@ -80,10 +80,10 @@ describe('Markdown Loader', () => {
     })
 
     it('should include all metadata fields', () => {
-      const post = getBlogPostById('2')
+      const post = getBlogPostById('4')
       
       expect(post).toBeDefined()
-      expect(post).toHaveProperty('id', '2')
+      expect(post).toHaveProperty('id', '4')
       expect(post).toHaveProperty('title')
       expect(post).toHaveProperty('excerpt')
       expect(post).toHaveProperty('date')
