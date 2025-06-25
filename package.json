@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "npm run build:frontend && tsx watch src/spa-server.ts",
     "dev:frontend": "vite",
+    "prebuild": "git lfs pull",
     "build": "vite build",
+    "prebuild:frontend": "git lfs pull",
     "build:frontend": "vite build",
     "start": "npm run build && node -r tsx/esm src/spa-server.ts",
     "deploy": "vercel --prod",

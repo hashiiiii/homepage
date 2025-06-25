@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:frontend",
+  "buildCommand": "git lfs pull && npm run build:frontend",
   "outputDirectory": "dist/client",
   "devCommand": "npm run dev:frontend",
   "framework": "vite",
