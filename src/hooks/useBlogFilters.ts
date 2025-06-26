@@ -27,10 +27,7 @@ export function useBlogFilters(posts: BlogPost[] | null) {
       const archive = filters.archive;
       filtered = filtered.filter((post) => {
         const date = new Date(post.date);
-        return (
-          date.getFullYear() === archive.year &&
-          date.getMonth() + 1 === archive.month
-        );
+        return date.getFullYear() === archive.year && date.getMonth() + 1 === archive.month;
       });
     }
 

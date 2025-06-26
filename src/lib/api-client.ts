@@ -57,9 +57,21 @@ export async function fetchBlogPost(
  * Fetch resume data
  */
 export async function fetchResume() {
-  const response = await fetch(`${API_BASE}/resume`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch resume');
+  try {
+    const response = await fetch(`${API_BASE}/resume`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Response is not JSON');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching resume:', error);
+    throw error;
   }
-  return response.json();
 }
