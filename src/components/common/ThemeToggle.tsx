@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { ToggleButton } from './ToggleButton';
 
 export const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button
+    <ToggleButton
       onClick={toggleTheme}
-      className="rounded-lg bg-tn-bg-secondary p-2 transition-all duration-200 hover:bg-tn-bg-hover"
-      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      ariaLabel={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (
         <svg
@@ -41,6 +41,6 @@ export const ThemeToggle: React.FC = () => {
           />
         </svg>
       )}
-    </button>
+    </ToggleButton>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import type { Language } from '../../contexts/LanguageContext';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { ToggleButton } from './ToggleButton';
 import {
   shouldShowLanguageToggle,
   isMultilingualEnabled,
@@ -50,19 +51,10 @@ export const LanguageToggle: React.FC = () => {
   };
 
   return (
-    <button
-      onClick={toggleLanguage}
-      disabled={isDisabled}
-      className={`rounded-lg p-2 transition-all duration-200 ${
-        isDisabled
-          ? 'bg-tn-bg-secondary/50 cursor-not-allowed opacity-50'
-          : 'bg-tn-bg-secondary hover:bg-tn-bg-hover'
-      }`}
-      aria-label={getAriaLabel()}
-    >
+    <ToggleButton onClick={toggleLanguage} disabled={isDisabled} ariaLabel={getAriaLabel()}>
       <div className="flex h-5 w-5 items-center justify-center text-base">
         {getLanguageDisplay(displayLanguage)}
       </div>
-    </button>
+    </ToggleButton>
   );
 };
