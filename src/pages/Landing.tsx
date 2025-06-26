@@ -22,7 +22,7 @@ export const Landing: React.FC = () => {
           <p className="text-base leading-relaxed text-tn-text-secondary">
             <span className="font-medium text-tn-text-primary">Engineer</span>
             <span className="mx-2 text-tn-text-muted">·</span>
-            <span className="text-tn-text-muted">Jack of all trades</span>
+            <span className="text-tn-text-muted">Wears many hats</span>
           </p>
         </div>
 

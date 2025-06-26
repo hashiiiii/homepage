@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Product } from '../../../src/pages/Product';
-import { ThemeProvider } from '../../../src/contexts/ThemeContext';
+import { describe, expect, it } from 'vitest';
 import { LanguageProvider } from '../../../src/contexts/LanguageContext';
+import { ThemeProvider } from '../../../src/contexts/ThemeContext';
+import { Product } from '../../../src/pages/Product';
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -23,7 +23,7 @@ describe('Product Page', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByText('Products')).toBeInTheDocument();
+    expect(screen.getByText('Product')).toBeInTheDocument();
   });
 
   it('should render OSS section', () => {

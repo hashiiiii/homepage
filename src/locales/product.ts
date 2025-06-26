@@ -18,7 +18,7 @@ export interface ProductData {
 
 export const productData: Record<Language, ProductData> = {
   en: {
-    title: 'Products',
+    title: 'Product',
     sections: {
       ossProjects: 'OSS',
       presentations: 'Presentations',
@@ -87,7 +87,7 @@ export const productData: Record<Language, ProductData> = {
     presentations: [],
   },
   ja: {
-    title: 'Products',
+    title: 'Product',
     sections: {
       ossProjects: 'OSS',
       presentations: '資料',
