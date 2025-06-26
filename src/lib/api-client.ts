@@ -83,6 +83,48 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata> {
   try {
     const response = await fetch(`${API_BASE}/blog/metadata`);
     if (!response.ok) {
+      // Fallback to old API if metadata endpoint is not available
+      if (response.status === 404) {
+        console.warn('Blog metadata endpoint not available, falling back to posts API');
+        const posts = await fetchBlogPosts();
+        
+        // Calculate metadata on client side as fallback
+        const tagCounts: Record<string, number> = {};
+        posts.forEach(post => {
+          post.tags.forEach(tag => {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+          });
+        });
+
+        const tagCountsArray = Object.entries(tagCounts)
+          .map(([tag, count]) => ({ tag, count }))
+          .sort((a, b) => b.count - a.count);
+
+        const monthlyArchives: Record<string, { year: number; month: number; count: number }> = {};
+        posts.forEach(post => {
+          const date = new Date(post.date);
+          const year = date.getFullYear();
+          const month = date.getMonth() + 1;
+          const key = `${year}-${month.toString().padStart(2, '0')}`;
+
+          if (!monthlyArchives[key]) {
+            monthlyArchives[key] = { year, month, count: 0 };
+          }
+          monthlyArchives[key].count++;
+        });
+
+        const archives = Object.values(monthlyArchives)
+          .sort((a, b) => {
+            if (a.year !== b.year) return b.year - a.year;
+            return b.month - a.month;
+          });
+
+        return {
+          posts,
+          archives,
+          tagCounts: tagCountsArray,
+        };
+      }
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
