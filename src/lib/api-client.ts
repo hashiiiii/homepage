@@ -87,11 +87,11 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata> {
       if (response.status === 404) {
         console.warn('Blog metadata endpoint not available, falling back to posts API');
         const posts = await fetchBlogPosts();
-        
+
         // Calculate metadata on client side as fallback
         const tagCounts: Record<string, number> = {};
-        posts.forEach(post => {
-          post.tags.forEach(tag => {
+        posts.forEach((post) => {
+          post.tags.forEach((tag) => {
             tagCounts[tag] = (tagCounts[tag] || 0) + 1;
           });
         });
@@ -101,7 +101,7 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata> {
           .sort((a, b) => b.count - a.count);
 
         const monthlyArchives: Record<string, { year: number; month: number; count: number }> = {};
-        posts.forEach(post => {
+        posts.forEach((post) => {
           const date = new Date(post.date);
           const year = date.getFullYear();
           const month = date.getMonth() + 1;
@@ -113,11 +113,10 @@ export async function fetchBlogMetadata(): Promise<BlogMetadata> {
           monthlyArchives[key].count++;
         });
 
-        const archives = Object.values(monthlyArchives)
-          .sort((a, b) => {
-            if (a.year !== b.year) return b.year - a.year;
-            return b.month - a.month;
-          });
+        const archives = Object.values(monthlyArchives).sort((a, b) => {
+          if (a.year !== b.year) return b.year - a.year;
+          return b.month - a.month;
+        });
 
         return {
           posts,
