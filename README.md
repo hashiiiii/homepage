@@ -6,11 +6,13 @@ Personal homepage built with Hono, TypeScript, and AWS.
 
 1. Clone the repository
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Copy environment variables:
+
    ```bash
    cp .env.example .env
    ```
@@ -41,6 +43,7 @@ This project supports **manual deployment** to Vercel via GitHub Actions to ensu
 3. Uncomment the workflow in `.github/workflows/deploy.yml`
 
 Once enabled:
+
 1. Go to the [Actions tab](../../actions) on GitHub
 2. Select "Deploy to Vercel" workflow
 3. Click "Run workflow" and choose:

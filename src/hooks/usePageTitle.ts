@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 /**
  * Custom hook to update page title dynamically
@@ -7,17 +7,17 @@ import { useEffect } from 'react'
  */
 export function usePageTitle(title?: string, isHome = false) {
   useEffect(() => {
-    const baseTitle = 'hashiiiii.com'
-    
+    const baseTitle = 'hashiiiii.com';
+
     if (isHome || !title) {
-      document.title = baseTitle
+      document.title = baseTitle;
     } else {
-      document.title = `${title} | ${baseTitle}`
+      document.title = `${title} | ${baseTitle}`;
     }
-    
+
     // Cleanup function to reset title when component unmounts
     return () => {
-      document.title = baseTitle
-    }
-  }, [title, isHome])
+      document.title = baseTitle;
+    };
+  }, [title, isHome]);
 }

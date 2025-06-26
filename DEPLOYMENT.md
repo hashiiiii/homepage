@@ -17,16 +17,19 @@ npm install -g vercel
 ## 2. 初回デプロイ設定
 
 ### Vercelにログイン
+
 ```bash
 vercel login
 ```
 
 ### プロジェクトの初期化
+
 ```bash
 vercel
 ```
 
 初回実行時の設定：
+
 - Project Name: `hashiiiii-homepage`
 - Framework: `Other`
 - Build Command: `npm run build`
@@ -62,6 +65,7 @@ NODE_ENV=production
 AWS Route53コンソールで `hashiiiii.com` ホストゾーンを開き、以下のレコードを設定：
 
 #### A レコード（apex domain用）
+
 ```
 Name: @
 Type: A
@@ -70,9 +74,10 @@ TTL: 300
 ```
 
 #### CNAME レコード（www用）
+
 ```
 Name: www
-Type: CNAME  
+Type: CNAME
 Value: cname.vercel-dns.com
 TTL: 300
 ```
@@ -80,6 +85,7 @@ TTL: 300
 > **注意**: Vercelが表示する実際のCNAME値を使用してください
 
 #### DNS設定の確認
+
 ```bash
 dig hashiiiii.com
 dig www.hashiiiii.com
@@ -88,6 +94,7 @@ dig www.hashiiiii.com
 ## 5. SSL証明書の自動設定
 
 Vercelは自動でSSL証明書を発行します：
+
 - Let's Encrypt証明書
 - 自動更新
 - HTTPS強制リダイレクト
@@ -95,16 +102,19 @@ Vercelは自動でSSL証明書を発行します：
 ## 6. デプロイコマンド
 
 ### 開発環境での確認
+
 ```bash
 npm run deploy:local    # ローカルでVercel環境をテスト
 ```
 
 ### プレビューデプロイ
+
 ```bash
 npm run deploy:preview  # プレビュー環境にデプロイ
 ```
 
 ### 本番デプロイ
+
 ```bash
 npm run deploy         # 本番環境にデプロイ
 ```
@@ -117,7 +127,7 @@ npm run deploy         # 本番環境にデプロイ
 # ORG IDの取得
 vercel teams list
 
-# プロジェクトIDの取得  
+# プロジェクトIDの取得
 vercel projects list
 
 # トークンの作成
@@ -142,12 +152,14 @@ VERCEL_PROJECT_ID=xxx   # プロジェクトID
 ## 8. デプロイ後の確認
 
 ### 8.1 サイトの動作確認
+
 ```bash
 curl -I https://hashiiiii.com
 curl -I https://www.hashiiiii.com
 ```
 
 ### 8.2 API エンドポイントの確認
+
 ```bash
 curl https://hashiiiii.com/api/health
 curl https://hashiiiii.com/api/blog
@@ -155,6 +167,7 @@ curl https://hashiiiii.com/api/resume
 ```
 
 ### 8.3 パフォーマンステスト
+
 - [PageSpeed Insights](https://pagespeed.web.dev/)
 - [GTmetrix](https://gtmetrix.com/)
 - Vercel Analytics（プロジェクト内で有効化）
@@ -162,6 +175,7 @@ curl https://hashiiiii.com/api/resume
 ## 9. トラブルシューティング
 
 ### DNS の問題
+
 ```bash
 # DNS プロパゲーションの確認
 https://www.whatsmydns.net/
@@ -172,6 +186,7 @@ sudo dscacheutil -flushcache  # macOS
 ```
 
 ### Vercel デプロイエラー
+
 ```bash
 # ログの確認
 vercel logs https://hashiiiii.com
@@ -181,6 +196,7 @@ vercel --prod --force
 ```
 
 ### SSL証明書の問題
+
 - Vercel Dashboardで証明書のステータス確認
 - DNS設定の再確認
 - 24-48時間待機（証明書発行には時間がかかる場合あり）
@@ -188,12 +204,14 @@ vercel --prod --force
 ## 10. パフォーマンス最適化
 
 ### CDN効果の確認
+
 ```bash
 # キャッシュヘッダーの確認
 curl -I https://hashiiiii.com/assets/main.js
 ```
 
 ### バンドルサイズの最適化
+
 ```bash
 npm run build
 ls -la dist/client/assets/  # ファイルサイズ確認
@@ -202,11 +220,13 @@ ls -la dist/client/assets/  # ファイルサイズ確認
 ## 11. 本番環境での監視
 
 ### Vercel Analytics
+
 - Vercel Dashboard → Analytics
 - Core Web Vitals
 - Real User Monitoring
 
 ### エラー監視
+
 - Vercel Dashboard → Functions（Serverless Functions のログ）
 - ブラウザ DevTools → Console
 

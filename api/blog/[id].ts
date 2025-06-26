@@ -23,13 +23,13 @@ function getBlogPostById(id: string): BlogPostWithContent | null {
 
     const files = fs.readdirSync(CONTENT_DIR)
     const mdFiles = files.filter(file => file.endsWith('.md'))
-    
+
     for (const file of mdFiles) {
       const filePath = path.join(CONTENT_DIR, file)
       const fileContent = fs.readFileSync(filePath, 'utf-8')
-      
+
       const { data, content } = matter(fileContent)
-      
+
       if (String(data.id) === id) {
         return {
           id: String(data.id),
@@ -45,7 +45,7 @@ function getBlogPostById(id: string): BlogPostWithContent | null {
   } catch (error) {
     console.error('Error loading blog post:', error)
   }
-  
+
   return null
 }
 
@@ -70,11 +70,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const post = getBlogPostById(id)
-    
+
     if (!post) {
       return res.status(404).json({ error: 'Post not found' })
     }
-    
+
     return res.status(200).json(post)
   } catch (error) {
     console.error('Error in blog detail API:', error)

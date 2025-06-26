@@ -4,4 +4,4 @@
 export const productConfig = {
   // Control whether to show GitHub stars
   showStars: false,
-}
+};

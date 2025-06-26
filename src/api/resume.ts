@@ -1,6 +1,6 @@
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const resume = new Hono()
+const resume = new Hono();
 
 // Mock resume data
 const mockResume = {
@@ -74,10 +74,10 @@ const mockResume = {
     linkedin: 'https://linkedin.com/in/hashiiiii',
     twitter: 'https://twitter.com/hashiiiii',
   },
-}
+};
 
 resume.get('/', (c) => {
-  return c.json(mockResume)
-})
+  return c.json(mockResume);
+});
 
-export { resume }
+export { resume };

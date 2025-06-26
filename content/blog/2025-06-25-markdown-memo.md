@@ -1,10 +1,10 @@
 ---
-id: "4"
-title: "マークダウン記法メモ"
-excerpt: "当ホームページで利用可能なマークダウン記法をメモするための記事です。"
-date: "2025-06-25"
-tags: ["Markdown", "Test"]
-readTime: "5 min read"
+id: '4'
+title: 'マークダウン記法メモ'
+excerpt: '当ホームページで利用可能なマークダウン記法をメモするための記事です。'
+date: '2025-06-25'
+tags: ['Markdown', 'Test']
+readTime: '5 min read'
 ---
 
 # 概要
@@ -40,11 +40,11 @@ readTime: "5 min read"
 
 ```typescript
 function greet(name: string): string {
-  return `Hello, ${name}!`
+  return `Hello, ${name}!`;
 }
 
-const message = greet("World")
-console.log(message)
+const message = greet('World');
+console.log(message);
 ```
 
 ### 水平線
@@ -53,10 +53,10 @@ console.log(message)
 
 ### テーブル
 
-|ヘッダー1|ヘッダー2|ヘッダー3|
-|-|-|-|
-|セル1|セル2|セル3|
-|セル4|セル5|セル6|
+| ヘッダー1 | ヘッダー2 | ヘッダー3 |
+| --------- | --------- | --------- |
+| セル1     | セル2     | セル3     |
+| セル4     | セル5     | セル6     |
 
 ### リンク
 
@@ -64,7 +64,7 @@ console.log(message)
 
 ### 画像
 
-![Tokyo Night テーマのサンプル画像](/images/blog/sample-image.svg "Tokyo Night Sample Image")
+![Tokyo Night テーマのサンプル画像](/images/blog/sample-image.svg 'Tokyo Night Sample Image')
 
 ### タスクリスト
 
@@ -122,13 +122,13 @@ sequenceDiagram
 これは HTML の `<details>` タグを使用した折りたたみ可能なコンテンツです。
 
 - マークダウン記法も使用可能
-- **太字** や *斜体* も OK
+- **太字** や _斜体_ も OK
 - `コード` も問題なし
 
 ```javascript
 // コードブロックも動作します
 function example() {
-  console.log("詳細が表示されました！")
+  console.log('詳細が表示されました！');
 }
 ```
 
@@ -139,18 +139,20 @@ function example() {
 インライン数式: $E = mc^2$
 
 ブロック数式:
+
 $$
 \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
 $$
 
 複雑な数式:
+
 $$
 \frac{\partial}{\partial t} \Psi(\mathbf{r}, t) = \frac{i\hbar}{2m} \nabla^2 \Psi(\mathbf{r}, t) + V(\mathbf{r}) \Psi(\mathbf{r}, t)
 $$
 
 ### スタイルの組み合わせ
 
-***太字かつイタリック***
+**_太字かつイタリック_**
 
 ~~取り消し線~~
 

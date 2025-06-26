@@ -3,7 +3,7 @@ import { designSystem } from '@/styles/design-system';
 export function generateStyles(theme: 'light' | 'dark' = 'light') {
   const colors = designSystem.colors[theme];
   const { typography, spacing, animation } = designSystem;
-  
+
   return `
     :root {
       --color-bg: ${colors.background};

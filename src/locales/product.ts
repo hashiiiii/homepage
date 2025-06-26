@@ -1,19 +1,19 @@
-import { Language } from '../contexts/LanguageContext'
-import type { OSSProject, Presentation } from '../models/product.model'
+import type { Language } from '../contexts/LanguageContext';
+import type { OSSProject, Presentation } from '../models/product.model';
 
 export interface ProductData {
-  title: string
+  title: string;
   sections: {
-    ossProjects: string
-    presentations: string
-  }
+    ossProjects: string;
+    presentations: string;
+  };
   labels: {
-    github: string
-    slides: string
-    video: string
-  }
-  ossProjects: OSSProject[]
-  presentations: Presentation[]
+    github: string;
+    slides: string;
+    video: string;
+  };
+  ossProjects: OSSProject[];
+  presentations: Presentation[];
 }
 
 export const productData: Record<Language, ProductData> = {
@@ -32,7 +32,8 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '1',
         name: 'RectPop',
-        description: 'A Unity plugin for positioning layouts around a RectTransform using anchors and pivots.',
+        description:
+          'A Unity plugin for positioning layouts around a RectTransform using anchors and pivots.',
         url: 'https://github.com/hashiiiii/RectPop',
         githubUrl: 'https://github.com/hashiiiii/RectPop',
         stars: 4,
@@ -42,7 +43,8 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '2',
         name: 'dotfiles',
-        description: 'About Rules and guidelines for optimizing AI coding assistant interactions in Windsurf and Cursor IDEs.',
+        description:
+          'About Rules and guidelines for optimizing AI coding assistant interactions in Windsurf and Cursor IDEs.',
         url: 'https://github.com/hashiiiii/dotfiles',
         githubUrl: 'https://github.com/hashiiiii/dotfiles',
         stars: 1,
@@ -52,7 +54,8 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '3',
         name: 'rules-for-ai',
-        description: 'About Rules and guidelines for optimizing AI coding assistant interactions in Windsurf and Cursor IDEs.',
+        description:
+          'About Rules and guidelines for optimizing AI coding assistant interactions in Windsurf and Cursor IDEs.',
         url: 'https://github.com/hashiiiii/rules-for-ai',
         githubUrl: 'https://github.com/hashiiiii/rules-for-ai',
         stars: 4,
@@ -62,7 +65,8 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '4',
         name: 'gh-auto-load-more',
-        description: "Automatically expands all 'Load more...' buttons in GitHub PR reviews until all comments are visible.",
+        description:
+          "Automatically expands all 'Load more...' buttons in GitHub PR reviews until all comments are visible.",
         url: 'https://github.com/hashiiiii/gh-auto-load-more',
         githubUrl: 'https://github.com/hashiiiii/gh-auto-load-more',
         stars: 0,
@@ -72,7 +76,7 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '5',
         name: 'homepage',
-        description: "My home page.",
+        description: 'My home page.',
         url: 'https://github.com/hashiiiii/homepage',
         githubUrl: 'https://github.com/hashiiiii/homepage',
         stars: 0,
@@ -80,8 +84,7 @@ export const productData: Record<Language, ProductData> = {
         tags: ['homepage', 'Hono', 'React', 'TypeScript', 'Vite', 'Tailwind CSS'],
       },
     ],
-    presentations: [
-    ],
+    presentations: [],
   },
   ja: {
     title: 'Products',
@@ -128,7 +131,8 @@ export const productData: Record<Language, ProductData> = {
       {
         id: '4',
         name: 'gh-auto-load-more',
-        description: 'GitHub PR で全てのコメントが表示されるまで「Load more...」ボタンを自動的で展開してくれる Chrome 拡張。',
+        description:
+          'GitHub PR で全てのコメントが表示されるまで「Load more...」ボタンを自動的で展開してくれる Chrome 拡張。',
         url: 'https://github.com/hashiiiii/gh-auto-load-more',
         githubUrl: 'https://github.com/hashiiiii/gh-auto-load-more',
         stars: 0,
@@ -146,7 +150,6 @@ export const productData: Record<Language, ProductData> = {
         tags: ['homepage', 'Hono', 'React', 'TypeScript', 'Vite', 'Tailwind CSS'],
       },
     ],
-    presentations: [
-    ],
+    presentations: [],
   },
-}
+};

@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import { Timeline } from '../../../../src/components/resume/Timeline'
+import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { Timeline } from '../../../../src/components/resume/Timeline';
 
 describe('Timeline Component', () => {
   it('should render timeline items with all fields', () => {
@@ -12,16 +12,16 @@ describe('Timeline Component', () => {
         description: ['Built amazing things'],
         current: true,
       },
-    ]
+    ];
 
-    render(<Timeline items={items} />)
-    
-    expect(screen.getByText('Senior Engineer')).toBeInTheDocument()
-    expect(screen.getByText('Tech Corp')).toBeInTheDocument()
-    expect(screen.getByText('2020 - Present')).toBeInTheDocument()
-    expect(screen.getByText('Built amazing things')).toBeInTheDocument()
-    expect(screen.getByText('Current')).toBeInTheDocument()
-  })
+    render(<Timeline items={items} />);
+
+    expect(screen.getByText('Senior Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Tech Corp')).toBeInTheDocument();
+    expect(screen.getByText('2020 - Present')).toBeInTheDocument();
+    expect(screen.getByText('Built amazing things')).toBeInTheDocument();
+    expect(screen.getByText('Current')).toBeInTheDocument();
+  });
 
   it('should render timeline items without company', () => {
     const items = [
@@ -30,16 +30,16 @@ describe('Timeline Component', () => {
         period: '2020 - 2022',
         description: ['Various projects'],
       },
-    ]
+    ];
 
-    render(<Timeline items={items} />)
-    
-    expect(screen.getByText('Freelance Developer')).toBeInTheDocument()
-    expect(screen.getByText('2020 - 2022')).toBeInTheDocument()
-    expect(screen.getByText('Various projects')).toBeInTheDocument()
+    render(<Timeline items={items} />);
+
+    expect(screen.getByText('Freelance Developer')).toBeInTheDocument();
+    expect(screen.getByText('2020 - 2022')).toBeInTheDocument();
+    expect(screen.getByText('Various projects')).toBeInTheDocument();
     // Should not show separator bullet
-    expect(screen.queryByText('•')).not.toBeInTheDocument()
-  })
+    expect(screen.queryByText('•')).not.toBeInTheDocument();
+  });
 
   it('should render timeline items without period', () => {
     const items = [
@@ -48,16 +48,16 @@ describe('Timeline Component', () => {
         company: 'Startup Inc',
         description: ['Leading innovation'],
       },
-    ]
+    ];
 
-    render(<Timeline items={items} />)
-    
-    expect(screen.getByText('Project Lead')).toBeInTheDocument()
-    expect(screen.getByText('Startup Inc')).toBeInTheDocument()
-    expect(screen.getByText('Leading innovation')).toBeInTheDocument()
+    render(<Timeline items={items} />);
+
+    expect(screen.getByText('Project Lead')).toBeInTheDocument();
+    expect(screen.getByText('Startup Inc')).toBeInTheDocument();
+    expect(screen.getByText('Leading innovation')).toBeInTheDocument();
     // Should not show separator bullet
-    expect(screen.queryByText('•')).not.toBeInTheDocument()
-  })
+    expect(screen.queryByText('•')).not.toBeInTheDocument();
+  });
 
   it('should render timeline items with only title and description', () => {
     const items = [
@@ -65,13 +65,13 @@ describe('Timeline Component', () => {
         title: 'Open Source Contributor',
         description: ['Contributing to various projects'],
       },
-    ]
+    ];
 
-    render(<Timeline items={items} />)
-    
-    expect(screen.getByText('Open Source Contributor')).toBeInTheDocument()
-    expect(screen.getByText('Contributing to various projects')).toBeInTheDocument()
-  })
+    render(<Timeline items={items} />);
+
+    expect(screen.getByText('Open Source Contributor')).toBeInTheDocument();
+    expect(screen.getByText('Contributing to various projects')).toBeInTheDocument();
+  });
 
   it('should render nested description items', () => {
     const items = [
@@ -91,16 +91,16 @@ describe('Timeline Component', () => {
           },
         ],
       },
-    ]
+    ];
 
-    render(<Timeline items={items} />)
-    
-    expect(screen.getByText('Full Stack Developer')).toBeInTheDocument()
-    expect(screen.getByText('Main responsibilities')).toBeInTheDocument()
-    expect(screen.getByText('Frontend development')).toBeInTheDocument()
-    expect(screen.getByText('Backend APIs')).toBeInTheDocument()
-    expect(screen.getByText('DevOps tasks')).toBeInTheDocument()
-    expect(screen.getByText('CI/CD')).toBeInTheDocument()
-    expect(screen.getByText('Monitoring')).toBeInTheDocument()
-  })
-})
+    render(<Timeline items={items} />);
+
+    expect(screen.getByText('Full Stack Developer')).toBeInTheDocument();
+    expect(screen.getByText('Main responsibilities')).toBeInTheDocument();
+    expect(screen.getByText('Frontend development')).toBeInTheDocument();
+    expect(screen.getByText('Backend APIs')).toBeInTheDocument();
+    expect(screen.getByText('DevOps tasks')).toBeInTheDocument();
+    expect(screen.getByText('CI/CD')).toBeInTheDocument();
+    expect(screen.getByText('Monitoring')).toBeInTheDocument();
+  });
+});

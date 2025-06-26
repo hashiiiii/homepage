@@ -25,7 +25,7 @@ const CONTENT_DIR = path.join(process.cwd(), 'content/blog')
  */
 function loadMarkdownFiles(): Map<string, BlogPostWithContent> {
   const posts = new Map<string, BlogPostWithContent>()
-  
+
   try {
     if (!fs.existsSync(CONTENT_DIR)) {
       console.warn(`Content directory not found: ${CONTENT_DIR}`)
@@ -34,18 +34,18 @@ function loadMarkdownFiles(): Map<string, BlogPostWithContent> {
 
     const files = fs.readdirSync(CONTENT_DIR)
     const mdFiles = files.filter(file => file.endsWith('.md'))
-    
+
     for (const file of mdFiles) {
       const filePath = path.join(CONTENT_DIR, file)
       const fileContent = fs.readFileSync(filePath, 'utf-8')
-      
+
       const { data, content } = matter(fileContent)
-      
+
       if (!data.id || !data.title) {
         console.warn(`Invalid frontmatter in ${file}: missing id or title`)
         continue
       }
-      
+
       const post: BlogPostWithContent = {
         id: String(data.id),
         title: String(data.title),
@@ -55,13 +55,13 @@ function loadMarkdownFiles(): Map<string, BlogPostWithContent> {
         tags: Array.isArray(data.tags) ? data.tags : [],
         readTime: String(data.readTime || '5 min read'),
       }
-      
+
       posts.set(post.id, post)
     }
   } catch (error) {
     console.error('Error loading markdown files:', error)
   }
-  
+
   return posts
 }
 
@@ -70,7 +70,7 @@ function loadMarkdownFiles(): Map<string, BlogPostWithContent> {
  */
 function getAllBlogPostsMetadata(): BlogPost[] {
   const posts = loadMarkdownFiles()
-  
+
   return Array.from(posts.values())
     .map(({ content: _content, ...metadata }) => metadata)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -108,11 +108,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     } else {
       // Get specific blog post
       const post = getBlogPostById(slug)
-      
+
       if (!post) {
         return res.status(404).json({ error: 'Post not found' })
       }
-      
+
       return res.status(200).json(post)
     }
   } catch (error) {

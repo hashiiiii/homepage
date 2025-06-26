@@ -1,14 +1,14 @@
-import { Language } from '../contexts/LanguageContext'
+import type { Language } from '../contexts/LanguageContext';
 
 export interface SkillCategory {
-  category: string
-  skills: string[]
-  color: string
+  category: string;
+  skills: string[];
+  color: string;
 }
 
 export interface SkillsData {
-  title: string
-  categories: SkillCategory[]
+  title: string;
+  categories: SkillCategory[];
 }
 
 export const skillsData: Record<Language, SkillsData> = {
@@ -22,7 +22,17 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'Game Development',
-        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'IAP', 'WebGL', 'Photon', 'Steam', 'fingger'],
+        skills: [
+          'Unity',
+          'Clean Architecture',
+          'MVP / DDD',
+          'Addressable Asset System',
+          'IAP',
+          'WebGL',
+          'Photon',
+          'Steam',
+          'fingger',
+        ],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {
@@ -42,7 +52,12 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'Leadership & Expertise',
-        skills: ['Tech Lead', 'Team Management (2-10 engineers)', 'Architecture Design', 'Performance Optimization'],
+        skills: [
+          'Tech Lead',
+          'Team Management (2-10 engineers)',
+          'Architecture Design',
+          'Performance Optimization',
+        ],
         color: 'bg-tn-red/10 text-tn-red border-tn-red/20',
       },
     ],
@@ -57,7 +72,17 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'ゲーム開発',
-        skills: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'IAP', 'WebGL', 'Photon', 'Steam', 'fingger'],
+        skills: [
+          'Unity',
+          'Clean Architecture',
+          'MVP / DDD',
+          'Addressable Asset System',
+          'IAP',
+          'WebGL',
+          'Photon',
+          'Steam',
+          'fingger',
+        ],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {
@@ -77,9 +102,14 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'リーダーシップ・専門性',
-        skills: ['テックリード', 'チームマネジメント（2 - 10 名）', 'アーキテクチャ設計', 'パフォーマンスチューニング'],
+        skills: [
+          'テックリード',
+          'チームマネジメント（2 - 10 名）',
+          'アーキテクチャ設計',
+          'パフォーマンスチューニング',
+        ],
         color: 'bg-tn-red/10 text-tn-red border-tn-red/20',
       },
     ],
   },
-}
+};

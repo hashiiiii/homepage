@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { markdownPlugin } from './vite-plugin-markdown'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { markdownPlugin } from './vite-plugin-markdown';
 
 export default defineConfig({
   plugins: [react(), markdownPlugin()],
@@ -36,7 +36,7 @@ export default defineConfig({
             'remark-math',
             'rehype-highlight',
             'rehype-katex',
-            'rehype-raw'
+            'rehype-raw',
           ],
           // 数式レンダリング
           'katex-vendor': ['katex'],
@@ -47,4 +47,4 @@ export default defineConfig({
   server: {
     port: 3001,
   },
-})
+});

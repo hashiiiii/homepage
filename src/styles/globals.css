@@ -8,7 +8,6 @@
   color: #a9b1d6 !important;
 }
 
-
 /* Code block unified styles - darker than main background for distinction */
 .markdown-content pre {
   background: #16161e !important;
@@ -38,22 +37,20 @@
 }
 
 /* Task list styles */
-.markdown-content input[type="checkbox"] {
+.markdown-content input[type='checkbox'] {
   margin-right: 0.5rem;
   accent-color: var(--tn-green);
 }
 
-.markdown-content li:has(input[type="checkbox"]:checked) {
+.markdown-content li:has(input[type='checkbox']:checked) {
   color: var(--tn-text-muted);
   text-decoration: line-through;
   opacity: 0.7;
 }
 
-
-.markdown-content li:has(input[type="checkbox"]:not(:checked)) {
+.markdown-content li:has(input[type='checkbox']:not(:checked)) {
   color: var(--tn-text-secondary);
 }
-
 
 /* Image styling */
 .markdown-content img {
@@ -170,22 +167,22 @@
   * {
     @apply border-tn-border;
   }
-  
+
   body {
     @apply bg-tn-bg-primary text-tn-fg-primary;
     @apply transition-colors duration-200;
   }
-  
+
   ::selection {
     background-color: var(--tn-selection);
     color: var(--tn-fg-primary);
   }
-  
+
   ::-moz-selection {
     background-color: var(--tn-selection);
     color: var(--tn-fg-primary);
   }
-  
+
   /* Color variable aliases for consistency */
   :root {
     --tn-text-primary: var(--tn-fg-primary);
@@ -199,41 +196,41 @@
 
 @layer components {
   .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  
+
   .btn-primary {
     @apply bg-tn-blue text-white hover:bg-tn-cyan;
-    @apply px-6 py-3 rounded-lg font-medium;
+    @apply rounded-lg px-6 py-3 font-medium;
     @apply transition-all duration-200;
     @apply hover:shadow-lg;
     @apply border border-tn-blue hover:border-tn-cyan;
     box-shadow: 0 10px 15px -3px rgba(122, 162, 247, 0.3);
   }
-  
+
   .btn-secondary {
     @apply bg-tn-bg-tertiary text-tn-fg-primary hover:bg-tn-bg-hover;
-    @apply px-6 py-3 rounded-lg font-medium;
+    @apply rounded-lg px-6 py-3 font-medium;
     @apply border border-tn-border hover:border-tn-fg-muted;
     @apply transition-all duration-200;
   }
-  
+
   .card {
-    @apply bg-tn-bg-secondary rounded-xl p-6;
+    @apply rounded-xl bg-tn-bg-secondary p-6;
     @apply border border-tn-border;
     @apply hover:border-tn-comment;
     @apply transition-all duration-200;
     @apply hover:shadow-lg;
   }
-  
+
   .link {
     @apply text-tn-blue hover:text-tn-cyan;
     @apply underline-offset-2 hover:underline;
     @apply transition-colors duration-200;
   }
-  
+
   .tag {
-    @apply px-3 py-1 rounded-full text-sm font-medium;
+    @apply rounded-full px-3 py-1 text-sm font-medium;
     @apply bg-tn-bg-tertiary text-tn-cyan;
     @apply border border-tn-border;
   }

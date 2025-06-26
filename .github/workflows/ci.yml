@@ -33,7 +33,7 @@ jobs:
       run: npm run typecheck
     
     - name: Build frontend
-      run: npm run build:frontend
+      run: npm run build
       
     - name: Run tests
       run: npm run test -- --run
@@ -56,4 +56,4 @@ jobs:
       run: npm ci
     
     - name: Build project
-      run: npm run build:frontend
+      run: npm run build

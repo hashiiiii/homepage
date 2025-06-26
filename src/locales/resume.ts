@@ -1,41 +1,41 @@
-import { Language } from '../contexts/LanguageContext'
+import type { Language } from '../contexts/LanguageContext';
 
-type DescriptionItem = string | { text: string; items?: DescriptionItem[] }
+type DescriptionItem = string | { text: string; items?: DescriptionItem[] };
 
 export interface ResumeData {
-  title: string
-  subtitle: string
+  title: string;
+  subtitle: string;
   sections: {
-    workExperience: string
-    workExperienceTitle: string
-    freelance: string
-    education: string
-    contact: string
-  }
+    workExperience: string;
+    workExperienceTitle: string;
+    freelance: string;
+    education: string;
+    contact: string;
+  };
   experience: Array<{
-    title: string
-    company?: string
-    period?: string
-    current?: boolean
-    description: DescriptionItem[]
-  }>
+    title: string;
+    company?: string;
+    period?: string;
+    current?: boolean;
+    description: DescriptionItem[];
+  }>;
   freelance: Array<{
-    title: string
-    company?: string
-    period?: string
-    current?: boolean
-    description: DescriptionItem[]
-  }>
+    title: string;
+    company?: string;
+    period?: string;
+    current?: boolean;
+    description: DescriptionItem[];
+  }>;
   education: {
-    degree: string
-    university: string
-    period: string
-  }
+    degree: string;
+    university: string;
+    period: string;
+  };
   contact: {
-    email: string
-    github: string
-    linkedin: string
-  }
+    email: string;
+    github: string;
+    linkedin: string;
+  };
 }
 
 export const resumeData: Record<Language, ResumeData> = {
@@ -69,7 +69,7 @@ export const resumeData: Record<Language, ResumeData> = {
             items: [
               'Error protocol improvements',
               'HTTP foundation modifications',
-              'Response parser implementation'
+              'Response parser implementation',
             ],
           },
           {
@@ -115,10 +115,7 @@ export const resumeData: Record<Language, ResumeData> = {
           },
           {
             text: 'Server-side development with Go + GCP (Cloud Run + Firestore)',
-            items: [
-              'Various API development',
-              'GCS deployment infrastructure improvements',
-            ],
+            items: ['Various API development', 'GCS deployment infrastructure improvements'],
           },
         ],
       },
@@ -140,14 +137,12 @@ export const resumeData: Record<Language, ResumeData> = {
             items: [
               'Architecture design and technology selection',
               'Foundation development (UI navigation, Addressable Asset System)',
-              'Out-game development and in-game prototype implementation'
+              'Out-game development and in-game prototype implementation',
             ],
           },
           {
             text: 'Server-side development with PlayFab + Azure Functions (C#)',
-            items: [
-              'Worker implementation (item grants/deletions, player data deletion/export)',
-            ],
+            items: ['Worker implementation (item grants/deletions, player data deletion/export)'],
           },
           {
             text: 'DevOps',
@@ -156,7 +151,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'Steam integration implementation',
               'CI / CD pipeline implementation with GitHub Actions (Steam, fingger)',
             ],
-          }
+          },
         ],
       },
       {
@@ -208,7 +203,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'iOS / Android platform support and store review handling',
               'Build server construction and operations',
             ],
-          }
+          },
         ],
       },
     ],
@@ -226,7 +221,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'Asset infrastructure implementation using Addressable Asset System',
               'AssetBundle build pipeline construction using GitHub Actions + GCS',
             ],
-          }
+          },
         ],
       },
     ],
@@ -268,11 +263,7 @@ export const resumeData: Record<Language, ResumeData> = {
           },
           {
             text: 'C++ による SDK 開発',
-            items: [
-              'エラープロトコル改修',
-              'http 基盤の改修',
-              'レスポンス Parser の実装'
-            ],
+            items: ['エラープロトコル改修', 'http 基盤の改修', 'レスポンス Parser の実装'],
           },
           {
             text: 'Unity + C# による API テストアプリ改修',
@@ -317,10 +308,7 @@ export const resumeData: Record<Language, ResumeData> = {
           },
           {
             text: 'Go + GCP（Cloud Run + Firestore）によるサーバーサイド開発',
-            items: [
-              '各種 API 開発',
-              'GCS へのデプロイ基盤の改修',
-            ],
+            items: ['各種 API 開発', 'GCS へのデプロイ基盤の改修'],
           },
         ],
       },
@@ -342,14 +330,12 @@ export const resumeData: Record<Language, ResumeData> = {
             items: [
               'アーキテクチャ設計, 技術選定, ',
               '基盤開発（UI ナビゲーション基盤, Addressable Asset System を用いた Asset 基盤）',
-              'アウトゲーム開発とインゲームプロト実装'
+              'アウトゲーム開発とインゲームプロト実装',
             ],
           },
           {
             text: 'PlayFab + Azure Functions（C#）によるサーバーサイド開発',
-            items: [
-              '各種ワーカーの実装（アイテム付与や削除, プレイヤーデータ削除やエクスポート）',
-            ],
+            items: ['各種ワーカーの実装（アイテム付与や削除, プレイヤーデータ削除やエクスポート）'],
           },
           {
             text: 'DevOps',
@@ -358,7 +344,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'Steam との Integration 対応',
               'Github Actions を用いた CI / CD（Steam, fingger）パイプラインの実装',
             ],
-          }
+          },
         ],
       },
       {
@@ -410,7 +396,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'iOS / Android プラットフォーム対応、ストア審査対応',
               'ビルドサーバーの構築と運用',
             ],
-          }
+          },
         ],
       },
     ],
@@ -428,7 +414,7 @@ export const resumeData: Record<Language, ResumeData> = {
               'Addressable Asset System を用いた Asset 基盤の実装',
               'Github Actions + GCS を用いた AssetBundle ビルドパイプラインの構築',
             ],
-          }
+          },
         ],
       },
     ],
@@ -443,4 +429,4 @@ export const resumeData: Record<Language, ResumeData> = {
       linkedin: 'linkedin.com/in/hashiiiii',
     },
   },
-}
+};
