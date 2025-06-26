@@ -10,6 +10,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -21,10 +22,13 @@
       "jsx": true
     }
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "tailwindcss"],
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "tailwindcss": {
+      "config": "tailwind.config.js"
     }
   },
   "rules": {
@@ -87,7 +91,16 @@
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
     "eol-last": ["error", "always"],
     "no-whitespace-before-property": "error",
-    "space-in-parens": ["error", "never"]
+    "space-in-parens": ["error", "never"],
+
+    // TailwindCSS
+    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/enforces-negative-arbitrary-values": "warn",
+    "tailwindcss/enforces-shorthand": "warn",
+    "tailwindcss/migration-from-tailwind-2": "warn",
+    "tailwindcss/no-arbitrary-value": "off",
+    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/no-contradicting-classname": "error"
   },
   "ignorePatterns": [
     "dist/",

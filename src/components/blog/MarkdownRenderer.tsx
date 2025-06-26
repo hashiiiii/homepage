@@ -194,7 +194,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
                       return (
                         <div className="alert-note bg-tn-blue/10 my-4 rounded-lg border-l-4 border-tn-blue p-4">
                           <div className="flex items-start">
-                            <div className="mr-3 mt-0.5 flex-shrink-0 text-lg text-tn-blue">ℹ️</div>
+                            <div className="mr-3 mt-0.5 shrink-0 text-lg text-tn-blue">ℹ️</div>
                             <div className="text-tn-text-primary">{children}</div>
                           </div>
                         </div>
@@ -203,9 +203,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
                       return (
                         <div className="alert-tip bg-tn-green/10 my-4 rounded-lg border-l-4 border-tn-green p-4">
                           <div className="flex items-start">
-                            <div className="mr-3 mt-0.5 flex-shrink-0 text-lg text-tn-green">
-                              💡
-                            </div>
+                            <div className="mr-3 mt-0.5 shrink-0 text-lg text-tn-green">💡</div>
                             <div className="text-tn-text-primary">{children}</div>
                           </div>
                         </div>
@@ -214,9 +212,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
                       return (
                         <div className="alert-warning bg-tn-yellow/10 my-4 rounded-lg border-l-4 border-tn-yellow p-4">
                           <div className="flex items-start">
-                            <div className="mr-3 mt-0.5 flex-shrink-0 text-lg text-tn-yellow">
-                              ⚠️
-                            </div>
+                            <div className="mr-3 mt-0.5 shrink-0 text-lg text-tn-yellow">⚠️</div>
                             <div className="text-tn-text-primary">{children}</div>
                           </div>
                         </div>
@@ -225,7 +221,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
                       return (
                         <div className="alert-danger bg-tn-red/10 my-4 rounded-lg border-l-4 border-tn-red p-4">
                           <div className="flex items-start">
-                            <div className="mr-3 mt-0.5 flex-shrink-0 text-lg text-tn-red">🚨</div>
+                            <div className="mr-3 mt-0.5 shrink-0 text-lg text-tn-red">🚨</div>
                             <div className="text-tn-text-primary">{children}</div>
                           </div>
                         </div>

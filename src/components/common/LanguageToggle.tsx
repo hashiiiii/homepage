@@ -52,7 +52,7 @@ export const LanguageToggle: React.FC = () => {
 
   return (
     <ToggleButton onClick={toggleLanguage} disabled={isDisabled} ariaLabel={getAriaLabel()}>
-      <div className="flex h-5 w-5 items-center justify-center text-base">
+      <div className="flex size-5 items-center justify-center text-base">
         {getLanguageDisplay(displayLanguage)}
       </div>
     </ToggleButton>

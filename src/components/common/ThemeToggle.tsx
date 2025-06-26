@@ -13,7 +13,7 @@ export const ThemeToggle: React.FC = () => {
       {theme === 'dark' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-tn-yellow"
+          className="size-5 text-tn-yellow"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -28,7 +28,7 @@ export const ThemeToggle: React.FC = () => {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-tn-blue"
+          className="size-5 text-tn-blue"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

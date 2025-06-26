@@ -44,12 +44,12 @@ const renderDescriptionItems = (items: DescriptionItem[], level: number = 0): Re
 export const Timeline: React.FC<TimelineProps> = ({ items }) => {
   return (
     <div className="relative">
-      <div className="absolute bottom-0 left-4 top-0 w-0.5 bg-tn-comment" />
+      <div className="absolute inset-y-0 left-4 w-0.5 bg-tn-comment" />
 
       {items.map((item, index) => (
         <div key={index} className="relative mb-8 ml-10">
           <div
-            className={`absolute -left-[29px] h-6 w-1.5 ${
+            className={`absolute left-[-29px] h-6 w-1.5 ${
               item.current ? 'shadow-tn-green/30 bg-tn-green shadow-lg' : 'bg-tn-blue'
             }`}
           />

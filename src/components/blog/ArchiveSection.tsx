@@ -111,7 +111,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = ({
         <div key={year}>
           <button
             onClick={() => toggleYear(year)}
-            className="flex w-full items-center justify-between rounded px-2 py-2 font-medium text-tn-text-primary transition-colors hover:bg-tn-bg-tertiary"
+            className="flex w-full items-center justify-between rounded p-2 font-medium text-tn-text-primary transition-colors hover:bg-tn-bg-tertiary"
           >
             <div className="flex items-center">
               <span
@@ -168,7 +168,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = ({
             {!showOlderYears ? (
               <button
                 onClick={() => setShowOlderYears(true)}
-                className="w-full rounded px-2 py-2 text-sm text-tn-text-muted transition-colors hover:bg-tn-bg-tertiary hover:text-tn-text-primary"
+                className="w-full rounded p-2 text-sm text-tn-text-muted transition-colors hover:bg-tn-bg-tertiary hover:text-tn-text-primary"
               >
                 ▼ 過去のアーカイブを表示
               </button>

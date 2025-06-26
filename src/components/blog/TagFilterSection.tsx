@@ -63,7 +63,7 @@ export const TagFilterSection: React.FC<TagFilterSectionProps> = ({
           <button
             key={tag}
             onClick={() => handleTagToggle(tag)}
-            className={`block flex w-full items-center justify-between rounded px-3 py-2 text-left transition-colors ${
+            className={`flex w-full items-center justify-between rounded px-3 py-2 text-left transition-colors ${
               selectedTags.includes(tag)
                 ? 'bg-tn-accent-blue text-white'
                 : 'text-tn-text-secondary hover:bg-tn-bg-tertiary hover:text-tn-text-primary'

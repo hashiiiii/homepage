@@ -39,7 +39,7 @@ export const Navigation: React.FC = () => {
         <div className="flex h-16 items-center justify-between">
           <Link
             to="/"
-            className="flex-shrink-0 text-lg font-bold text-tn-cyan transition-colors hover:text-tn-magenta sm:text-xl"
+            className="shrink-0 text-lg font-bold text-tn-cyan transition-colors hover:text-tn-magenta sm:text-xl"
           >
             hashiiiii
           </Link>
@@ -71,7 +71,7 @@ export const Navigation: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
-              <div className="flex h-6 w-6 flex-col justify-center">
+              <div className="flex size-6 flex-col justify-center">
                 <span
                   className={`block h-0.5 w-6 bg-tn-fg-primary transition-transform ${
                     isMobileMenuOpen ? 'translate-y-1 rotate-45' : ''
