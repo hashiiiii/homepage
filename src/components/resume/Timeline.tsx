@@ -52,7 +52,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
             className={`absolute -left-[29px] h-6 w-1.5 ${
               item.current ? 'shadow-tn-green/30 bg-tn-green shadow-lg' : 'bg-tn-blue'
             }`}
-           />
+          />
 
           <div className="card">
             <div className="mb-2 flex flex-wrap items-center justify-between">

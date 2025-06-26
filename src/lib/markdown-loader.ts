@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import type { BlogPost } from '@/models/blog.model';
+import { extractBlogPost } from '@/utils/markdown';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/blog');
 
@@ -25,25 +25,20 @@ export function loadMarkdownFiles(): Map<string, BlogPost & { content: string }>
       const filePath = path.join(CONTENT_DIR, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-      const { data, content } = matter(fileContent);
+      try {
+        const post = extractBlogPost(fileContent);
 
-      // フロントマターの必須フィールドをチェック
-      if (!data.id || !data.title) {
-        console.warn(`Invalid frontmatter in ${file}: missing id or title`);
+        // フロントマターの必須フィールドをチェック
+        if (!post.id || !post.title) {
+          console.warn(`Invalid frontmatter in ${file}: missing id or title`);
+          continue;
+        }
+
+        posts.set(post.id, post);
+      } catch (error) {
+        console.warn(`Error parsing ${file}:`, error);
         continue;
       }
-
-      const post: BlogPost & { content: string } = {
-        id: data.id,
-        title: data.title,
-        excerpt: data.excerpt || '',
-        content,
-        date: data.date || new Date().toISOString().split('T')[0],
-        tags: data.tags || [],
-        readTime: data.readTime || '5 min read',
-      };
-
-      posts.set(post.id, post);
     }
   } catch (error) {
     console.error('Error loading markdown files:', error);

@@ -1,4 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const mockResume = {
   experience: [
@@ -71,25 +71,25 @@ const mockResume = {
     linkedin: 'https://www.linkedin.com/in/hashiiiii/',
     twitter: 'https://twitter.com/hashiiiii',
   },
-}
+};
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end()
+    return res.status(200).end();
   }
 
   if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' })
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    return res.status(200).json(mockResume)
+    return res.status(200).json(mockResume);
   } catch (error) {
-    console.error('Error in resume API:', error)
-    return res.status(500).json({ error: 'Internal server error' })
+    console.error('Error in resume API:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
