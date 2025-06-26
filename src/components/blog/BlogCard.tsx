@@ -1,14 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  tags: string[];
-  readTime: string;
-}
+import type { BlogPost } from '@/models/blog.model';
 
 interface BlogCardProps {
   post: BlogPost;

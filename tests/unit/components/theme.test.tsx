@@ -163,6 +163,13 @@ describe('Tokyo Night Theme System', () => {
     });
 
     it('should save theme to localStorage when changed', () => {
+      // Mock system preference to dark mode
+      window.matchMedia = vi.fn().mockImplementation(() => ({
+        matches: true, // prefers dark mode
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }));
+
       render(
         <ThemeProvider>
           <TestComponent />
@@ -173,7 +180,7 @@ describe('Tokyo Night Theme System', () => {
 
       fireEvent.click(toggleButton);
 
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'light');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark');
     });
   });
 

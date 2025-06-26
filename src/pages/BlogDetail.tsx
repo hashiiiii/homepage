@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import type { BlogPost } from '@/models/blog.model';
 import { fetchBlogPost } from '@/lib/api-client';
 import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { useAsyncData } from '../hooks/useAsyncData';
 
 export function BlogDetail() {
   const { id } = useParams<{ id: string }>();
-  const [post, setPost] = useState<(BlogPost & { content: string; html: string }) | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  const {
+    data: post,
+    loading,
+    error,
+  } = useAsyncData(
+    () => (id ? fetchBlogPost(id) : Promise.reject(new Error('No ID provided'))),
+    [id]
+  );
 
   // Set page title when post is loaded
   usePageTitle(post?.title);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const loadPost = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchBlogPost(id);
-        setPost(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load post');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPost();
-  }, [id]);
 
   if (loading) {
     return (
