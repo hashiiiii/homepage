@@ -24,11 +24,12 @@ export function useBlogFilters(posts: BlogPost[] | null) {
 
     // Archive filter
     if (filters.archive) {
+      const archive = filters.archive;
       filtered = filtered.filter((post) => {
         const date = new Date(post.date);
         return (
-          date.getFullYear() === filters.archive.year &&
-          date.getMonth() + 1 === filters.archive.month
+          date.getFullYear() === archive.year &&
+          date.getMonth() + 1 === archive.month
         );
       });
     }
