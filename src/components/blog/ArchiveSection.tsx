@@ -1,10 +1,11 @@
 import React from 'react';
-import type { BlogPost } from '@/models/blog.model';
+import type { BlogPost, BlogMetadata } from '@/models/blog.model';
 
 interface ArchiveSectionProps {
   posts: BlogPost[];
   selectedArchive: { year: number; month: number } | null;
   onArchiveFilter: (year: number, month: number) => void;
+  metadata?: BlogMetadata | null;
 }
 
 interface MonthlyArchive {
@@ -20,15 +21,44 @@ interface YearlyArchive {
   totalCount: number;
 }
 
-export const ArchiveSection: React.FC<ArchiveSectionProps> = ({
+export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function ArchiveSection({
   posts,
   selectedArchive,
   onArchiveFilter,
-}) => {
+  metadata,
+}) {
   const [expandedYears, setExpandedYears] = React.useState<Set<number>>(new Set());
   const [showOlderYears, setShowOlderYears] = React.useState(false);
 
   const yearlyArchives = React.useMemo(() => {
+    // Use pre-calculated archives from metadata if available
+    if (metadata?.archives) {
+      const yearGroups: Record<number, YearlyArchive> = {};
+
+      metadata.archives.forEach((archive) => {
+        if (!yearGroups[archive.year]) {
+          yearGroups[archive.year] = {
+            year: archive.year,
+            months: [],
+            totalCount: 0,
+          };
+        }
+        yearGroups[archive.year].months.push({
+          year: archive.year,
+          month: archive.month,
+          count: archive.count,
+          posts: posts.filter((p) => {
+            const date = new Date(p.date);
+            return date.getFullYear() === archive.year && date.getMonth() + 1 === archive.month;
+          }),
+        });
+        yearGroups[archive.year].totalCount += archive.count;
+      });
+
+      return Object.values(yearGroups).sort((a, b) => b.year - a.year);
+    }
+
+    // Fallback to client-side calculation if metadata not available
     const monthlyArchives: Record<string, MonthlyArchive> = {};
 
     posts.forEach((post) => {
@@ -63,7 +93,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = ({
     });
 
     return Object.values(yearGroups).sort((a, b) => b.year - a.year);
-  }, [posts]);
+  }, [posts, metadata?.archives]);
 
   React.useEffect(() => {
     if (yearlyArchives.length > 0) {
@@ -188,4 +218,6 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = ({
       </div>
     </section>
   );
-};
+});
+
+ArchiveSection.displayName = 'ArchiveSection';

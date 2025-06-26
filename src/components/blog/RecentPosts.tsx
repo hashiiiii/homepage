@@ -6,7 +6,7 @@ interface RecentPostsProps {
   posts: BlogPost[];
 }
 
-export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
+export const RecentPosts: React.FC<RecentPostsProps> = React.memo(function RecentPosts({ posts }) {
   const recentPosts = posts
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 5);
@@ -32,4 +32,6 @@ export const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
       </div>
     </section>
   );
-};
+});
+
+RecentPosts.displayName = 'RecentPosts';

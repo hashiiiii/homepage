@@ -1,4 +1,4 @@
-import type { BlogPost } from '@/models/blog.model';
+import type { BlogPost, BlogMetadata } from '@/models/blog.model';
 
 const API_BASE = '/api';
 
@@ -72,6 +72,29 @@ export async function fetchResume() {
     return response.json();
   } catch (error) {
     console.error('Error fetching resume:', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch blog metadata with pre-calculated tag counts and archives
+ */
+export async function fetchBlogMetadata(): Promise<BlogMetadata> {
+  try {
+    const response = await fetch(`${API_BASE}/blog/metadata`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new Error('Response is not JSON');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching blog metadata:', error);
     throw error;
   }
 }

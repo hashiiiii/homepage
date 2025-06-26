@@ -1,5 +1,5 @@
 import React from 'react';
-import type { BlogPost } from '@/models/blog.model';
+import type { BlogPost, BlogMetadata } from '@/models/blog.model';
 import { RecentPosts } from './RecentPosts';
 import { ArchiveSection } from './ArchiveSection';
 import { TagFilterSection } from './TagFilterSection';
@@ -10,6 +10,7 @@ interface BlogSidebarProps {
   selectedArchive: { year: number; month: number } | null;
   onTagFilter: (tags: string[]) => void;
   onArchiveFilter: (year: number, month: number) => void;
+  metadata?: BlogMetadata | null;
 }
 
 export const BlogSidebar: React.FC<BlogSidebarProps> = ({
@@ -18,6 +19,7 @@ export const BlogSidebar: React.FC<BlogSidebarProps> = ({
   selectedArchive,
   onTagFilter,
   onArchiveFilter,
+  metadata,
 }) => {
   return (
     <aside className="w-full space-y-6 lg:w-80 lg:space-y-8">
@@ -26,8 +28,14 @@ export const BlogSidebar: React.FC<BlogSidebarProps> = ({
         posts={posts}
         selectedArchive={selectedArchive}
         onArchiveFilter={onArchiveFilter}
+        metadata={metadata}
       />
-      <TagFilterSection posts={posts} selectedTags={selectedTags} onTagFilter={onTagFilter} />
+      <TagFilterSection
+        posts={posts}
+        selectedTags={selectedTags}
+        onTagFilter={onTagFilter}
+        metadata={metadata}
+      />
     </aside>
   );
 };

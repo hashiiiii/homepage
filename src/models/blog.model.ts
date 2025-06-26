@@ -20,5 +20,22 @@ export interface BlogTag {
   slug: string;
 }
 
+export interface BlogArchive {
+  year: number;
+  month: number;
+  count: number;
+}
+
+export interface TagCount {
+  tag: string;
+  count: number;
+}
+
+export interface BlogMetadata {
+  posts: BlogPost[];
+  archives: BlogArchive[];
+  tagCounts: TagCount[];
+}
+
 export type CreateBlogPostInput = Omit<BlogPost, 'id' | 'publishedAt' | 'updatedAt' | 'viewCount'>;
 export type UpdateBlogPostInput = Partial<CreateBlogPostInput>;

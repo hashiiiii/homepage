@@ -5,16 +5,30 @@ import { extractBlogPost } from '@/utils/markdown';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content/blog');
 
+// Cache for loaded posts
+let postsCache: Map<string, BlogPost & { content: string }> | null = null;
+let lastCacheTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in development
+
 /**
  * Load all markdown files from content directory (synchronous)
  */
 export function loadMarkdownFiles(): Map<string, BlogPost & { content: string }> {
+  const now = Date.now();
+
+  // Return cached posts if cache is still valid
+  if (postsCache && now - lastCacheTime < CACHE_DURATION) {
+    return postsCache;
+  }
+
   const posts = new Map<string, BlogPost & { content: string }>();
 
   try {
     // ディレクトリが存在しない場合は空のMapを返す
     if (!fs.existsSync(CONTENT_DIR)) {
       console.warn(`Content directory not found: ${CONTENT_DIR}`);
+      postsCache = posts;
+      lastCacheTime = now;
       return posts;
     }
 
@@ -43,6 +57,10 @@ export function loadMarkdownFiles(): Map<string, BlogPost & { content: string }>
   } catch (error) {
     console.error('Error loading markdown files:', error);
   }
+
+  // Update cache
+  postsCache = posts;
+  lastCacheTime = now;
 
   return posts;
 }

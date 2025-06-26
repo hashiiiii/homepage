@@ -3,7 +3,7 @@ import { BlogSidebar } from '../components/blog/BlogSidebar';
 import { BlogFilters } from '../components/blog/BlogFilters';
 import { BlogList } from '../components/blog/BlogList';
 import { LoadingErrorWrapper } from '../components/common/LoadingErrorWrapper';
-import { fetchBlogPosts } from '@/lib/api-client';
+import { fetchBlogMetadata } from '@/lib/api-client';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useAsyncData } from '../hooks/useAsyncData';
 import { useBlogFilters } from '../hooks/useBlogFilters';
@@ -11,7 +11,9 @@ import { usePagination } from '../hooks/usePagination';
 
 export const Blog: React.FC = () => {
   usePageTitle('Blog');
-  const { data: posts, loading, error } = useAsyncData(fetchBlogPosts, []);
+  const { data: metadata, loading, error } = useAsyncData(fetchBlogMetadata, []);
+
+  const posts = metadata?.posts || [];
 
   const { filters, filteredPosts, setTagFilter, setArchiveFilter, clearFilters } =
     useBlogFilters(posts);
@@ -46,11 +48,12 @@ export const Blog: React.FC = () => {
             />
 
             <BlogSidebar
-              posts={posts || []}
+              posts={posts}
               selectedTags={filters.tags}
               selectedArchive={filters.archive}
               onTagFilter={setTagFilter}
               onArchiveFilter={setArchiveFilter}
+              metadata={metadata}
             />
           </div>
         </div>
