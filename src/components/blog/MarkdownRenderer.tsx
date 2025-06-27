@@ -88,19 +88,19 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
   useEffect(() => {
     if (containerRef.current && mermaidLoaded && mermaidRef.current) {
       const mermaidElements = containerRef.current.querySelectorAll('code.language-mermaid');
-      
+
       mermaidElements.forEach((element, index) => {
         const code = element.textContent || '';
         const id = `mermaid-${Date.now()}-${index}`;
         const wrapper = element.parentElement?.parentElement; // pre -> div wrapper
-        
+
         if (wrapper && !wrapper.querySelector('.mermaid')) {
           // Create new div element instead of using innerHTML for better React compatibility
           const mermaidDiv = document.createElement('div');
           mermaidDiv.id = id;
           mermaidDiv.className = 'mermaid';
           mermaidDiv.textContent = code;
-          
+
           // Replace the wrapper content
           wrapper.innerHTML = '';
           wrapper.appendChild(mermaidDiv);
