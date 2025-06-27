@@ -26,7 +26,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
       import('mermaid').then((module) => {
         mermaidRef.current = module.default;
         mermaidRef.current.initialize({
-          startOnLoad: true,
+          startOnLoad: false, // Disable auto-start
           theme: 'base',
           themeVariables: {
             // Node backgrounds - dark theme文字色に統一
@@ -88,18 +88,40 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
   useEffect(() => {
     if (containerRef.current && mermaidLoaded && mermaidRef.current) {
       const mermaidElements = containerRef.current.querySelectorAll('code.language-mermaid');
+      
       mermaidElements.forEach((element, index) => {
         const code = element.textContent || '';
         const id = `mermaid-${Date.now()}-${index}`;
         const wrapper = element.parentElement?.parentElement; // pre -> div wrapper
-        if (wrapper) {
-          wrapper.innerHTML = `<div id="${id}" class="mermaid">${code}</div>`;
+        
+        if (wrapper && !wrapper.querySelector('.mermaid')) {
+          // Create new div element instead of using innerHTML for better React compatibility
+          const mermaidDiv = document.createElement('div');
+          mermaidDiv.id = id;
+          mermaidDiv.className = 'mermaid';
+          mermaidDiv.textContent = code;
+          
+          // Replace the wrapper content
+          wrapper.innerHTML = '';
+          wrapper.appendChild(mermaidDiv);
         }
       });
 
-      // Re-initialize and render mermaid
+      // Re-initialize and render mermaid using the newer API
       if (mermaidElements.length > 0) {
-        mermaidRef.current.run();
+        // Use async rendering for better error handling
+        const mermaidDivs = containerRef.current.querySelectorAll('.mermaid');
+        mermaidDivs.forEach(async (div, index) => {
+          try {
+            const id = `mermaid-rendered-${Date.now()}-${index}`;
+            div.id = id;
+            await mermaidRef.current.run({ nodes: [div] });
+          } catch (error) {
+            console.error('Mermaid rendering error:', error);
+            // Fallback: show the raw text
+            div.innerHTML = `<pre class="text-tn-red bg-tn-bg-tertiary p-4 rounded">${div.textContent}</pre>`;
+          }
+        });
       }
     }
   }, [content, mermaidLoaded]);
@@ -259,7 +281,7 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
                   </div>
                 )}
                 <pre className="overflow-x-auto rounded-lg p-4">
-                  <code className={className} {...props}>
+                  <code className={codeClassName} {...props}>
                     {children}
                   </code>
                 </pre>
