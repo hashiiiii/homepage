@@ -58,7 +58,6 @@ describe('Hono + React SPA Integration', () => {
   });
 
   describe('API Routes', () => {
-
     it('should serve blog API endpoint', async () => {
       const response = await fetch(`${baseUrl}/api/blog`);
       expect(response.status).toBe(200);
@@ -67,7 +66,6 @@ describe('Hono + React SPA Integration', () => {
       const data = await response.json();
       expect(Array.isArray(data)).toBe(true);
     });
-
   });
 
   describe('SPA Routing Behavior', () => {
