@@ -2,7 +2,7 @@
   "version": 2,
   "buildCommand": "git lfs pull && npm run build",
   "outputDirectory": "dist/client",
-  "devCommand": "npm run dev:frontend",
+  "devCommand": "npm run dev",
   "framework": "vite",
   "rewrites": [
     {
@@ -11,15 +11,6 @@
     }
   ],
   "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "s-maxage=0"
-        }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [

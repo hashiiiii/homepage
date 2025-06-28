@@ -21,6 +21,16 @@ export interface Presentation {
 }
 
 export interface ProductData {
+  title: string;
+  sections: {
+    ossProjects: string;
+    presentations: string;
+  };
+  labels: {
+    github: string;
+    slides: string;
+    video: string;
+  };
   ossProjects: OSSProject[];
   presentations: Presentation[];
 }

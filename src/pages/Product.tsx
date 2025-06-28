@@ -1,14 +1,14 @@
 import React from 'react';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { useTranslation } from '../contexts/LanguageContext';
-import { productData } from '../locales/product';
+import { fetchProductData } from '@/lib/product';
 import { productConfig } from '../config/product';
 
 export const Product: React.FC = () => {
   const { language } = useTranslation();
-  const data = productData[language];
+  const data = fetchProductData(language);
 
-  usePageTitle(data.title);
+  usePageTitle(data.title || 'Product');
 
   return (
     <div className="w-full animate-fade-in">

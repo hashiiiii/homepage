@@ -121,13 +121,7 @@
       }
     },
     {
-      "files": ["src/spa-server.ts"],
-      "rules": {
-        "no-console": "off"
-      }
-    },
-    {
-      "files": ["src/utils/analytics.ts", "vite-plugin-markdown.ts"],
+      "files": ["src/lib/build-blog.ts"],
       "rules": {
         "no-console": "off"
       }

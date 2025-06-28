@@ -5,11 +5,11 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import type { BlogPost, BlogMetadata, TagCount, BlogArchive } from '../src/models/blog.model';
-import { extractBlogPost } from '../src/utils/markdown';
+import type { BlogPost, BlogMetadata, TagCount, BlogArchive } from '../models/blog.model';
+import { extractBlogPost } from '../utils/markdown';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.resolve(__dirname, '..');
+const PROJECT_ROOT = path.resolve(__dirname, '../..');
 const CONTENT_DIR = path.join(PROJECT_ROOT, 'content/blog');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'src/generated');
 

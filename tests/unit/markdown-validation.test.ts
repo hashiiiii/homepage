@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { validateMarkdownPost, loadMarkdownFiles } from '../../scripts/build-blog-data';
+import { validateMarkdownPost, loadMarkdownFiles } from '../../src/lib/build-blog';
 import { extractBlogPost } from '../../src/utils/markdown';
 import type { BlogPost } from '../../src/models/blog.model';
 

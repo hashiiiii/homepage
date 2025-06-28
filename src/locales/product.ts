@@ -1,20 +1,5 @@
 import type { Language } from '../contexts/LanguageContext';
-import type { OSSProject, Presentation } from '../models/product.model';
-
-export interface ProductData {
-  title: string;
-  sections: {
-    ossProjects: string;
-    presentations: string;
-  };
-  labels: {
-    github: string;
-    slides: string;
-    video: string;
-  };
-  ossProjects: OSSProject[];
-  presentations: Presentation[];
-}
+import type { ProductData } from '../models/product.model';
 
 export const productData: Record<Language, ProductData> = {
   en: {
