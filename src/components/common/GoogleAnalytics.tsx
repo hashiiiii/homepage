@@ -8,6 +8,9 @@ export function GoogleAnalytics() {
   useEffect(() => {
     // Google Analytics スクリプトを動的に読み込み
     if (typeof window !== 'undefined' && GA_TRACKING_ID) {
+      if (import.meta.env.DEV) {
+        console.log('[GA] Initializing with ID:', GA_TRACKING_ID);
+      }
       // gtag スクリプトが既に存在するかチェック
       if (
         !document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}"]`)
@@ -35,6 +38,11 @@ export function GoogleAnalytics() {
           allow_google_signals: false, // Googleシグナルを無効化
           allow_ad_personalization_signals: false, // 広告パーソナライゼーションを無効化
         });
+
+        if (import.meta.env.DEV) {
+          console.log('[GA] Google Analytics initialized successfully');
+          console.log('[GA] You can verify with Google Tag Assistant Chrome extension');
+        }
       }
     }
   }, []);
@@ -42,6 +50,9 @@ export function GoogleAnalytics() {
   useEffect(() => {
     // ページ変更時にページビューを記録
     if (GA_TRACKING_ID) {
+      if (import.meta.env.DEV) {
+        console.log('[GA] Tracking pageview:', window.location.href);
+      }
       pageview(window.location.href);
     }
   }, [location]);

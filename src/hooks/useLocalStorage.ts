@@ -32,7 +32,9 @@ export function useLocalStorage<T>(
         return parsed;
       }
     } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
+      if (import.meta.env.DEV) {
+        console.warn(`Error reading localStorage key "${key}":`, error);
+      }
     }
     return defaultValue;
   }, [key, defaultValue, validator]);
@@ -53,7 +55,9 @@ export function useLocalStorage<T>(
           localStorage.setItem(key, JSON.stringify(newValue));
         }
       } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        if (import.meta.env.DEV) {
+          console.error(`Error setting localStorage key "${key}":`, error);
+        }
       }
     },
     [key, storedValue]
@@ -80,7 +84,9 @@ export function useLocalStorage<T>(
             setStoredValue(newValue);
           }
         } catch (error) {
-          console.warn(`Error parsing storage event for key "${key}":`, error);
+          if (import.meta.env.DEV) {
+            console.warn(`Error parsing storage event for key "${key}":`, error);
+          }
         }
       }
     };

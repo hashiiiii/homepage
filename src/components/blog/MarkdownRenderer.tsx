@@ -117,7 +117,9 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
             div.id = id;
             await mermaidRef.current.run({ nodes: [div] });
           } catch (error) {
-            console.error('Mermaid rendering error:', error);
+            if (import.meta.env.DEV) {
+              console.error('Mermaid rendering error:', error);
+            }
             // Fallback: show the raw text
             div.innerHTML = `<pre class="text-tn-red bg-tn-bg-tertiary p-4 rounded">${div.textContent}</pre>`;
           }

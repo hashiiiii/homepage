@@ -9,6 +9,15 @@ declare global {
 
 export const GA_TRACKING_ID = import.meta.env.VITE_GA_TRACKING_ID || '';
 
+// デバッグ用ログ（開発環境のみ）
+if (import.meta.env.DEV && typeof window !== 'undefined') {
+  console.log(
+    '[GA] Environment variable VITE_GA_TRACKING_ID:',
+    import.meta.env.VITE_GA_TRACKING_ID
+  );
+  console.log('[GA] Resolved GA_TRACKING_ID:', GA_TRACKING_ID);
+}
+
 // ページビューを記録
 export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {

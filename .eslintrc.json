@@ -125,6 +125,12 @@
       "rules": {
         "no-console": "off"
       }
+    },
+    {
+      "files": ["src/utils/analytics.ts", "src/components/common/GoogleAnalytics.tsx"],
+      "rules": {
+        "no-console": "off"
+      }
     }
   ]
 }
