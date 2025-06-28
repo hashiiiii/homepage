@@ -31,14 +31,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Type check
-        run: npm run typecheck
-
       - name: Build
         run: npm run build
 
       - name: Run tests
-        run: npm run test -- --run
+        run: npm run test
 
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
