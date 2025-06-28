@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { trackLanguageChange } from '@/utils/analytics';
 
 export type Language = 'en' | 'ja';
 
@@ -21,7 +22,12 @@ const isLanguage = (value: unknown): value is Language => {
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useLocalStorage<Language>('language', 'en', isLanguage);
+  const [language, setLanguageState] = useLocalStorage<Language>('language', 'en', isLanguage);
+
+  const setLanguage = (newLanguage: Language) => {
+    setLanguageState(newLanguage);
+    trackLanguageChange(newLanguage);
+  };
 
   // Translation function (basic implementation)
   const t = (key: string, _data?: Record<string, unknown>): string => {

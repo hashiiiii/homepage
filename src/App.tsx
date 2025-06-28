@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Layout } from './components/common/Layout';
+import { GoogleAnalytics } from './components/common/GoogleAnalytics';
 import './styles/globals.css';
 
 // Lazy load pages for better code splitting
@@ -13,6 +14,7 @@ const BlogDetail = lazy(() =>
 );
 const Resume = lazy(() => import('./pages/Resume').then((m) => ({ default: m.Resume })));
 const Product = lazy(() => import('./pages/Product').then((m) => ({ default: m.Product })));
+const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })));
 
 // Loading component
 const PageLoader = () => (
@@ -26,6 +28,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
         <Router>
+          <GoogleAnalytics />
           <Layout>
             <Suspense fallback={<PageLoader />}>
               <Routes>
@@ -34,6 +37,7 @@ function App() {
                 <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/resume" element={<Resume />} />
                 <Route path="/product" element={<Product />} />
+                <Route path="/privacy" element={<Privacy />} />
               </Routes>
             </Suspense>
           </Layout>

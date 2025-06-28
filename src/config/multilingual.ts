@@ -42,6 +42,13 @@ export const PAGE_MULTILINGUAL_CONFIG: Record<string, PageMultilingualConfig> = 
     availableLanguages: ['en', 'ja'],
     showToggle: true,
   },
+
+  // Privacy Policy page - full multilingual support
+  '/privacy': {
+    enabled: true,
+    availableLanguages: ['en', 'ja'],
+    showToggle: true,
+  },
 };
 
 /**
