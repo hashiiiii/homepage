@@ -10,16 +10,6 @@ describe('Integrated API Endpoints', () => {
     app = spaApp;
   });
 
-  describe('Health Check API', () => {
-    it('should return health status', async () => {
-      const res = await app.request('/api/health');
-      expect(res.status).toBe(200);
-
-      const data = await res.json();
-      expect(data).toEqual({ status: 'ok' });
-    });
-  });
-
   describe('Blog API', () => {
     it('should return blog posts list', async () => {
       const res = await app.request('/api/blog');
@@ -55,35 +45,6 @@ describe('Integrated API Endpoints', () => {
     });
   });
 
-  describe('Resume API', () => {
-    it('should return resume data', async () => {
-      const res = await app.request('/api/resume');
-      expect(res.status).toBe(200);
-
-      const resume = await res.json();
-      expect(resume).toHaveProperty('experience');
-      expect(resume).toHaveProperty('skills');
-      expect(resume).toHaveProperty('education');
-      expect(resume).toHaveProperty('contact');
-
-      expect(Array.isArray(resume.experience)).toBe(true);
-      expect(Array.isArray(resume.skills)).toBe(true);
-    });
-
-    it('should return properly structured experience data', async () => {
-      const res = await app.request('/api/resume');
-      const resume = await res.json();
-
-      if (resume.experience.length > 0) {
-        const exp = resume.experience[0];
-        expect(exp).toHaveProperty('title');
-        expect(exp).toHaveProperty('company');
-        expect(exp).toHaveProperty('period');
-        expect(exp).toHaveProperty('description');
-      }
-    });
-  });
-
   describe('API Error Handling', () => {
     it('should return 404 for unknown API endpoints', async () => {
       const res = await app.request('/api/non-existent');
@@ -98,7 +59,7 @@ describe('Integrated API Endpoints', () => {
 
   describe('CORS Support', () => {
     it('should include CORS headers for API requests', async () => {
-      const res = await app.request('/api/health');
+      const res = await app.request('/api/blog');
       expect(res.headers.get('access-control-allow-origin')).toBeTruthy();
     });
   });

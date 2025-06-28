@@ -3,7 +3,6 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { blog } from './api/blog';
-import { resume } from './api/resume';
 
 const app = new Hono();
 
@@ -11,14 +10,8 @@ const app = new Hono();
 app.use('*', logger());
 app.use('*', cors());
 
-// Health check
-app.get('/api/health', (c) => {
-  return c.json({ status: 'ok' });
-});
-
 // API routes
 app.route('/api/blog', blog);
-app.route('/api/resume', resume);
 
 // Serve static assets from Vite build
 app.use(

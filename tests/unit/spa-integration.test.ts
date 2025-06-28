@@ -58,14 +58,6 @@ describe('Hono + React SPA Integration', () => {
   });
 
   describe('API Routes', () => {
-    it('should serve API endpoints with JSON responses', async () => {
-      const response = await fetch(`${baseUrl}/api/health`);
-      expect(response.status).toBe(200);
-      expect(response.headers.get('content-type')).toContain('application/json');
-
-      const data = await response.json();
-      expect(data).toEqual({ status: 'ok' });
-    });
 
     it('should serve blog API endpoint', async () => {
       const response = await fetch(`${baseUrl}/api/blog`);
@@ -76,15 +68,6 @@ describe('Hono + React SPA Integration', () => {
       expect(Array.isArray(data)).toBe(true);
     });
 
-    it('should serve resume API endpoint', async () => {
-      const response = await fetch(`${baseUrl}/api/resume`);
-      expect(response.status).toBe(200);
-      expect(response.headers.get('content-type')).toContain('application/json');
-
-      const data = await response.json();
-      expect(data).toHaveProperty('experience');
-      expect(data).toHaveProperty('skills');
-    });
   });
 
   describe('SPA Routing Behavior', () => {
