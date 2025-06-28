@@ -5,19 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build && tsx watch src/spa-server.ts",
-    "dev:frontend": "vite",
-    "prebuild": "git lfs pull && npm run build:blog-data",
-    "build": "vite build",
-    "build:blog-data": "tsx scripts/build-blog-data.ts",
-    "start": "npm run build && node -r tsx/esm src/spa-server.ts",
-    "test": "vitest",
-    "test:watch": "vitest --watch",
-    "test:coverage": "vitest --coverage",
-    "test:markdown": "npm run build:blog-data && vitest run tests/unit/markdown-validation.test.ts",
-    "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,html}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css,html}\"",
-    "typecheck": "tsc --noEmit"
+    "build": "tsx scripts/build-blog-data.ts && vite build",
+    "test": "tsc --noEmit && vitest run --coverage",
+    "lint": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,html}\" && eslint . --ext .ts,.tsx"
   },
   "dependencies": {
     "@hono/node-server": "^1.0.0",
