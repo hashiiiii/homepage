@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchBlogPost } from '@/lib/api-client';
+import { fetchBlogPost } from '@/lib/api-client-static';
 import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer';
 import { LoadingErrorWrapper } from '@/components/common/LoadingErrorWrapper';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { useAsyncData } from '../hooks/useAsyncData';
+import { useStaticData } from '../hooks/useStaticData';
 
 export function BlogDetail() {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +13,7 @@ export function BlogDetail() {
     data: post,
     loading,
     error,
-  } = useAsyncData(
+  } = useStaticData(
     () => (id ? fetchBlogPost(id) : Promise.reject(new Error('No ID provided'))),
     [id]
   );

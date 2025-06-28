@@ -3,15 +3,15 @@ import { BlogSidebar } from '../components/blog/BlogSidebar';
 import { BlogFilters } from '../components/blog/BlogFilters';
 import { BlogList } from '../components/blog/BlogList';
 import { LoadingErrorWrapper } from '../components/common/LoadingErrorWrapper';
-import { fetchBlogMetadata } from '@/lib/api-client';
+import { fetchBlogMetadata } from '@/lib/api-client-static';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { useAsyncData } from '../hooks/useAsyncData';
+import { useStaticData } from '../hooks/useStaticData';
 import { useBlogFilters } from '../hooks/useBlogFilters';
 import { usePagination } from '../hooks/usePagination';
 
 export const Blog: React.FC = () => {
   usePageTitle('Blog');
-  const { data: metadata, loading, error } = useAsyncData(fetchBlogMetadata, []);
+  const { data: metadata, loading, error } = useStaticData(fetchBlogMetadata, []);
 
   const posts = metadata?.posts || [];
 

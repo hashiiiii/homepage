@@ -2,7 +2,7 @@ import React from 'react';
 
 interface LoadingErrorWrapperProps {
   loading: boolean;
-  error: string | null;
+  error: string | Error | null;
   loadingText?: string;
   children: React.ReactNode;
 }
@@ -24,10 +24,11 @@ export const LoadingErrorWrapper: React.FC<LoadingErrorWrapperProps> = ({
   }
 
   if (error) {
+    const errorMessage = error instanceof Error ? error.message : error;
     return (
       <div className="animate-fade-in">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-tn-red">{error}</p>
+          <p className="text-tn-red">{errorMessage}</p>
         </div>
       </div>
     );
