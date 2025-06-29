@@ -114,7 +114,6 @@ homepage/
 2. **メタデータ設定**
 
    ```markdown
-   id: '5'
    title: 'Post Title'
    excerpt: 'Brief description'
    date: '2024-01-01'

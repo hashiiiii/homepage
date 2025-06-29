@@ -23,7 +23,8 @@ describe('Markdown Validation', () => {
       const errors = validateMarkdownPost('/test/file.md', invalidPost);
 
       expect(errors.length).toBeGreaterThan(0);
-      expect(errors.some((e) => e.field === 'id')).toBe(true);
+      // IDは自動生成されるので、エラーにはならない
+      expect(errors.some((e) => e.field === 'id')).toBe(false);
       expect(errors.some((e) => e.field === 'title')).toBe(true);
       expect(errors.some((e) => e.field === 'date')).toBe(true);
       expect(errors.some((e) => e.field === 'content')).toBe(true);
@@ -148,7 +149,8 @@ Some content without frontmatter.
 
       // extractBlogPost doesn't throw, but validation should catch missing fields
       expect(errors.length).toBeGreaterThan(0);
-      expect(errors.some((e) => e.field === 'id')).toBe(true);
+      // IDは自動生成されるので、エラーにはならない
+      expect(errors.some((e) => e.field === 'id')).toBe(false);
       expect(errors.some((e) => e.field === 'title')).toBe(true);
     });
 
