@@ -121,8 +121,6 @@ Write your content here using Markdown syntax.
 - GitHub-flavored Markdown extensions
 - Custom alert blocks (Note, Tip, Warning, Danger)
 
-````
-
 ## 🎨 Theming
 
 Built with Tokyo Night color scheme supporting both dark and light modes:
@@ -151,7 +149,7 @@ Run tests:
 
 ```bash
 npm run test
-````
+```
 
 ## 📦 Deployment
 
