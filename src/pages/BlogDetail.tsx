@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchBlogPost } from '@/lib/blog';
 import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { trackBlogView } from '@/utils/analytics';
 
 export function BlogDetail() {
   const { id } = useParams<{ id: string }>();
@@ -19,13 +18,6 @@ export function BlogDetail() {
 
   // Set page title when post is loaded
   usePageTitle(post?.title);
-
-  // Track blog post view
-  useEffect(() => {
-    if (post) {
-      trackBlogView(post.id, post.title);
-    }
-  }, [post]);
 
   if (error) {
     return (

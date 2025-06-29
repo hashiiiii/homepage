@@ -54,21 +54,21 @@ const privacyData: Record<Language, PrivacyData> = {
         items: [
           'アクセス状況（ページビュー、滞在時間など）',
           '使用デバイス・ブラウザの種類',
-          'IPアドレス（匿名化済み）',
+          'IP アドレス（匿名化済み）',
           'リファラー情報',
         ],
       },
       googleAnalytics: {
         title: 'Google Analytics',
         description:
-          '当サイトでは、アクセス解析のためにGoogle Analyticsを使用しています。Google Analyticsでは以下の設定でプライバシーに配慮しています：',
+          '当サイトでは、アクセス解析のために Google Analytics を使用しています。Google Analytics では以下の設定でプライバシーに配慮しています：',
         privacyFeatures: [
-          'IPアドレスの匿名化を有効化',
+          'IP アドレスの匿名化を有効化',
           '広告パーソナライゼーションの無効化',
-          'Googleシグナルの無効化',
+          'Google シグナルの無効化',
         ],
-        linkText: 'Googleのプライバシーポリシー',
-        linkDescription: 'Google Analyticsの詳細については、',
+        linkText: 'Google のプライバシーポリシー',
+        linkDescription: 'Google Analytics の詳細については、',
       },
       dataUsage: {
         title: 'データの使用目的',
@@ -78,22 +78,22 @@ const privacyData: Record<Language, PrivacyData> = {
       dataSharing: {
         title: 'データの第三者提供',
         description:
-          '収集したデータを第三者に提供することはありません。ただし、Google Analyticsのサービス提供に必要な範囲で、Googleにデータが送信されます。',
+          '収集したデータを第三者に提供することはありません。ただし、Google Analytics のサービス提供に必要な範囲で、Google にデータが送信されます。',
       },
       cookies: {
         title: 'Cookie について',
-        description: '当サイトでは、以下の用途でCookieを使用しています：',
+        description: '当サイトでは、以下の用途で Cookie を使用しています：',
         purposes: [
           'テーマ設定（ダーク/ライトモード）の保存',
           '言語設定の保存',
-          'Google Analyticsによるアクセス解析',
+          'Google Analytics によるアクセス解析',
         ],
-        note: 'ブラウザの設定でCookieを無効にすることができますが、一部の機能が正常に動作しない場合があります。',
+        note: 'ブラウザの設定で Cookie を無効にすることができますが、一部の機能が正常に動作しない場合があります。',
       },
       contact: {
         title: 'お問い合わせ',
         description:
-          'プライバシーポリシーに関するご質問は、GitHubのIssueまたはその他の連絡手段でお気軽にお問い合わせください。',
+          'プライバシーポリシーに関するご質問は、GitHub の Issue またはその他の連絡手段でお気軽にお問い合わせください。',
       },
       changes: {
         title: '変更について',
