@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { trackLanguageChange } from '@/utils/analytics';
 
 export type Language = 'en' | 'ja';
 
@@ -26,7 +25,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   const setLanguage = (newLanguage: Language) => {
     setLanguageState(newLanguage);
-    trackLanguageChange(newLanguage);
   };
 
   // Translation function (basic implementation)
