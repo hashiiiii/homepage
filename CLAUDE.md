@@ -2,292 +2,546 @@
 
 ## プロジェクト概要
 
-hashiiiii.comドメインを使用した個人ホームページの開発プロジェクトです。**Hono + React SPA統合アーキテクチャ**を採用し、高速なUXと開発効率を両立させています。
+hashiiiii.comドメインを使用した個人ホームページの開発プロジェクトです。**静的サイト生成アーキテクチャ**を採用し、高速なパフォーマンスと開発効率を両立させています。
 
 ### 実装済み機能
 
-- ✅ Landing page: プロフェッショナルでモダンなトップページ
-- ✅ Blog page: ブログ記事一覧（現在はモックデータ）
-- ✅ Resume page: 職歴・スキルをまとめたレジュメページ
-- ✅ Tokyo Night Theme: ダーク/ライトモード切り替え
-- ✅ レスポンシブデザイン: モバイル/タブレット/デスクトップ対応
+- ✅ **Landing Page**: プロフェッショナルでモダンなトップページ
+- ✅ **Blog System**: Markdown静的生成によるブログ機能
+- ✅ **Resume Page**: 職歴・スキルをまとめたレジュメページ
+- ✅ **Product Page**: プロジェクト紹介ページ
+- ✅ **Tokyo Night Theme**: ダーク/ライトモード切り替え
+- ✅ **多言語対応**: 日本語/英語サポート
+- ✅ **レスポンシブデザイン**: モバイル/タブレット/デスクトップ対応
 
 ## 技術スタック
 
 ### コア技術
 
 - **フロントエンド**: React 19 + TypeScript
-- **バックエンド**: Hono (統合サーバー)
 - **スタイリング**: Tailwind CSS v3
-- **ビルドツール**: Vite
-- **テーマ**: Tokyo Night
+- **ビルドツール**: Vite 6
 - **ルーティング**: React Router v7 (Client-side)
-- **ランタイム**: Node.js 18+
+- **ランタイム**: Node.js 18+ (推奨: 20.x)
+
+### コンテンツ処理
+
+- **Markdown処理**: react-markdown + remark/rehype
+- **シンタックスハイライト**: highlight.js (Tokyo Night theme)
+- **数式レンダリング**: KaTeX
+- **図表**: Mermaid.js
 
 ### 開発ツール
 
-- **テストフレームワーク**: Vitest
+- **テストフレームワーク**: Vitest + @testing-library
 - **リンター**: ESLint
 - **フォーマッター**: Prettier
 - **パッケージマネージャー**: npm
 - **型チェック**: TypeScript (strict mode)
 
-## 現在のプロジェクト構造
+## プロジェクト構造
 
 ```
 homepage/
+├── .github/
+│   └── workflows/          # GitHub Actions CI/CD
+│       ├── ci.yml         # テスト・リント・ビルド
+│       └── deploy.yml     # Vercelデプロイ
+├── content/
+│   └── blog/              # Markdownブログ記事
+├── docs/                  # プロジェクトドキュメント
+├── public/                # 静的アセット
+│   ├── images/           # 画像ファイル
+│   └── favicon.ico       # ファビコン
 ├── src/
-│   ├── api/              # API ルートハンドラー
-│   │   ├── blog.ts       # ブログ記事API
-│   │   └── resume.ts     # レジュメAPI
-│   ├── components/       # Reactコンポーネント
+│   ├── components/        # Reactコンポーネント
+│   │   ├── blog/         # ブログ関連コンポーネント
 │   │   ├── common/       # 共通コンポーネント
-│   │   │   ├── Layout.tsx
-│   │   │   └── Navigation.tsx
-│   │   ├── blog/         # ブログ関連
-│   │   └── resume/       # レジュメ関連
-│   ├── contexts/         # React Context
+│   │   └── resume/       # レジュメページ専用
+│   ├── contexts/          # React Context
+│   │   ├── LanguageContext.tsx
 │   │   └── ThemeContext.tsx
+│   ├── generated/         # ビルド時生成ファイル
+│   │   ├── blog-metadata.json
+│   │   └── blog-posts.json
+│   ├── hooks/            # カスタムReact Hooks
+│   ├── lib/              # ビジネスロジック
+│   │   ├── blog.ts       # ブログデータアクセス
+│   │   ├── build-blog.ts # Markdownビルドスクリプト
+│   │   └── product.ts    # プロダクトデータ
+│   ├── locales/          # 多言語データ
+│   ├── models/           # TypeScript型定義
 │   ├── pages/            # ページコンポーネント
-│   │   ├── Landing.tsx
-│   │   ├── Blog.tsx
-│   │   └── Resume.tsx
-│   ├── styles/           # スタイル定義
-│   │   ├── theme.ts      # Tokyo Nightテーマ定義
-│   │   └── globals.css   # グローバルCSS
-│   ├── models/           # データ型定義
-│   ├── utils/            # ユーティリティ関数
-│   ├── App.tsx           # Reactアプリ本体
-│   ├── main.tsx          # React起動ポイント
-│   ├── spa-app.ts        # Honoアプリ定義
-│   └── spa-server.ts     # サーバー起動
+│   ├── styles/           # グローバルスタイル・デザインシステム
+│   └── utils/            # ユーティリティ関数
 ├── tests/                # テストファイル
-│   ├── unit/
-│   └── setup.ts
-├── public/               # 静的ファイル
-├── docs/                 # ドキュメント
-├── dist/                 # ビルド出力
-│   └── client/           # Viteビルド出力
-└── index.html            # SPAエントリーポイント
+│   ├── setup.ts          # テスト設定
+│   └── unit/             # 単体・統合テスト
+└── dist/                 # ビルド出力 (gitignore)
 ```
 
-## アーキテクチャ概要
+## 開発ワークフロー
 
-### Hono + React SPA統合
+### 日常的な開発手順
 
-単一のHonoサーバーが以下を配信：
+1. **開発環境起動**
 
-- `/api/*` → JSON API レスポンス
-- その他全て → React SPA (index.html)
+   ```bash
+   npm run dev
+   ```
 
-```
-ブラウザ → Honoサーバー(:3000)
-           ├── /api/* → APIハンドラー → JSON
-           └── /* → index.html → React SPA → Client-side routing
-```
+2. **コード品質チェック**
 
-## 開発ルール
+   ```bash
+   npm run lint
+   npm run test
+   ```
 
-### 1. テスト駆動開発（TDD）
+3. **ビルド確認**
+   ```bash
+   npm run build
+   ```
 
-- 新機能は必ずテストから書き始める
-- Red → Green → Refactorのサイクル
-- 現在のテストカバレッジ: 30/30 (100%)
+### ブログ記事作成フロー
 
-### 2. ファイル命名規則
+1. **Markdownファイル作成**
 
-- **Reactコンポーネント**: PascalCase (`Layout.tsx`, `ThemeContext.tsx`)
-- **ページコンポーネント**: PascalCase (`Landing.tsx`, `Blog.tsx`)
-- **APIファイル**: camelCase (`blog.ts`, `resume.ts`)
-- **設定ファイル**: kebab-case (`spa-app.ts`, `spa-server.ts`)
-- **テストファイル**: `*.test.ts` or `*.test.tsx`
+   ```bash
+   # content/blog/配下に新しい.mdファイルを作成
+   touch content/blog/2024-01-01-new-post.md
+   ```
 
-### 3. コーディング規約
+2. **メタデータ設定**
 
-- TypeScript strictモード必須
-- 関数型プログラミングアプローチ優先
-- 早期リターンでネスト削減
-- ESLint/Prettier準拠
+   ```markdown
+   id: '5'
+   title: 'Post Title'
+   excerpt: 'Brief description'
+   date: '2024-01-01'
+   tags: ['React', 'TypeScript']
+   readTime: '5 min read'
+   ```
 
-### 4. Git運用
+3. **自動ビルド**
+   - `npm run build`実行時に自動的にJSONファイル生成
+   - Markdown仕様違反があればビルドエラーで検知
 
-- ブランチ命名: `feature/*`, `fix/*`, `docs/*`
-- コミットメッセージ: 日本語OK
-- PRは全テストパス必須
+### 機能開発フロー
 
-## 開発コマンド
+1. **テスト駆動開発**
 
-```bash
-# 開発サーバー起動（Hono + React SPA）
-npm run dev           # http://localhost:3000
+   - 新機能はテストから書き始める
+   - Red → Green → Refactorサイクル
 
-# フロントエンドのみ開発（Vite HMR）
-npm run dev:frontend  # http://localhost:3001
+2. **コンポーネント作成**
 
-# ビルド
-npm run build         # React SPAビルド
-npm run build:frontend # 同上
+   - 既存コンポーネントのパターンを参考
+   - TypeScript型安全性を重視
+   - アクセシビリティ配慮
 
-# テスト
-npm run test          # 全テスト実行
-npm run test:watch    # ウォッチモード
-npm run test:coverage # カバレッジ付き
+3. **スタイリング**
+   - Tailwind CSSのユーティリティクラス使用
+   - Tokyo Nightテーマカラーシステム準拠
 
-# コード品質
-npm run lint          # ESLint実行
-npm run format        # Prettier実行
-npm run typecheck     # TypeScript型チェック
+## データベース設計
 
-# 本番起動
-npm run start         # ビルド後に本番サーバー起動
-```
+**このプロジェクトではデータベースは使用していません。**
 
-## APIエンドポイント
+すべてのデータは以下の形式で管理されています：
 
-### 実装済み
+- **ブログデータ**: Markdownファイル → ビルド時にJSONに変換
+- **静的データ**: TypeScriptファイル内で定義（locales, config等）
+- **ユーザー設定**: localStorage（テーマ、言語設定）
 
-```
-GET  /api/health       # ヘルスチェック
-GET  /api/blog         # ブログ記事一覧
-GET  /api/blog/:id     # ブログ記事詳細
-GET  /api/resume       # レジュメデータ
-```
+## 認証システム
 
-### SPA配信
+**このプロジェクトでは認証システムは実装していません。**
 
-```
-GET  /                 # Landing page
-GET  /blog             # Blog page
-GET  /resume           # Resume page
-GET  /*                # その他全て → index.html (SPA fallback)
-```
+パブリックな個人ホームページとして設計されており、認証が必要な機能はありません。
 
-## Tokyo Night Theme実装
+## テストガイドライン
 
-### テーマカラー定義
+### テスト戦略
 
-```typescript
-// src/styles/theme.ts で定義
-const tokyoNightTheme = {
-  dark: {
-    colors: {
-      background: {
-        primary: '#1a1b26', // メイン背景
-        secondary: '#16161e', // サイドバー背景
-        tertiary: '#1e202e', // ハイライト背景
-      },
-      text: {
-        primary: '#c0caf5', // メインテキスト
-        secondary: '#a9b1d6', // サブテキスト
-        muted: '#565f89', // ミュートテキスト
-      },
-      accent: {
-        blue: '#7aa2f7', // リンク・ボタン
-        green: '#9ece6a', // 成功
-        red: '#f7768e', // エラー
-      },
-    },
-  },
-  light: {
-    /* ライトテーマ定義 */
-  },
-};
-```
-
-### テーマ切り替え
-
-- React Context APIで管理
-- localStorage永続化
-- システム設定連動対応
-
-## 環境変数
-
-```env
-# .env.local (作成予定)
-PORT=3000                    # サーバーポート
-HOST=localhost               # ホスト名
-NODE_ENV=development         # 環境
-DATABASE_URL=mysql://...     # 将来のDB接続
-```
-
-## テスト戦略
-
-### 現在のテスト
-
-- **単体テスト**: Reactコンポーネント (11 tests)
-- **API統合テスト**: Honoエンドポイント (9 tests)
-- **SPA統合テスト**: 全体動作確認 (10 tests)
+- **単体テスト**: 個別コンポーネント・ユーティリティ関数
+- **統合テスト**: 機能全体のワークフロー
+- **カバレッジ**: 100%維持目標
 
 ### テスト実行
 
 ```bash
-# 特定のテストファイル
-npm run test tests/unit/components/theme.test.tsx
-
-# 統合テストのみ
-npm run test tests/unit/spa-integration.test.ts
-
-# 全テスト
+# 全テスト実行
 npm run test
+
+# ウォッチモード
+npm run test -- --watch
+
+# カバレッジ確認
+npm run test -- --coverage
 ```
 
-## 注意事項
+### テスト作成ガイドライン
 
-- セキュリティ最優先（XSS対策、CORS設定）
-- パフォーマンス重視（Vite最適化、コード分割）
-- アクセシビリティ配慮（セマンティックHTML、ARIA）
-- レスポンシブデザイン必須
+1. **コンポーネントテスト**
 
-## 今後の実装予定
+   ```typescript
+   // テンプレート: tests/unit/components/ComponentName.test.tsx
+   import { render, screen } from '@testing-library/react';
+   import { ComponentName } from '@/components/ComponentName';
 
-### Phase 1 (次回)
+   describe('ComponentName', () => {
+     it('should render correctly', () => {
+       render(<ComponentName />);
+       expect(screen.getByRole('...')).toBeInTheDocument();
+     });
+   });
+   ```
 
-- [ ] 実際のデータベース接続（MySQL/PostgreSQL）
-- [ ] ブログ記事のMarkdown対応
-- [ ] 検索機能実装
+2. **フックテスト**
 
-### Phase 2
+   ```typescript
+   // テンプレート: tests/unit/hooks/useHookName.test.ts
+   import { renderHook } from '@testing-library/react';
+   import { useHookName } from '@/hooks/useHookName';
 
-- [ ] 認証システム（管理画面用）
-- [ ] CMS機能（ブログ投稿）
-- [ ] 画像最適化・CDN対応
+   describe('useHookName', () => {
+     it('should return expected value', () => {
+       const { result } = renderHook(() => useHookName());
+       expect(result.current).toBe(...);
+     });
+   });
+   ```
 
-### Phase 3
+3. **Markdownバリデーションテスト**
+   - ブログ記事の仕様準拠チェック
+   - フロントマター必須フィールド検証
+   - 日付形式・タグ形式の妥当性検証
 
-- [ ] 多言語対応（日英）
-- [ ] アナリティクス統合
-- [ ] PWA対応
-- [ ] SSR/SSG検討（SEO強化）
+## デプロイメント
 
-## デプロイ構成
+### GitHub Actions + Vercel
 
-- **ホスティング**: Vercel (手動デプロイ)
-- **ドメイン**: hashiiiii.com
-- **CI/CD**: GitHub Actions (テスト自動化、デプロイ手動化)
-- **デプロイ方式**:
-  - 自動デプロイ無効化（意図しないデプロイを防止）
-  - GitHub Actions経由での手動デプロイ
-  - Vercel CLI経由での手動デプロイ
+#### CI Pipeline (`.github/workflows/ci.yml`)
 
-### デプロイ手順
+- **トリガー**: Push/PR to `main`
+- **実行内容**: Lint → Build → Test
+- **Node.js**: 20.x
 
-詳細は [docs/vercel-deployment-setup.md](./docs/vercel-deployment-setup.md) を参照
+#### Deploy Pipeline (`.github/workflows/deploy.yml`)
+
+- **トリガー**: Manual workflow dispatch
+- **環境**: Preview / Production選択可能
+- **実行内容**: Quality checks → Build → Deploy to Vercel
+
+#### 必要なGitHubシークレット
+
+```
+VERCEL_TOKEN         # Vercel認証トークン
+VERCEL_ORG_ID        # 組織ID
+VERCEL_PROJECT_ID    # プロジェクトID
+```
+
+#### デプロイ手順
+
+1. GitHub → Actions → "Deploy to Vercel"
+2. "Run workflow" → 環境選択
+3. 実行完了まで待機
+
+### ローカルビルド
+
+```bash
+npm run build
+npx serve dist
+```
+
+## 重要な設定ファイル
+
+### 1. `package.json`
+
+```json
+{
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsx src/lib/build-blog.ts && vite build",
+    "test": "tsc --noEmit && vitest run --coverage",
+    "lint": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css,html}\" && eslint . --ext .ts,.tsx"
+  }
+}
+```
+
+### 2. `vite.config.ts`
+
+```typescript
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mermaid: ['mermaid'],
+        },
+      },
+    },
+  },
+});
+```
+
+### 3. `tailwind.config.js`
+
+- Tokyo Nightカラーシステム定義
+- カスタムユーティリティクラス
+- レスポンシブブレークポイント
+
+### 4. `tsconfig.json`
+
+- Strict mode有効
+- Path mapping設定 (`@/` → `src/`)
+- Modern JSX transform
 
 ## トラブルシューティング
 
-### よくある問題
+### よくある問題と解決方法
 
-1. **ビルドエラー**: `npm run build:frontend`を先に実行
-2. **ポート競合**: PORT環境変数で変更可能
-3. **テスト失敗**: `npm run build:frontend`後に再実行
+#### 1. ビルドエラー: "Markdown validation failed"
 
-### 開発のヒント
+```bash
+# 原因: ブログ記事のフロントマターが仕様に合わない
+# 解決: エラーメッセージの指示に従ってMarkdownファイルを修正
 
-- `npm run dev`で統合環境を起動
-- フロントエンドのみ開発時は`npm run dev:frontend`が高速
-- テーマ変更はCSS変数で簡単にカスタマイズ可能
+# 例: 必須フィールドが不足
+Error: Missing required field 'excerpt' in 2024-01-01-post.md
+
+# 修正: フロントマターに不足フィールドを追加
+id: '1'
+title: 'Title'
+excerpt: 'Description'  # 追加
+date: '2024-01-01'
+tags: ['tag']
+readTime: '3 min read'
+```
+
+#### 2. テスト失敗: "Cannot resolve module '@/...'"
+
+```bash
+# 原因: Path mappingが正しく設定されていない
+# 解決: vitest.config.tsでalias設定を確認
+
+# vitest.config.ts
+export default defineConfig({
+  test: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+```
+
+#### 3. Mermaidダイアグラムが表示されない
+
+```bash
+# 原因: 大きなJavaScriptバンドルによる読み込み遅延
+# 解決: 自動的に遅延ロードされるため、しばらく待つ
+# または、ネットワークタブでスクリプト読み込み状況を確認
+```
+
+#### 4. 開発サーバーが起動しない
+
+```bash
+# 原因: ポートが既に使用されている
+# 解決1: 他のプロセスを終了
+lsof -ti:3000 | xargs kill
+
+# 解決2: 別のポートを使用
+npm run dev -- --port 3001
+```
+
+## CI/CD
+
+### 継続的インテグレーション
+
+#### 自動実行内容
+
+- **コード品質**: ESLint + Prettier
+- **型安全性**: TypeScript型チェック
+- **ビルド検証**: 本番ビルドの成功確認
+- **テスト実行**: 全テストスイートの実行
+- **カバレッジ**: テストカバレッジレポート
+
+#### 品質ゲート
+
+- すべてのテストがパス
+- ESLint・TypeScriptエラーゼロ
+- ビルドが正常に完了
+
+### 継続的デプロイメント
+
+#### 手動デプロイ
+
+- **理由**: 意図しないデプロイを防止
+- **トリガー**: GitHub Actions手動実行
+- **環境**: Preview/Production選択可能
+
+#### デプロイフロー
+
+1. 品質チェック実行
+2. プロダクションビルド
+3. Vercel CLI経由でデプロイ
+4. デプロイ完了通知
+
+## コントリビューション
+
+### 開発ルール
+
+1. **ブランチ戦略**
+
+   - `main`: 本番ブランチ
+   - `feature/*`: 機能開発
+   - `fix/*`: バグ修正
+
+2. **コミットメッセージ**
+
+   ```
+   feat: add new blog feature
+   fix: resolve markdown rendering issue
+   docs: update API documentation
+   test: add unit tests for BlogCard component
+   ```
+
+3. **プルリクエスト**
+   - 全テストパス必須
+   - コードレビュー必須
+   - CIパス確認後マージ
+
+### コード規約
+
+1. **TypeScript**
+
+   - `any`型の使用禁止
+   - 明示的な型定義を推奨
+   - インターフェース名は`I`プレフィックス不要
+
+2. **React**
+
+   - 関数コンポーネント使用
+   - カスタムフックで状態ロジック分離
+   - Propsはインターフェースで型定義
+
+3. **CSS**
+   - Tailwind CSSユーティリティクラス使用
+   - カスタムCSSは最小限に抑制
+   - Tokyo Nightテーマカラー使用
+
+## コード生成規約
+
+### 新しいコンポーネント作成
+
+1. **ファイル配置**
+
+   ```
+   src/components/[category]/ComponentName.tsx
+   tests/unit/components/[category]/ComponentName.test.tsx
+   ```
+
+2. **基本テンプレート**
+
+   ```typescript
+   import type { FC } from 'react';
+
+   interface ComponentNameProps {
+     // Props型定義
+   }
+
+   export const ComponentName: FC<ComponentNameProps> = ({
+     // props
+   }) => {
+     return (
+       <div className="...">
+         {/* JSX */}
+       </div>
+     );
+   };
+   ```
+
+3. **テストテンプレート**
+
+   ```typescript
+   import { render, screen } from '@testing-library/react';
+   import { ComponentName } from '@/components/[category]/ComponentName';
+
+   describe('ComponentName', () => {
+     it('should render correctly', () => {
+       render(<ComponentName />);
+       // テストケース
+     });
+   });
+   ```
+
+### 新しいページ作成
+
+1. **ページコンポーネント**
+
+   ```typescript
+   // src/pages/PageName.tsx
+   import { usePageTitle } from '@/hooks/usePageTitle';
+
+   export function PageName() {
+     usePageTitle('Page Title');
+
+     return (
+       <div className="container mx-auto px-4">
+         {/* ページ内容 */}
+       </div>
+     );
+   }
+   ```
+
+2. **ルート追加**
+
+   ```typescript
+   // src/App.tsx
+   <Route path="/page-name" element={<PageName />} />
+   ```
+
+3. **ナビゲーション追加**
+   ```typescript
+   // src/components/common/Navigation.tsx
+   // 必要に応じてナビゲーションリンクを追加
+   ```
+
+### 新しいフック作成
+
+1. **カスタムフックテンプレート**
+
+   ```typescript
+   // src/hooks/useHookName.ts
+   import { useState, useEffect } from 'react';
+
+   export function useHookName() {
+     const [state, setState] = useState(initialValue);
+
+     useEffect(() => {
+       // 副作用処理
+     }, []);
+
+     return state;
+   }
+   ```
+
+2. **型安全性**
+   - 戻り値の型を明示的に定義
+   - ジェネリクスを適切に使用
+   - 副作用の依存配列を正確に指定
 
 ---
 
-**Last Updated**: 2024-12-22
-**Version**: 1.0.0 (MVP)
+**Last Updated**: 2025-06-29
+**Version**: 1.0.0 (Static SPA)
