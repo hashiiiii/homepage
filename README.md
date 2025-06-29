@@ -1,74 +1,208 @@
-# hashiiiii.com Homepage
+# hashiiiii.com
 
-Personal homepage built with Hono, TypeScript, and AWS.
+Personal homepage built with modern web technologies. A fast, responsive, and accessible single-page application showcasing projects, blog posts, and professional profile.
 
-## Setup
+## ✨ Features
 
-1. Clone the repository
-2. Install dependencies:
+- **🎨 Modern Design**: Tokyo Night theme with dark/light mode toggle
+- **📱 Responsive**: Mobile-first design that works on all devices
+- **🌐 Multilingual**: Japanese/English language support
+- **📝 Blog System**: Markdown-based blog with syntax highlighting and Mermaid diagrams
+- **🚀 Performance**: Static site generation with Vite for optimal loading speed
+- **♿ Accessible**: Semantic HTML and ARIA compliance
+- **🧪 Well Tested**: Comprehensive test suite with 100% coverage
 
-   ```bash
-   npm install
-   ```
+## 🛠 Tech Stack
 
-3. Copy environment variables:
+### Core
 
-   ```bash
-   cp .env.example .env
-   ```
+- **Frontend**: React 19 + TypeScript
+- **Bundler**: Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router 7
 
-4. Run development server:
-   ```bash
-   npm run dev
-   ```
+### Content & Markdown
 
-## Development
+- **Markdown Processing**: react-markdown with enhanced features
+- **Syntax Highlighting**: highlight.js (Tokyo Night theme)
+- **Math Rendering**: KaTeX
+- **Diagrams**: Mermaid.js
 
-- `npm run dev` - Start development server
-- `npm run test` - Run tests
-- `npm run build:frontend` - Build for production
-- `npm run lint` - Run linter
-- `npm run typecheck` - Check TypeScript types
+### Development
 
-## Deployment
+- **Testing**: Vitest with coverage
+- **Code Quality**: ESLint + Prettier
+- **Type Safety**: TypeScript (strict mode)
 
-This project supports **manual deployment** to Vercel via GitHub Actions to ensure control over releases:
+## 🚀 Quick Start
 
-### Manual Deployment via GitHub Actions
+### Prerequisites
 
-**Note**: Currently disabled. To enable automated deployment:
+- Node.js 18+ (Recommended: 20.x)
+- npm
 
-1. Follow the setup guide: [docs/vercel-deployment-setup.md](./docs/vercel-deployment-setup.md)
-2. Set up required GitHub Secrets (`VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`)
-3. Uncomment the workflow in `.github/workflows/deploy.yml`
-
-Once enabled:
-
-1. Go to the [Actions tab](../../actions) on GitHub
-2. Select "Deploy to Vercel" workflow
-3. Click "Run workflow" and choose:
-   - **preview**: Deploy to preview environment
-   - **production**: Deploy to production
-
-### Manual Deployment via CLI
+### Installation
 
 ```bash
-# Preview deployment
-npm run deploy:preview
+# Clone the repository
+git clone https://github.com/hashiiiii/homepage.git
+cd homepage
 
-# Production deployment
-npm run deploy
+# Install dependencies
+npm install
 
-# Local development with Vercel
-npm run deploy:local
+# Start development server
+npm run dev
 ```
 
-### Automatic CI/CD
+Visit [http://localhost:3000](http://localhost:3000) to see the site.
 
-- All pushes to `main` trigger CI tests automatically
-- Deployment only happens when manually triggered
-- This prevents unwanted automatic deployments
+## 📜 Available Scripts
 
-## Architecture
+| Command         | Description                |
+| --------------- | -------------------------- |
+| `npm run dev`   | Start development server   |
+| `npm run build` | Build for production       |
+| `npm run test`  | Run tests with coverage    |
+| `npm run lint`  | Format code and run linter |
 
-See [CLAUDE.md](./CLAUDE.md) for detailed project documentation.
+## 📁 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── blog/           # Blog-specific components
+│   ├── common/         # Shared components
+│   └── resume/         # Resume page components
+├── contexts/           # React contexts (Theme, Language)
+├── hooks/              # Custom React hooks
+├── lib/                # Core business logic
+├── locales/            # i18n content
+├── models/             # TypeScript type definitions
+├── pages/              # Page components
+├── styles/             # Global styles and design system
+└── utils/              # Utility functions
+
+content/
+└── blog/               # Markdown blog posts
+
+tests/
+└── unit/               # Unit and integration tests
+```
+
+## 📝 Blog System
+
+The blog system uses a static generation approach for optimal performance:
+
+1. **Content**: Write Markdown files in `content/blog/`
+2. **Build**: `build-blog.ts` processes markdown into JSON
+3. **Runtime**: Components consume pre-processed JSON data
+
+### Blog Post Metadata
+
+```markdown
+id: '1'
+title: 'Your Blog Post Title'
+excerpt: 'A brief description of your blog post content that appears in the blog list.'
+date: '2024-01-01'
+tags: ['React', 'TypeScript', 'Web Development']
+readTime: '3 min read'
+```
+
+# Your Blog Post Content
+
+Write your content here using Markdown syntax.
+
+## Features Supported
+
+- Syntax highlighting for code blocks
+- Math equations with KaTeX: $E = mc^2$
+- Mermaid diagrams for flowcharts
+- GitHub-flavored Markdown extensions
+- Custom alert blocks (Note, Tip, Warning, Danger)
+
+````
+
+## 🎨 Theming
+
+Built with Tokyo Night color scheme supporting both dark and light modes:
+
+- **Dark Mode**: Deep blues and purples with high contrast
+- **Light Mode**: Clean whites and soft grays
+
+## 🌐 Internationalization
+
+Currently supports:
+
+- **Japanese (ja)**: Native language
+- **English (en)**: International audience
+
+Language toggle available in navigation. Content is managed through locale files for maintainability.
+
+## 🧪 Testing
+
+Comprehensive test suite covering:
+
+- **Unit Tests**: Individual components and utilities
+- **Integration Tests**: Feature workflows
+- **Coverage**: 100% test coverage maintained
+
+Run tests:
+
+```bash
+npm run test
+````
+
+## 📦 Deployment
+
+### GitHub Actions + Vercel
+
+Deployment is handled via GitHub Actions workflows:
+
+#### Continuous Integration (`.github/workflows/ci.yml`)
+
+- **Trigger**: Push/PR to `main` branch
+- **Actions**: Lint → Build → Test
+- **Node.js**: 20.x
+
+#### Required Secrets
+
+Set these in GitHub repository settings:
+
+- `VERCEL_TOKEN`: Vercel authentication token
+- `VERCEL_ORG_ID`: Organization ID
+- `VERCEL_PROJECT_ID`: Project ID
+
+#### Manual Deployment
+
+To deploy manually:
+
+1. Go to Actions tab in GitHub
+2. Select "Deploy to Vercel" workflow
+3. Click "Run workflow"
+4. Choose environment (preview/production)
+
+### Local Build
+
+```bash
+# Build the project
+npm run build
+
+# Serve the dist folder with any static file server
+npx serve dist
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 👨‍💻 Author
+
+**hashiiiii**
+
+- Website: [hashiiiii.com](https://hashiiiii.com)
+- GitHub: [@hashiiiii](https://github.com/hashiiiii)
+
+---
+
+Built with ❤️ using React and TypeScript
