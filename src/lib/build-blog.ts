@@ -24,15 +24,22 @@ interface ValidationError {
 }
 
 /**
+ * ファイル名からIDを生成
+ */
+function deriveIdFromFilename(filename: string): string {
+  return filename.replace(/\.md$/, '');
+}
+
+/**
  * Markdownファイルの仕様検証
  */
 function validateMarkdownPost(filePath: string, post: BlogPostWithContent): ValidationError[] {
   const errors: ValidationError[] = [];
   const fileName = path.basename(filePath);
 
-  // 必須フィールドのチェック
-  if (!post.id || typeof post.id !== 'string') {
-    errors.push({ file: fileName, field: 'id', message: 'id is required and must be a string' });
+  // ファイル名からIDを自動生成
+  if (!post.id) {
+    post.id = deriveIdFromFilename(fileName);
   }
 
   if (!post.title || typeof post.title !== 'string') {

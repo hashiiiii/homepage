@@ -101,7 +101,6 @@ The blog system uses a static generation approach for optimal performance:
 ### Blog Post Metadata
 
 ```markdown
-id: '1'
 title: 'Your Blog Post Title'
 excerpt: 'A brief description of your blog post content that appears in the blog list.'
 date: '2024-01-01'
