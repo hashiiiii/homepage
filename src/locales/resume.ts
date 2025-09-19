@@ -59,9 +59,10 @@ export const resumeData: Record<Language, ResumeData> = {
           {
             text: 'Server-side development with Ruby on Rails + MySQL / Memcached + AWS / GCP services',
             items: [
-              'Worker implementation',
-              'API development and admin panel feature additions',
-              'Database design with MySQL and ridgepole, query optimization through index design',
+              'Worker（Daemon） implementation',
+              'API development',
+              'Database design with MySQL, query optimization through index design',
+              'Performance tuning (in-memory caching offload and additional index-based query optimizations)',
             ],
           },
           {
@@ -256,7 +257,7 @@ export const resumeData: Record<Language, ResumeData> = {
           {
             text: 'Ruby on Rails + MySQL / Memcached + AWS / GCP 各種サービスによるサーバーサイド開発',
             items: [
-              'ワーカーの実装',
+              'ワーカー（デーモン）の実装',
               '各種 API 開発',
               'MySQL, ridgepole を用いたデータベース設計',
               'インデックス設計によるクエリの高速化やインメモリキャッシュを用いたオフロード等のパフォーマンスチューニング',

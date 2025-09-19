@@ -17,11 +17,11 @@ export const skillsData: Record<Language, SkillsData> = {
     categories: [
       {
         category: 'Languages',
-        skills: ['C#', 'Ruby', 'C++', 'Go', 'Typescript'],
+        skills: ['C#', 'Ruby', 'C++', 'Zig', 'Go', 'Typescript'],
         color: 'bg-tn-blue/10 text-tn-blue border-tn-blue/20',
       },
       {
-        category: 'Game Development',
+        category: 'Frontend & Frameworks',
         skills: [
           'Unity',
           'Clean Architecture',
@@ -32,12 +32,26 @@ export const skillsData: Record<Language, SkillsData> = {
           'Photon',
           'Steam',
           'fingger',
+          'React Native',
+          'React',
+          'Expo',
+          'Flutter',
         ],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {
         category: 'Backend & Frameworks',
-        skills: ['Ruby on Rails', 'MySQL', 'Memcached', 'PlayFab', 'Azure Functions'],
+        skills: [
+          'Ruby on Rails',
+          'MySQL',
+          'PostgreSQL',
+          'Q4M',
+          'Memcached',
+          'Hono',
+          'Node.js',
+          'Layered Architecture',
+          'MVC',
+        ],
         color: 'bg-tn-green/10 text-tn-green border-tn-green/20',
       },
       {
@@ -66,7 +80,7 @@ export const skillsData: Record<Language, SkillsData> = {
         color: 'bg-tn-blue/10 text-tn-blue border-tn-blue/20',
       },
       {
-        category: 'ゲーム開発',
+        category: 'フロントエンド・フレームワーク',
         skills: [
           'Unity',
           'Clean Architecture',
@@ -77,12 +91,25 @@ export const skillsData: Record<Language, SkillsData> = {
           'Photon',
           'Steam',
           'fingger',
+          'React Native',
+          'React',
+          'Expo',
+          'Flutter',
         ],
         color: 'bg-tn-cyan/10 text-tn-cyan border-tn-cyan/20',
       },
       {
         category: 'バックエンド・フレームワーク',
-        skills: ['Ruby on Rails', 'MySQL', 'Memcached', 'PlayFab', 'Azure Functions'],
+        skills: [
+          'Ruby on Rails',
+          'MySQL',
+          'PostgreSQL',
+          'Memcached',
+          'Hono',
+          'Node.js',
+          'Layered Architecture',
+          'MVC',
+        ],
         color: 'bg-tn-green/10 text-tn-green border-tn-green/20',
       },
       {
