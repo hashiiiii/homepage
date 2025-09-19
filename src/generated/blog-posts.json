@@ -5,11 +5,12 @@
     "excerpt": "2025年09月19日の日報です。",
     "date": "2025-09-19",
     "tags": [
+      "Daily Report",
       "React Native",
       "Expo",
       "v0"
     ],
-    "readTime": "5 min read",
+    "readTime": "3 min read",
     "content": "\n# 前置き\n\n今日から日報を書こうと思います。ホームページをせっかく作ったのに塩漬けにするのは勿体無いので....アクティブなものにしていきたいですね。\n今は React Native + Expo でマルチプラットフォーム（Web, iOS, Android）向けのアプリケーションを作っています。\n1 source でマルチプラットフォーム展開可能ということで、前述の技術スタックを採用しました。\nあとは AI と Typescript そしてそのエコシステムの相性が非常に相性が良いのもあり、今後 React Native が再興する世界線があるのではと睨んでいたり...\n\n# やったこと\n\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/style\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/height-and-width\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/flexbox\n\n上記 UI の組み方の勉強中。Web で Expo の Snack を利用した動作確認が可能なので、ちょこちょこコードをいじりつつ手触りの確認をしています。\n\n- https://v0.app/\n\nv0 を利用してデザインのモックアップを作成しています。ちなみにデフォルトだと v0 は React Native + Expo に対応したソースコードを吐き出してくれないっぽいです。\n\n- https://v0.app/chat/react-native-ui-design-VLfLJnzCmHs\n\nWeb 上で Share されていた上記をベースにプロジェクトを作ってみたところ、React Native + Expo のコードを吐いてくれました。明日以降はこちらのコードを読みつつ、学び得た知識でリファクタリングをしていこうかなと思っています。ちなみに、今回の開発はスキルアップも兼ねているので vibe coding はあまりする気がないです。\n\n# やること\n\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/flexbox の続き\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/images\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/colors この辺り含むカラーの管理を他 repository 見つつ勉強\n- v0 で吐き出したコードのリファクタリング\n"
   },
   {
