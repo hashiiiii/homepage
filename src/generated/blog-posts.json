@@ -1,5 +1,18 @@
 [
   {
+    "id": "2025-09-19-daily",
+    "title": "20250919-日報",
+    "excerpt": "2025年09月19日の日報です。",
+    "date": "2025-09-19",
+    "tags": [
+      "React Native",
+      "Expo",
+      "v0"
+    ],
+    "readTime": "5 min read",
+    "content": "\n# 前置き\n\n今日から日報を書こうと思います。ホームページをせっかく作ったのに塩漬けにするのは勿体無いので....アクティブなものにしていきたいですね。\n今は React Native + Expo で Web, iOS, Android マルチプラットフォーム向けのアプリケーションを作っています。\n1 source でマルチプラットフォームやれるということで前述の技術スタックを採用しました。\nあとは AI と Typescript やそのエコシステムの相性が非常に相性が良いので、今後また React Native が流行る世界線が来るのではと睨んでいるというのもあります。\n\n# やったこと\n\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/style\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/height-and-width\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/flexbox\n\n上記の UI の組み方の勉強中。Web で Expo の Snack を利用した動作確認が可能なので、ちょこちょこコードをいじりつつ手触りの確認をしています。\n\n- https://v0.app/\n\nv0 を利用してデザインのモックアップを作成しています。デフォルトだと v0 は React Native + Expo に対応したソースコードを吐き出してくれないみたいなのですが、\n\n- https://v0.app/chat/react-native-ui-design-VLfLJnzCmHs\n\nWeb 上で Share されていた上記のプロトコルを import することで、React Native + Expo のコードを吐いてみました。明日以降はこちらのコードを読みつつ、学び得た知識でリファクタリングをしていこうかなと思っています。今回の開発はスキルアップも兼ねているので vibe coding はあまりする気がないです。\n\n# やること\n\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/flexbox の続き\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/images\n- https://reactnative-archive-august-2025.netlify.app/docs/0.76/colors この辺り含むカラーの管理を他 repository 見つつ勉強\n- v0 で吐き出したコードのリファクタリング\n"
+  },
+  {
     "id": "2025-06-25-markdown-memo",
     "title": "マークダウン記法メモ",
     "excerpt": "当ホームページで利用可能なマークダウン記法をメモするための記事です。",
