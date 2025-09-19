@@ -57,7 +57,7 @@ export const resumeData: Record<Language, ResumeData> = {
         current: true,
         description: [
           {
-            text: 'Server-side development with Ruby on Rails + MySQL / Redis + AWS / GCP services',
+            text: 'Server-side development with Ruby on Rails + MySQL / Memcached + AWS / GCP services',
             items: [
               'Worker implementation',
               'API development and admin panel feature additions',
@@ -254,11 +254,12 @@ export const resumeData: Record<Language, ResumeData> = {
         current: true,
         description: [
           {
-            text: 'Ruby on Rails + MySQL / Redis + AWS / GCP 各種サービスによるサーバーサイド開発',
+            text: 'Ruby on Rails + MySQL / Memcached + AWS / GCP 各種サービスによるサーバーサイド開発',
             items: [
               'ワーカーの実装',
-              '各種 API 開発や管理画面への機能追加',
-              'MySQL, ridgepole を用いたデータベース設計, インデックス設計によるクエリの高速化',
+              '各種 API 開発',
+              'MySQL, ridgepole を用いたデータベース設計',
+              'インデックス設計によるクエリの高速化やインメモリキャッシュを用いたオフロード等のパフォーマンスチューニング',
             ],
           },
           {

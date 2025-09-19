@@ -17,7 +17,7 @@ export const skillsData: Record<Language, SkillsData> = {
     categories: [
       {
         category: 'Languages',
-        skills: ['C#', 'Ruby', 'C++', 'Go', 'HLSL / GLSL'],
+        skills: ['C#', 'Ruby', 'C++', 'Go', 'Typescript'],
         color: 'bg-tn-blue/10 text-tn-blue border-tn-blue/20',
       },
       {
@@ -37,27 +37,22 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'Backend & Frameworks',
-        skills: ['Ruby on Rails', 'MySQL', 'Redis', 'ridgepole', 'PlayFab', 'Azure Functions'],
+        skills: ['Ruby on Rails', 'MySQL', 'Memcached', 'PlayFab', 'Azure Functions'],
         color: 'bg-tn-green/10 text-tn-green border-tn-green/20',
       },
       {
         category: 'Cloud & Infrastructure',
-        skills: ['AWS', 'GCP', 'On-premises'],
+        skills: ['AWS', 'GCP'],
         color: 'bg-tn-magenta/10 text-tn-magenta border-tn-magenta/20',
       },
       {
-        category: 'DevOps & Tools',
-        skills: ['GitHub Actions', 'Jenkins', 'CI / CD', 'GDPR Compliance', 'Build Systems'],
+        category: 'DevOps',
+        skills: ['GitHub Actions', 'Jenkins'],
         color: 'bg-tn-yellow/10 text-tn-yellow border-tn-yellow/20',
       },
       {
-        category: 'Leadership & Expertise',
-        skills: [
-          'Tech Lead',
-          'Team Management (2-10 engineers)',
-          'Architecture Design',
-          'Performance Optimization',
-        ],
+        category: 'Role',
+        skills: ['Tech Lead', 'Team Management (2-10 engineers)', 'Architect'],
         color: 'bg-tn-red/10 text-tn-red border-tn-red/20',
       },
     ],
@@ -67,7 +62,7 @@ export const skillsData: Record<Language, SkillsData> = {
     categories: [
       {
         category: 'プログラミング言語',
-        skills: ['C#', 'Ruby', 'C++', 'Go', 'HLSL / GLSL'],
+        skills: ['C#', 'Ruby', 'C++', 'Go', 'Typescript'],
         color: 'bg-tn-blue/10 text-tn-blue border-tn-blue/20',
       },
       {
@@ -87,27 +82,22 @@ export const skillsData: Record<Language, SkillsData> = {
       },
       {
         category: 'バックエンド・フレームワーク',
-        skills: ['Ruby on Rails', 'MySQL', 'Redis', 'ridgepole', 'PlayFab', 'Azure Functions'],
+        skills: ['Ruby on Rails', 'MySQL', 'Memcached', 'PlayFab', 'Azure Functions'],
         color: 'bg-tn-green/10 text-tn-green border-tn-green/20',
       },
       {
         category: 'クラウド・インフラ',
-        skills: ['AWS', 'GCP', 'オンプレミス'],
+        skills: ['AWS', 'GCP'],
         color: 'bg-tn-magenta/10 text-tn-magenta border-tn-magenta/20',
       },
       {
-        category: 'DevOps・ツール',
-        skills: ['GitHub Actions', 'Jenkins', 'CI / CD', 'GDPR 対応', 'ビルドシステム'],
+        category: 'DevOps',
+        skills: ['GitHub Actions', 'Jenkins'],
         color: 'bg-tn-yellow/10 text-tn-yellow border-tn-yellow/20',
       },
       {
-        category: 'リーダーシップ・専門性',
-        skills: [
-          'テックリード',
-          'チームマネジメント（2 - 10 名）',
-          'アーキテクチャ設計',
-          'パフォーマンスチューニング',
-        ],
+        category: 'ロール',
+        skills: ['テックリード', 'チームマネジメント（2 - 10 名）', 'アーキテクト'],
         color: 'bg-tn-red/10 text-tn-red border-tn-red/20',
       },
     ],
