@@ -43,19 +43,19 @@ jobs:
       - name: Deploy to Vercel (Preview)
         if: github.event.inputs.environment == 'preview'
         run: |
-          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN2 }}
-          vercel build --token=${{ secrets.VERCEL_TOKEN2 }}
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN2 }}
-        env:
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        env: # Read by Vercel CLI
           VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID2 }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
       - name: Deploy to Vercel (Production)
         if: github.event.inputs.environment == 'production'
         run: |
-          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN2 }}
-          vercel build --prod --token=${{ secrets.VERCEL_TOKEN2 }}
-          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN2 }}
-        env:
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env: # Read by Vercel CLI
           VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID2 }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

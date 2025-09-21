@@ -7,10 +7,11 @@
     "tags": [
       "Daily Report",
       "React Native",
-      "Expo"
+      "Expo",
+      "Vercel"
     ],
-    "readTime": "3 min read",
-    "content": "\n# React Native, Expo, React のバージョンアップ\n\nプロジェクトの React Native をなぜか 0.76 で進めていたので 0.81 まで上げました。\nそれに伴って Expo のバージョンを 54 系に, React のバージョンを 19 系に上げました。\n\n# やること\n\n- プロダクトの UI 作成\n"
+    "readTime": "1 min read",
+    "content": "\n# React Native, Expo, React のバージョンアップ\n\nプロジェクトの React Native をなぜか 0.76 で進めていたので 0.81 まで上げました。\nそれに伴って Expo のバージョンを 54 系に, React のバージョンを 19 系に上げました。\n\n# Vercel アカウント切り替え\n\nVercel は無料枠で、v0 は Premium プランを契約して利用しています。また、両者ともに Google Account 認証を利用しています。\nところが、サチっていたのか利用している Google Account が異なることに気づいてしまいました...\n\nGoogle Account セッションの関係で、それぞれのサービスでアカウントの切り替えに苦労する[^1]ため、Vercel を v0 で利用する Google Account に合わせました。結果としてプロジェクトを作り直す必要があったため、それに伴って CI で利用していた環境変数の値を払い出し直したりなどしました。\n\n# やること\n\n- プロダクトの UI 作成\n\n[^1]: セッションが維持されてしまうため、片方をシークレットウィンドウでサインインするという工程が必要\n"
   },
   {
     "id": "2025-09-19-daily",
