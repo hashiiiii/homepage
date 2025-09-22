@@ -11,7 +11,7 @@
       "Vercel"
     ],
     "readTime": "1 min read",
-    "content": "\n# React Native, Expo で UI の作成\n\nApp.tsx 内に React Native の Core Component を利用して色々と雑に UI を組む練習をしていました。\n\n![](/public/images/blog/2025-09-21-daily/playground.png, 'playground')\n\n触って覚えていくしかなさそう。ある程度覚えたら、画面のレイアウト組むのは AI に任せるでいいかな.... それと比べて遷移周りとか状態管理まわりは楽しめそうな予感がしている。週の半ばくらいからはそっちやろうかなと思います。\n\n# 読書\n\n[パーフェクト Ruby on Rails](https://gihyo.jp/book/2020/978-4-297-11462-6) を 40 ページくらい読んだ。\n"
+    "content": "\n# React Native, Expo で UI の作成\n\nApp.tsx 内に React Native の Core Component を利用して色々と雑に UI を組む練習をしていました。\n\n![雑 UI](/public/images/blog/2025-09-21-daily/playground.png, 'playground')\n\n触って覚えていくしかなさそう。ある程度覚えたら、画面のレイアウト組むのは AI に任せるでいいかな.... それと比べて遷移周りとか状態管理まわりは楽しめそうな予感がしている。週の半ばくらいからはそっちやろうかなと思います。\n\n# 読書\n\n[パーフェクト Ruby on Rails](https://gihyo.jp/book/2020/978-4-297-11462-6) を 40 ページくらい読んだ。\n"
   },
   {
     "id": "2025-09-20-daily",
