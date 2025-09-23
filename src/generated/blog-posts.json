@@ -1,5 +1,18 @@
 [
   {
+    "id": "2025-09-23-daily",
+    "title": "20250923-日報",
+    "excerpt": "2025年09月23日の日報です。",
+    "date": "2025-09-23",
+    "tags": [
+      "Daily Report",
+      "React Native",
+      "Expo"
+    ],
+    "readTime": "3 min read",
+    "content": "\n# React Native, Expo で UI の作成\n\nApp.tsx 内に React Native の Core Component を利用して色々と雑に UI を組む練習の続きです。\n少しレベルアップしていて、\n\n- `StyleSheet` を利用してデザインをあてる\n- `React Hooks` の `useState` を利用した状態管理\n- UI を組み合わせたイベント駆動なコード\n\nなどを書いてみました。出来上がったのがこれ。\n\n![雑 UI](/images/blog/2025-09-23-daily/playground.gif 'playground')\n\nこの List View 的なやつを作るのには Core Component の `SectionList` というのを利用しています。見て分かるように Section を構築するためのフィールドは空になっています。これでほんまにええんか感はありますが.....こういうものなんですかね？（too much なものよりは just right なものを使う方が好みです）\n\n# 某案件の課金周りの調査\n\n主に Unity IAP 周りのクライアントの実装の調査をしていました。IAP の課金トランザクションフローでは、ストアから渡されたレシートを検証サーバー（実態は NestJS で書かれたごく普通の API サーバー）に送って検証を行うようにしています。現状だと、渡したレシートを用いてストアの検証を叩く API を叩くと Invalid Value になるらしい。\n\n祝日だったのであまり根気を入れて見れてないですが、クライアントとサーバーの内部実装をどちらも確認しましたが、パッとはおかしいところ見つけられず....明日サーバー担当者の人に追加でログ仕込んでもらうよう依頼しつつ、一旦はクライアント側の実装を再度見直してみよう。\n\n# 読書\n\n[パーフェクト Ruby on Rails](https://gihyo.jp/book/2020/978-4-297-11462-6) を 40 ページくらい読んだ。\n"
+  },
+  {
     "id": "2025-09-21-daily",
     "title": "20250921-日報",
     "excerpt": "2025年09月21日の日報です。",
