@@ -1,7 +1,7 @@
 [
   {
     "id": "2025-09-23-daily",
-    "title": "20250923-日報",
+    "title": "React Native 開発 - part4 と Unity IAP 基盤のバグ調査",
     "excerpt": "2025年09月23日の日報です。",
     "date": "2025-09-23",
     "tags": [
@@ -16,7 +16,7 @@
   },
   {
     "id": "2025-09-21-daily",
-    "title": "20250921-日報",
+    "title": "React Native 開発 - part3",
     "excerpt": "2025年09月21日の日報です。",
     "date": "2025-09-21",
     "tags": [
@@ -30,7 +30,7 @@
   },
   {
     "id": "2025-09-20-daily",
-    "title": "20250920-日報",
+    "title": "React Native 開発 - part2",
     "excerpt": "2025年09月20日の日報です。",
     "date": "2025-09-20",
     "tags": [
@@ -44,7 +44,7 @@
   },
   {
     "id": "2025-09-19-daily",
-    "title": "20250919-日報",
+    "title": "React Native 開発 - part1",
     "excerpt": "2025年09月19日の日報です。",
     "date": "2025-09-19",
     "tags": [
