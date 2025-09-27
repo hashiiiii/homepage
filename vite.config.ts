@@ -1,35 +1,24 @@
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-
-  return {
-    plugins: [
-      react(),
-      {
-        name: 'html-transform',
-        transformIndexHtml(html) {
-          return html.replace(/%VITE_GA_MEASUREMENT_ID%/g, env.VITE_GA_MEASUREMENT_ID);
-        },
-      },
-    ],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-        '@components': path.resolve(__dirname, './src/components'),
-        '@contexts': path.resolve(__dirname, './src/contexts'),
-        '@styles': path.resolve(__dirname, './src/styles'),
-        '@pages': path.resolve(__dirname, './src/pages'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-      },
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@contexts': path.resolve(__dirname, './src/contexts'),
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@utils': path.resolve(__dirname, './src/utils'),
     },
-    css: {
-      postcss: './postcss.config.js',
-    },
-    build: {
-      outDir: 'dist/client',
+  },
+  css: {
+    postcss: './postcss.config.js',
+  },
+  build: {
+    outDir: 'dist/client',
       chunkSizeWarningLimit: 1000, // 1MBに拡大
       rollupOptions: {
         input: {
@@ -54,8 +43,7 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    server: {
-      port: 3000,
-    },
-  };
+  server: {
+    port: 3000,
+  },
 });

@@ -24,7 +24,5 @@ jobs:
         run: npm run lint
       - name: Build frontend
         run: npm run build
-        env:
-          VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID || '' }}
       - name: Run tests
         run: npm run test
