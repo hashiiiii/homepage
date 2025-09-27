@@ -1,5 +1,19 @@
 [
   {
+    "id": "2025-09-27-daily",
+    "title": "React Native 開発 - part5 と Google Analytics の導入",
+    "excerpt": "2025年09月27日の日報です。",
+    "date": "2025-09-27",
+    "tags": [
+      "Daily Report",
+      "Google Analytics",
+      "React Native",
+      "Expo"
+    ],
+    "readTime": "4 min read",
+    "content": "\n# 前置き\n\n本業側のリリース作業があり、労働負荷が高まった結果として日報を書く元気が湧かなかったです。また少しずつ頑張ります。\n\n# Google Analytics\n\n[当サイト](https://hashiiiii.com/)に Google Analytics を導入しました。\nこれといった導入理由はなくて、なんとなく使ってみたかったからです。\nトラフィックを少し見るくらいになると思います。\n\n## React Native, Expo で UI の作成\n\n今日は[前回](./2025-09-23-daily.md)から更に少し進化をしました。型エイリアスという仕組みを使ってデータを構造化しました。\n\n```tsx\ntype ChatMessage = {\n  name: string;\n  actor: Actor;\n  text: string;\n  createdAt: string;\n};\n\nenum Actor {\n  User = 'user',\n  Assistant = 'assistant',\n}\n```\n\nこれは C# でいう `record` と似たような概念です。JS にトランスパイルされるとただの JS オブジェクトとして扱われるらしい。\nこの `ChatMessage` は `Actor` 毎の style が用意されていて actor によって style が切り替わるようなイメージです。また、それぞれの style には共通化可能な部分があったので共通用の style も定義しました。\n\n```tsx\n<SectionList\n  sections={[{ data: _dataList }]}\n  keyExtractor={(item) => item.createdAt}\n  renderItem={({ item }) => (\n    <View style={[styles.chat, item.actor === Actor.User ? styles.chatUser : styles.chatAi]}>\n      {item.text}\n    </View>\n  )}\n/>\n```\n\nこんな感じ。てか、style って配列で複数指定可能なのですね。今日も勉強になった。\n\n![雑 UI](/images/blog/2025-09-27-daily/playground.gif 'playground')\n\n出来上がった UI はこれ。Assistant のレスポンスはハードコードしてます。\n"
+  },
+  {
     "id": "2025-09-23-daily",
     "title": "React Native 開発 - part4 と Unity IAP 基盤のバグ調査",
     "excerpt": "2025年09月23日の日報です。",
