@@ -19,30 +19,27 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist/client',
-      chunkSizeWarningLimit: 1000, // 1MBに拡大
-      rollupOptions: {
-        input: {
-          main: path.resolve(__dirname, 'index.html'),
-        },
-        output: {
-          manualChunks: {
-            // React関連
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            // Markdownレンダリング関連（rehype-highlightを含む）
-            'markdown-vendor': [
-              'react-markdown',
-              'remark-gfm',
-              'remark-math',
-              'rehype-highlight',
-              'rehype-katex',
-              'rehype-raw',
-            ],
-            // 数式レンダリング
-            'katex-vendor': ['katex'],
-          },
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+      },
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'markdown-vendor': [
+            'react-markdown',
+            'remark-gfm',
+            'remark-math',
+            'rehype-highlight',
+            'rehype-katex',
+            'rehype-raw',
+          ],
+          'katex-vendor': ['katex'],
         },
       },
     },
+  },
   server: {
     port: 3000,
   },
