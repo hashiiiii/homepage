@@ -1,5 +1,18 @@
 [
   {
+    "id": "2025-10-02-daily",
+    "title": "React Native 開発 - part6",
+    "excerpt": "2025年10月02日の日報です。",
+    "date": "2025-10-02",
+    "tags": [
+      "Daily Report",
+      "React Native",
+      "Expo"
+    ],
+    "readTime": "1 min read",
+    "content": "\n# React Native, Expo で UI の作成\n\n大幅にリファクタリングを進めました。UI のデザインも洗練させて、とりあえずのモックアップとしては十分な領域に到達したかと思います。\n\n徐々にサーバーサイドの開発に着手していこうと思っています。また、ReactNative は使わないと忘れそうなので、設定画面の開発を進めていこうと思います。\n\n![雑 UI](/images/blog/2025-10-02-daily/playground.gif 'playground')\n"
+  },
+  {
     "id": "2025-09-27-daily",
     "title": "React Native 開発 - part5 と Google Analytics の導入",
     "excerpt": "2025年09月27日の日報です。",
