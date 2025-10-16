@@ -14,6 +14,21 @@
     "content": "\n# tRPC\n\nこれまで React Native のアプリケーションを作っていましたが、それから呼び出す API サーバーを書いています。\n\nAPI を作る上で、本業では gRPC や REST で書くことがよくあるのですが、今回は [`tRPC`](https://trpc.io/docs/) を使うことにしました。\n\n前提として、新しいものを使ってみたいという気持ちがありました。また、個人開発なのもあり Client - Server は `Monorepo` で構成しているのと、出来るだけ Server の変更による Client の変更コストが安いようにしたいという気持ちがありました。パフォーマンス云々よりもまずは開発容易性を重視しました。こういった要件の元で調査を進めていった結果 tRPC にたどり着きました。GraphQL も候補としては挙がっていたのですが、今回のプロジェクトはフルスタック Typescript なので型とエディタの補完をフルに享受することができるのと、GraphQL より tRPC の方が学習しやすいようにみえたため tRPC がよかろうという結論になりました。\n\n# Hono, Deno\n\nサーバーは [`Hono`](https://hono.dev/) を利用します。ランタイムには [`Deno`](https://deno.com/) を使ってみることにしました。どちらも使ってみたかったからですね。この辺りは解像度上がったらもうちょっと色々書いていこうと思います。\n\n# 悩み\n\n悩みに悩んで tRPC を採用するに至ったのですが `Hono RPC` というものがあるのを知りました。これ自体は tRPC と同様に型安全。その上で REST に乗って書けるのでより学習しやすいだろうと想像できました。明日以降 tRPC を捨ててこっちに移動している気がする。。。\n"
   },
   {
+    "id": "2025-10-17-daily",
+    "title": "クライアントとサーバーの統合と 1Password CLI",
+    "excerpt": "2025年10月05日の日報です。",
+    "date": "2025-10-05",
+    "tags": [
+      "Daily Report",
+      "honoRPC",
+      "Hono",
+      "Deno",
+      "1Password"
+    ],
+    "readTime": "5 min read",
+    "content": "\n# 前置き\n\n2 week 弱くらい空いてしまった... 最近仕事で Rails アプデをやっていて、それが楽しくてあまり趣味プログラミングをする暇がなかったという言い訳をさせてください。\n\nというわけで....ちょこちょこと触っていたのですが、そんなに進捗ないです。\n\n# honoRPC\n\ntRPC を使うという話をしていましたが、気が変わって honoRPC を利用することにしました。tRPC と打って変わって REST ぽい書き味が、やはり体に合うなという印象です。\n\n# Integration\n\nhonoRPC を interface にして ReactNative + Expo のクライアントアプリケーションと、Hono + Deno のサーバーサイドを統合しました。\n\n書くのは超絶簡単で、\n\nhttps://hono.dev/docs/guides/rpc\n\nこいつを見れば大体わかります。また、\n\nhttps://hono.dev/docs/guides/best-practices\n\nこの辺りのベストプラクティスのドキュメントも、非常に分かりやすいとおもっています。\n\n# Architecture\n\n実はサーバーサイドは Layered Architecture で構成していて、クライアントは ExpoRouter があるので Expo のプラクティスに基本的には沿っています。\n\nただ、今回のように honoRPC の interface 部分をどこに持ってくるか、サーバーサイドの API を呼ぶようなコードをどこに書くかというのが悩みどころでした。\n\nhttps://expo.dev/blog/expo-app-folder-structure-best-practices\n\nこの記事を参考にしてみました。Expo の公式記事なのでそれなりにフレームワークとの兼ね合いは考慮されたモノでしょうし。主に見ればいいのは、\n\nhttps://expo.dev/blog/expo-app-folder-structure-best-practices\n\nこのサマリーの部分ですかね。今回は自分も app folder の中に api folder を切って、そこに記述しています。\n\n```typescript\nimport { client } from './client';\n\nexport const fetchTest = async () => {\n  try {\n    const res = await client.index.$get();\n    if (!res.ok) {\n      throw new Error(`API Error: ${res.status}`);\n    }\n    const data = await res.json();\n    return data;\n  } catch (error) {\n    throw new Error(`API Test Failed: ${error}`);\n  }\n};\n```\n\n例えばこんな感じです。そして、共通部分となるコードは\n\n```typescript\nimport { hc } from 'hono/client';\nimport type { AppType } from '../../../api/src/presentation/index.ts';\n\n// TODO: URL は環境ごとに変えたいのでどうするか考える\nexport const client = hc<AppType>('http://localhost:8000');\n```\n\nこんな感じで `client.ts` として逃すことにしました。気に入ってないのは `AppType` を参照するのにサーバー側のパスを指定しないといけないことですかね... この辺りは `gRPC` のようなスキーマから生成する系の interface を持つ技術スタックの方が好きだなぁと思いました。\n\nhttps://x.com/_ayame113_/status/1974960185576972545\n\n同じような気持ちを吐露している方がいた。Yusuke Wada さんもいいねと言っている。\nが、どうなんでしょうね？神経質になっちゃう気持ちを抑えて、あえてこうしたのだと思っていたけれど、口ぶりから見るにそんなこともないのかもしれない？\n\n正直僕はスキーマがある方が好きなんだけれど、今の方がシンプルで Hono らしいっちゃらしいのではという気持ちにもなった。これでスキーマ作る方がパフォーマンス出るから対応した。とかだと、それはそれで Hono らしいかもしれない。\n\n# 1Password CLI\n\n環境変数を例えばローカルとリモートで、コードの変更なしで動的に差し替えたいようなことって全エンジニアが一度は思いを馳せたことがあると思います。\n\n多分 .env を使ったり、git submodule を使ったりがメインだと思いますが、Claude Code さんに相談すると 1Password CLI がいいよとおすすめをもらった。\n\n1Password はいわゆるパスワードマネージャーだと思っていたのですが、実はもっと幅広く任意の重要情報を積めるようなソリューションだということを知りました。\n\n例えば、API token を登録しておけば 1Password CLI 経由で引いてくることが可能になります。このような値を登録すると、代わりの参照キーのようなものが払い出されるので、アプリケーションからはそれを用いて参照するというイメージです。\n\nこんな便利なソリューションがあるとは知らなかった.... shared モードみたいなものあるらしく、チーム開発で他人に共有すべきものは共有可能になるみたいです。めちゃめちゃいいですね。\n\n今作っているアプリケーションでも当然 env 系の値は使いますので、今回は 1Password を利用していこうと思います。\n"
+  },
+  {
     "id": "2025-10-02-daily",
     "title": "React Native 開発 - part6",
     "excerpt": "2025年10月02日の日報です。",
