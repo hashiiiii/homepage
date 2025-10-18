@@ -7,6 +7,17 @@ interface BlogPostWithContent extends BlogPost {
   content: string;
 }
 
+// トップレベルで一度だけMarkdownファイルを読み込む（I/O削減）
+let cachedContentValidation: { posts: Map<string, BlogPostWithContent>; errors: any[] } | null =
+  null;
+
+function getContentValidation() {
+  if (!cachedContentValidation) {
+    cachedContentValidation = loadMarkdownFiles();
+  }
+  return cachedContentValidation;
+}
+
 describe('Markdown Validation', () => {
   describe('Individual Post Validation', () => {
     it('should validate required fields', () => {
@@ -174,8 +185,8 @@ This is missing id, date, and other required fields.
     let contentValidation: { posts: Map<string, BlogPostWithContent>; errors: any[] };
 
     beforeAll(() => {
-      // 実際のcontentディレクトリを検証
-      contentValidation = loadMarkdownFiles();
+      // 実際のcontentディレクトリを検証（キャッシュされた結果を使用）
+      contentValidation = getContentValidation();
     });
 
     it('should have no validation errors in existing content', () => {
@@ -242,7 +253,8 @@ This is missing id, date, and other required fields.
     let posts: Map<string, BlogPostWithContent>;
 
     beforeAll(() => {
-      const result = loadMarkdownFiles();
+      // キャッシュされた結果を再利用
+      const result = getContentValidation();
       posts = result.posts;
     });
 

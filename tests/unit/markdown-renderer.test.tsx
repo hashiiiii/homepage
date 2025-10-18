@@ -1,6 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer';
+
+// 重い依存関係をモック化してテスト高速化
+vi.mock('highlight.js/styles/tokyo-night-dark.css', () => ({}));
+vi.mock('highlight.js/styles/tokyo-night-light.css', () => ({}));
+vi.mock('katex/dist/katex.min.css', () => ({}));
 
 describe('MarkdownRenderer', () => {
   describe('Alert Rendering', () => {
