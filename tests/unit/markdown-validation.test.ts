@@ -1,7 +1,7 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import { validateMarkdownPost, loadMarkdownFiles } from '../../src/lib/build-blog';
-import { extractBlogPost } from '../../src/utils/markdown';
+import { beforeAll, describe, expect, it } from 'vitest';
+import { loadMarkdownFiles, validateMarkdownPost } from '../../src/lib/build-blog';
 import type { BlogPost } from '../../src/models/blog.model';
+import { extractBlogPost } from '../../src/utils/markdown';
 
 interface BlogPostWithContent extends BlogPost {
   content: string;
@@ -269,9 +269,19 @@ This is missing id, date, and other required fields.
 
     it('should have valid dates (not future dates)', () => {
       const now = new Date();
+      const endOfToday = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        23,
+        59,
+        59,
+        999
+      );
       posts.forEach((post) => {
-        const postDate = new Date(post.date);
-        expect(postDate.getTime()).toBeLessThanOrEqual(now.getTime());
+        const [year, month, day] = post.date.split('-').map(Number);
+        const postDate = new Date(year, month - 1, day);
+        expect(postDate.getTime()).toBeLessThanOrEqual(endOfToday.getTime());
       });
     });
   });
