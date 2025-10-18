@@ -13,7 +13,32 @@ on:
           - production
 
 jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        check: [typecheck, lint, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build blog metadata (for typecheck)
+        if: matrix.check == 'typecheck'
+        run: npx tsx src/lib/build-blog.ts
+
+      - name: Run ${{ matrix.check }}
+        run: npm run ${{ matrix.check }}
+
   deploy:
+    needs: quality-checks
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_ID }}
@@ -27,19 +52,9 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Build
-        run: npm run build
-
-      - name: Run tests
-        run: npm run test
 
       - name: Deploy to Vercel
         shell: bash
