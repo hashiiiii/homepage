@@ -1,205 +1,45 @@
-# hashiiiii.com
+# homepage
 
-Personal homepage built with modern web technologies. A fast, responsive, and accessible single-page application showcasing projects, blog posts, and professional profile.
+Internal guide for maintaining hashiiiii.com
 
-## ✨ Features
+## Stack
 
-- **🎨 Modern Design**: Tokyo Night theme with dark/light mode toggle
-- **📱 Responsive**: Mobile-first design that works on all devices
-- **🌐 Multilingual**: Japanese/English language support
-- **📝 Blog System**: Markdown-based blog with syntax highlighting and Mermaid diagrams
-- **🚀 Performance**: Static site generation with Vite for optimal loading speed
-- **♿ Accessible**: Semantic HTML and ARIA compliance
-- **🧪 Well Tested**: Comprehensive test suite with 100% coverage
+- React 19 with TypeScript and strict compilation
+- Vite for bundling and local dev server
+- React Router 7 for client-side routing
+- Tailwind CSS with a custom design system in `src/styles/design-system.ts`
+- Markdown content sourced from `content/blog`; processed by `src/lib/build-blog.ts`
 
-## 🛠 Tech Stack
+## Prerequisites
 
-### Core
+- Node.js 18 or newer (development is done with 20.x)
+- npm (comes with Node.js)
 
-- **Frontend**: React 19 + TypeScript
-- **Bundler**: Vite
-- **Styling**: Tailwind CSS
-- **Routing**: React Router 7
-
-### Content & Markdown
-
-- **Markdown Processing**: react-markdown with enhanced features
-- **Syntax Highlighting**: highlight.js (Tokyo Night theme)
-- **Math Rendering**: KaTeX
-- **Diagrams**: Mermaid.js
-
-### Development
-
-- **Testing**: Vitest with coverage
-- **Code Quality**: ESLint + Prettier
-- **Type Safety**: TypeScript (strict mode)
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+ (Recommended: 20.x)
-- npm
-
-### Installation
+## Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/hashiiiii/homepage.git
-cd homepage
-
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the site.
+Clone the repository as usual before running the installation if this is a new environment.
 
-## 📜 Available Scripts
+## Local development
 
-| Command         | Description                |
-| --------------- | -------------------------- |
-| `npm run dev`   | Start development server   |
-| `npm run build` | Build for production       |
-| `npm run test`  | Run tests with coverage    |
-| `npm run lint`  | Format code and run linter |
+- `npm run dev` starts the Vite dev server on http://localhost:3000.
+- `npm run lint` runs Prettier (in write mode) and ESLint. Commit after verifying unwanted files were not reformatted.
+- `npm run test` performs a TypeScript check and runs Vitest with coverage reporting to `coverage/`.
+- `npm run build` regenerates blog JSON via `tsx src/lib/build-blog.ts` and builds the production bundle in `dist/`.
 
-## 📁 Project Structure
+## Content workflow
 
-```
-src/
-├── components/          # React components
-│   ├── blog/           # Blog-specific components
-│   ├── common/         # Shared components
-│   └── resume/         # Resume page components
-├── contexts/           # React contexts (Theme, Language)
-├── hooks/              # Custom React hooks
-├── lib/                # Core business logic
-├── locales/            # i18n content
-├── models/             # TypeScript type definitions
-├── pages/              # Page components
-├── styles/             # Global styles and design system
-└── utils/              # Utility functions
+- Add markdown files under `content/blog`. File names are used as post IDs unless `id` is set in front matter.
+- Required front matter fields: `title`, `date` (YYYY-MM-DD), `tags` array. Optional: `excerpt`, `readTime`.
+- Run `npm run build` after editing content to refresh `src/generated/blog-posts.json` and `src/generated/blog-metadata.json`. Commit the regenerated files with the content changes.
+- Markdown is rendered with GitHub-flavored extensions, KaTeX, Mermaid, and highlight.js; preview with the dev server to confirm formatting.
 
-content/
-└── blog/               # Markdown blog posts
+## Deployment
 
-tests/
-└── unit/               # Unit and integration tests
-```
-
-## 📝 Blog System
-
-The blog system uses a static generation approach for optimal performance:
-
-1. **Content**: Write Markdown files in `content/blog/`
-2. **Build**: `build-blog.ts` processes markdown into JSON
-3. **Runtime**: Components consume pre-processed JSON data
-
-### Blog Post Metadata
-
-```markdown
-title: 'Your Blog Post Title'
-excerpt: 'A brief description of your blog post content that appears in the blog list.'
-date: '2024-01-01'
-tags: ['React', 'TypeScript', 'Web Development']
-readTime: '3 min read'
-```
-
-# Your Blog Post Content
-
-Write your content here using Markdown syntax.
-
-## Features Supported
-
-- Syntax highlighting for code blocks
-- Math equations with KaTeX: $E = mc^2$
-- Mermaid diagrams for flowcharts
-- GitHub-flavored Markdown extensions
-- Custom alert blocks (Note, Tip, Warning, Danger)
-
-## 🎨 Theming
-
-Built with Tokyo Night color scheme supporting both dark and light modes:
-
-- **Dark Mode**: Deep blues and purples with high contrast
-- **Light Mode**: Clean whites and soft grays
-
-## 🌐 Internationalization
-
-Currently supports:
-
-- **Japanese (ja)**: Native language
-- **English (en)**: International audience
-
-Language toggle available in navigation. Content is managed through locale files for maintainability.
-
-## 🧪 Testing
-
-Comprehensive test suite covering:
-
-- **Unit Tests**: Individual components and utilities
-- **Integration Tests**: Feature workflows
-- **Coverage**: 100% test coverage maintained
-
-Run tests:
-
-```bash
-npm run test
-```
-
-## 📦 Deployment
-
-### GitHub Actions + Vercel
-
-Deployment is handled via GitHub Actions workflows:
-
-#### Continuous Integration (`.github/workflows/ci.yml`)
-
-- **Trigger**: Push/PR to `main` branch
-- **Actions**: Lint → Build → Test
-- **Node.js**: 20.x
-
-#### Required Secrets
-
-Set these in GitHub repository settings:
-
-- `VERCEL_TOKEN`: Vercel authentication token
-- `VERCEL_ORG_ID`: Organization ID
-- `VERCEL_PROJECT_ID`: Project ID
-
-#### Manual Deployment
-
-To deploy manually:
-
-1. Go to Actions tab in GitHub
-2. Select "Deploy to Vercel" workflow
-3. Click "Run workflow"
-4. Choose environment (preview/production)
-
-### Local Build
-
-```bash
-# Build the project
-npm run build
-
-# Serve the dist folder with any static file server
-npx serve dist
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-## 👨‍💻 Author
-
-**hashiiiii**
-
-- Website: [hashiiiii.com](https://hashiiiii.com)
-- GitHub: [@hashiiiii](https://github.com/hashiiiii)
-
----
-
-Built with ❤️ using React and TypeScript
+- GitHub Actions (`.github/workflows/ci.yml`) runs lint, build, and tests on pushes and pull requests targeting `main`.
+- Vercel deploys from the `main` branch. Required repository secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+- Manual deployment: trigger the "Deploy to Vercel" workflow in GitHub Actions and select the desired environment (preview or production).
+- For a local production check, run `npm run build` and serve `dist/` with `npx serve dist` or any static file server.
