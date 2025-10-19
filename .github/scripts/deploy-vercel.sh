@@ -12,7 +12,7 @@ else
   prod_flag=""
 fi
 
-vercel_cmd=(npx --yes vercel@latest)
+vercel_cmd=(vercel)
 
 "${vercel_cmd[@]}" pull --yes --environment="$deploy_environment" --token="$VERCEL_TOKEN"
 
