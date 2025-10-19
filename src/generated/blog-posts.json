@@ -1,5 +1,18 @@
 [
   {
+    "id": "2025-10-18-daily",
+    "title": "ホームページの CI/CD 高速化",
+    "excerpt": "2025年10月18日の日報です。",
+    "date": "2025-10-18",
+    "tags": [
+      "Daily Report",
+      "Github Actions",
+      "CI/CD"
+    ],
+    "readTime": "1 min read",
+    "content": "\n# 高速化\n\n当ホームページの CI/CD を高速化しました。CI では typecheck や linter, test の実行を並列化しました。また、CD では vercel コマンドの install が重複している箇所があったので、global install しておいてそれを使い回すように修正したり、npm package cache を有効化するなどの対応を入れました。\n\n# tsconfig.json の微修正\n\n`base_url` フィールドが deprecate になっていたのに気づいたので、利用を廃止しました。\n\n# README の更新\n\n最新化しました。また、自分が見てためになるような情報以外は全て削除しました。Claude 4.5 は優秀ですね、かなり意図を汲み取って実装をしてくれます。\n"
+  },
+  {
     "id": "2025-10-17-daily",
     "title": "クライアントとサーバーの統合と 1Password CLI",
     "excerpt": "2025年10月17日の日報です。",
