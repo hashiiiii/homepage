@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import type { BlogPost, BlogMetadata, TagCount, BlogArchive } from '../models/blog.model';
 import { extractBlogPost } from '../utils/markdown';
+import { fetchMultipleOGP, type OGPData } from '../utils/ogp';
 
 // zenn-markdown-htmlのインポート（CommonJS形式）
 import { createRequire } from 'module';
@@ -201,6 +202,42 @@ function loadMarkdownFiles(): {
 }
 
 /**
+ * HTMLから埋め込みURLを抽出
+ */
+function extractEmbedUrls(html: string): string[] {
+  const urls: string[] = [];
+
+  // Zenn埋め込みiframeからURLを抽出（data-content属性から）
+  const iframeRegex = /<iframe[^>]*data-content="([^"]+)"[^>]*>/g;
+  let match;
+
+  while ((match = iframeRegex.exec(html)) !== null) {
+    try {
+      const encodedUrl = match[1];
+      const url = decodeURIComponent(encodedUrl);
+
+      // Mermaid, YouTube, CodePenは除外（OGP不要）
+      if (
+        url.includes('embed.zenn.studio/mermaid') ||
+        url.includes('youtube.com') ||
+        url.includes('codepen.io')
+      ) {
+        continue;
+      }
+
+      // Twitter, GitHub, その他のURLを対象
+      if (url.startsWith('http')) {
+        urls.push(url);
+      }
+    } catch (error) {
+      console.warn(`Failed to decode URL: ${match[1]}`);
+    }
+  }
+
+  return [...new Set(urls)]; // 重複を除去
+}
+
+/**
  * ブログメタデータを計算
  */
 function calculateMetadata(posts: BlogPost[]): BlogMetadata {
@@ -290,6 +327,24 @@ async function main() {
   const postsMetadataOnly = postsArray.map(({ content, ...metadata }) => metadata);
   const metadata = calculateMetadata(postsMetadataOnly);
 
+  // すべての記事からURLを抽出
+  console.log('\n🔍 Extracting embed URLs from posts...');
+  const allUrls = new Set<string>();
+  postsArray.forEach((post) => {
+    const urls = extractEmbedUrls(post.html);
+    urls.forEach((url) => allUrls.add(url));
+  });
+
+  console.log(`Found ${allUrls.size} unique embed URLs`);
+
+  // OGP情報を取得
+  let ogpData: Map<string, OGPData> = new Map();
+  if (allUrls.size > 0) {
+    console.log('\n📥 Fetching OGP data...');
+    ogpData = await fetchMultipleOGP(Array.from(allUrls));
+    console.log(`✅ Fetched OGP data for ${ogpData.size} URLs`);
+  }
+
   // 出力ディレクトリの作成
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -298,13 +353,19 @@ async function main() {
   // JSONファイルの生成
   const postsOutputPath = path.join(OUTPUT_DIR, 'blog-posts.json');
   const metadataOutputPath = path.join(OUTPUT_DIR, 'blog-metadata.json');
+  const ogpOutputPath = path.join(OUTPUT_DIR, 'ogp-data.json');
 
   fs.writeFileSync(postsOutputPath, JSON.stringify(postsArray, null, 2));
   fs.writeFileSync(metadataOutputPath, JSON.stringify(metadata, null, 2));
 
-  console.log(`✅ Generated ${postsArray.length} blog posts`);
+  // OGPデータをJSONに保存（MapをObjectに変換）
+  const ogpObject = Object.fromEntries(ogpData);
+  fs.writeFileSync(ogpOutputPath, JSON.stringify(ogpObject, null, 2));
+
+  console.log(`\n✅ Generated ${postsArray.length} blog posts`);
   console.log(`📁 Posts data: ${postsOutputPath}`);
   console.log(`📁 Metadata: ${metadataOutputPath}`);
+  console.log(`📁 OGP data: ${ogpOutputPath}`);
   console.log('🎉 Blog data build completed successfully!');
 }
 

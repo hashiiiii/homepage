@@ -4,6 +4,7 @@ excerpt: 'Zenn Editor の拡張構文が正しく動作するかのテスト記�
 date: '2025-11-23'
 tags: ['Zenn', 'Test', 'Markdown']
 readTime: '5 min read'
+published: true
 ---
 
 # Zenn 拡張構文テスト

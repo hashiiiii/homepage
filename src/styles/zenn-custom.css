@@ -253,6 +253,94 @@
   min-height: 200px;
 }
 
+/* OGPリッチカードのスタイル */
+.znc .zenn-link-card {
+  display: flex;
+  text-decoration: none;
+  margin: 0; /* p要素のマージンをリセット */
+  border-radius: 0.5rem;
+  border: 1px solid var(--tn-border);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  height: 112px; /* 高さを少し小さく */
+}
+
+.znc .zenn-link-card:hover {
+  border-color: var(--tn-blue);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* カードを含むp要素のマージン・パディング調整 */
+.znc p:has(.zenn-link-card) {
+  margin: 1.5rem 0;
+  padding: 0;
+  line-height: 0; /* p要素の行間をゼロに */
+}
+
+/* カード内のテキストセクション */
+.znc .zenn-link-card > div:first-child {
+  flex: 1;
+  padding: 0.75rem; /* パディングを少し小さく */
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 上下に均等配置 */
+  gap: 0.5rem; /* 子要素間に等間隔 */
+}
+
+/* カード内の画像セクション */
+.znc .zenn-link-card > div:last-child {
+  width: 200px; /* 画像幅を少し小さく */
+  height: 112px; /* カードの高さに合わせる */
+  flex-shrink: 0;
+  align-self: stretch; /* 画像コンテナをコンテナの高さにストレッチ */
+}
+
+.znc .zenn-link-card > div:last-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* 画像の中央を表示 */
+  display: block; /* 画像下の隙間を削除 */
+  margin: 0 !important; /* 汎用的な .znc img のmarginを上書き */
+  border-radius: 0 !important; /* カード自体にborder-radiusがあるため画像には不要 */
+}
+
+/* OGPカードのタイトル（1行制限） */
+.znc .ogp-card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: var(--tn-text-primary);
+  /* margin-bottom: 0.25rem; */
+  line-height: 1.4;
+}
+
+/* OGPカードの説明文（1行制限） */
+.znc .ogp-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.875rem;
+  color: var(--tn-text-secondary);
+  line-height: 1.4;
+}
+
+/* OGPカードのドメイン表示 */
+.znc .ogp-card-domain {
+  font-size: 0.75rem;
+  color: var(--tn-text-muted);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
   .znc {

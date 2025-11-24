@@ -1,9 +1,65 @@
 import { useEffect, useRef, useState } from 'react';
 import 'zenn-content-css';
+import ogpDataJson from '../../generated/ogp-data.json';
+import type { OGPData } from '../../utils/ogp';
 
 interface ZennContentRendererProps {
   html: string;
   className?: string;
+}
+
+// OGPデータをMapに変換
+const ogpDataMap = new Map<string, OGPData>(Object.entries(ogpDataJson));
+
+/**
+ * OGP情報を使ってリッチなカードを作成
+ */
+function createRichCard(url: string, ogp?: OGPData): HTMLAnchorElement {
+  const card = document.createElement('a');
+  card.href = url;
+  card.className = 'zenn-link-card';
+  card.setAttribute('target', '_blank');
+  card.setAttribute('rel', 'nofollow noopener noreferrer');
+
+  // 左側：テキスト情報
+  const textSection = document.createElement('div');
+
+  // タイトル（1行制限）
+  const title = document.createElement('div');
+  title.className = 'ogp-card-title';
+  title.textContent = ogp?.title || url;
+  textSection.appendChild(title);
+
+  // 説明文（1行制限）
+  if (ogp?.description) {
+    const description = document.createElement('div');
+    description.className = 'ogp-card-description';
+    description.textContent = ogp.description;
+    textSection.appendChild(description);
+  }
+
+  // ドメイン表示（ファビコンなし）
+  const domain = document.createElement('div');
+  domain.className = 'ogp-card-domain';
+  try {
+    domain.textContent = new URL(url).hostname;
+  } catch {
+    domain.textContent = url;
+  }
+  textSection.appendChild(domain);
+
+  card.appendChild(textSection);
+
+  // 右側：サムネイル画像
+  if (ogp?.image) {
+    const imageSection = document.createElement('div');
+    const image = document.createElement('img');
+    image.src = ogp.image;
+    //image.alt = ogp.title || '';
+    imageSection.appendChild(image);
+    card.appendChild(imageSection);
+  }
+  return card;
 }
 
 export function ZennContentRenderer({ html, className = '' }: ZennContentRendererProps) {
@@ -41,9 +97,11 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
 
       // 3. リンクカードの処理はDOM挿入後に行うため、ここではスキップ
       // 4. 残っている隠しリンクをすべて削除（念のため）
-      const hiddenLinks = doc.querySelectorAll('a[style*="display:none"], a[style*="display: none"]');
+      const hiddenLinks = doc.querySelectorAll(
+        'a[style*="display:none"], a[style*="display: none"]'
+      );
       console.log('[Hidden Links] Found', hiddenLinks.length, 'hidden links to remove');
-      hiddenLinks.forEach(link => link.remove());
+      hiddenLinks.forEach((link) => link.remove());
 
       // 加工したHTMLを文字列として取得
       const newHtml = doc.body.innerHTML;
@@ -78,41 +136,14 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
         const parentElement = span.parentElement;
         if (parentElement) {
           const allLinksInParent = parentElement.querySelectorAll('a');
-          allLinksInParent.forEach(link => link.remove());
+          allLinksInParent.forEach((link) => link.remove());
         }
 
-        // カード要素を作成
-        const card = document.createElement('a');
-        card.href = url;
-        card.className = 'block p-4 bg-tn-bg-secondary rounded-lg border border-tn-border hover:border-tn-blue transition-all hover:shadow-lg no-underline my-4';
-        card.setAttribute('target', '_blank');
-        card.setAttribute('rel', 'nofollow noopener noreferrer');
-        card.style.textDecoration = 'none';
+        // OGP情報を取得してリッチカードを作成
+        const ogp = ogpDataMap.get(url);
+        const card = createRichCard(url, ogp);
 
-        const cardContent = document.createElement('div');
-        cardContent.className = 'flex flex-col gap-2';
-
-        const labelRow = document.createElement('div');
-        labelRow.className = 'flex items-center gap-2 text-sm text-tn-text-muted';
-
-        const iconSpan = document.createElement('span');
-        iconSpan.textContent = '🐦';
-
-        const labelSpan = document.createElement('span');
-        labelSpan.textContent = 'Twitter Post';
-
-        labelRow.appendChild(iconSpan);
-        labelRow.appendChild(labelSpan);
-
-        const urlRow = document.createElement('div');
-        urlRow.className = 'text-tn-blue font-medium break-all';
-        urlRow.textContent = url;
-
-        cardContent.appendChild(labelRow);
-        cardContent.appendChild(urlRow);
-        card.appendChild(cardContent);
-
-        console.log('[Twitter DOM] Replacing span', index, 'with card for', url);
+        console.log('[Twitter DOM] Replacing span', index, 'with rich card for', url);
 
         // span要素全体を置き換え
         span.replaceWith(card);
@@ -141,52 +172,14 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
         const parentElement = span.parentElement;
         if (parentElement) {
           const allLinksInParent = parentElement.querySelectorAll('a');
-          allLinksInParent.forEach(link => link.remove());
+          allLinksInParent.forEach((link) => link.remove());
         }
 
-        // URLから表示テキストとスタイルを決定
-        let iconText = '🔗';
-        let label = 'External Link';
-        if (url.includes('github.com')) {
-          iconText = '⚙';
-          label = 'GitHub Repository';
-        } else if (url.includes('zenn.dev')) {
-          iconText = '📄';
-          label = 'Zenn Article';
-        }
+        // OGP情報を取得してリッチカードを作成
+        const ogp = ogpDataMap.get(url);
+        const card = createRichCard(url, ogp);
 
-        // カード要素を作成
-        const card = document.createElement('a');
-        card.href = url;
-        card.className = 'block p-4 bg-tn-bg-secondary rounded-lg border border-tn-border hover:border-tn-blue transition-all hover:shadow-lg no-underline my-4';
-        card.setAttribute('target', '_blank');
-        card.setAttribute('rel', 'nofollow noopener noreferrer');
-        card.style.textDecoration = 'none';
-
-        const cardContent = document.createElement('div');
-        cardContent.className = 'flex flex-col gap-2';
-
-        const labelRow = document.createElement('div');
-        labelRow.className = 'flex items-center gap-2 text-sm text-tn-text-muted';
-
-        const iconSpan = document.createElement('span');
-        iconSpan.textContent = iconText;
-
-        const labelSpan = document.createElement('span');
-        labelSpan.textContent = label;
-
-        labelRow.appendChild(iconSpan);
-        labelRow.appendChild(labelSpan);
-
-        const urlRow = document.createElement('div');
-        urlRow.className = 'text-tn-blue font-medium break-all';
-        urlRow.textContent = url;
-
-        cardContent.appendChild(labelRow);
-        cardContent.appendChild(urlRow);
-        card.appendChild(cardContent);
-
-        console.log('[Card DOM] Replacing span', index, 'with card for', url);
+        console.log('[Card DOM] Replacing span', index, 'with rich card for', url);
 
         // span要素全体を置き換え
         span.replaceWith(card);
@@ -263,7 +256,7 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
           const code = placeholder.getAttribute('data-mermaid-code');
           if (!code) continue;
 
-          console.log('[Mermaid] Rendering:', code.substring(0, 50) + '...');
+          console.log('[Mermaid] Rendering:', `${code.substring(0, 50)}...`);
 
           const mermaidDiv = document.createElement('div');
           mermaidDiv.className = 'mermaid';
