@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import 'zenn-content-css'; // @ts-expect-error - no type definitions available
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - no type definitions available
+import 'zenn-content-css';
 import ogpDataJson from '../../generated/ogp-data.json';
 import type { OGPData } from '../../utils/ogp';
 

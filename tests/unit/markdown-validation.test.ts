@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { loadMarkdownFiles, validateMarkdownPost } from '../../src/lib/build-blog';
-import type { BlogPost, BlogPostWithContent } from '../../src/models/blog.model';
+import type { BlogPostWithContent } from '../../src/models/blog.model';
 import { extractBlogPost } from '../../src/utils/markdown';
 
 // トップレベルで一度だけMarkdownファイルを読み込む（I/O削減）

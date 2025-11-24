@@ -304,8 +304,10 @@ async function main() {
   }
 
   // データの整理
-  const allPosts = Array.from(posts.values())
-    .map(({ content, ...metadata }) => ({ ...metadata, content }));
+  const allPosts = Array.from(posts.values()).map(({ content, ...metadata }) => ({
+    ...metadata,
+    content,
+  }));
 
   // 非公開記事をフィルタリング（published === false を除外）
   const publishedPosts = allPosts.filter((post) => post.published !== false);
