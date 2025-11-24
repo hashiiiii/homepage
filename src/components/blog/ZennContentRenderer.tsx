@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import 'zenn-content-css';
+import 'zenn-content-css'; // @ts-expect-error - no type definitions available
 import ogpDataJson from '../../generated/ogp-data.json';
 import type { OGPData } from '../../utils/ogp';
 
@@ -75,7 +75,6 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
 
       // 1. Mermaid iframeを検索して置き換え準備
       const mermaidIframes = doc.querySelectorAll('.zenn-embedded-mermaid iframe[data-content]');
-      console.log('[Mermaid] Found', mermaidIframes.length, 'diagrams');
 
       mermaidIframes.forEach((iframe) => {
         const dataContent = iframe.getAttribute('data-content');
@@ -100,12 +99,10 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
       const hiddenLinks = doc.querySelectorAll(
         'a[style*="display:none"], a[style*="display: none"]'
       );
-      console.log('[Hidden Links] Found', hiddenLinks.length, 'hidden links to remove');
       hiddenLinks.forEach((link) => link.remove());
 
       // 加工したHTMLを文字列として取得
       const newHtml = doc.body.innerHTML;
-      console.log('[ZennContentRenderer] HTML processing completed');
       setProcessedHtml(newHtml);
     };
 
@@ -121,9 +118,7 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
       const tweetSpans = containerRef.current?.querySelectorAll('.zenn-embedded-tweet');
       if (!tweetSpans || tweetSpans.length === 0) return;
 
-      console.log('[Twitter DOM] Found', tweetSpans.length, 'tweet containers');
-
-      tweetSpans.forEach((span, index) => {
+      tweetSpans.forEach((span) => {
         const iframe = span.querySelector('iframe[data-content]');
         if (!iframe) return;
 
@@ -142,8 +137,6 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
         // OGP情報を取得してリッチカードを作成
         const ogp = ogpDataMap.get(url);
         const card = createRichCard(url, ogp);
-
-        console.log('[Twitter DOM] Replacing span', index, 'with rich card for', url);
 
         // span要素全体を置き換え
         span.replaceWith(card);
@@ -157,9 +150,7 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
       const cardSpans = containerRef.current?.querySelectorAll('.zenn-embedded-card');
       if (!cardSpans || cardSpans.length === 0) return;
 
-      console.log('[Cards DOM] Found', cardSpans.length, 'card containers');
-
-      cardSpans.forEach((span, index) => {
+      cardSpans.forEach((span) => {
         const iframe = span.querySelector('iframe[data-content]');
         if (!iframe) return;
 
@@ -179,8 +170,6 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
         const ogp = ogpDataMap.get(url);
         const card = createRichCard(url, ogp);
 
-        console.log('[Card DOM] Replacing span', index, 'with rich card for', url);
-
         // span要素全体を置き換え
         span.replaceWith(card);
       });
@@ -192,8 +181,6 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
     const renderMermaid = async () => {
       const placeholders = containerRef.current?.querySelectorAll('.mermaid-placeholder');
       if (!placeholders || placeholders.length === 0) return;
-
-      console.log('[Mermaid] Rendering', placeholders.length, 'diagrams');
 
       const mermaid = await import('mermaid');
       mermaid.default.initialize({
@@ -256,17 +243,13 @@ export function ZennContentRenderer({ html, className = '' }: ZennContentRendere
           const code = placeholder.getAttribute('data-mermaid-code');
           if (!code) continue;
 
-          console.log('[Mermaid] Rendering:', `${code.substring(0, 50)}...`);
-
           const mermaidDiv = document.createElement('div');
           mermaidDiv.className = 'mermaid';
           mermaidDiv.textContent = code;
 
           placeholder.replaceWith(mermaidDiv);
           await mermaid.default.run({ nodes: [mermaidDiv] });
-          console.log('[Mermaid] Success');
         } catch (error) {
-          console.error('[Mermaid] Error:', error);
           const errorDiv = document.createElement('pre');
           errorDiv.className =
             'bg-tn-bg-tertiary text-tn-red p-4 rounded border border-tn-red overflow-x-auto';

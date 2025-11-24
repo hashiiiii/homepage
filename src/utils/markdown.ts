@@ -1,5 +1,5 @@
-import matter from 'gray-matter';
 import type { BlogPost } from '@/models/blog.model';
+import matter from 'gray-matter';
 
 export interface MarkdownFile {
   content: string;

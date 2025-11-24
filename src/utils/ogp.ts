@@ -61,7 +61,9 @@ function parseOGPFromHTML(html: string, url: string): OGPData {
   }
 
   // faviconを抽出
-  const faviconMatch = html.match(/<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i);
+  const faviconMatch = html.match(
+    /<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i
+  );
   if (faviconMatch) {
     let faviconUrl = faviconMatch[1];
     // 相対URLの場合は絶対URLに変換
@@ -91,8 +93,6 @@ function parseOGPFromHTML(html: string, url: string): OGPData {
  */
 export async function fetchOGP(url: string): Promise<OGPData> {
   try {
-    console.log(`[OGP] Fetching: ${url}`);
-
     const response = await fetch(url, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; BlogBot/1.0)',
@@ -107,7 +107,6 @@ export async function fetchOGP(url: string): Promise<OGPData> {
     const html = await response.text();
     const ogp = parseOGPFromHTML(html, url);
 
-    console.log(`[OGP] Success: ${url} - ${ogp.title || 'No title'}`);
     return ogp;
   } catch (error) {
     console.error(`[OGP] Error fetching ${url}:`, error);
