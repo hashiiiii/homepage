@@ -8,6 +8,11 @@ import { fileURLToPath } from 'url';
 import type { BlogPost, BlogMetadata, TagCount, BlogArchive } from '../models/blog.model';
 import { extractBlogPost } from '../utils/markdown';
 
+// zenn-markdown-htmlのインポート（CommonJS形式）
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const { default: markdownToHtml } = require('zenn-markdown-html');
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../..');
 const CONTENT_DIR = path.join(PROJECT_ROOT, 'content/blog');
@@ -15,6 +20,7 @@ const OUTPUT_DIR = path.join(PROJECT_ROOT, 'src/generated');
 
 interface BlogPostWithContent extends BlogPost {
   content: string;
+  html: string;
 }
 
 interface ValidationError {
@@ -99,6 +105,14 @@ function validateMarkdownPost(filePath: string, post: BlogPostWithContent): Vali
     });
   }
 
+  if (post.published !== undefined && typeof post.published !== 'boolean') {
+    errors.push({
+      file: fileName,
+      field: 'published',
+      message: 'published must be a boolean if provided',
+    });
+  }
+
   if (!post.content || typeof post.content !== 'string') {
     errors.push({
       file: fileName,
@@ -157,7 +171,13 @@ function loadMarkdownFiles(): {
           continue;
         }
 
-        posts.set(post.id, post);
+        // Markdown → HTML変換（Zenn形式）
+        // embedOrigin: Zennの埋め込みサーバーを使用（Twitter/リンクカード等）
+        const html = markdownToHtml(post.content, {
+          embedOrigin: 'https://embed.zenn.studio',
+        });
+
+        posts.set(post.id, { ...post, html });
         console.log(`✅ Processed: ${file} (id: ${post.id})`);
       } catch (error) {
         allErrors.push({
@@ -247,9 +267,25 @@ async function main() {
   }
 
   // データの整理
-  const postsArray = Array.from(posts.values())
-    .map(({ content, ...metadata }) => ({ ...metadata, content }))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const allPosts = Array.from(posts.values())
+    .map(({ content, ...metadata }) => ({ ...metadata, content }));
+
+  // 非公開記事をフィルタリング（published === false を除外）
+  const publishedPosts = allPosts.filter((post) => post.published !== false);
+  const unpublishedPosts = allPosts.filter((post) => post.published === false);
+
+  // ログ出力
+  if (unpublishedPosts.length > 0) {
+    console.log(`\n📝 Unpublished posts (${unpublishedPosts.length}):`);
+    unpublishedPosts.forEach((post) => {
+      console.log(`   - ${post.id} (${post.title})`);
+    });
+  }
+
+  // 公開記事のみをソート
+  const postsArray = publishedPosts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   const postsMetadataOnly = postsArray.map(({ content, ...metadata }) => metadata);
   const metadata = calculateMetadata(postsMetadataOnly);

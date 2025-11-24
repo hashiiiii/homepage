@@ -1,13 +1,9 @@
-import type { BlogMetadata, BlogPost } from '@/models/blog.model';
+import type { BlogMetadata, BlogPost, BlogPostWithContent } from '@/models/blog.model';
 
 // 生成された静的データをインポート
 // ビルド時に生成されるため、実行時には必ず存在する
 import metadataData from '@/generated/blog-metadata.json';
 import postsData from '@/generated/blog-posts.json';
-
-export interface BlogPostWithContent extends BlogPost {
-  content: string;
-}
 
 /**
  * ブログ記事一覧を取得
@@ -61,17 +57,13 @@ export function searchBlogPosts(query: string): BlogPost[] {
 /**
  * ブログ記事取得関数
  */
-export function fetchBlogPost(id: string): (BlogPost & { content: string; html: string }) | null {
+export function fetchBlogPost(id: string): BlogPostWithContent | null {
   const post = getBlogPostById(id);
   if (!post) {
     throw new Error('Blog post not found');
   }
 
-  // htmlフィールドは MarkdownRenderer コンポーネントで処理されるため空文字列
-  return {
-    ...post,
-    html: '',
-  };
+  return post;
 }
 
 /**

@@ -5,6 +5,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useGoogleAnalytics } from './hooks/useGoogleAnalytics';
 import './styles/globals.css';
+import './styles/zenn-custom.css';
 
 // Lazy load pages for better code splitting
 const Landing = lazy(() => import('./pages/Landing').then((m) => ({ default: m.Landing })));

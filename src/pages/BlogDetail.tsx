@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchBlogPost } from '@/lib/blog';
-import { MarkdownRenderer } from '@/components/blog/MarkdownRenderer';
+import { ZennContentRenderer } from '@/components/blog/ZennContentRenderer';
 import { usePageTitle } from '../hooks/usePageTitle';
 
 export function BlogDetail() {
@@ -73,7 +73,7 @@ export function BlogDetail() {
             </div>
           </header>
 
-          <MarkdownRenderer content={post.content} className="max-w-none" />
+          <ZennContentRenderer html={post.html} className="max-w-none" />
         </article>
       </div>
     </div>

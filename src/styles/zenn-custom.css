@@ -1,0 +1,261 @@
+/* Zennスタイルのカスタマイズ - Tokyo Nightテーマとの統合 */
+
+/* ベーステキスト色の調整 */
+.znc {
+  color: var(--tn-text-secondary);
+  line-height: 1.8;
+}
+
+/* 見出しのスタイル調整 */
+.znc h1,
+.znc h2,
+.znc h3,
+.znc h4,
+.znc h5,
+.znc h6 {
+  color: var(--tn-text-primary);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.znc h1 {
+  font-size: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--tn-border);
+}
+
+.znc h2 {
+  font-size: 1.5rem;
+}
+
+.znc h3 {
+  font-size: 1.25rem;
+}
+
+/* リンクの色調整 */
+.znc a {
+  color: var(--tn-blue);
+  text-decoration: none;
+}
+
+.znc a:hover {
+  text-decoration: underline;
+}
+
+/* コードブロックのスタイル調整 */
+.znc pre {
+  background-color: #16161e;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.znc code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.znc :not(pre) > code {
+  background-color: var(--tn-bg-tertiary);
+  color: var(--tn-magenta);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* テーブルのスタイル調整 */
+.znc table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.znc th,
+.znc td {
+  border: 1px solid var(--tn-border);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.znc th {
+  background-color: var(--tn-bg-tertiary);
+  color: var(--tn-text-primary);
+  font-weight: 600;
+}
+
+/* 引用のスタイル調整 */
+.znc blockquote {
+  border-left: 4px solid var(--tn-comment);
+  background-color: var(--tn-bg-tertiary);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+}
+
+/* リストのスタイル調整 */
+.znc ul,
+.znc ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.znc li {
+  margin: 0.5rem 0;
+}
+
+/* 水平線のスタイル調整 */
+.znc hr {
+  border: none;
+  border-top: 1px solid var(--tn-border);
+  margin: 2rem 0;
+}
+
+/* 画像のスタイル調整 */
+.znc img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Zennメッセージボックスのスタイル調整 */
+.znc .msg {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.znc .msg.msg-info {
+  background-color: rgba(125, 207, 255, 0.1);
+  border-left-color: var(--tn-blue);
+}
+
+.znc .msg.msg-alert {
+  background-color: rgba(247, 118, 142, 0.1);
+  border-left-color: var(--tn-red);
+}
+
+.znc .msg.msg-warn {
+  background-color: rgba(224, 175, 104, 0.1);
+  border-left-color: var(--tn-yellow);
+}
+
+/* Zennアコーディオンのスタイル調整 */
+.znc details {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid var(--tn-border);
+  border-radius: 0.5rem;
+  background-color: var(--tn-bg-secondary);
+}
+
+.znc details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--tn-text-primary);
+  user-select: none;
+}
+
+.znc details summary:hover {
+  opacity: 0.8;
+}
+
+.znc details[open] summary {
+  margin-bottom: 1rem;
+}
+
+/* タスクリストのスタイル調整 */
+.znc input[type='checkbox'] {
+  margin-right: 0.5rem;
+  accent-color: var(--tn-green);
+}
+
+/* 段落のスタイル調整 */
+.znc p {
+  margin: 1rem 0;
+}
+
+/* コードファイル名の表示 */
+.znc .code-block-filename-container {
+  background-color: var(--tn-bg-tertiary);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--tn-text-muted);
+  border-bottom: 1px solid var(--tn-border);
+}
+
+.znc .code-block-filename {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.znc .code-block-container pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+}
+
+/* 脚注のスタイル */
+.znc .footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--tn-border);
+}
+
+.znc .footnotes-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--tn-text-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.znc .footnotes-list {
+  font-size: 0.9rem;
+  color: var(--tn-text-secondary);
+}
+
+.znc .footnote-ref a {
+  color: var(--tn-blue);
+  text-decoration: none;
+}
+
+.znc .footnote-backref {
+  color: var(--tn-blue);
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+/* 埋め込みコンテンツのスタイル */
+.znc .embed-block {
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.znc .embed-block iframe {
+  width: 100%;
+  border: 1px solid var(--tn-border);
+  border-radius: 0.5rem;
+}
+
+.znc .embed-youtube iframe {
+  aspect-ratio: 16 / 9;
+  min-height: 400px;
+}
+
+.znc .embed-codepen iframe {
+  height: 500px;
+}
+
+.znc .zenn-embedded iframe {
+  min-height: 200px;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .znc {
+    color: var(--tn-text-secondary);
+  }
+}

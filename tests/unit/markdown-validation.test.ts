@@ -1,11 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { loadMarkdownFiles, validateMarkdownPost } from '../../src/lib/build-blog';
-import type { BlogPost } from '../../src/models/blog.model';
+import type { BlogPost, BlogPostWithContent } from '../../src/models/blog.model';
 import { extractBlogPost } from '../../src/utils/markdown';
-
-interface BlogPostWithContent extends BlogPost {
-  content: string;
-}
 
 // トップレベルで一度だけMarkdownファイルを読み込む（I/O削減）
 let cachedContentValidation: { posts: Map<string, BlogPostWithContent>; errors: any[] } | null =
@@ -26,6 +22,7 @@ describe('Markdown Validation', () => {
         title: '',
         excerpt: '',
         content: '',
+        html: '',
         date: '',
         tags: [],
         readTime: '',
@@ -47,6 +44,7 @@ describe('Markdown Validation', () => {
         title: 'Test Post',
         excerpt: 'Test excerpt',
         content: 'Test content',
+        html: '',
         date: '2023-12-25',
         tags: ['test'],
         readTime: '5 min read',
@@ -71,6 +69,7 @@ describe('Markdown Validation', () => {
           title: 'Test Post',
           excerpt: 'Test excerpt',
           content: 'Test content',
+          html: '',
           date: invalidDate,
           tags: ['test'],
           readTime: '5 min read',
@@ -87,6 +86,7 @@ describe('Markdown Validation', () => {
         title: 'Test Post',
         excerpt: 'Test excerpt',
         content: 'Test content',
+        html: '',
         date: '2023-12-25',
         tags: ['valid-tag', 123, null, ''] as any, // Invalid tag types
         readTime: '5 min read',
@@ -102,6 +102,7 @@ describe('Markdown Validation', () => {
         title: 'Test Post',
         excerpt: 'Test excerpt',
         content: 'Test content with meaningful text',
+        html: '',
         date: '2023-12-25',
         tags: ['typescript', 'testing'],
         readTime: '5 min read',
@@ -109,6 +110,40 @@ describe('Markdown Validation', () => {
 
       const errors = validateMarkdownPost('/test/file.md', validPost);
       expect(errors).toHaveLength(0);
+    });
+
+    it('should validate published field as boolean', () => {
+      const validPublished = {
+        id: 'test-1',
+        title: 'Test Post',
+        excerpt: 'Test excerpt',
+        content: 'Test content',
+        html: '',
+        date: '2023-12-25',
+        tags: ['test'],
+        readTime: '5 min read',
+        published: true,
+      } as BlogPostWithContent;
+
+      const errors = validateMarkdownPost('/test/file.md', validPublished);
+      expect(errors.filter((e) => e.field === 'published')).toHaveLength(0);
+    });
+
+    it('should reject invalid published field type', () => {
+      const invalidPublished = {
+        id: 'test-1',
+        title: 'Test Post',
+        excerpt: 'Test excerpt',
+        content: 'Test content',
+        html: '',
+        date: '2023-12-25',
+        tags: ['test'],
+        readTime: '5 min read',
+        published: 'yes' as any, // Invalid type
+      } as BlogPostWithContent;
+
+      const errors = validateMarkdownPost('/test/file.md', invalidPublished);
+      expect(errors.some((e) => e.field === 'published')).toBe(true);
     });
   });
 

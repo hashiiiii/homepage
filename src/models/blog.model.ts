@@ -5,6 +5,12 @@ export interface BlogPost {
   date: string;
   tags: string[];
   readTime: string;
+  published?: boolean;
+}
+
+export interface BlogPostWithContent extends BlogPost {
+  content: string;
+  html: string;
 }
 
 export interface BlogCategory {
