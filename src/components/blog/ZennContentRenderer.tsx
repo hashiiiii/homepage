@@ -2,66 +2,10 @@ import { useEffect, useRef, useState } from "react";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error - no type definitions available
 import "zenn-content-css";
-import ogpDataJson from "../../generated/ogp-data.json";
-import type { OGPData } from "../../utils/ogp";
 
 interface ZennContentRendererProps {
   html: string;
   className?: string;
-}
-
-// OGPデータをMapに変換
-const ogpDataMap = new Map<string, OGPData>(Object.entries(ogpDataJson));
-
-/**
- * OGP情報を使ってリッチなカードを作成
- */
-function createRichCard(url: string, ogp?: OGPData): HTMLAnchorElement {
-  const card = document.createElement("a");
-  card.href = url;
-  card.className = "zenn-link-card";
-  card.setAttribute("target", "_blank");
-  card.setAttribute("rel", "nofollow noopener noreferrer");
-
-  // 左側：テキスト情報
-  const textSection = document.createElement("div");
-
-  // タイトル（1行制限）
-  const title = document.createElement("div");
-  title.className = "ogp-card-title";
-  title.textContent = ogp?.title || url;
-  textSection.appendChild(title);
-
-  // 説明文（1行制限）
-  if (ogp?.description) {
-    const description = document.createElement("div");
-    description.className = "ogp-card-description";
-    description.textContent = ogp.description;
-    textSection.appendChild(description);
-  }
-
-  // ドメイン表示（ファビコンなし）
-  const domain = document.createElement("div");
-  domain.className = "ogp-card-domain";
-  try {
-    domain.textContent = new URL(url).hostname;
-  } catch {
-    domain.textContent = url;
-  }
-  textSection.appendChild(domain);
-
-  card.appendChild(textSection);
-
-  // 右側：サムネイル画像
-  if (ogp?.image) {
-    const imageSection = document.createElement("div");
-    const image = document.createElement("img");
-    image.src = ogp.image;
-    //image.alt = ogp.title || '';
-    imageSection.appendChild(image);
-    card.appendChild(imageSection);
-  }
-  return card;
 }
 
 export function ZennContentRenderer({ html, className = "" }: ZennContentRendererProps) {
@@ -111,77 +55,9 @@ export function ZennContentRenderer({ html, className = "" }: ZennContentRendere
     processHtml();
   }, [html]);
 
-  // DOM挿入後の処理（カード変換とMermaidレンダリング）
+  // DOM挿入後の処理（Mermaidレンダリング）
   useEffect(() => {
     if (!containerRef.current) return;
-
-    // Twitter埋め込みを通常のカードに変換
-    const processTweets = () => {
-      const tweetSpans = containerRef.current?.querySelectorAll(".zenn-embedded-tweet");
-      if (!tweetSpans || tweetSpans.length === 0) return;
-
-      tweetSpans.forEach((span) => {
-        const iframe = span.querySelector("iframe[data-content]");
-        if (!iframe) return;
-
-        const dataContent = iframe.getAttribute("data-content");
-        if (!dataContent) return;
-
-        const url = decodeURIComponent(dataContent);
-
-        // 親要素（p要素）内の隠しリンクを削除
-        const parentElement = span.parentElement;
-        if (parentElement) {
-          const allLinksInParent = parentElement.querySelectorAll("a");
-          allLinksInParent.forEach((link) => {
-            link.remove();
-          });
-        }
-
-        // OGP情報を取得してリッチカードを作成
-        const ogp = ogpDataMap.get(url);
-        const card = createRichCard(url, ogp);
-
-        // span要素全体を置き換え
-        span.replaceWith(card);
-      });
-    };
-
-    processTweets();
-
-    // リンクカードをReact DOMで直接変換
-    const processCards = () => {
-      const cardSpans = containerRef.current?.querySelectorAll(".zenn-embedded-card");
-      if (!cardSpans || cardSpans.length === 0) return;
-
-      cardSpans.forEach((span) => {
-        const iframe = span.querySelector("iframe[data-content]");
-        if (!iframe) return;
-
-        const dataContent = iframe.getAttribute("data-content");
-        if (!dataContent) return;
-
-        const url = decodeURIComponent(dataContent);
-
-        // 親要素（p要素）内の隠しリンクを削除
-        const parentElement = span.parentElement;
-        if (parentElement) {
-          const allLinksInParent = parentElement.querySelectorAll("a");
-          allLinksInParent.forEach((link) => {
-            link.remove();
-          });
-        }
-
-        // OGP情報を取得してリッチカードを作成
-        const ogp = ogpDataMap.get(url);
-        const card = createRichCard(url, ogp);
-
-        // span要素全体を置き換え
-        span.replaceWith(card);
-      });
-    };
-
-    processCards();
 
     // Mermaidレンダリング
     const renderMermaid = async () => {
