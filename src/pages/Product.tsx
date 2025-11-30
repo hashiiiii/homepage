@@ -1,21 +1,19 @@
-import React from 'react';
-import { usePageTitle } from '../hooks/usePageTitle';
-import { useTranslation } from '../contexts/LanguageContext';
-import { fetchProductData } from '@/lib/product';
-import { productConfig } from '../config/product';
+import type React from "react";
+import { fetchProductData } from "@/lib/product";
+import { productConfig } from "../config/product";
+import { useTranslation } from "../contexts/LanguageContext";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export const Product: React.FC = () => {
   const { language } = useTranslation();
   const data = fetchProductData(language);
 
-  usePageTitle(data.title || 'Product');
+  usePageTitle(data.title || "Product");
 
   return (
     <div className="w-full animate-fade-in">
       <div className="mb-8 sm:mb-12">
-        <h1 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">
-          {data.title}
-        </h1>
+        <h1 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">{data.title}</h1>
       </div>
 
       {/* Open Source Projects Section */}
@@ -68,24 +66,21 @@ export const Product: React.FC = () => {
       {/* Presentations Section */}
       {data.presentations.length > 0 && (
         <section>
-          <h2 className="mb-4 text-xl font-bold sm:mb-6 sm:text-2xl">
-            {data.sections.presentations}
-          </h2>
+          <h2 className="mb-4 text-xl font-bold sm:mb-6 sm:text-2xl">{data.sections.presentations}</h2>
           <div className="space-y-4 sm:space-y-6">
             {data.presentations.map((presentation) => (
               <article key={presentation.id} className="card">
                 <div className="mb-4">
-                  <h3 className="mb-2 text-xl font-semibold text-tn-fg-primary">
-                    {presentation.title}
-                  </h3>
+                  <h3 className="mb-2 text-xl font-semibold text-tn-fg-primary">{presentation.title}</h3>
                   <div className="flex items-center gap-4 text-sm text-tn-fg-secondary">
                     <span>{presentation.event}</span>
                     <span>•</span>
                     <span>
-                      {new Date(presentation.date).toLocaleDateString(
-                        language === 'ja' ? 'ja-JP' : 'en-US',
-                        { year: 'numeric', month: 'long', day: 'numeric' }
-                      )}
+                      {new Date(presentation.date).toLocaleDateString(language === "ja" ? "ja-JP" : "en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </span>
                   </div>
                 </div>

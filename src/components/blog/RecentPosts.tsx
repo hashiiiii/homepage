@@ -1,15 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import type { BlogPost } from '@/models/blog.model';
+import React from "react";
+import { Link } from "react-router-dom";
+import type { BlogPost } from "@/models/blog.model";
 
 interface RecentPostsProps {
   posts: BlogPost[];
 }
 
 export const RecentPosts: React.FC<RecentPostsProps> = React.memo(function RecentPosts({ posts }) {
-  const recentPosts = posts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
+  const recentPosts = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
 
   return (
     <section className="rounded-lg bg-tn-bg-secondary p-4 sm:p-6">
@@ -24,9 +22,7 @@ export const RecentPosts: React.FC<RecentPostsProps> = React.memo(function Recen
             <h4 className="mb-1 line-clamp-2 text-sm text-tn-text-secondary transition-colors group-hover:text-tn-accent-blue">
               {post.title}
             </h4>
-            <time className="text-xs text-tn-text-muted">
-              {new Date(post.date).toLocaleDateString()}
-            </time>
+            <time className="text-xs text-tn-text-muted">{new Date(post.date).toLocaleDateString()}</time>
           </Link>
         ))}
       </div>
@@ -34,4 +30,4 @@ export const RecentPosts: React.FC<RecentPostsProps> = React.memo(function Recen
   );
 });
 
-RecentPosts.displayName = 'RecentPosts';
+RecentPosts.displayName = "RecentPosts";

@@ -1,7 +1,7 @@
-import React from 'react';
-import { BlogCard } from './BlogCard';
-import type { BlogPost } from '@/models/blog.model';
-import type { BlogFilters } from '@/hooks/useBlogFilters';
+import type React from "react";
+import type { BlogFilters } from "@/hooks/useBlogFilters";
+import type { BlogPost } from "@/models/blog.model";
+import { BlogCard } from "./BlogCard";
 
 interface BlogListProps {
   posts: BlogPost[];
@@ -11,21 +11,15 @@ interface BlogListProps {
   onLoadMore: () => void;
 }
 
-export const BlogList: React.FC<BlogListProps> = ({
-  posts,
-  filters,
-  hasMore,
-  remainingCount,
-  onLoadMore,
-}) => {
+export const BlogList: React.FC<BlogListProps> = ({ posts, filters, hasMore, remainingCount, onLoadMore }) => {
   const getEmptyMessage = () => {
     if (filters.tags.length > 0) {
-      return `選択されたタグ「${filters.tags.join('、')}」の記事が見つかりませんでした`;
+      return `選択されたタグ「${filters.tags.join("、")}」の記事が見つかりませんでした`;
     }
     if (filters.archive) {
       return `${filters.archive.year}年${filters.archive.month}月の記事が見つかりませんでした`;
     }
-    return '記事が見つかりませんでした';
+    return "記事が見つかりませんでした";
   };
 
   return (
@@ -42,7 +36,7 @@ export const BlogList: React.FC<BlogListProps> = ({
 
       {hasMore && (
         <div className="mt-8 text-center sm:mt-12">
-          <button onClick={onLoadMore} className="btn-secondary w-full sm:w-auto">
+          <button type="button" onClick={onLoadMore} className="btn-secondary w-full sm:w-auto">
             Load More Posts ({remainingCount}件残り)
           </button>
         </div>

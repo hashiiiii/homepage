@@ -1,5 +1,5 @@
-import React from 'react';
-import type { BlogPost, BlogMetadata } from '@/models/blog.model';
+import React from "react";
+import type { BlogMetadata, BlogPost } from "@/models/blog.model";
 
 interface ArchiveSectionProps {
   posts: BlogPost[];
@@ -65,7 +65,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
       const date = new Date(post.date);
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
-      const key = `${year}-${month.toString().padStart(2, '0')}`;
+      const key = `${year}-${month.toString().padStart(2, "0")}`;
 
       if (!monthlyArchives[key]) {
         monthlyArchives[key] = { year, month, count: 0, posts: [] };
@@ -118,20 +118,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
   };
 
   const getMonthName = (month: number) => {
-    const monthNames = [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月',
-    ];
+    const monthNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
     return monthNames[month - 1];
   };
 
@@ -140,15 +127,12 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
       {years.map(({ year, months, totalCount }) => (
         <div key={year}>
           <button
+            type="button"
             onClick={() => toggleYear(year)}
             className="flex w-full items-center justify-between rounded p-2 font-medium text-tn-text-primary transition-colors hover:bg-tn-bg-tertiary"
           >
             <div className="flex items-center">
-              <span
-                className={`mr-2 transition-transform ${expandedYears.has(year) ? 'rotate-90' : ''}`}
-              >
-                ▶
-              </span>
+              <span className={`mr-2 transition-transform ${expandedYears.has(year) ? "rotate-90" : ""}`}>▶</span>
               <span>{year}年</span>
             </div>
             <span className="text-sm text-tn-text-muted">({totalCount})</span>
@@ -157,22 +141,20 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
           {expandedYears.has(year) && (
             <div className="ml-6 mt-1 space-y-1">
               {months.map(({ month, count }) => {
-                const isSelected =
-                  selectedArchive?.year === year && selectedArchive?.month === month;
+                const isSelected = selectedArchive?.year === year && selectedArchive?.month === month;
                 return (
                   <button
+                    type="button"
                     key={`${year}-${month}`}
                     onClick={() => onArchiveFilter(year, month)}
                     className={`flex w-full items-center justify-between rounded px-3 py-1.5 text-sm transition-colors ${
                       isSelected
-                        ? 'bg-tn-green text-white'
-                        : 'text-tn-text-secondary hover:bg-tn-bg-tertiary hover:text-tn-text-primary'
+                        ? "bg-tn-green text-white"
+                        : "text-tn-text-secondary hover:bg-tn-bg-tertiary hover:text-tn-text-primary"
                     }`}
                   >
                     <span>{getMonthName(month)}</span>
-                    <span className={`text-xs ${isSelected ? 'text-white' : 'text-tn-text-muted'}`}>
-                      ({count})
-                    </span>
+                    <span className={`text-xs ${isSelected ? "text-white" : "text-tn-text-muted"}`}>({count})</span>
                   </button>
                 );
               })}
@@ -197,6 +179,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
           <div className="border-tn-border/50 border-t pt-2">
             {!showOlderYears ? (
               <button
+                type="button"
                 onClick={() => setShowOlderYears(true)}
                 className="w-full rounded p-2 text-sm text-tn-text-muted transition-colors hover:bg-tn-bg-tertiary hover:text-tn-text-primary"
               >
@@ -205,6 +188,7 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
             ) : (
               <>
                 <button
+                  type="button"
                   onClick={() => setShowOlderYears(false)}
                   className="mb-2 w-full rounded px-2 py-1 text-sm text-tn-text-muted transition-colors hover:bg-tn-bg-tertiary hover:text-tn-text-primary"
                 >
@@ -220,4 +204,4 @@ export const ArchiveSection: React.FC<ArchiveSectionProps> = React.memo(function
   );
 });
 
-ArchiveSection.displayName = 'ArchiveSection';
+ArchiveSection.displayName = "ArchiveSection";

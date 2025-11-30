@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from "react";
 
 interface LoadingErrorWrapperProps {
   loading: boolean;
@@ -10,7 +10,7 @@ interface LoadingErrorWrapperProps {
 export const LoadingErrorWrapper: React.FC<LoadingErrorWrapperProps> = ({
   loading,
   error,
-  loadingText = 'Loading...',
+  loadingText = "Loading...",
   children,
 }) => {
   if (loading) {

@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
-import { LanguageProvider } from '../../../src/contexts/LanguageContext';
-import { ThemeProvider } from '../../../src/contexts/ThemeContext';
-import { Product } from '../../../src/pages/Product';
+import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { describe, expect, it } from "vitest";
+import { LanguageProvider } from "../../../src/contexts/LanguageContext";
+import { ThemeProvider } from "../../../src/contexts/ThemeContext";
+import { Product } from "../../../src/pages/Product";
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -15,63 +15,63 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-describe('Product Page', () => {
-  it('should render page title', () => {
+describe("Product Page", () => {
+  it("should render page title", () => {
     render(
       <TestWrapper>
         <Product />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
-    expect(screen.getByText('Product')).toBeInTheDocument();
+    expect(screen.getByText("Product")).toBeInTheDocument();
   });
 
-  it('should render OSS section', () => {
+  it("should render OSS section", () => {
     render(
       <TestWrapper>
         <Product />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
-    expect(screen.getByText('OSS')).toBeInTheDocument();
+    expect(screen.getByText("OSS")).toBeInTheDocument();
   });
 
-  it('should not render presentations section when empty', () => {
+  it("should not render presentations section when empty", () => {
     render(
       <TestWrapper>
         <Product />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Since presentations array is empty, section should not be rendered
-    expect(screen.queryByText('Presentations')).not.toBeInTheDocument();
+    expect(screen.queryByText("Presentations")).not.toBeInTheDocument();
   });
 
-  it('should display OSS projects with links', () => {
+  it("should display OSS projects with links", () => {
     render(
       <TestWrapper>
         <Product />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Check for at least one OSS project structure
-    const articles = screen.getAllByRole('article');
+    const articles = screen.getAllByRole("article");
     expect(articles.length).toBeGreaterThan(0);
 
     // Check for GitHub links (multiple projects have GitHub links)
-    const githubLinks = screen.getAllByText('GitHub');
+    const githubLinks = screen.getAllByText("GitHub");
     expect(githubLinks.length).toBeGreaterThan(0);
   });
 
-  it('should only display OSS project articles when presentations are empty', () => {
+  it("should only display OSS project articles when presentations are empty", () => {
     render(
       <TestWrapper>
         <Product />
-      </TestWrapper>
+      </TestWrapper>,
     );
 
     // Check for OSS project articles only (since presentations are empty)
-    const articles = screen.getAllByRole('article');
+    const articles = screen.getAllByRole("article");
     expect(articles.length).toBe(5); // We have 5 OSS projects
   });
 });

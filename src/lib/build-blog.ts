@@ -2,22 +2,22 @@
 
 /* eslint-disable no-console */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import type { BlogPost, BlogMetadata, TagCount, BlogArchive } from '../models/blog.model';
-import { extractBlogPost } from '../utils/markdown';
-import { fetchMultipleOGP, type OGPData } from '../utils/ogp';
-
+import fs from "node:fs";
 // zenn-markdown-htmlのインポート（CommonJS形式）
-import { createRequire } from 'module';
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import type { BlogArchive, BlogMetadata, BlogPost, TagCount } from "../models/blog.model";
+import { extractBlogPost } from "../utils/markdown";
+import { fetchMultipleOGP, type OGPData } from "../utils/ogp";
+
 const require = createRequire(import.meta.url);
-const { default: markdownToHtml } = require('zenn-markdown-html');
+const { default: markdownToHtml } = require("zenn-markdown-html");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.resolve(__dirname, '../..');
-const CONTENT_DIR = path.join(PROJECT_ROOT, 'content/blog');
-const OUTPUT_DIR = path.join(PROJECT_ROOT, 'src/generated');
+const PROJECT_ROOT = path.resolve(__dirname, "../..");
+const CONTENT_DIR = path.join(PROJECT_ROOT, "content/blog");
+const OUTPUT_DIR = path.join(PROJECT_ROOT, "src/generated");
 
 interface BlogPostWithContent extends BlogPost {
   content: string;
@@ -34,7 +34,7 @@ interface ValidationError {
  * ファイル名からIDを生成
  */
 function deriveIdFromFilename(filename: string): string {
-  return filename.replace(/\.md$/, '');
+  return filename.replace(/\.md$/, "");
 }
 
 /**
@@ -49,19 +49,19 @@ function validateMarkdownPost(filePath: string, post: BlogPostWithContent): Vali
     post.id = deriveIdFromFilename(fileName);
   }
 
-  if (!post.title || typeof post.title !== 'string') {
+  if (!post.title || typeof post.title !== "string") {
     errors.push({
       file: fileName,
-      field: 'title',
-      message: 'title is required and must be a string',
+      field: "title",
+      message: "title is required and must be a string",
     });
   }
 
-  if (!post.date || typeof post.date !== 'string') {
+  if (!post.date || typeof post.date !== "string") {
     errors.push({
       file: fileName,
-      field: 'date',
-      message: 'date is required and must be a string',
+      field: "date",
+      message: "date is required and must be a string",
     });
   } else {
     // 日付形式のチェック (YYYY-MM-DD)
@@ -69,56 +69,56 @@ function validateMarkdownPost(filePath: string, post: BlogPostWithContent): Vali
     if (!dateRegex.test(post.date)) {
       errors.push({
         file: fileName,
-        field: 'date',
-        message: 'date must be in YYYY-MM-DD format',
+        field: "date",
+        message: "date must be in YYYY-MM-DD format",
       });
     } else {
       const date = new Date(post.date);
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         errors.push({
           file: fileName,
-          field: 'date',
-          message: 'date must be a valid date',
+          field: "date",
+          message: "date must be a valid date",
         });
       }
     }
   }
 
   if (!Array.isArray(post.tags)) {
-    errors.push({ file: fileName, field: 'tags', message: 'tags must be an array' });
-  } else if (post.tags.some((tag) => typeof tag !== 'string')) {
-    errors.push({ file: fileName, field: 'tags', message: 'all tags must be strings' });
+    errors.push({ file: fileName, field: "tags", message: "tags must be an array" });
+  } else if (post.tags.some((tag) => typeof tag !== "string")) {
+    errors.push({ file: fileName, field: "tags", message: "all tags must be strings" });
   }
 
-  if (post.excerpt && typeof post.excerpt !== 'string') {
+  if (post.excerpt && typeof post.excerpt !== "string") {
     errors.push({
       file: fileName,
-      field: 'excerpt',
-      message: 'excerpt must be a string if provided',
+      field: "excerpt",
+      message: "excerpt must be a string if provided",
     });
   }
 
-  if (post.readTime && typeof post.readTime !== 'string') {
+  if (post.readTime && typeof post.readTime !== "string") {
     errors.push({
       file: fileName,
-      field: 'readTime',
-      message: 'readTime must be a string if provided',
+      field: "readTime",
+      message: "readTime must be a string if provided",
     });
   }
 
-  if (post.published !== undefined && typeof post.published !== 'boolean') {
+  if (post.published !== undefined && typeof post.published !== "boolean") {
     errors.push({
       file: fileName,
-      field: 'published',
-      message: 'published must be a boolean if provided',
+      field: "published",
+      message: "published must be a boolean if provided",
     });
   }
 
-  if (!post.content || typeof post.content !== 'string') {
+  if (!post.content || typeof post.content !== "string") {
     errors.push({
       file: fileName,
-      field: 'content',
-      message: 'content is required and must be a string',
+      field: "content",
+      message: "content is required and must be a string",
     });
   }
 
@@ -144,7 +144,7 @@ function loadMarkdownFiles(): {
     }
 
     const files = fs.readdirSync(CONTENT_DIR);
-    const mdFiles = files.filter((file) => file.endsWith('.md'));
+    const mdFiles = files.filter((file) => file.endsWith(".md"));
 
     console.log(`Found ${mdFiles.length} markdown files`);
 
@@ -152,7 +152,7 @@ function loadMarkdownFiles(): {
       const filePath = path.join(CONTENT_DIR, file);
 
       try {
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const fileContent = fs.readFileSync(filePath, "utf-8");
         const post = extractBlogPost(fileContent);
 
         // 仕様検証
@@ -166,7 +166,7 @@ function loadMarkdownFiles(): {
         if (posts.has(post.id)) {
           allErrors.push({
             file,
-            field: 'id',
+            field: "id",
             message: `Duplicate post ID: ${post.id} (already used in another file)`,
           });
           continue;
@@ -175,7 +175,7 @@ function loadMarkdownFiles(): {
         // Markdown → HTML変換（Zenn形式）
         // embedOrigin: Zennの埋め込みサーバーを使用（Twitter/リンクカード等）
         const html = markdownToHtml(post.content, {
-          embedOrigin: 'https://embed.zenn.studio',
+          embedOrigin: "https://embed.zenn.studio",
         });
 
         posts.set(post.id, { ...post, html });
@@ -183,19 +183,19 @@ function loadMarkdownFiles(): {
       } catch (error) {
         allErrors.push({
           file,
-          field: 'parsing',
-          message: `Failed to parse markdown: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          field: "parsing",
+          message: `Failed to parse markdown: ${error instanceof Error ? error.message : "Unknown error"}`,
         });
         console.error(`❌ Failed to parse ${file}:`, error);
       }
     }
   } catch (error) {
     allErrors.push({
-      file: 'directory',
-      field: 'access',
-      message: `Failed to read content directory: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      file: "directory",
+      field: "access",
+      message: `Failed to read content directory: ${error instanceof Error ? error.message : "Unknown error"}`,
     });
-    console.error('Error reading content directory:', error);
+    console.error("Error reading content directory:", error);
   }
 
   return { posts, errors: allErrors };
@@ -209,29 +209,28 @@ function extractEmbedUrls(html: string): string[] {
 
   // Zenn埋め込みiframeからURLを抽出（data-content属性から）
   const iframeRegex = /<iframe[^>]*data-content="([^"]+)"[^>]*>/g;
-  let match;
+  let match: RegExpExecArray | null = null;
 
-  while ((match = iframeRegex.exec(html)) !== null) {
+  match = iframeRegex.exec(html);
+  while (match !== null) {
     try {
       const encodedUrl = match[1];
       const url = decodeURIComponent(encodedUrl);
 
       // Mermaid, YouTube, CodePenは除外（OGP不要）
-      if (
-        url.includes('embed.zenn.studio/mermaid') ||
-        url.includes('youtube.com') ||
-        url.includes('codepen.io')
-      ) {
+      if (url.includes("embed.zenn.studio/mermaid") || url.includes("youtube.com") || url.includes("codepen.io")) {
+        match = iframeRegex.exec(html);
         continue;
       }
 
       // Twitter, GitHub, その他のURLを対象
-      if (url.startsWith('http')) {
+      if (url.startsWith("http")) {
         urls.push(url);
       }
-    } catch (error) {
+    } catch (_) {
       console.warn(`Failed to decode URL: ${match[1]}`);
     }
+    match = iframeRegex.exec(html);
   }
 
   return [...new Set(urls)]; // 重複を除去
@@ -259,7 +258,7 @@ function calculateMetadata(posts: BlogPost[]): BlogMetadata {
     const date = new Date(post.date);
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const key = `${year}-${month.toString().padStart(2, '0')}`;
+    const key = `${year}-${month.toString().padStart(2, "0")}`;
 
     if (!monthlyArchives[key]) {
       monthlyArchives[key] = { year, month, count: 0 };
@@ -283,14 +282,14 @@ function calculateMetadata(posts: BlogPost[]): BlogMetadata {
  * メイン処理
  */
 async function main() {
-  console.log('🔨 Building blog data...');
+  console.log("🔨 Building blog data...");
 
   // Markdownファイルの読み込みと検証
   const { posts, errors } = loadMarkdownFiles();
 
   // エラーがある場合は処理を停止
   if (errors.length > 0) {
-    console.error('\n❌ Markdown validation errors found:');
+    console.error("\n❌ Markdown validation errors found:");
     errors.forEach((error) => {
       console.error(`  ${error.file} [${error.field}]: ${error.message}`);
     });
@@ -299,7 +298,7 @@ async function main() {
   }
 
   if (posts.size === 0) {
-    console.warn('⚠️  No valid markdown files found');
+    console.warn("⚠️  No valid markdown files found");
     return;
   }
 
@@ -322,19 +321,19 @@ async function main() {
   }
 
   // 公開記事のみをソート
-  const postsArray = publishedPosts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  const postsArray = publishedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const postsMetadataOnly = postsArray.map(({ content, ...metadata }) => metadata);
   const metadata = calculateMetadata(postsMetadataOnly);
 
   // すべての記事からURLを抽出
-  console.log('\n🔍 Extracting embed URLs from posts...');
+  console.log("\n🔍 Extracting embed URLs from posts...");
   const allUrls = new Set<string>();
   postsArray.forEach((post) => {
     const urls = extractEmbedUrls(post.html);
-    urls.forEach((url) => allUrls.add(url));
+    urls.forEach((url) => {
+      allUrls.add(url);
+    });
   });
 
   console.log(`Found ${allUrls.size} unique embed URLs`);
@@ -342,7 +341,7 @@ async function main() {
   // OGP情報を取得
   let ogpData: Map<string, OGPData> = new Map();
   if (allUrls.size > 0) {
-    console.log('\n📥 Fetching OGP data...');
+    console.log("\n📥 Fetching OGP data...");
     ogpData = await fetchMultipleOGP(Array.from(allUrls));
     console.log(`✅ Fetched OGP data for ${ogpData.size} URLs`);
   }
@@ -353,9 +352,9 @@ async function main() {
   }
 
   // JSONファイルの生成
-  const postsOutputPath = path.join(OUTPUT_DIR, 'blog-posts.json');
-  const metadataOutputPath = path.join(OUTPUT_DIR, 'blog-metadata.json');
-  const ogpOutputPath = path.join(OUTPUT_DIR, 'ogp-data.json');
+  const postsOutputPath = path.join(OUTPUT_DIR, "blog-posts.json");
+  const metadataOutputPath = path.join(OUTPUT_DIR, "blog-metadata.json");
+  const ogpOutputPath = path.join(OUTPUT_DIR, "ogp-data.json");
 
   fs.writeFileSync(postsOutputPath, JSON.stringify(postsArray, null, 2));
   fs.writeFileSync(metadataOutputPath, JSON.stringify(metadata, null, 2));
@@ -368,13 +367,13 @@ async function main() {
   console.log(`📁 Posts data: ${postsOutputPath}`);
   console.log(`📁 Metadata: ${metadataOutputPath}`);
   console.log(`📁 OGP data: ${ogpOutputPath}`);
-  console.log('🎉 Blog data build completed successfully!');
+  console.log("🎉 Blog data build completed successfully!");
 }
 
 // 実行
 if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch((error) => {
-    console.error('Build failed:', error);
+    console.error("Build failed:", error);
     process.exit(1);
   });
 }

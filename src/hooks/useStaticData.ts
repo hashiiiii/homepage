@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 interface UseStaticDataResult<T> {
   data: T | null;
@@ -10,10 +10,7 @@ interface UseStaticDataResult<T> {
  * 静的データ用のカスタムフック
  * APIコールと同じインターフェースを提供するが、実際は同期的にデータを返す
  */
-export function useStaticData<T>(
-  dataProvider: () => Promise<T>,
-  deps: React.DependencyList = []
-): UseStaticDataResult<T> {
+export function useStaticData<T>(dataProvider: () => Promise<T>): UseStaticDataResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -33,7 +30,7 @@ export function useStaticData<T>(
         }
       } catch (err) {
         if (isMounted) {
-          setError(err instanceof Error ? err : new Error('Unknown error'));
+          setError(err instanceof Error ? err : new Error("Unknown error"));
         }
       } finally {
         if (isMounted) {
@@ -47,8 +44,7 @@ export function useStaticData<T>(
     return () => {
       isMounted = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }, [dataProvider]);
 
   return { data, loading, error };
 }

@@ -1,9 +1,8 @@
-import type { BlogMetadata, BlogPost, BlogPostWithContent } from '@/models/blog.model';
-
 // 生成された静的データをインポート
 // ビルド時に生成されるため、実行時には必ず存在する
-import metadataData from '@/generated/blog-metadata.json';
-import postsData from '@/generated/blog-posts.json';
+import metadataData from "@/generated/blog-metadata.json";
+import postsData from "@/generated/blog-posts.json";
+import type { BlogMetadata, BlogPost, BlogPostWithContent } from "@/models/blog.model";
 
 /**
  * ブログ記事一覧を取得
@@ -50,7 +49,7 @@ export function searchBlogPosts(query: string): BlogPost[] {
       (post) =>
         post.title.toLowerCase().includes(lowerQuery) ||
         post.excerpt.toLowerCase().includes(lowerQuery) ||
-        post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+        post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
     );
 }
 
@@ -60,7 +59,7 @@ export function searchBlogPosts(query: string): BlogPost[] {
 export function fetchBlogPost(id: string): BlogPostWithContent | null {
   const post = getBlogPostById(id);
   if (!post) {
-    throw new Error('Blog post not found');
+    throw new Error("Blog post not found");
   }
 
   return post;

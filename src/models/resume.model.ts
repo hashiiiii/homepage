@@ -20,7 +20,7 @@ export interface PersonalInfo {
 }
 
 export interface SocialLink {
-  platform: 'GitHub' | 'LinkedIn' | 'Twitter' | 'Website' | 'Other';
+  platform: "GitHub" | "LinkedIn" | "Twitter" | "Website" | "Other";
   url: string;
   username?: string;
 }
@@ -51,9 +51,9 @@ export interface Education {
 
 export interface Skill {
   id: string;
-  category: 'Programming' | 'Framework' | 'Database' | 'Tool' | 'Other';
+  category: "Programming" | "Framework" | "Database" | "Tool" | "Other";
   name: string;
-  proficiency: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  proficiency: "Beginner" | "Intermediate" | "Advanced" | "Expert";
   yearsOfExperience?: number;
 }
 

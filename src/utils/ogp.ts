@@ -33,16 +33,16 @@ function parseOGPFromHTML(html: string, url: string): OGPData {
       const content = contentMatch[1];
 
       switch (property) {
-        case 'og:title':
+        case "og:title":
           ogp.title = content;
           break;
-        case 'og:description':
+        case "og:description":
           ogp.description = content;
           break;
-        case 'og:image':
+        case "og:image":
           ogp.image = content;
           break;
-        case 'og:site_name':
+        case "og:site_name":
           ogp.siteName = content;
           break;
       }
@@ -54,23 +54,21 @@ function parseOGPFromHTML(html: string, url: string): OGPData {
       const name = nameMatch[1];
       const content = contentMatch[1];
 
-      if (name === 'description' && !ogp.description) {
+      if (name === "description" && !ogp.description) {
         ogp.description = content;
       }
     }
   }
 
   // faviconを抽出
-  const faviconMatch = html.match(
-    /<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i
-  );
+  const faviconMatch = html.match(/<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i);
   if (faviconMatch) {
     let faviconUrl = faviconMatch[1];
     // 相対URLの場合は絶対URLに変換
-    if (faviconUrl.startsWith('/')) {
+    if (faviconUrl.startsWith("/")) {
       const urlObj = new URL(url);
       faviconUrl = `${urlObj.protocol}//${urlObj.host}${faviconUrl}`;
-    } else if (!faviconUrl.startsWith('http')) {
+    } else if (!faviconUrl.startsWith("http")) {
       const urlObj = new URL(url);
       faviconUrl = `${urlObj.protocol}//${urlObj.host}/${faviconUrl}`;
     }
@@ -95,7 +93,7 @@ export async function fetchOGP(url: string): Promise<OGPData> {
   try {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; BlogBot/1.0)',
+        "User-Agent": "Mozilla/5.0 (compatible; BlogBot/1.0)",
       },
     });
 
@@ -122,7 +120,7 @@ export async function fetchMultipleOGP(urls: string[]): Promise<Map<string, OGPD
     urls.map(async (url) => {
       const ogp = await fetchOGP(url);
       return [url, ogp] as [string, OGPData];
-    })
+    }),
   );
 
   return new Map(results);

@@ -43,5 +43,5 @@ export interface BlogMetadata {
   tagCounts: TagCount[];
 }
 
-export type CreateBlogPostInput = Omit<BlogPost, 'id' | 'publishedAt' | 'updatedAt' | 'viewCount'>;
+export type CreateBlogPostInput = Omit<BlogPost, "id" | "publishedAt" | "updatedAt" | "viewCount">;
 export type UpdateBlogPostInput = Partial<CreateBlogPostInput>;

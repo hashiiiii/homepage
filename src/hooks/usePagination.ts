@@ -1,13 +1,14 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useCallback, useMemo, useRef, useState } from "react";
 
-export function usePagination<T>(items: T[], itemsPerPage: number, deps: unknown[] = []) {
+export function usePagination<T>(items: T[], itemsPerPage: number) {
   const [currentPage, setCurrentPage] = useState(1);
+  const prevItemsLengthRef = useRef(items.length);
 
-  // Reset to first page when dependencies change
-  useEffect(() => {
+  // Reset to first page when items array length changes
+  if (prevItemsLengthRef.current !== items.length) {
+    prevItemsLengthRef.current = items.length;
     setCurrentPage(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
+  }
 
   // Calculate displayed items
   const displayedItems = useMemo(() => {

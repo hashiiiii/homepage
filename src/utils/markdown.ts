@@ -1,5 +1,5 @@
-import type { BlogPost } from '@/models/blog.model';
-import matter from 'gray-matter';
+import matter from "gray-matter";
+import type { BlogPost } from "@/models/blog.model";
 
 export interface MarkdownFile {
   content: string;
@@ -21,14 +21,14 @@ export function extractBlogPost(fileContent: string): BlogPost & { content: stri
   const { content, data } = parseMarkdown(fileContent);
 
   return {
-    id: String(data.id || ''),
-    title: String(data.title || ''),
-    excerpt: String(data.excerpt || ''),
+    id: String(data.id || ""),
+    title: String(data.title || ""),
+    excerpt: String(data.excerpt || ""),
     content,
-    html: '', // HTMLはビルド時に生成される
+    html: "", // HTMLはビルド時に生成される
     date: String(data.date || new Date().toISOString()),
     tags: Array.isArray(data.tags) ? data.tags : [],
-    readTime: String(data.readTime || '5 min read'),
-    published: typeof data.published === 'boolean' ? data.published : true, // デフォルトはtrue（公開）
+    readTime: String(data.readTime || "5 min read"),
+    published: typeof data.published === "boolean" ? data.published : true, // デフォルトはtrue（公開）
   };
 }

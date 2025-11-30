@@ -1,6 +1,6 @@
-import React from 'react';
-import { useTranslation } from '../../contexts/LanguageContext';
-import { skillsData } from '../../locales/skills';
+import type React from "react";
+import { useTranslation } from "../../contexts/LanguageContext";
+import { skillsData } from "../../locales/skills";
 
 export const SkillSection: React.FC = () => {
   const { language } = useTranslation();
@@ -16,10 +16,7 @@ export const SkillSection: React.FC = () => {
             <h3 className="mb-3 text-lg font-semibold text-tn-fg-primary">{category.category}</h3>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className={`rounded-full border px-3 py-1 text-sm font-medium ${category.color}`}
-                >
+                <span key={skill} className={`rounded-full border px-3 py-1 text-sm font-medium ${category.color}`}>
                   {skill}
                 </span>
               ))}

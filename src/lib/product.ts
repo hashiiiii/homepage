@@ -1,6 +1,6 @@
-import type { Language } from '@/contexts/LanguageContext';
-import { productData } from '@/locales/product';
-import type { ProductData } from '@/models/product.model';
+import type { Language } from "@/contexts/LanguageContext";
+import { productData } from "@/locales/product";
+import type { ProductData } from "@/models/product.model";
 
 /**
  * プロダクトデータを取得

@@ -1,27 +1,21 @@
-import React from 'react';
-import { BlogSidebar } from '../components/blog/BlogSidebar';
-import { BlogFilters } from '../components/blog/BlogFilters';
-import { BlogList } from '../components/blog/BlogList';
-import { fetchBlogMetadata } from '@/lib/blog';
-import { usePageTitle } from '../hooks/usePageTitle';
-import { useBlogFilters } from '../hooks/useBlogFilters';
-import { usePagination } from '../hooks/usePagination';
+import type React from "react";
+import { fetchBlogMetadata } from "@/lib/blog";
+import { BlogFilters } from "../components/blog/BlogFilters";
+import { BlogList } from "../components/blog/BlogList";
+import { BlogSidebar } from "../components/blog/BlogSidebar";
+import { useBlogFilters } from "../hooks/useBlogFilters";
+import { usePageTitle } from "../hooks/usePageTitle";
+import { usePagination } from "../hooks/usePagination";
 
 export const Blog: React.FC = () => {
-  usePageTitle('Blog');
+  usePageTitle("Blog");
   const metadata = fetchBlogMetadata();
 
   const posts = metadata?.posts || [];
 
-  const { filters, filteredPosts, setTagFilter, setArchiveFilter, clearFilters } =
-    useBlogFilters(posts);
+  const { filters, filteredPosts, setTagFilter, setArchiveFilter, clearFilters } = useBlogFilters(posts);
 
-  const {
-    displayedItems: displayedPosts,
-    hasMore,
-    loadMore,
-    remainingCount,
-  } = usePagination(filteredPosts, 6, [filters.tags, filters.archive]);
+  const { displayedItems: displayedPosts, hasMore, loadMore, remainingCount } = usePagination(filteredPosts, 6);
 
   return (
     <div className="animate-fade-in">

@@ -1,8 +1,7 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { fetchBlogPost } from '@/lib/blog';
-import { ZennContentRenderer } from '@/components/blog/ZennContentRenderer';
-import { usePageTitle } from '../hooks/usePageTitle';
+import { Link, useParams } from "react-router-dom";
+import { ZennContentRenderer } from "@/components/blog/ZennContentRenderer";
+import { fetchBlogPost } from "@/lib/blog";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function BlogDetail() {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +12,7 @@ export function BlogDetail() {
   try {
     post = id ? fetchBlogPost(id) : null;
   } catch (err) {
-    error = err instanceof Error ? err.message : 'Unknown error';
+    error = err instanceof Error ? err.message : "Unknown error";
   }
 
   // Set page title when post is loaded
@@ -63,10 +62,7 @@ export function BlogDetail() {
             </div>
             <div className="mt-4 flex gap-2">
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-tn-bg-tertiary px-3 py-1 text-sm text-tn-fg-secondary"
-                >
+                <span key={tag} className="rounded-full bg-tn-bg-tertiary px-3 py-1 text-sm text-tn-fg-secondary">
                   {tag}
                 </span>
               ))}

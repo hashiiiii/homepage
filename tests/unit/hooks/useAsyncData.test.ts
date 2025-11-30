@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
-import { renderHook, waitFor, act } from '@testing-library/react';
-import { useAsyncData } from '../../../src/hooks/useAsyncData';
+import { act, renderHook, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { useAsyncData } from "../../../src/hooks/useAsyncData";
 
-describe('useAsyncData', () => {
-  it('should handle successful data fetching', async () => {
-    const mockData = { id: 1, name: 'Test' };
+describe("useAsyncData", () => {
+  it("should handle successful data fetching", async () => {
+    const mockData = { id: 1, name: "Test" };
     const mockFn = vi.fn().mockResolvedValue(mockData);
 
     const { result } = renderHook(() => useAsyncData(mockFn));
@@ -24,8 +24,8 @@ describe('useAsyncData', () => {
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle errors', async () => {
-    const mockError = new Error('Test error');
+  it("should handle errors", async () => {
+    const mockError = new Error("Test error");
     const mockFn = vi.fn().mockRejectedValue(mockError);
 
     const { result } = renderHook(() => useAsyncData(mockFn));
@@ -35,11 +35,11 @@ describe('useAsyncData', () => {
     });
 
     expect(result.current.data).toBe(null);
-    expect(result.current.error).toBe('Test error');
+    expect(result.current.error).toBe("Test error");
   });
 
-  it('should re-fetch when dependencies change', async () => {
-    const mockFn = vi.fn().mockResolvedValue({ value: 'test' });
+  it("should re-fetch when dependencies change", async () => {
+    const mockFn = vi.fn().mockResolvedValue({ value: "test" });
     const { result, rerender } = renderHook(({ dep }) => useAsyncData(mockFn, [dep]), {
       initialProps: { dep: 1 },
     });
@@ -57,8 +57,8 @@ describe('useAsyncData', () => {
     });
   });
 
-  it('should provide refetch function', async () => {
-    const mockFn = vi.fn().mockResolvedValue({ value: 'test' });
+  it("should provide refetch function", async () => {
+    const mockFn = vi.fn().mockResolvedValue({ value: "test" });
     const { result } = renderHook(() => useAsyncData(mockFn));
 
     await waitFor(() => {

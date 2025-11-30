@@ -1,5 +1,5 @@
-import React from 'react';
-import type { BlogFilters as BlogFiltersType } from '@/hooks/useBlogFilters';
+import type React from "react";
+import type { BlogFilters as BlogFiltersType } from "@/hooks/useBlogFilters";
 
 interface BlogFiltersProps {
   filters: BlogFiltersType;
@@ -7,11 +7,7 @@ interface BlogFiltersProps {
   onClearFilters: () => void;
 }
 
-export const BlogFilters: React.FC<BlogFiltersProps> = ({
-  filters,
-  onTagFilter,
-  onClearFilters,
-}) => {
+export const BlogFilters: React.FC<BlogFiltersProps> = ({ filters, onTagFilter, onClearFilters }) => {
   const hasActiveFilters = filters.tags.length > 0 || filters.archive;
 
   if (!hasActiveFilters) {
@@ -37,6 +33,7 @@ export const BlogFilters: React.FC<BlogFiltersProps> = ({
           >
             {tag}
             <button
+              type="button"
               onClick={() => removeTag(tag)}
               className="ml-2 hover:text-tn-text-muted"
               aria-label={`Remove ${tag} filter`}
@@ -49,6 +46,7 @@ export const BlogFilters: React.FC<BlogFiltersProps> = ({
           <span className="inline-flex items-center rounded-full bg-tn-green px-3 py-1 text-sm text-white">
             {filters.archive.year}年{filters.archive.month}月
             <button
+              type="button"
               onClick={onClearFilters}
               className="ml-2 hover:text-tn-text-muted"
               aria-label="Remove archive filter"
@@ -58,6 +56,7 @@ export const BlogFilters: React.FC<BlogFiltersProps> = ({
           </span>
         )}
         <button
+          type="button"
           onClick={onClearFilters}
           className="rounded-full border border-tn-border px-3 py-1 text-sm text-tn-text-muted hover:text-tn-text-primary"
         >

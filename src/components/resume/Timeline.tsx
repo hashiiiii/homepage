@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from "react";
 
 type DescriptionItem = string | { text: string; items?: DescriptionItem[] };
 
@@ -15,26 +15,24 @@ interface TimelineProps {
 }
 
 const renderDescriptionItems = (items: DescriptionItem[], level: number = 0): React.ReactNode => {
-  const marginClass = level === 0 ? '' : level === 1 ? 'ml-6' : level === 2 ? 'ml-12' : 'ml-18';
+  const marginClass = level === 0 ? "" : level === 1 ? "ml-6" : level === 2 ? "ml-12" : "ml-18";
 
-  return items.map((item, index) => {
-    if (typeof item === 'string') {
+  return items.map((item) => {
+    if (typeof item === "string") {
       return (
-        <div key={index} className={`flex items-start text-tn-fg-secondary ${marginClass}`}>
+        <div key={item} className={`flex items-start text-tn-fg-secondary ${marginClass}`}>
           <span className="mr-2 text-tn-cyan">▸</span>
           <span>{item}</span>
         </div>
       );
     } else {
       return (
-        <div key={index} className={marginClass}>
+        <div key={item.text} className={marginClass}>
           <div className="flex items-start text-tn-fg-secondary">
             <span className="mr-2 text-tn-cyan">▸</span>
             <span>{item.text}</span>
           </div>
-          {item.items && (
-            <div className="mt-1">{renderDescriptionItems(item.items, level + 1)}</div>
-          )}
+          {item.items && <div className="mt-1">{renderDescriptionItems(item.items, level + 1)}</div>}
         </div>
       );
     }
@@ -46,11 +44,11 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
     <div className="relative">
       <div className="absolute inset-y-0 left-4 w-0.5 bg-tn-comment" />
 
-      {items.map((item, index) => (
-        <div key={index} className="relative mb-8 ml-10">
+      {items.map((item) => (
+        <div key={item.title} className="relative mb-8 ml-10">
           <div
             className={`absolute left-[-29px] h-6 w-1.5 ${
-              item.current ? 'shadow-tn-green/30 bg-tn-green shadow-lg' : 'bg-tn-blue'
+              item.current ? "shadow-tn-green/30 bg-tn-green shadow-lg" : "bg-tn-blue"
             }`}
           />
 

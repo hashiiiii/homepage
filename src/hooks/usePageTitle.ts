@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Custom hook to update page title dynamically
@@ -7,7 +7,7 @@ import { useEffect } from 'react';
  */
 export function usePageTitle(title?: string, isHome = false) {
   useEffect(() => {
-    const baseTitle = 'hashiiiii.com';
+    const baseTitle = "hashiiiii.com";
 
     if (isHome || !title) {
       document.title = baseTitle;

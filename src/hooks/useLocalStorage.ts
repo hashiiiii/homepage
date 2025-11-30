@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
 /**
  * Hook for managing localStorage state with automatic sync
@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from 'react';
 export function useLocalStorage<T>(
   key: string,
   defaultValue: T,
-  validator?: (value: unknown) => value is T
+  validator?: (value: unknown) => value is T,
 ): [T, (value: T | ((prev: T) => T)) => void] {
   // Get initial value from localStorage
   const getStoredValue = useCallback((): T => {
@@ -17,7 +17,7 @@ export function useLocalStorage<T>(
       const item = localStorage.getItem(key);
       if (item) {
         // For simple string values, don't parse as JSON
-        if (typeof defaultValue === 'string') {
+        if (typeof defaultValue === "string") {
           const value = item as T;
           if (validator) {
             return validator(value) ? value : defaultValue;
@@ -45,11 +45,10 @@ export function useLocalStorage<T>(
   const setValue = useCallback(
     (value: T | ((prev: T) => T)) => {
       try {
-        const newValue =
-          typeof value === 'function' ? (value as (prev: T) => T)(storedValue) : value;
+        const newValue = typeof value === "function" ? (value as (prev: T) => T)(storedValue) : value;
         setStoredValue(newValue);
         // For simple string values, store directly
-        if (typeof newValue === 'string') {
+        if (typeof newValue === "string") {
           localStorage.setItem(key, newValue);
         } else {
           localStorage.setItem(key, JSON.stringify(newValue));
@@ -60,7 +59,7 @@ export function useLocalStorage<T>(
         }
       }
     },
-    [key, storedValue]
+    [key, storedValue],
   );
 
   // Listen for changes in other tabs
@@ -70,7 +69,7 @@ export function useLocalStorage<T>(
         try {
           let newValue: T;
           // Handle string values directly
-          if (typeof defaultValue === 'string') {
+          if (typeof defaultValue === "string") {
             newValue = e.newValue as T;
           } else {
             newValue = JSON.parse(e.newValue);
@@ -91,8 +90,8 @@ export function useLocalStorage<T>(
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, [key, validator, defaultValue]);
 
   return [storedValue, setValue];

@@ -1,6 +1,6 @@
-import { designSystem } from '@/styles/design-system';
+import { designSystem } from "@/styles/design-system";
 
-export function generateStyles(theme: 'light' | 'dark' = 'light') {
+export function generateStyles(theme: "light" | "dark" = "light") {
   const colors = designSystem.colors[theme];
   const { typography, spacing, animation } = designSystem;
 
@@ -64,14 +64,14 @@ export function generateStyles(theme: 'light' | 'dark' = 'light') {
 
     /* Typography */
     h1 {
-      font-size: ${typography.fontSize['4xl']};
+      font-size: ${typography.fontSize["4xl"]};
       font-weight: 700;
       line-height: ${typography.lineHeight.tight};
       margin-bottom: ${spacing[4]};
     }
 
     h2 {
-      font-size: ${typography.fontSize['2xl']};
+      font-size: ${typography.fontSize["2xl"]};
       font-weight: 600;
       line-height: ${typography.lineHeight.tight};
       margin-bottom: ${spacing[3]};
@@ -105,7 +105,7 @@ export function generateStyles(theme: 'light' | 'dark' = 'light') {
     }
 
     .hero-title {
-      font-size: clamp(${typography.fontSize['3xl']}, 8vw, ${typography.fontSize['5xl']});
+      font-size: clamp(${typography.fontSize["3xl"]}, 8vw, ${typography.fontSize["5xl"]});
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: ${spacing[6]};
@@ -216,7 +216,7 @@ export function generateStyles(theme: 'light' | 'dark' = 'light') {
       }
 
       .hero-title {
-        font-size: ${typography.fontSize['3xl']};
+        font-size: ${typography.fontSize["3xl"]};
         margin-bottom: ${spacing[4]};
       }
 
@@ -252,7 +252,7 @@ export function generateStyles(theme: 'light' | 'dark' = 'light') {
 
     @media (max-width: ${designSystem.breakpoints.sm}) {
       .hero-title {
-        font-size: ${typography.fontSize['2xl']};
+        font-size: ${typography.fontSize["2xl"]};
       }
 
       .hero-subtitle {

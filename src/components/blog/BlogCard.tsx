@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import type { BlogPost } from '@/models/blog.model';
+import type React from "react";
+import { Link } from "react-router-dom";
+import type { BlogPost } from "@/models/blog.model";
 
 interface BlogCardProps {
   post: BlogPost;

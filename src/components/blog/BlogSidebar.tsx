@@ -1,8 +1,8 @@
-import React from 'react';
-import type { BlogPost, BlogMetadata } from '@/models/blog.model';
-import { RecentPosts } from './RecentPosts';
-import { ArchiveSection } from './ArchiveSection';
-import { TagFilterSection } from './TagFilterSection';
+import type React from "react";
+import type { BlogMetadata, BlogPost } from "@/models/blog.model";
+import { ArchiveSection } from "./ArchiveSection";
+import { RecentPosts } from "./RecentPosts";
+import { TagFilterSection } from "./TagFilterSection";
 
 interface BlogSidebarProps {
   posts: BlogPost[];
@@ -30,12 +30,7 @@ export const BlogSidebar: React.FC<BlogSidebarProps> = ({
         onArchiveFilter={onArchiveFilter}
         metadata={metadata}
       />
-      <TagFilterSection
-        posts={posts}
-        selectedTags={selectedTags}
-        onTagFilter={onTagFilter}
-        metadata={metadata}
-      />
+      <TagFilterSection posts={posts} selectedTags={selectedTags} onTagFilter={onTagFilter} metadata={metadata} />
     </aside>
   );
 };

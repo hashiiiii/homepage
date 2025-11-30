@@ -1,16 +1,13 @@
-import React from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
-import { ToggleButton } from './ToggleButton';
+import type React from "react";
+import { useTheme } from "../../contexts/ThemeContext";
+import { ToggleButton } from "./ToggleButton";
 
 export const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <ToggleButton
-      onClick={toggleTheme}
-      ariaLabel={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-    >
-      {theme === 'dark' ? (
+    <ToggleButton onClick={toggleTheme} ariaLabel={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
+      {theme === "dark" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="size-5 text-tn-yellow"
@@ -19,6 +16,7 @@ export const ThemeToggle: React.FC = () => {
           stroke="currentColor"
           strokeWidth={2}
         >
+          <title>Light mode icon</title>
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -34,6 +32,7 @@ export const ThemeToggle: React.FC = () => {
           stroke="currentColor"
           strokeWidth={2}
         >
+          <title>Dark mode icon</title>
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

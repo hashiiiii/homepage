@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ThemeToggle } from './ThemeToggle';
-import { LanguageToggle } from './LanguageToggle';
+import type React from "react";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { LanguageToggle } from "./LanguageToggle";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
-  { path: '/blog', label: 'Blog' },
-  { path: '/resume', label: 'Resume' },
-  { path: '/product', label: 'Product' },
+  { path: "/blog", label: "Blog" },
+  { path: "/resume", label: "Resume" },
+  { path: "/product", label: "Product" },
 ];
 
 export const Navigation: React.FC = () => {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/';
+  const isLandingPage = location.pathname === "/";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => location.pathname === path;
@@ -21,11 +22,11 @@ export const Navigation: React.FC = () => {
     children: React.ReactNode;
     className?: string;
     onClick?: () => void;
-  }> = ({ to, children, className = '', onClick }) => (
+  }> = ({ to, children, className = "", onClick }) => (
     <Link
       to={to}
       className={`transition-colors ${
-        isActive(to) ? 'text-tn-blue' : 'text-tn-fg-secondary hover:text-tn-fg-primary'
+        isActive(to) ? "text-tn-blue" : "text-tn-fg-secondary hover:text-tn-fg-primary"
       } ${className}`}
       onClick={onClick}
     >
@@ -67,6 +68,7 @@ export const Navigation: React.FC = () => {
             <LanguageToggle />
             <ThemeToggle />
             <button
+              type="button"
               className="-mr-2 p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
@@ -74,17 +76,17 @@ export const Navigation: React.FC = () => {
               <div className="flex size-6 flex-col justify-center">
                 <span
                   className={`block h-0.5 w-6 bg-tn-fg-primary transition-transform ${
-                    isMobileMenuOpen ? 'translate-y-1 rotate-45' : ''
+                    isMobileMenuOpen ? "translate-y-1 rotate-45" : ""
                   }`}
                 />
                 <span
                   className={`mt-1 block h-0.5 w-6 bg-tn-fg-primary transition-opacity ${
-                    isMobileMenuOpen ? 'opacity-0' : ''
+                    isMobileMenuOpen ? "opacity-0" : ""
                   }`}
                 />
                 <span
                   className={`mt-1 block h-0.5 w-6 bg-tn-fg-primary transition-transform ${
-                    isMobileMenuOpen ? '-translate-y-1 -rotate-45' : ''
+                    isMobileMenuOpen ? "-translate-y-1 -rotate-45" : ""
                   }`}
                 />
               </div>

@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
-import React, { createContext, useContext } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import type React from "react";
+import type { ReactNode } from "react";
+import { createContext, useContext } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-export type Language = 'en' | 'ja';
+export type Language = "en" | "ja";
 
 interface LanguageContextType {
   language: Language;
@@ -17,11 +18,11 @@ interface LanguageProviderProps {
 }
 
 const isLanguage = (value: unknown): value is Language => {
-  return value === 'en' || value === 'ja';
+  return value === "en" || value === "ja";
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useLocalStorage<Language>('language', 'en', isLanguage);
+  const [language, setLanguageState] = useLocalStorage<Language>("language", "en", isLanguage);
 
   const setLanguage = (newLanguage: Language) => {
     setLanguageState(newLanguage);
@@ -46,7 +47,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 };

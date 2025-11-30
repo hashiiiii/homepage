@@ -1,4 +1,4 @@
-import type { Language } from '../contexts/LanguageContext';
+import type { Language } from "../contexts/LanguageContext";
 
 export interface PageMultilingualConfig {
   /** Whether the page supports multilingual functionality */
@@ -17,36 +17,36 @@ export interface PageMultilingualConfig {
  */
 export const PAGE_MULTILINGUAL_CONFIG: Record<string, PageMultilingualConfig> = {
   // Landing page - no multilingual needed
-  '/': {
+  "/": {
     enabled: false,
     showToggle: false,
   },
 
   // Blog pages - Japanese only for now
-  '/blog': {
+  "/blog": {
     enabled: false,
-    defaultLanguage: 'ja',
+    defaultLanguage: "ja",
     showToggle: true, // Show but disabled
   },
 
   // Resume page - full multilingual support
-  '/resume': {
+  "/resume": {
     enabled: true,
-    availableLanguages: ['en', 'ja'],
+    availableLanguages: ["en", "ja"],
     showToggle: true,
   },
 
   // Product page - full multilingual support
-  '/product': {
+  "/product": {
     enabled: true,
-    availableLanguages: ['en', 'ja'],
+    availableLanguages: ["en", "ja"],
     showToggle: true,
   },
 
   // Privacy Policy page - full multilingual support
-  '/privacy': {
+  "/privacy": {
     enabled: true,
-    availableLanguages: ['en', 'ja'],
+    availableLanguages: ["en", "ja"],
     showToggle: true,
   },
 };
@@ -61,8 +61,8 @@ export function getPageMultilingualConfig(pathname: string): PageMultilingualCon
   }
 
   // Check for blog post detail pages (/blog/:id)
-  if (pathname.startsWith('/blog/')) {
-    return PAGE_MULTILINGUAL_CONFIG['/blog'];
+  if (pathname.startsWith("/blog/")) {
+    return PAGE_MULTILINGUAL_CONFIG["/blog"];
   }
 
   // Default configuration for unknown pages
@@ -91,7 +91,7 @@ export function shouldShowLanguageToggle(pathname: string): boolean {
  */
 export function getAvailableLanguages(pathname: string): Language[] {
   const config = getPageMultilingualConfig(pathname);
-  return config.availableLanguages ?? ['en', 'ja'];
+  return config.availableLanguages ?? ["en", "ja"];
 }
 
 /**
@@ -99,5 +99,5 @@ export function getAvailableLanguages(pathname: string): Language[] {
  */
 export function getDefaultLanguage(pathname: string): Language {
   const config = getPageMultilingualConfig(pathname);
-  return config.defaultLanguage ?? 'en';
+  return config.defaultLanguage ?? "en";
 }
