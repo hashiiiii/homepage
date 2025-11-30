@@ -1,0 +1,4 @@
+echo "Running pre-commit checks..."
+echo "Checking code with Biome..."
+npx biome check --write .
+echo "All checks passed!"
