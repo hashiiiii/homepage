@@ -172,25 +172,9 @@ function loadMarkdownFiles(): {
         }
 
         // Markdown → HTML変換（Zenn形式）
-        // customEmbedで埋め込みを無効化（Mermaidのみ保持）
+        // Zennのデフォルト動作に完全に任せる
         const html = markdownToHtml(post.content, {
-          customEmbed: {
-            youtube: () => "",
-            tweet: () => "",
-            card: () => "",
-            github: () => "",
-            gist: () => "",
-            codepen: () => "",
-            codesandbox: () => "",
-            stackblitz: () => "",
-            jsfiddle: () => "",
-            slideshare: () => "",
-            speakerdeck: () => "",
-            docswell: () => "",
-            blueprintue: () => "",
-            figma: () => "",
-            // mermaidは保持（デフォルトジェネレータを使用）
-          },
+          embedOrigin: "https://embed.zenn.studio",
         });
 
         posts.set(post.id, { ...post, html });
