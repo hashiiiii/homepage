@@ -6,6 +6,8 @@ export interface BlogPost {
   tags: string[];
   readTime: string;
   published?: boolean;
+  source?: "local" | "zenn";
+  externalUrl?: string;
 }
 
 export interface BlogPostWithContent extends BlogPost {

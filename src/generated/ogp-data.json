@@ -1,0 +1,25 @@
+{
+  "https://twitter.com/jack/status/20": {
+    "url": "https://twitter.com/jack/status/20",
+    "siteName": "X (formerly Twitter)",
+    "title": "jack (@jack) on X",
+    "description": "just setting up my twttr",
+    "image": "https://pbs.twimg.com/profile_images/1661201415899951105/azNjKOSH_200x200.jpg",
+    "favicon": "https://twitter.com//abs.twimg.com/favicons/twitter.3.ico"
+  },
+  "https://github.com/zenn-dev/zenn-editor": {
+    "url": "https://github.com/zenn-dev/zenn-editor",
+    "description": "Convert markdown to html in Zenn format. Contribute to zenn-dev/zenn-editor development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/bf582548c69690f8278d5cd51392384a8a3094794673d17d313334a9e0baad0b/zenn-dev/zenn-editor",
+    "siteName": "GitHub",
+    "title": "GitHub - zenn-dev/zenn-editor: Convert markdown to html in Zenn format",
+    "favicon": "https://github.githubassets.com/favicons/favicon"
+  },
+  "https://zenn.dev": {
+    "url": "https://zenn.dev",
+    "description": "Zennはエンジニアが技術・開発についての知見をシェアする場所です。本の販売や、読者からのバッジの受付により対価を受け取ることができます。",
+    "title": "Zenn｜エンジニアのための情報共有コミュニティ",
+    "image": "https://static.zenn.studio/images/logo-only-dark.png",
+    "siteName": "Zenn"
+  }
+}

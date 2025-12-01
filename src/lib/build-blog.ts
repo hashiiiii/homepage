@@ -7,6 +7,7 @@ import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import Parser from "rss-parser";
 import type { BlogArchive, BlogMetadata, BlogPost, TagCount } from "../models/blog.model";
 import { extractBlogPost } from "../utils/markdown";
 
@@ -17,6 +18,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../..");
 const CONTENT_DIR = path.join(PROJECT_ROOT, "content/blog");
 const OUTPUT_DIR = path.join(PROJECT_ROOT, "src/generated");
+const ZENN_USERNAME = "hashiiiii"; // Zennのユーザー名
 
 interface BlogPostWithContent extends BlogPost {
   content: string;
@@ -124,6 +126,49 @@ function validateMarkdownPost(filePath: string, post: BlogPostWithContent): Vali
   // IDの重複チェック用に呼び出し側で処理する
 
   return errors;
+}
+
+/**
+ * ZennのRSSフィードから記事を取得
+ */
+async function fetchZennPosts(): Promise<BlogPost[]> {
+  try {
+    const parser = new Parser();
+    const feed = await parser.parseURL(`https://zenn.dev/${ZENN_USERNAME}/feed`);
+
+    const zennPosts: BlogPost[] = feed.items.map((item) => {
+      // IDはURLから生成（https://zenn.dev/username/articles/article-id）
+      const urlParts = item.link?.split("/") || [];
+      const id = `zenn-${urlParts[urlParts.length - 1] || item.guid || Date.now().toString()}`;
+
+      // 日付を YYYY-MM-DD 形式に変換
+      const date = item.pubDate
+        ? new Date(item.pubDate).toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0];
+
+      // タグをカテゴリーから抽出（RSSには含まれていない可能性があるため空配列をデフォルトに）
+      const tags = item.categories || ["Zenn"];
+
+      return {
+        id,
+        title: item.title || "Untitled",
+        excerpt: item.contentSnippet || item.content?.substring(0, 150) || "",
+        date,
+        tags,
+        readTime: "Zenn記事",
+        published: true,
+        source: "zenn" as const,
+        externalUrl: item.link,
+      };
+    });
+
+    console.log(`✅ Fetched ${zennPosts.length} posts from Zenn`);
+    return zennPosts;
+  } catch (error) {
+    console.error("❌ Failed to fetch Zenn posts:", error);
+    // エラーが発生しても処理を継続（Zenn記事なしで続行）
+    return [];
+  }
 }
 
 /**
@@ -261,16 +306,30 @@ async function main() {
     process.exit(1);
   }
 
-  if (posts.size === 0) {
-    console.warn("⚠️  No valid markdown files found");
+  // Zenn記事を取得
+  const zennPosts = await fetchZennPosts();
+
+  if (posts.size === 0 && zennPosts.length === 0) {
+    console.warn("⚠️  No valid markdown files or Zenn posts found");
     return;
   }
 
-  // データの整理
-  const allPosts = Array.from(posts.values()).map(({ content, ...metadata }) => ({
+  // データの整理（ローカルMarkdown）
+  const localPosts = Array.from(posts.values()).map(({ content, ...metadata }) => ({
     ...metadata,
     content,
+    source: "local" as const,
   }));
+
+  // Zenn記事にcontent/htmlを追加（空文字列）
+  const zennPostsWithContent = zennPosts.map((post) => ({
+    ...post,
+    content: "",
+    html: "",
+  }));
+
+  // すべての記事を結合
+  const allPosts = [...localPosts, ...zennPostsWithContent];
 
   // 非公開記事をフィルタリング（published === false を除外）
   const publishedPosts = allPosts.filter((post) => post.published !== false);
@@ -283,6 +342,10 @@ async function main() {
       console.log(`   - ${post.id} (${post.title})`);
     });
   }
+
+  console.log(`\n📊 Total published posts: ${publishedPosts.length}`);
+  console.log(`   - Local: ${localPosts.filter((p) => p.published !== false).length}`);
+  console.log(`   - Zenn: ${zennPosts.length}`);
 
   // 公開記事のみをソート
   const postsArray = publishedPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

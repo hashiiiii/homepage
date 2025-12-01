@@ -27,6 +27,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
+    "rss-parser": "^3.13.0",
     "zenn-content-css": "^0.2.10",
     "zenn-embed-elements": "^0.2.10",
     "zenn-markdown-html": "^0.2.10"
