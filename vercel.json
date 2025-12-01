@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "git lfs pull && npm run build",
+  "buildCommand": "git lfs pull && npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64 && npm run build",
   "outputDirectory": "dist/client",
   "devCommand": "npm run dev",
   "framework": "vite",
