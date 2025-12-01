@@ -1,5 +1,0 @@
-# Vercel ignore file
-# This prevents automatic deployments
-
-# Git integration is disabled
-# Use manual deployments via GitHub Actions or CLI instead
