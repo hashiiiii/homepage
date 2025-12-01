@@ -247,7 +247,7 @@ https://github.com/zenn-dev/zenn-editor
 
 ### CodePenの埋め込み
 
-@[codepen](https://codepen.io/sosuke/pen/Pjoqqp)
+https://codepen.io/sosuke/pen/Pjoqqp
 
 ## インラインコード
 

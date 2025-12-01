@@ -38,10 +38,33 @@ export function ZennContentRenderer({ html, className = "" }: ZennContentRendere
         }
       });
 
-      // 2. Twitter iframeの処理はDOM挿入後に行うため、ここではスキップ
+      // 2. すべての埋め込み要素を削除（YouTube、Twitter、CodePenなど）
+      // クラスベースの削除
+      const embedClasses = [
+        ".embed-block",
+        ".embed-youtube",
+        ".embed-codepen",
+        ".embed-twitter",
+        "span.embed-block",
+        "span.embed-youtube",
+        "span.embed-codepen",
+        "p > span.embed-block",
+      ];
 
-      // 3. リンクカードの処理はDOM挿入後に行うため、ここではスキップ
-      // 4. 残っている隠しリンクをすべて削除（念のため）
+      embedClasses.forEach((selector) => {
+        const elements = doc.querySelectorAll(selector);
+        elements.forEach((el) => {
+          el.remove();
+        });
+      });
+
+      // 3. リンクカード要素を削除
+      const linkCards = doc.querySelectorAll(".zenn-link-card");
+      linkCards.forEach((card) => {
+        card.remove();
+      });
+
+      // 4. 隠しリンクを削除
       const hiddenLinks = doc.querySelectorAll('a[style*="display:none"], a[style*="display: none"]');
       hiddenLinks.forEach((link) => {
         link.remove();
