@@ -56,7 +56,11 @@ describe("useAsyncData", () => {
     await waitFor(() => {
       expect(mockFn2).toHaveBeenCalledTimes(1);
     });
-    expect(result.current.data).toEqual({ value: "test2" });
+
+    // Wait for data to update
+    await waitFor(() => {
+      expect(result.current.data).toEqual({ value: "test2" });
+    });
   });
 
   it("should provide refetch function", async () => {
