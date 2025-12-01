@@ -38,23 +38,25 @@ describe("useAsyncData", () => {
     expect(result.current.error).toBe("Test error");
   });
 
-  it("should re-fetch when dependencies change", async () => {
-    const mockFn = vi.fn().mockResolvedValue({ value: "test" });
-    const { result, rerender } = renderHook(({ dep }) => useAsyncData(mockFn, [dep]), {
-      initialProps: { dep: 1 },
-    });
+  it("should re-fetch when asyncFn changes", async () => {
+    const mockFn1 = vi.fn().mockResolvedValue({ value: "test1" });
+    const mockFn2 = vi.fn().mockResolvedValue({ value: "test2" });
+
+    const { result, rerender } = renderHook(({ fn }) => useAsyncData(fn), { initialProps: { fn: mockFn1 } });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
     });
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn1).toHaveBeenCalledTimes(1);
+    expect(result.current.data).toEqual({ value: "test1" });
 
-    // Change dependency
-    rerender({ dep: 2 });
+    // Change function
+    rerender({ fn: mockFn2 });
 
     await waitFor(() => {
-      expect(mockFn).toHaveBeenCalledTimes(2);
+      expect(mockFn2).toHaveBeenCalledTimes(1);
     });
+    expect(result.current.data).toEqual({ value: "test2" });
   });
 
   it("should provide refetch function", async () => {

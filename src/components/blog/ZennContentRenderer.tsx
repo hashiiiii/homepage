@@ -1,8 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error - no type definitions available
 import "zenn-content-css";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error - no type definitions available
 import "zenn-embed-elements";
 
 interface ZennContentRendererProps {
