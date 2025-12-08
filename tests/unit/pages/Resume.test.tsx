@@ -26,8 +26,8 @@ describe("Resume Page with Tabs", () => {
     // Check for main Work Experience title
     expect(screen.getByText("Work Experience")).toBeInTheDocument();
 
-    // Check for corporate and freelance tabs
-    expect(screen.getByRole("tab", { name: /corporate/i })).toBeInTheDocument();
+    // Check for company and freelance tabs
+    expect(screen.getByRole("tab", { name: /company/i })).toBeInTheDocument();
     expect(screen.getByRole("tab", { name: /freelance/i })).toBeInTheDocument();
   });
 
@@ -38,9 +38,9 @@ describe("Resume Page with Tabs", () => {
       </TestWrapper>,
     );
 
-    // Corporate tab should be active
-    const corporateTab = screen.getByRole("tab", { name: /corporate/i });
-    expect(corporateTab).toHaveAttribute("aria-selected", "true");
+    // Company tab should be active
+    const companyTab = screen.getByRole("tab", { name: /company/i });
+    expect(companyTab).toHaveAttribute("aria-selected", "true");
 
     // Should show main work experience (check for multiple occurrences)
     expect(screen.getAllByText("DeNA Co., Ltd.").length).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe("Resume Page with Tabs", () => {
     expect(freelanceTab).toHaveAttribute("aria-selected", "true");
 
     // Should show freelance content
-    expect(screen.getByText("Web3 New Game / Game Client Engineer")).toBeInTheDocument();
+    expect(screen.getByText("Web3 New Game Title")).toBeInTheDocument();
   });
 
   it("should maintain skills and contact sections regardless of tab", () => {
@@ -85,16 +85,16 @@ describe("Resume Page with Tabs", () => {
     expect(screen.getByText("contact[at]hashiiiii.com")).toBeInTheDocument();
   });
 
-  it("should show education only on corporate tab", () => {
+  it("should show education only on company tab", () => {
     render(
       <TestWrapper>
         <Resume />
       </TestWrapper>,
     );
 
-    // Education should be visible on corporate tab (default)
+    // Education should be visible on company tab (default)
     expect(screen.getByText("Education")).toBeInTheDocument();
-    expect(screen.getByText("Master of Science in Planetary Atmospheric Science")).toBeInTheDocument();
+    expect(screen.getByText("Master of Science (Planetary Atmospheric Science)")).toBeInTheDocument();
 
     // Switch to freelance tab
     const freelanceTab = screen.getByRole("tab", { name: /freelance/i });
@@ -102,6 +102,6 @@ describe("Resume Page with Tabs", () => {
 
     // Education should not be visible on freelance tab
     expect(screen.queryByText("Education")).not.toBeInTheDocument();
-    expect(screen.queryByText("Master of Science in Planetary Atmospheric Science")).not.toBeInTheDocument();
+    expect(screen.queryByText("Master of Science (Planetary Atmospheric Science)")).not.toBeInTheDocument();
   });
 });
