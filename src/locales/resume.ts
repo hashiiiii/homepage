@@ -44,161 +44,160 @@ export const resumeData: Record<Language, ResumeData> = {
     subtitle: "",
     sections: {
       workExperienceTitle: "Work Experience",
-      workExperience: "Corporate",
+      workExperience: "Company",
       freelance: "Freelance",
       education: "Education",
       contact: "Contact",
     },
     experience: [
       {
-        title: "Mobile Game Platform Operations & Development / Full-Stack Engineer",
+        title: "Mobile Game Backend Platform Operations & Development",
         company: "DeNA Co., Ltd.",
-        period: "Jan 2025 - Present",
+        period: "January 2025 - Present",
         current: true,
         description: [
           {
-            text: "Server-side development with Ruby on Rails + MySQL / Memcached + AWS / GCP services",
+            text: "Server development using Ruby on Rails",
             items: [
-              "Worker（Daemon） implementation",
               "API development",
-              "Database design with MySQL, query optimization through index design",
-              "Performance tuning (in-memory caching offload and additional index-based query optimizations)",
+              "Database design and development using ActiveRecord + MySQL",
+              "Implementation of Daemon and Batch processes",
+              "Migration of legacy components",
+              "Framework update support",
+              "Monitoring and incident response",
             ],
           },
           {
-            text: "SDK development with C++",
-            items: ["Error protocol improvements", "HTTP foundation modifications", "Response parser implementation"],
-          },
-          {
-            text: "API test application modifications with Unity + C#",
+            text: "SDK development using C++",
+            items: ["Error protocol refactoring", "Middleware refactoring", "Response Parser implementation"],
           },
         ],
       },
       {
-        title: "New Mobile Game / Game Client Engineer (Tech Lead)",
+        title: "Unity (Android, iOS) New Mobile Game Title (Lead Engineer)",
         company: "DeNA Co., Ltd.",
-        period: "May 2024 - Dec 2024",
+        period: "May 2024 - December 2024",
         description: [
           {
-            text: "Tech lead for large-scale mobile game title development",
+            text: "Collaboration with numerous internal and external stakeholders",
             items: [
-              "Development planning and task progress management for team members",
-              "Coordination and technical alignment with partner companies and internal teams",
+              "Coordination of role division and alignment of expectations with multiple partner companies",
+              "Technical collaboration and coordination",
             ],
           },
           {
-            text: "Client-side development with Unity + C#",
+            text: "Architect experience in large-scale title development",
+            items: ["Design based on Clean Architecture", "Various PoCs", "Technology selection including OSS"],
+          },
+          {
+            text: "Implementation of various client infrastructure including middleware",
             items: [
-              "Architecture design (Clean Architecture), technology selection, and PoC",
-              "UI, animation, and system logic implementation",
-              "Foundation development (UI navigation, Addressable Asset System, localization)",
-              "Fragment shader and animation implementation",
-              "Performance tuning (parallelization, batching, rebuild control)",
-            ],
-          },
-        ],
-      },
-      {
-        title: "New Business / Full-Stack Engineer",
-        company: "DeNA Co., Ltd.",
-        period: "Sep 2023 - May 2024",
-        description: [
-          {
-            text: "Client-side development with Unity + C# + C++",
-            items: [
-              "UI and system logic implementation using Clean Architecture",
-              "Native plugin development with C++",
-            ],
-          },
-          {
-            text: "Server-side development with Go + GCP (Cloud Run + Firestore)",
-            items: ["Various API development", "GCS deployment infrastructure improvements"],
-          },
-        ],
-      },
-      {
-        title: "PC + WebGL New Game / Full-Stack Engineer (Tech Lead)",
-        company: "DeNA Co., Ltd.",
-        period: "Sep 2022 - Sep 2023",
-        description: [
-          {
-            text: "Tech lead for new title development on Steam and live gaming platform (fingger)",
-            items: [
-              "Development planning and task progress management for team members",
-              "GDPR compliance and Steam developer registration",
-              "Management of 2 engineers",
-            ],
-          },
-          {
-            text: "Client-side development with Unity (macOS, Windows, WebGL) + C#",
-            items: [
-              "Architecture design and technology selection",
-              "Foundation development (UI navigation, Addressable Asset System)",
-              "Out-game development and in-game prototype implementation",
-            ],
-          },
-          {
-            text: "Server-side development with PlayFab + Azure Functions (C#)",
-            items: ["Worker implementation (item grants/deletions, player data deletion/export)"],
-          },
-          {
-            text: "DevOps",
-            items: [
-              "Master data infrastructure development",
-              "Steam integration implementation",
-              "CI / CD pipeline implementation with GitHub Actions (Steam, fingger)",
+              "Trading system",
+              "Cache design and implementation",
+              "UI infrastructure, middleware development using Addressable Asset System, Globalization",
+              "Shader implementation",
+              "Various performance tuning",
             ],
           },
         ],
       },
       {
-        title: "WebGL New Game / Game Client Engineer (Tech Lead)",
+        title: "New Service Development",
         company: "DeNA Co., Ltd.",
-        period: "Mar 2022 - Aug 2022",
+        period: "September 2023 - May 2024",
         description: [
-          "Tech lead for new game title for live gaming platform (fingger) using Unity",
-          "Full out-game system implementation with Unity + C#",
-          "Management of 2 engineers",
+          "Unity client development using Clean Architecture",
+          "C++ native plugin development",
+          "Server development using Go + GCP managed services",
         ],
       },
       {
-        title: "Live Mobile Game Operations / Full-Stack Engineer (Tech Lead)",
+        title: "Unity (PC + WebGL) New Game Title (Lead Engineer)",
         company: "DeNA Co., Ltd.",
-        period: "Apr 2019 - Mar 2022",
+        period: "September 2022 - September 2023",
         description: [
           {
-            text: "Tech lead for large-scale mobile game title operations",
+            text: "Handling wide-ranging requirements including non-engineering domains",
             items: [
-              "Development planning and task progress management for team members",
-              "Coordination and technical alignment with partner companies and internal teams",
-              "Incident response and various direction during failures",
-              "Management of 10 engineers",
+              "Development planning, task assignment to members, and progress management",
+              "Internal and external coordination including partner companies",
+              "Compliance with legal requirements such as GDPR",
+              "Steam developer registration support",
+            ],
+          },
+          "Support for a wide range of platforms (macOS, Windows, WebGL)",
+          {
+            text: "Client development including middleware implementation and technology selection",
+            items: [
+              "Architecture design, technology selection",
+              "UI navigation infrastructure",
+              "Middleware development using Addressable Asset System",
+              "Overall out-game development",
+              "In-game prototype implementation",
             ],
           },
           {
-            text: "Client-side development with Unity (Android, iOS) + C#",
+            text: "Server development using PlayFab + Azure Functions (C#)",
             items: [
-              "MVP / DDD maintenance",
-              "Real-time multi-battle system implementation",
-              "UI and animation implementation",
-              "System logic implementation (missions, matching, GvG features)",
-            ],
-          },
-          {
-            text: "Server-side development with Ruby on Rails + MySQL + on-premises",
-            items: [
-              "Matching algorithm and worker implementation",
-              "API development (chat, GvG features) and admin panel feature additions",
-              "Database design with MySQL and ridgepole, query optimization through index design",
+              "Implementation of functionality not present in PlayFab (item granting, deletion, player data deletion, export)",
             ],
           },
           {
             text: "DevOps",
             items: [
-              "CI / CD pipeline improvements with Jenkins",
-              "Unity major upgrade (2018 LTS -> 2020 LTS)",
-              "iOS / Android platform support and store review handling",
-              "Build server construction and operations",
+              "CI/CD pipeline construction using Github Actions",
+              "Master data build and deployment to PlayFab",
+              "ROM build and deployment to Steam platform",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Unity (WebGL) New Game Title (Lead Engineer)",
+        company: "DeNA Co., Ltd.",
+        period: "March 2022 - August 2022",
+        description: [
+          "New game title for live gaming platform (fingger) using Unity (WebGL)",
+          "Casual game",
+          "Overall out-game development on the client side",
+        ],
+      },
+      {
+        title: "Unity (Android, iOS) Live Mobile Game Title (Lead Engineer)",
+        company: "DeNA Co., Ltd.",
+        period: "April 2019 - March 2022",
+        description: [
+          {
+            text: "Lead engineer experience on a large-scale title",
+            items: [
+              "Management of approximately 10 engineers",
+              "Development planning, task assignment to members, and progress management",
+              "Internal and external coordination including partner companies",
+              "Direction during incidents",
+            ],
+          },
+          {
+            text: "Overall client development",
+            items: [
+              "Implementation using MVP + DDD based design",
+              "Real-time PvP system implementation",
+              "UI and Animation implementation",
+            ],
+          },
+          {
+            text: "Server development using Ruby on Rails",
+            items: [
+              "Implementation of GvG grouping system based on rank rating",
+              "API development (chat, GvG)",
+              "Adding various features to operation management screen",
+              "Database design and development using ActiveRecord + MySQL",
+            ],
+          },
+          {
+            text: "DevOps",
+            items: [
+              "CI/CD pipeline construction and improvement using Jenkins",
+              "Unity major update support (2018 LTS -> 2020 LTS)",
             ],
           },
         ],
@@ -206,25 +205,25 @@ export const resumeData: Record<Language, ResumeData> = {
     ],
     freelance: [
       {
-        title: "Web3 New Game / Game Client Engineer",
+        title: "Web3 New Game Title",
         description: [
           {
-            text: "Client-side development with Unity (Android, iOS) + C#",
+            text: "Client development using Unity (Android, iOS) + C#",
             items: [
-              "Architecture design assistance and code review",
-              "Various UI feature implementations",
-              "In-App Purchase (IAP) functionality implementation",
-              "System logic implementations (Gacha, Shop)",
+              "Architecture design assistance, code review",
+              "Implementation of various UI features",
+              "IAP (In-App Purchase) feature implementation",
+              "Implementation of various system logic (Gacha, SHOP)",
               "Asset infrastructure implementation using Addressable Asset System",
-              "AssetBundle build pipeline construction using GitHub Actions + GCS",
+              "AssetBundle build pipeline construction using Github Actions + GCS",
             ],
           },
         ],
       },
     ],
     education: {
-      degree: "Master of Science in Planetary Atmospheric Science",
-      university: "Okayama University Graduate School of Natural Science and Technology",
+      degree: "Master of Science (Planetary Atmospheric Science)",
+      university: "Graduate School of Natural Science and Technology, Okayama University",
       period: "2017 - 2019",
     },
     contact: {
@@ -245,151 +244,144 @@ export const resumeData: Record<Language, ResumeData> = {
     },
     experience: [
       {
-        title: "モバイルゲーム向けプラットフォーム運用・開発 / フルスタックエンジニア",
+        title: "モバイルゲーム向けバックエンドプラットフォーム運用・開発",
         company: "株式会社ディー・エヌ・エー",
         period: "2025年1月 - 現在",
         current: true,
         description: [
           {
-            text: "Ruby on Rails + MySQL / Memcached + AWS / GCP 各種サービスによるサーバーサイド開発",
+            text: "Ruby on Rails によるサーバー開発",
             items: [
-              "ワーカー（デーモン）の実装",
               "各種 API 開発",
-              "MySQL, ridgepole を用いたデータベース設計",
-              "インデックス設計によるクエリの高速化やインメモリキャッシュを用いたオフロード等のパフォーマンスチューニング",
+              "ActiveRecord + MySQL を利用した DB 設計, 開発",
+              "Daemon や Batch の実装",
+              "各種レガシーコンポーネントの移行",
+              "Framework のアップデート対応",
+              "各種監視, 障害対応",
             ],
           },
           {
-            text: "C++ による SDK 開発",
-            items: ["エラープロトコル改修", "http 基盤の改修", "レスポンス Parser の実装"],
-          },
-          {
-            text: "Unity + C# による API テストアプリ改修",
+            text: "C++ を用いた SDK 開発",
+            items: ["エラープロトコルの改修", "ミドルウェアの改修", "レスポンス Parser の実装"],
           },
         ],
       },
       {
-        title: "新規モバイルゲーム / ゲームクライアントエンジニア（テックリード）",
+        title: "Unity (Android, iOS) 新規モバイルゲームタイトル (リードエンジニア)",
         company: "株式会社ディー・エヌ・エー",
         period: "2024年5月 - 2024年12月",
         description: [
           {
-            text: "大規模モバイルゲームタイトル開発におけるテックリード",
-            items: [
-              "開発計画の策定やメンバーに割り当てたタスクの進捗管理",
-              "協業他社や社内の別チームとの連携や技術的な調整",
-            ],
+            text: "社内外の多数のステークホルダーとの連携",
+            items: ["複数の協業各社との役務分担の取り決めや期待値のすり合わせ", "技術的な連携や調整"],
           },
           {
-            text: "Unity + C# によるクライアントサイド開発",
+            text: "大規模タイトル開発でのアーキテクト経験",
+            items: ["Clean Architecture をベースにした設計", "各種 PoC", "各種 OSS 等を含む技術選定"],
+          },
+          {
+            text: "ミドルウェアを含む各種クライアント基盤の実装",
             items: [
-              "アーキテクチャ設計（Clean Architecture）や技術選定, PoC",
-              "UI, Animation や各種システムロジックの実装",
-              "基盤開発（UI ナビゲーション基盤, Addressable Asset System を用いた Asset 基盤, Glocalization 基盤）",
-              "Fragment Shader や Animation の実装",
-              "各種パフォーマンスチューニング（並列化, バッチング, Rebuild 制御）",
+              "取引システム",
+              "キャッシュ設計と実装",
+              "UI 基盤, Addressable Asset System を用いたミドルウェア開発, Globalization",
+              "Shader の実装",
+              "各種パフォーマンスチューニング",
             ],
           },
         ],
       },
       {
-        title: "新規事業 / フルスタックエンジニア",
+        title: "新規サービス開発",
         company: "株式会社ディー・エヌ・エー",
         period: "2023年9月 - 2024年5月",
         description: [
-          {
-            text: "Unity + C# + C++ によるクライアントサイド開発",
-            items: ["Clean Architecture を用いた UI やシステムロジックの実装", "C++ を用いたネイティブプラグイン開発"],
-          },
-          {
-            text: "Go + GCP（Cloud Run + Firestore）によるサーバーサイド開発",
-            items: ["各種 API 開発", "GCS へのデプロイ基盤の改修"],
-          },
+          "Clean Architecture を用いた Unity クライアント開発",
+          "C++ ネイティブプラグイン開発",
+          "Go + GCP の各種マネージドサービスを用いたサーバー開発",
         ],
       },
       {
-        title: "PC + WebGL 新規ゲーム / フルスタックエンジニア（テックリード）",
+        title: "Unity (PC + WebGL) 新規ゲームタイトル (リードエンジニア)",
         company: "株式会社ディー・エヌ・エー",
         period: "2022年9月 - 2023年9月",
         description: [
           {
-            text: "Steam, ライブゲーミングプラットフォーム（fingger）新規タイトル開発におけるテックリード",
+            text: "非エンジニア領域を含む幅広い要件への対応",
             items: [
-              "開発計画の策定やメンバーに割り当てたタスクの進捗管理",
-              "GDPR 等法務対応や Steam への Developer 登録",
-              "エンジニア2名のマネジメント",
+              "開発計画の策定やメンバーへの割り振り, タスクの進捗管理",
+              "協業他社を含む、社内外との連携や調整",
+              "GDPR 等の法務要件への対応",
+              "Steam へのデベロッパー登録対応",
+            ],
+          },
+          "幅広いプラットフォームへの対応 (macOS, Windows, WebGL)",
+          {
+            text: "各種ミドルウェアの実装や技術選定を含めたクライアント開発",
+            items: [
+              "アーキテクチャ設計, 技術選定",
+              "UI ナビゲーション基盤",
+              "Addressable Asset System を利用したミドルウェアの開発",
+              "アウトゲーム開発全般",
+              "インゲームのプロトタイプ実装",
             ],
           },
           {
-            text: "Unity（macOS, Windows, WebGL）+ C# によるクライアントサイド開発",
-            items: [
-              "アーキテクチャ設計, 技術選定, ",
-              "基盤開発（UI ナビゲーション基盤, Addressable Asset System を用いた Asset 基盤）",
-              "アウトゲーム開発とインゲームプロト実装",
-            ],
-          },
-          {
-            text: "PlayFab + Azure Functions（C#）によるサーバーサイド開発",
-            items: ["各種ワーカーの実装（アイテム付与や削除, プレイヤーデータ削除やエクスポート）"],
+            text: "PlayFab + Azure Functions (C#) を用いたサーバー開発",
+            items: ["PlayFab に存在しない機能要件 (アイテム付与, 削除, プレイヤーデータの削除, エクスポート) の実装"],
           },
           {
             text: "DevOps",
             items: [
-              "マスターデータ基盤開発",
-              "Steam との Integration 対応",
-              "Github Actions を用いた CI / CD（Steam, fingger）パイプラインの実装",
+              "Github Actions を用いた CI/CD パイプラインの構築",
+              "マスターデータのビルド, PlayFab へのデプロイ",
+              "ROM のビルド, Steam プラットフォームへのデプロイ",
             ],
           },
         ],
       },
       {
-        title: "WebGL 新規ゲーム / ゲームクライアントエンジニア（テックリード）",
+        title: "Unity (WebGL) 新規ゲームタイトル (リードエンジニア)",
         company: "株式会社ディー・エヌ・エー",
         period: "2022年3月 - 2022年8月",
         description: [
-          "Unity を用いたライブゲーミングプラットフォーム（fingger）向け新規ゲームタイトルのテックリード",
-          "ゲームクライアント（Unity + C#）アウトゲーム全システムの実装",
-          "エンジニア 2 名のマネジメント",
+          "Unity (WebGL) を用いたライブゲーミングプラットフォーム (fingger) 向け新規ゲームタイトル",
+          "カジュアルゲーム",
+          "クライアントのアウトゲーム開発全般",
         ],
       },
       {
-        title: "運用モバイルゲーム / フルスタックエンジニア（テックリード）",
+        title: "Unity (Android, iOS) 運用モバイルゲームタイトル (リードエンジニア)",
         company: "株式会社ディー・エヌ・エー",
         period: "2019年4月 - 2022年3月",
         description: [
           {
-            text: "大規模モバイルゲームタイトル運用におけるテックリード",
+            text: "大規模タイトルでのリードエンジニア経験",
             items: [
-              "開発計画の策定やメンバーに割り当てたタスクの進捗管理",
-              "協業他社や社内の別チームとの連携や技術的な調整",
-              "障害発生時の対応や各種ディレクション",
-              "エンジニア 10 名のマネジメント",
+              "エンジニア 10 名規模のマネジメント",
+              "開発計画の策定やメンバーへの割り振り, タスクの進捗管理",
+              "協業他社を含む、社内外との連携や調整",
+              "障害発生時の各種ディレクション",
             ],
           },
           {
-            text: "Unity（Android, iOS）+ C# によるクライアントサイド開発",
-            items: [
-              "MVP / DDD の保守",
-              "リアルタイムマルチバトルシステムの実装",
-              "UI や Animation の実装",
-              "各種システムロジックの実装（ミッション, マッチング, GvG 系）",
-            ],
+            text: "クライアント開発全般を担当",
+            items: ["MVP + DDD ベースの設計を用いた実装", "リアルタイム PvP システムの実装", "UI や Animation の実装"],
           },
           {
-            text: "Ruby on Rails + MySQL + オンプレミス によるサーバーサイド開発",
+            text: "Ruby on Rails によるサーバー開発",
             items: [
-              "マッチングアルゴリズムやワーカーの実装",
-              "各種 API 開発（チャット, GvG 系）や管理画面への機能追加",
-              "MySQL, ridgepole を用いたデータベース設計, インデックス設計によるクエリの高速化",
+              "ランクレーティングに応じた GvG のグルーピングシステムの実装",
+              "各種 API 開発 (チャット, GvG)",
+              "Operation 管理画面への各種機能追加",
+              "ActiveRecord + MySQL を利用した DB 設計, 開発",
             ],
           },
           {
             text: "DevOps",
             items: [
-              "Jenkins を用いた CI / CD パイプラインの改善",
-              "Unity 大型アップデート対応（2018 LTS -> 2020 LTS）",
-              "iOS / Android プラットフォーム対応、ストア審査対応",
-              "ビルドサーバーの構築と運用",
+              "Jenkins を用いた CI/CD パイプラインの構築, 改善",
+              "Unity 大型アップデート対応 (2018 LTS -> 2020 LTS)",
             ],
           },
         ],
@@ -397,16 +389,16 @@ export const resumeData: Record<Language, ResumeData> = {
     ],
     freelance: [
       {
-        title: "Web 3 新規ゲーム / ゲームクライアントエンジニア",
+        title: "Web 3 新規ゲームタイトル",
         description: [
           {
-            text: "Unity（Android, iOS）+ C# によるクライアントサイド開発",
+            text: "Unity (Android, iOS) によるクライアント開発",
             items: [
               "アーキテクチャの設計補助, コードレビュー",
               "各種 UI 機能の実装",
-              "IAP（In-App Purchase）機能の実装",
-              "各種システムロジックの実装（ガチャ, SHOP）",
-              "Addressable Asset System を用いた Asset 基盤の実装",
+              "IAP (In-App Purchase) 機能の実装",
+              "各種システムロジックの実装 (ガチャ, SHOP)",
+              "Addressable Asset System を用いた Asset ミドルウェアの実装",
               "Github Actions + GCS を用いた AssetBundle ビルドパイプラインの構築",
             ],
           },
