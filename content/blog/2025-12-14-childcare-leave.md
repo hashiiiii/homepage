@@ -7,8 +7,9 @@ readTime: '5 min read'
 published: false
 ---
 
-https://zenn.dev/bigen1925/articles/reason-why-you-should-take-paternity-leave
+# wip
 
+https://zenn.dev/bigen1925/articles/reason-why-you-should-take-paternity-leave
 
 * 6月に生まれる
 * 会社の評価期間は 4/1 ~ 9/30 & 10/1 ~ 3/31 固定
