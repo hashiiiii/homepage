@@ -26,7 +26,6 @@ export const LanguageToggle: React.FC = () => {
   }
 
   const isDisabled = !multilingualEnabled;
-  const displayLanguage = isDisabled ? defaultLanguage : language;
 
   const toggleLanguage = () => {
     if (isDisabled) return;
