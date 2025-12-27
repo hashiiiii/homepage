@@ -41,17 +41,24 @@ export const LanguageToggle: React.FC = () => {
     return lang === "en" ? "🇺🇸" : "🇯🇵";
   };
 
+  const getNextLanguage = (): Language => {
+    const currentLang = isDisabled ? defaultLanguage : language;
+    const currentIndex = availableLanguages.indexOf(currentLang);
+    const nextIndex = (currentIndex + 1) % availableLanguages.length;
+    return availableLanguages[nextIndex];
+  };
+
   const getAriaLabel = (): string => {
     if (isDisabled) {
       return "Language switching not available for this page";
     }
-    const nextLang = availableLanguages[(availableLanguages.indexOf(language) + 1) % availableLanguages.length];
+    const nextLang = getNextLanguage();
     return `Switch to ${nextLang === "en" ? "English" : "Japanese"}`;
   };
 
   return (
     <ToggleButton onClick={toggleLanguage} disabled={isDisabled} ariaLabel={getAriaLabel()}>
-      <div className="flex size-5 items-center justify-center text-base">{getLanguageDisplay(displayLanguage)}</div>
+      <div className="flex size-5 items-center justify-center text-base">{getLanguageDisplay(getNextLanguage())}</div>
     </ToggleButton>
   );
 };
