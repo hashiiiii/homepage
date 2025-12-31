@@ -4,7 +4,7 @@ excerpt: '新卒以来 6 年以上積んでいたであろう入門書を読ん�
 date: '2025-12-28'
 tags: ['Reading']
 readTime: '10 min read'
-published: false
+published: true
 ---
 
 # 前置き
