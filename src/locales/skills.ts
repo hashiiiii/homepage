@@ -17,7 +17,7 @@ export const skillsData: Record<Language, SkillsData> = {
     categories: [
       {
         category: "Languages",
-        skills: ["C#", "Ruby", "C++", "Zig", "Go", "Typescript"],
+        skills: ["C#", "Ruby", "C++", "Go", "Typescript"],
         color: "bg-tn-blue/10 text-tn-blue border-tn-blue/20",
       },
       {
