@@ -140,6 +140,14 @@
   --tn-orange: #ff9e64;
 }
 
+/* Disable all transitions during theme switch to prevent color animation delay */
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+  transition-duration: 0ms !important;
+  animation-duration: 0ms !important;
+}
+
 .light {
   /* Tokyo Night Light mode colors */
   --tn-bg-primary: #e6e7ed;

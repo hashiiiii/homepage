@@ -7,7 +7,6 @@ import { ThemeToggle } from "./ThemeToggle";
 const navLinks = [
   { path: "/blog", label: "Blog" },
   { path: "/resume", label: "Resume" },
-  { path: "/product", label: "Product" },
 ];
 
 export const Navigation: React.FC = () => {

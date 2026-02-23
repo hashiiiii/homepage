@@ -1,5 +1,5 @@
 import type React from "react";
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useLayoutEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type ThemeMode = "dark" | "light";
@@ -36,13 +36,21 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const [theme, setTheme] = useLocalStorage<ThemeMode>("theme", getDefaultTheme(), isThemeMode);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
+    root.classList.add("no-transition");
+
     if (theme === "light") {
       root.classList.add("light");
     } else {
       root.classList.remove("light");
     }
+
+    const raf = requestAnimationFrame(() => {
+      root.classList.remove("no-transition");
+    });
+
+    return () => cancelAnimationFrame(raf);
   }, [theme]);
 
   const toggleTheme = () => {

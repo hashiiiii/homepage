@@ -18,7 +18,7 @@ export const Blog: React.FC = () => {
   const { displayedItems: displayedPosts, hasMore, loadMore, remainingCount } = usePagination(filteredPosts, 6);
 
   return (
-    <div className="animate-fade-in">
+    <div>
       <div className="w-full">
         <div className="mb-6 sm:mb-8">
           <h1 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">Blog</h1>

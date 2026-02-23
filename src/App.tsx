@@ -12,7 +12,6 @@ const Landing = lazy(() => import("./pages/Landing").then((m) => ({ default: m.L
 const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
 const BlogDetail = lazy(() => import("./pages/BlogDetail").then((m) => ({ default: m.BlogDetail })));
 const Resume = lazy(() => import("./pages/Resume").then((m) => ({ default: m.Resume })));
-const Product = lazy(() => import("./pages/Product").then((m) => ({ default: m.Product })));
 
 const PageLoader = () => (
   <div className="flex min-h-screen items-center justify-center">
@@ -31,7 +30,6 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="/product" element={<Product />} />
         </Routes>
       </Suspense>
     </Layout>

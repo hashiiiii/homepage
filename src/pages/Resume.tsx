@@ -23,7 +23,7 @@ export const Resume: React.FC = () => {
   const currentExperience = activeTab === "main" ? data.experience : data.freelance;
 
   return (
-    <div className="w-full animate-fade-in">
+    <div className="w-full">
       <div className="mb-8 sm:mb-12">
         <h1 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">{data.title}</h1>
         {data.subtitle && <p className="text-xl text-tn-fg-secondary">{data.subtitle}</p>}
