@@ -1,73 +1,190 @@
-// 生成された静的データをインポート
-// ビルド時に生成されるため、実行時には必ず存在する
-import metadataData from "@/generated/blog-metadata.json";
-import postsData from "@/generated/blog-posts.json";
-import type { BlogMetadata, BlogPost, BlogPostWithContent } from "@/models/blog.model";
+import fs from "node:fs";
+import { createRequire } from "node:module";
+import path from "node:path";
+import matter from "gray-matter";
+import Parser from "rss-parser";
+import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "../types/blog";
 
-/**
- * ブログ記事一覧を取得
- */
-export function getBlogPosts(): BlogPostWithContent[] {
-  return postsData as BlogPostWithContent[];
+const require = createRequire(import.meta.url);
+const markdownToHtml: (markdown: string, options?: Record<string, unknown>) => Promise<string> =
+  require("zenn-markdown-html").default;
+
+const ZENN_USERNAME = "hashiiiii";
+
+function getContentDir(): string {
+  // Astro uses project root as cwd
+  return path.resolve(process.cwd(), "content/blog");
 }
 
 /**
- * ブログメタデータを取得
+ * Parse markdown file and extract blog post data
  */
-export function getBlogMetadata(): BlogMetadata {
-  return metadataData as BlogMetadata;
+function extractPost(fileContent: string, filename: string): BlogPostWithContent {
+  const { content, data } = matter(fileContent);
+  const id = filename.replace(/\.md$/, "");
+
+  return {
+    id,
+    title: String(data.title || ""),
+    excerpt: String(data.excerpt || ""),
+    content,
+    html: "",
+    date: String(data.date || new Date().toISOString().split("T")[0]),
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    readTime: String(data.readTime || "5 min"),
+    published: typeof data.published === "boolean" ? data.published : true,
+    source: "local",
+  };
 }
 
 /**
- * IDによるブログ記事取得
+ * Validate a blog post's required fields
  */
-export function getBlogPostById(id: string): BlogPostWithContent | null {
-  const posts = getBlogPosts();
-  return posts.find((post) => post.id === id) || null;
-}
+function validatePost(post: BlogPostWithContent): string[] {
+  const errors: string[] = [];
 
-/**
- * タグによるブログ記事フィルタリング
- */
-export function getBlogPostsByTag(tag: string): BlogPost[] {
-  const posts = getBlogPosts();
-  return posts
-    .map(({ content, ...metadata }) => metadata)
-    .filter((post) => post.tags.some((t) => t.toLowerCase() === tag.toLowerCase()));
-}
+  if (!post.title) errors.push(`[${post.id}] title is required`);
+  if (!post.date) errors.push(`[${post.id}] date is required`);
 
-/**
- * 検索によるブログ記事フィルタリング
- */
-export function searchBlogPosts(query: string): BlogPost[] {
-  const posts = getBlogPosts();
-  const lowerQuery = query.toLowerCase();
-
-  return posts
-    .map(({ content, ...metadata }) => metadata)
-    .filter(
-      (post) =>
-        post.title.toLowerCase().includes(lowerQuery) ||
-        post.excerpt.toLowerCase().includes(lowerQuery) ||
-        post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
-    );
-}
-
-/**
- * ブログ記事取得関数
- */
-export function fetchBlogPost(id: string): BlogPostWithContent | null {
-  const post = getBlogPostById(id);
-  if (!post) {
-    throw new Error("Blog post not found");
+  if (post.date) {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(post.date)) {
+      errors.push(`[${post.id}] date must be in YYYY-MM-DD format`);
+    }
   }
 
-  return post;
+  if (!Array.isArray(post.tags)) {
+    errors.push(`[${post.id}] tags must be an array`);
+  }
+
+  if (!post.content) errors.push(`[${post.id}] content is required`);
+
+  return errors;
 }
 
 /**
- * ブログメタデータ取得関数
+ * Load and process all local markdown blog posts
  */
-export function fetchBlogMetadata(): BlogMetadata {
-  return getBlogMetadata();
+export async function loadLocalPosts(): Promise<BlogPostWithContent[]> {
+  const contentDir = getContentDir();
+
+  if (!fs.existsSync(contentDir)) {
+    return [];
+  }
+
+  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".md"));
+  const posts: BlogPostWithContent[] = [];
+  const allErrors: string[] = [];
+
+  for (const file of files) {
+    const filePath = path.join(contentDir, file);
+    const fileContent = fs.readFileSync(filePath, "utf-8");
+    const post = extractPost(fileContent, file);
+
+    const errors = validatePost(post);
+    if (errors.length > 0) {
+      allErrors.push(...errors);
+      continue;
+    }
+
+    post.html = await markdownToHtml(post.content, {
+      embedOrigin: "https://embed.zenn.studio",
+    });
+
+    posts.push(post);
+  }
+
+  if (allErrors.length > 0) {
+    console.error("Blog validation errors:", allErrors);
+  }
+
+  return posts;
+}
+
+/**
+ * Fetch posts from Zenn RSS feed
+ */
+export async function fetchZennPosts(): Promise<BlogPost[]> {
+  try {
+    const parser = new Parser();
+    const feed = await parser.parseURL(`https://zenn.dev/${ZENN_USERNAME}/feed`);
+
+    return feed.items.map((item) => {
+      const urlParts = item.link?.split("/") || [];
+      const id = `zenn-${urlParts[urlParts.length - 1] || item.guid || Date.now().toString()}`;
+      const date = item.pubDate
+        ? new Date(item.pubDate).toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0];
+
+      return {
+        id,
+        title: item.title || "Untitled",
+        excerpt: item.contentSnippet || item.content?.substring(0, 150) || "",
+        date,
+        tags: item.categories || ["Zenn"],
+        readTime: "zenn",
+        published: true,
+        source: "zenn" as const,
+        externalUrl: item.link,
+      };
+    });
+  } catch (error) {
+    console.error("Failed to fetch Zenn posts:", error);
+    return [];
+  }
+}
+
+/**
+ * Get all published posts (local + Zenn), sorted by date descending
+ */
+export async function getAllPosts(): Promise<BlogPost[]> {
+  const localPosts = (await loadLocalPosts()).filter((p) => p.published !== false);
+  const zennPosts = await fetchZennPosts();
+
+  const all = [...localPosts, ...zennPosts];
+  return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+/**
+ * Get a single post by slug with HTML content
+ */
+export async function getPostBySlug(slug: string): Promise<BlogPostWithContent | null> {
+  const posts = await loadLocalPosts();
+  return posts.find((p) => p.id === slug) || null;
+}
+
+/**
+ * Calculate blog metadata (tag counts, archives)
+ */
+export function calculateMetadata(posts: BlogPost[]): BlogMetadata {
+  const tagCounts: Record<string, number> = {};
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    }
+  }
+
+  const tagCountsArray: TagCount[] = Object.entries(tagCounts)
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+
+  const monthlyArchives: Record<string, BlogArchive> = {};
+  for (const post of posts) {
+    const date = new Date(post.date);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const key = `${year}-${month.toString().padStart(2, "0")}`;
+
+    if (!monthlyArchives[key]) {
+      monthlyArchives[key] = { year, month, count: 0 };
+    }
+    monthlyArchives[key].count++;
+  }
+
+  const archives: BlogArchive[] = Object.values(monthlyArchives).sort((a, b) => {
+    if (a.year !== b.year) return b.year - a.year;
+    return b.month - a.month;
+  });
+
+  return { posts, archives, tagCounts: tagCountsArray };
 }

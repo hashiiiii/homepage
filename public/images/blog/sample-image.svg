@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a5b18ba3c4cec96e0c100f8020f25635d30e90109de9b7dfe5c4446b3280f88e
-size 651
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="#16161e"/>
+  <rect x="50" y="50" width="500" height="300" fill="#1a1b26" stroke="#7aa2f7" stroke-width="2"/>
+  <text x="300" y="150" font-family="Arial, sans-serif" font-size="24" fill="#a9b1d6" text-anchor="middle">
+    Sample Image
+  </text>
+  <text x="300" y="200" font-family="Arial, sans-serif" font-size="16" fill="#787c99" text-anchor="middle">
+    Tokyo Night Theme
+  </text>
+  <circle cx="150" cy="280" r="30" fill="#7aa2f7"/>
+  <circle cx="300" cy="280" r="30" fill="#9ece6a"/>
+  <circle cx="450" cy="280" r="30" fill="#f7768e"/>
+</svg>

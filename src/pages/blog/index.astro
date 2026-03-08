@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getAllPosts } from '../../lib/blog';
+
+const posts = await getAllPosts();
+
+// Collect all unique tags
+const allTags = [...new Set(posts.flatMap((p) => p.tags))].sort();
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+---
+
+<Base title="Blog">
+  <h1>Blog</h1>
+
+  {allTags.length > 0 && (
+    <div class="tag-filters" id="tag-filters">
+      <button class="tag-btn active" data-tag="">All</button>
+      {allTags.map((tag) => (
+        <button class="tag-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+  )}
+
+  <ul class="post-list" id="post-list">
+    {posts.map((post) => {
+      const href = post.source === 'zenn' && post.externalUrl
+        ? post.externalUrl
+        : `/blog/${post.id}`;
+      const isExternal = post.source === 'zenn' && post.externalUrl;
+      return (
+        <li data-tags={JSON.stringify(post.tags)}>
+          <a
+            href={href}
+            class="post-row"
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            <span class="post-date">{formatDate(post.date)}</span>
+            <span class="post-title">{post.title}</span>
+            <span class="post-readtime">{post.readTime}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</Base>
+
+<script>
+  const filters = document.getElementById('tag-filters');
+  const items = document.querySelectorAll<HTMLLIElement>('#post-list li');
+
+  filters?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.tag-btn');
+    if (!btn) return;
+
+    const tag = btn.dataset.tag || '';
+
+    // Update active button
+    filters.querySelectorAll('.tag-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update URL
+    const url = new URL(window.location.href);
+    if (tag) {
+      url.searchParams.set('tag', tag);
+    } else {
+      url.searchParams.delete('tag');
+    }
+    history.replaceState(null, '', url.toString());
+
+    // Filter posts
+    items.forEach((li) => {
+      const tags: string[] = JSON.parse(li.dataset.tags || '[]');
+      li.style.display = !tag || tags.includes(tag) ? '' : 'none';
+    });
+  });
+
+  // Apply filter from URL on load
+  const initialTag = new URL(window.location.href).searchParams.get('tag');
+  if (initialTag) {
+    const btn = filters?.querySelector<HTMLButtonElement>(`[data-tag="${CSS.escape(initialTag)}"]`);
+    if (btn) btn.click();
+  }
+</script>
+
+<style>
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-btn {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tag-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+
+  .tag-btn.active {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .post-list {
+    list-style: none;
+  }
+
+  .post-row {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    gap: 1rem;
+  }
+
+  .post-row:hover {
+    text-decoration: none;
+  }
+
+  .post-row:hover .post-title {
+    color: var(--color-link);
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    width: 6.5rem;
+    white-space: nowrap;
+  }
+
+  .post-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.6;
+    flex: 1;
+    min-width: 0;
+    min-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .post-readtime {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .post-row {
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .post-date {
+      width: auto;
+    }
+
+    .post-title {
+      order: -1;
+      width: 100%;
+    }
+
+    .post-readtime {
+      width: auto;
+      text-align: left;
+    }
+
+    .post-date::after {
+      content: ' · ';
+    }
+  }
+</style>

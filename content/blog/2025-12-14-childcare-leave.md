@@ -3,7 +3,7 @@ title: '育休あれこれ'
 excerpt: '育児休業給付金とか保育所のこととか。'
 date: '2025-12-14'
 tags: ['Childcare']
-readTime: '5 min read'
+readTime: '5 min'
 published: false
 ---
 

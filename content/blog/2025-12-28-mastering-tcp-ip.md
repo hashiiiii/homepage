@@ -3,7 +3,7 @@ title: 'マスタリング TCP / IP 入門編 第 5 版 を読んだ'
 excerpt: '新卒以来 6 年以上積んでいたであろう入門書を読んだ。'
 date: '2025-12-28'
 tags: ['Book']
-readTime: '10 min read'
+readTime: '10 min'
 published: true
 ---
 

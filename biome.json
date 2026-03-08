@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
   "files": {
-    "includes": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"]
+    "includes": ["src/**/*.ts"]
   },
   "vcs": {
     "enabled": true,
@@ -13,10 +13,5 @@
     "enabled": true,
     "indentStyle": "space",
     "lineWidth": 120
-  },
-  "javascript": {
-    "formatter": {
-      "indentStyle": "space"
-    }
   }
 }

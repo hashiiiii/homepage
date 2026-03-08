@@ -1,0 +1,66 @@
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Preserve zenn-content-css styles inside .znc */
+.znc *,
+.znc *::before,
+.znc *::after {
+  margin: revert;
+  padding: revert;
+}
+
+:root {
+  /* Warm Dark Theme */
+  --color-bg: #191816;
+  --color-bg-card: #22211e;
+  --color-bg-secondary: #2c2a27;
+  --color-text: #e7e2d8;
+  --color-text-secondary: #a9a49a;
+  --color-text-muted: #7e7a71;
+  --color-accent: #6bb873;
+  --color-link: #6bb873;
+  --color-link-hover: #8dd498;
+  --color-border: #383633;
+  --color-code-bg: #1e1d1a;
+  --color-code-text: #c7d1ad;
+  --color-tag-bg: #2c2a27;
+
+  /* Fonts */
+  --font-sans: 'Nunito', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --max-width: 48rem;
+}
+
+::selection {
+  background: #adff2e;
+  color: #191816;
+}
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

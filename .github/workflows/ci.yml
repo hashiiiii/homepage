@@ -7,90 +7,28 @@ on:
     branches: [main]
 
 jobs:
-  # 型チェック（最も高速）
-  typecheck:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: 'npm'
-      - name: Install dependencies
-        run: |
+      - run: |
           npm ci
-          npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64
-      - name: Build blog metadata (required for type checking)
-        run: npx tsx src/lib/build-blog.ts
-      - name: Type check
-        run: npm run typecheck
+          npm install --no-save @biomejs/cli-linux-x64
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
 
-  # Linter（並列実行）
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-      - name: Install dependencies
-        run: |
-          npm ci
-          npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64
-      - name: Run linter
-        run: npm run lint
-
-  # ビルド検証（並列実行）
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: 'npm'
-      - name: Install dependencies
-        run: |
-          npm ci
-          npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64
-      - name: Build frontend
-        run: npm run build
-
-  # テスト実行（並列実行、カバレッジ無し）
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-      - name: Install dependencies
-        run: |
-          npm ci
-          npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64
-      - name: Run tests
-        run: npm run test
-
-  # カバレッジ取得（mainブランチのみ）
-  coverage:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: 'npm'
-      - name: Install dependencies
-        run: |
-          npm ci
-          npm install --no-save @rollup/rollup-linux-x64-gnu @biomejs/cli-linux-x64
-      - name: Run tests with coverage
-        run: npm run test:coverage
+      - run: npm ci
+      - run: npm run build

@@ -3,7 +3,7 @@ title: 'Zenn 拡張構文テスト'
 excerpt: 'Zenn Editor の拡張構文が正しく動作するかのテスト記事です。メッセージボックス、アコーディオン、埋め込みコンテンツなどをテストします。'
 date: '2025-11-23'
 tags: ['Random']
-readTime: '5 min read'
+readTime: '5 min'
 published: true
 ---
 

@@ -3,7 +3,7 @@ title: 'マークダウン記法メモ'
 excerpt: '当ホームページで利用可能なマークダウン記法をメモするための記事です。'
 date: '2025-06-25'
 tags: ['Markdown', 'Test']
-readTime: '5 min read'
+readTime: '5 min'
 published: false
 ---
 

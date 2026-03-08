@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:76ba8988816a021dd9c6b2d28df68d2a86a2b669ba5b4024ed9dc6cd181861f0
-size 1024
+<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="#1a1b26" stroke="#7aa2f7" stroke-width="2"/>
+  <rect x="10" y="10" width="480" height="30" fill="#16161e"/>
+  <text x="15" y="30" font-family="monospace" font-size="14" fill="#9ece6a">
+    $ npm run dev
+  </text>
+  <text x="15" y="70" font-family="monospace" font-size="12" fill="#a9b1d6">
+    function greet(name: string): string {
+  </text>
+  <text x="15" y="90" font-family="monospace" font-size="12" fill="#7aa2f7">
+      return `Hello, ${name}!`;
+  </text>
+  <text x="15" y="110" font-family="monospace" font-size="12" fill="#a9b1d6">
+    }
+  </text>
+  <text x="15" y="150" font-family="monospace" font-size="12" fill="#565f89">
+    // TypeScript コード例
+  </text>
+  <text x="15" y="180" font-family="monospace" font-size="12" fill="#f7768e">
+    const message = greet("World");
+  </text>
+  <text x="15" y="200" font-family="monospace" font-size="12" fill="#9ece6a">
+    console.log(message);
+  </text>
+</svg>

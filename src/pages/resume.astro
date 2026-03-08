@@ -1,0 +1,439 @@
+---
+import Base from '../layouts/Base.astro';
+
+type DescriptionItem = string | { text: string; items?: DescriptionItem[] };
+
+interface ExperienceEntry {
+  title: string;
+  company?: string;
+  period?: string;
+  current?: boolean;
+  description: DescriptionItem[];
+}
+
+const experience: ExperienceEntry[] = [
+  {
+    title: 'モバイルゲーム向けバックエンドプラットフォーム運用・開発',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2025年1月 - 現在',
+    current: true,
+    description: [
+      {
+        text: 'Ruby on Rails によるサーバー開発',
+        items: [
+          '各種 API 開発',
+          'ActiveRecord + MySQL を利用した DB 設計, 開発',
+          'Daemon や Batch の実装',
+          '各種レガシーコンポーネントの移行',
+          'Framework のアップデート対応',
+          '各種監視, 障害対応',
+        ],
+      },
+      {
+        text: 'C++ を用いた SDK 開発',
+        items: ['エラープロトコルの改修', 'ミドルウェアの改修', 'レスポンス Parser の実装'],
+      },
+    ],
+  },
+  {
+    title: 'Unity (Android, iOS) 新規モバイルゲームタイトル (リードエンジニア)',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2024年5月 - 2024年12月',
+    description: [
+      {
+        text: '社内外の多数のステークホルダーとの連携',
+        items: ['複数の協業各社との役務分担の取り決めや期待値のすり合わせ', '技術的な連携や調整'],
+      },
+      {
+        text: '大規模タイトル開発でのアーキテクト経験',
+        items: ['Clean Architecture をベースにした設計', '各種 PoC', '各種 OSS 等を含む技術選定'],
+      },
+      {
+        text: 'ミドルウェアを含む各種クライアント基盤の実装',
+        items: [
+          '取引システム',
+          'キャッシュ設計と実装',
+          'UI 基盤, Addressable Asset System を用いたミドルウェア開発, Globalization',
+          'Shader の実装',
+          '各種パフォーマンスチューニング',
+        ],
+      },
+    ],
+  },
+  {
+    title: '新規サービス開発',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2023年9月 - 2024年5月',
+    description: [
+      'Clean Architecture を用いた Unity クライアント開発',
+      'C++ ネイティブプラグイン開発',
+      'Go + GCP の各種マネージドサービスを用いたサーバー開発',
+    ],
+  },
+  {
+    title: 'Unity (PC + WebGL) 新規ゲームタイトル (リードエンジニア)',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2022年9月 - 2023年9月',
+    description: [
+      {
+        text: '非エンジニア領域を含む幅広い要件への対応',
+        items: [
+          '開発計画の策定やメンバーへの割り振り, タスクの進捗管理',
+          '協業他社を含む、社内外との連携や調整',
+          'GDPR 等の法務要件への対応',
+          'Steam へのデベロッパー登録対応',
+        ],
+      },
+      '幅広いプラットフォームへの対応 (macOS, Windows, WebGL)',
+      {
+        text: '各種ミドルウェアの実装や技術選定を含めたクライアント開発',
+        items: [
+          'アーキテクチャ設計, 技術選定',
+          'UI ナビゲーション基盤',
+          'Addressable Asset System を利用したミドルウェアの開発',
+          'アウトゲーム開発全般',
+          'インゲームのプロトタイプ実装',
+        ],
+      },
+      {
+        text: 'PlayFab + Azure Functions (C#) を用いたサーバー開発',
+        items: ['PlayFab に存在しない機能要件 (アイテム付与, 削除, プレイヤーデータの削除, エクスポート) の実装'],
+      },
+      {
+        text: 'DevOps',
+        items: [
+          'Github Actions を用いた CI/CD パイプラインの構築',
+          'マスターデータのビルド, PlayFab へのデプロイ',
+          'ROM のビルド, Steam プラットフォームへのデプロイ',
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Unity (WebGL) 新規ゲームタイトル (リードエンジニア)',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2022年3月 - 2022年8月',
+    description: [
+      'Unity (WebGL) を用いたライブゲーミングプラットフォーム (fingger) 向け新規ゲームタイトル',
+      'カジュアルゲーム',
+      'クライアントのアウトゲーム開発全般',
+    ],
+  },
+  {
+    title: 'Unity (Android, iOS) 運用モバイルゲームタイトル (リードエンジニア)',
+    company: '株式会社ディー・エヌ・エー',
+    period: '2019年4月 - 2022年3月',
+    description: [
+      {
+        text: '大規模タイトルでのリードエンジニア経験',
+        items: [
+          'エンジニア 10 名規模のマネジメント',
+          '開発計画の策定やメンバーへの割り振り, タスクの進捗管理',
+          '協業他社を含む、社内外との連携や調整',
+          '障害発生時の各種ディレクション',
+        ],
+      },
+      {
+        text: 'クライアント開発全般を担当',
+        items: ['MVP + DDD ベースの設計を用いた実装', 'リアルタイム PvP システムの実装', 'UI や Animation の実装'],
+      },
+      {
+        text: 'Ruby on Rails によるサーバー開発',
+        items: [
+          'ランクレーティングに応じた GvG のグルーピングシステムの実装',
+          '各種 API 開発 (チャット, GvG)',
+          'Operation 管理画面への各種機能追加',
+          'ActiveRecord + MySQL を利用した DB 設計, 開発',
+        ],
+      },
+      {
+        text: 'DevOps',
+        items: [
+          'Jenkins を用いた CI/CD パイプラインの構築, 改善',
+          'Unity 大型アップデート対応 (2018 LTS -> 2020 LTS)',
+        ],
+      },
+    ],
+  },
+];
+
+const freelance: ExperienceEntry[] = [
+  {
+    title: 'Web 3 新規ゲームタイトル',
+    description: [
+      {
+        text: 'Unity (Android, iOS) によるクライアント開発',
+        items: [
+          'アーキテクチャの設計補助, コードレビュー',
+          '各種 UI 機能の実装',
+          'IAP (In-App Purchase) 機能の実装',
+          '各種システムロジックの実装 (ガチャ, SHOP)',
+          'Addressable Asset System を用いた Asset ミドルウェアの実装',
+          'Github Actions + GCS を用いた AssetBundle ビルドパイプラインの構築',
+        ],
+      },
+    ],
+  },
+];
+
+const education = {
+  degree: '理学修士（惑星大気科学専攻）',
+  university: '岡山大学大学院自然科学研究科',
+  period: '2017年 - 2019年',
+};
+
+const skills = [
+  {
+    category: 'プログラミング言語',
+    tags: ['C#', 'Ruby', 'C++', 'Go', 'TypeScript'],
+  },
+  {
+    category: 'フロントエンド・フレームワーク',
+    tags: ['Unity', 'Clean Architecture', 'MVP / DDD', 'Addressable Asset System', 'IAP', 'WebGL', 'Photon', 'Steam', 'fingger', 'React Native', 'React', 'Expo', 'Flutter'],
+  },
+  {
+    category: 'バックエンド・フレームワーク',
+    tags: ['Ruby on Rails', 'MySQL', 'PostgreSQL', 'Memcached', 'Hono', 'Node.js', 'Layered Architecture', 'MVC'],
+  },
+  {
+    category: 'クラウド・インフラ',
+    tags: ['AWS', 'GCP'],
+  },
+  {
+    category: 'DevOps',
+    tags: ['GitHub Actions', 'Jenkins'],
+  },
+  {
+    category: 'ロール',
+    tags: ['テックリード', 'チームマネジメント（2 - 10 名）', 'アーキテクト'],
+  },
+];
+---
+
+<Base title="Resume">
+  <h1>Resume</h1>
+
+  <section>
+    <h2>職歴</h2>
+    <div class="timeline">
+      {experience.map((entry) => (
+        <div class="timeline-entry">
+          <span class="period">{entry.period}</span>
+          <div class="company">{entry.company}</div>
+          <div class="role">{entry.title}</div>
+          <div class="description-list">
+            {entry.description.map((item) =>
+              typeof item === 'string' ? (
+                <div class="desc-item">
+                  <span class="desc-marker">▸</span>
+                  <span>{item}</span>
+                </div>
+              ) : (
+                <div class="desc-group">
+                  <div class="desc-item">
+                    <span class="desc-marker">▸</span>
+                    <span>{item.text}</span>
+                  </div>
+                  {item.items && (
+                    <div class="desc-children">
+                      {item.items.map((child) => (
+                        <div class="desc-item sub">
+                          <span class="desc-marker">▸</span>
+                          <span>{typeof child === 'string' ? child : (child as {text: string}).text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>個人</h2>
+    <div class="timeline">
+      {freelance.map((entry) => (
+        <div class="timeline-entry">
+          <div class="role">{entry.title}</div>
+          <div class="description-list">
+            {entry.description.map((item) =>
+              typeof item === 'string' ? (
+                <div class="desc-item">
+                  <span class="desc-marker">▸</span>
+                  <span>{item}</span>
+                </div>
+              ) : (
+                <div class="desc-group">
+                  <div class="desc-item">
+                    <span class="desc-marker">▸</span>
+                    <span>{item.text}</span>
+                  </div>
+                  {item.items && (
+                    <div class="desc-children">
+                      {item.items.map((child) => (
+                        <div class="desc-item sub">
+                          <span class="desc-marker">▸</span>
+                          <span>{typeof child === 'string' ? child : (child as {text: string}).text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>学歴</h2>
+    <div class="timeline-entry">
+      <div class="company">{education.degree}</div>
+      <div class="role">{education.university}</div>
+      <span class="period">{education.period}</span>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>技術スキル</h2>
+    <div class="skills-grid">
+      {skills.map((category) => (
+        <div class="skill-category">
+          <span class="skill-label">{category.category}</span>
+          <div class="skill-tags">
+            {category.tags.map((tag) => (
+              <span class="skill-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .timeline-entry {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .timeline-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .period {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .company {
+    font-weight: 700;
+    font-size: 1.0625rem;
+    margin-top: 0.25rem;
+  }
+
+  .role {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.125rem;
+  }
+
+  .description-list {
+    margin-top: 0.75rem;
+  }
+
+  .desc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.375rem;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .desc-marker {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .desc-children {
+    padding-left: 1.25rem;
+  }
+
+  .desc-item.sub {
+    font-size: 0.8125rem;
+  }
+
+  .desc-group {
+    margin-bottom: 0.25rem;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2.5rem 0;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .skill-category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+  }
+</style>
