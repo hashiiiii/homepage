@@ -4,29 +4,30 @@ Source code for hashiiiii.com
 
 ## Stack
 
-- [Astro](https://astro.build/) (static site generation)
 - TypeScript
+- [Bun](https://bun.sh/) (runtime / package manager)
+- [Astro](https://astro.build/) (static site generation)
 - [Biome](https://biomejs.dev/) (lint / format)
-- Vitest
-- Deployed on Vercel
+- [Vitest](https://vitest.dev/) (testing)
+- Vercel (hosting)
 
 ## Setup
 
 ```bash
-node -v  # >= 22
-npm install
+bun --version  # >= 1.3
+bun install
 ```
 
 ## Scripts
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start dev server |
-| `npm run build` | Production build (`dist/`) |
-| `npm run typecheck` | Type check |
-| `npm run lint` | Lint with Biome |
-| `npm run format` | Auto-format with Biome |
-| `npm run test` | Run Vitest |
+| `bun run dev` | Start dev server |
+| `bun run build` | Production build (`dist/`) |
+| `bun run typecheck` | Type check |
+| `bun run lint` | Lint with Biome |
+| `bun run format` | Auto-format with Biome |
+| `bun run test` | Run Vitest |
 
 ## Content
 
