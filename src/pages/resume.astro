@@ -1,63 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
 
-type DescriptionItem = string | { text: string; items?: DescriptionItem[] };
-
 interface ExperienceEntry {
   title: string;
   company?: string;
   period?: string;
   current?: boolean;
-  description: DescriptionItem[];
+  description: string[];
 }
 
 const experience: ExperienceEntry[] = [
   {
-    title: 'モバイルゲーム向けバックエンドプラットフォーム運用・開発',
+    title: 'バックエンドプラットフォーム開発',
     company: '株式会社ディー・エヌ・エー',
     period: '2025年1月 - 現在',
     current: true,
     description: [
-      {
-        text: 'Ruby on Rails によるサーバー開発',
-        items: [
-          '各種 API 開発',
-          'ActiveRecord + MySQL を利用した DB 設計, 開発',
-          'Daemon や Batch の実装',
-          '各種レガシーコンポーネントの移行',
-          'Framework のアップデート対応',
-          '各種監視, 障害対応',
-        ],
-      },
-      {
-        text: 'C++ を用いた SDK 開発',
-        items: ['エラープロトコルの改修', 'ミドルウェアの改修', 'レスポンス Parser の実装'],
-      },
+      'モバイルゲーム向け共通基盤の運用・開発 (Ruby on Rails / C++)',
+      'API 開発、DB 設計、レガシーコンポーネントの移行',
+      'C++ SDK のプロトコル改修・ミドルウェア開発',
     ],
   },
   {
-    title: 'Unity (Android, iOS) 新規モバイルゲームタイトル (リードエンジニア)',
+    title: '新規モバイルゲーム開発 — リードエンジニア',
     company: '株式会社ディー・エヌ・エー',
     period: '2024年5月 - 2024年12月',
     description: [
-      {
-        text: '社内外の多数のステークホルダーとの連携',
-        items: ['複数の協業各社との役務分担の取り決めや期待値のすり合わせ', '技術的な連携や調整'],
-      },
-      {
-        text: '大規模タイトル開発でのアーキテクト経験',
-        items: ['Clean Architecture をベースにした設計', '各種 PoC', '各種 OSS 等を含む技術選定'],
-      },
-      {
-        text: 'ミドルウェアを含む各種クライアント基盤の実装',
-        items: [
-          '取引システム',
-          'キャッシュ設計と実装',
-          'UI 基盤, Addressable Asset System を用いたミドルウェア開発, Globalization',
-          'Shader の実装',
-          '各種パフォーマンスチューニング',
-        ],
-      },
+      'Unity (Android / iOS) 大規模タイトルのアーキテクト・技術選定',
+      '複数の協業各社とのステークホルダー連携・役務調整',
+      'Clean Architecture ベースのクライアント基盤設計・パフォーマンスチューニング',
     ],
   },
   {
@@ -65,113 +36,48 @@ const experience: ExperienceEntry[] = [
     company: '株式会社ディー・エヌ・エー',
     period: '2023年9月 - 2024年5月',
     description: [
-      'Clean Architecture を用いた Unity クライアント開発',
-      'C++ ネイティブプラグイン開発',
-      'Go + GCP の各種マネージドサービスを用いたサーバー開発',
+      'Unity クライアント (Clean Architecture) + C++ ネイティブプラグイン開発',
+      'Go + GCP マネージドサービスを用いたサーバー開発',
     ],
   },
   {
-    title: 'Unity (PC + WebGL) 新規ゲームタイトル (リードエンジニア)',
+    title: 'PC / WebGL ゲーム開発 — リードエンジニア',
     company: '株式会社ディー・エヌ・エー',
     period: '2022年9月 - 2023年9月',
     description: [
-      {
-        text: '非エンジニア領域を含む幅広い要件への対応',
-        items: [
-          '開発計画の策定やメンバーへの割り振り, タスクの進捗管理',
-          '協業他社を含む、社内外との連携や調整',
-          'GDPR 等の法務要件への対応',
-          'Steam へのデベロッパー登録対応',
-        ],
-      },
-      '幅広いプラットフォームへの対応 (macOS, Windows, WebGL)',
-      {
-        text: '各種ミドルウェアの実装や技術選定を含めたクライアント開発',
-        items: [
-          'アーキテクチャ設計, 技術選定',
-          'UI ナビゲーション基盤',
-          'Addressable Asset System を利用したミドルウェアの開発',
-          'アウトゲーム開発全般',
-          'インゲームのプロトタイプ実装',
-        ],
-      },
-      {
-        text: 'PlayFab + Azure Functions (C#) を用いたサーバー開発',
-        items: ['PlayFab に存在しない機能要件 (アイテム付与, 削除, プレイヤーデータの削除, エクスポート) の実装'],
-      },
-      {
-        text: 'DevOps',
-        items: [
-          'Github Actions を用いた CI/CD パイプラインの構築',
-          'マスターデータのビルド, PlayFab へのデプロイ',
-          'ROM のビルド, Steam プラットフォームへのデプロイ',
-        ],
-      },
+      'マルチプラットフォーム (macOS / Windows / WebGL) 対応のクライアント設計・開発',
+      'PlayFab + Azure Functions (C#) によるサーバー開発',
+      'GitHub Actions での CI/CD・Steam デプロイパイプライン構築',
+      'GDPR 対応や Steam デベロッパー登録など非エンジニア領域もカバー',
     ],
   },
   {
-    title: 'Unity (WebGL) 新規ゲームタイトル (リードエンジニア)',
+    title: 'WebGL ゲーム開発 — リードエンジニア',
     company: '株式会社ディー・エヌ・エー',
     period: '2022年3月 - 2022年8月',
     description: [
-      'Unity (WebGL) を用いたライブゲーミングプラットフォーム (fingger) 向け新規ゲームタイトル',
-      'カジュアルゲーム',
-      'クライアントのアウトゲーム開発全般',
+      'ライブゲーミングプラットフォーム (fingger) 向けカジュアルゲームの開発',
     ],
   },
   {
-    title: 'Unity (Android, iOS) 運用モバイルゲームタイトル (リードエンジニア)',
+    title: '運用モバイルゲーム — リードエンジニア',
     company: '株式会社ディー・エヌ・エー',
     period: '2019年4月 - 2022年3月',
     description: [
-      {
-        text: '大規模タイトルでのリードエンジニア経験',
-        items: [
-          'エンジニア 10 名規模のマネジメント',
-          '開発計画の策定やメンバーへの割り振り, タスクの進捗管理',
-          '協業他社を含む、社内外との連携や調整',
-          '障害発生時の各種ディレクション',
-        ],
-      },
-      {
-        text: 'クライアント開発全般を担当',
-        items: ['MVP + DDD ベースの設計を用いた実装', 'リアルタイム PvP システムの実装', 'UI や Animation の実装'],
-      },
-      {
-        text: 'Ruby on Rails によるサーバー開発',
-        items: [
-          'ランクレーティングに応じた GvG のグルーピングシステムの実装',
-          '各種 API 開発 (チャット, GvG)',
-          'Operation 管理画面への各種機能追加',
-          'ActiveRecord + MySQL を利用した DB 設計, 開発',
-        ],
-      },
-      {
-        text: 'DevOps',
-        items: [
-          'Jenkins を用いた CI/CD パイプラインの構築, 改善',
-          'Unity 大型アップデート対応 (2018 LTS -> 2020 LTS)',
-        ],
-      },
+      'エンジニア 10 名規模のチームマネジメント・開発計画策定',
+      'Unity クライアント開発全般 (リアルタイム PvP、UI / Animation)',
+      'Ruby on Rails によるサーバー開発 (GvG グルーピング、チャット API 等)',
+      'Jenkins CI/CD 構築、Unity 大型アップデート対応',
     ],
   },
 ];
 
 const freelance: ExperienceEntry[] = [
   {
-    title: 'Web 3 新規ゲームタイトル',
+    title: 'Web 3 モバイルゲーム開発',
     description: [
-      {
-        text: 'Unity (Android, iOS) によるクライアント開発',
-        items: [
-          'アーキテクチャの設計補助, コードレビュー',
-          '各種 UI 機能の実装',
-          'IAP (In-App Purchase) 機能の実装',
-          '各種システムロジックの実装 (ガチャ, SHOP)',
-          'Addressable Asset System を用いた Asset ミドルウェアの実装',
-          'Github Actions + GCS を用いた AssetBundle ビルドパイプラインの構築',
-        ],
-      },
+      'Unity (Android / iOS) クライアント開発 — アーキテクチャ設計補助・コードレビュー',
+      'IAP、ガチャ等のシステム実装、AssetBundle ビルドパイプライン構築',
     ],
   },
 ];
@@ -222,31 +128,12 @@ const skills = [
           <div class="company">{entry.company}</div>
           <div class="role">{entry.title}</div>
           <div class="description-list">
-            {entry.description.map((item) =>
-              typeof item === 'string' ? (
-                <div class="desc-item">
-                  <span class="desc-marker">▸</span>
-                  <span>{item}</span>
-                </div>
-              ) : (
-                <div class="desc-group">
-                  <div class="desc-item">
-                    <span class="desc-marker">▸</span>
-                    <span>{item.text}</span>
-                  </div>
-                  {item.items && (
-                    <div class="desc-children">
-                      {item.items.map((child) => (
-                        <div class="desc-item sub">
-                          <span class="desc-marker">▸</span>
-                          <span>{typeof child === 'string' ? child : (child as {text: string}).text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )
-            )}
+            {entry.description.map((item) => (
+              <div class="desc-item">
+                <span class="desc-marker">▸</span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       ))}
@@ -262,31 +149,12 @@ const skills = [
         <div class="timeline-entry">
           <div class="role">{entry.title}</div>
           <div class="description-list">
-            {entry.description.map((item) =>
-              typeof item === 'string' ? (
-                <div class="desc-item">
-                  <span class="desc-marker">▸</span>
-                  <span>{item}</span>
-                </div>
-              ) : (
-                <div class="desc-group">
-                  <div class="desc-item">
-                    <span class="desc-marker">▸</span>
-                    <span>{item.text}</span>
-                  </div>
-                  {item.items && (
-                    <div class="desc-children">
-                      {item.items.map((child) => (
-                        <div class="desc-item sub">
-                          <span class="desc-marker">▸</span>
-                          <span>{typeof child === 'string' ? child : (child as {text: string}).text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )
-            )}
+            {entry.description.map((item) => (
+              <div class="desc-item">
+                <span class="desc-marker">▸</span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       ))}
@@ -386,17 +254,6 @@ const skills = [
     flex-shrink: 0;
   }
 
-  .desc-children {
-    padding-left: 1.25rem;
-  }
-
-  .desc-item.sub {
-    font-size: 0.8125rem;
-  }
-
-  .desc-group {
-    margin-bottom: 0.25rem;
-  }
 
   .divider {
     border: none;
