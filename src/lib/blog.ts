@@ -3,7 +3,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import matter from "gray-matter";
 import Parser from "rss-parser";
-import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "../types/blog";
+import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "@/types/blog";
 
 const require = createRequire(import.meta.url);
 const markdownToHtml: (markdown: string, options?: Record<string, unknown>) => Promise<string> =

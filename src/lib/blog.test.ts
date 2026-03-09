@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { BlogPost } from "../types/blog";
-import { calculateMetadata, loadLocalPosts } from "./blog";
+import { calculateMetadata, loadLocalPosts } from "@/lib/blog";
+import type { BlogPost } from "@/types/blog";
 
 describe("loadLocalPosts", () => {
   it("should load markdown files from content/blog", async () => {
