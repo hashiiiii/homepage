@@ -1,0 +1,76 @@
+---
+layout: base.html
+title: Blog
+---
+<div class="blog-list">
+  <h1>Blog</h1>
+
+  {% if blog.allTags.size > 0 %}
+  <div class="tag-filters" id="tag-filters">
+    <button class="tag-btn active" data-tag="">All</button>
+    {% for tag in blog.allTags %}
+    <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <ul class="post-list" id="post-list">
+    {% for post in blog.posts %}
+    {% if post.source == 'zenn' and post.externalUrl %}
+      {% assign href = post.externalUrl %}
+      {% assign isExternal = true %}
+    {% else %}
+      {% assign href = '/blog/' | append: post.id | append: '/' %}
+      {% assign isExternal = false %}
+    {% endif %}
+    <li data-tags="{{ post.tags | jsonify }}">
+      <a
+        href="{{ href }}"
+        class="post-row"
+        {% if isExternal %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        <span class="post-title">{{ post.title }}</span>
+        <span class="post-meta">
+          <span class="post-date">{{ post.date | formatDate }}</span>
+          <span class="post-meta-sep">&middot;</span>
+          <span class="post-readtime">{{ post.readTime }}</span>
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+  const filters = document.getElementById('tag-filters');
+  const items = document.querySelectorAll('#post-list li');
+
+  filters?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tag-btn');
+    if (!btn) return;
+
+    const tag = btn.dataset.tag || '';
+
+    filters.querySelectorAll('.tag-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const url = new URL(window.location.href);
+    if (tag) {
+      url.searchParams.set('tag', tag);
+    } else {
+      url.searchParams.delete('tag');
+    }
+    history.replaceState(null, '', url.toString());
+
+    items.forEach((li) => {
+      const tags = JSON.parse(li.dataset.tags || '[]');
+      li.style.display = !tag || tags.includes(tag) ? '' : 'none';
+    });
+  });
+
+  const initialTag = new URL(window.location.href).searchParams.get('tag');
+  if (initialTag) {
+    const btn = filters?.querySelector(`[data-tag="${CSS.escape(initialTag)}"]`);
+    if (btn) btn.click();
+  }
+</script>

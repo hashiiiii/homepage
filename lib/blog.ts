@@ -1,20 +1,10 @@
-import fs from "node:fs";
-import { createRequire } from "node:module";
-import path from "node:path";
 import matter from "gray-matter";
 import Parser from "rss-parser";
-import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "@/types/blog";
-
-const require = createRequire(import.meta.url);
-const markdownToHtml: (markdown: string, options?: Record<string, unknown>) => Promise<string> =
-  require("zenn-markdown-html").default;
+import markdownToHtml from "zenn-markdown-html";
+import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "../types/blog";
 
 const ZENN_USERNAME = "hashiiiii";
-
-function getContentDir(): string {
-  // Astro uses project root as cwd
-  return path.resolve(process.cwd(), "content/blog");
-}
+const CONTENT_DIR = `${process.cwd()}/content/blog`;
 
 /**
  * Parse markdown file and extract blog post data
@@ -66,19 +56,18 @@ function validatePost(post: BlogPostWithContent): string[] {
  * Load and process all local markdown blog posts
  */
 export async function loadLocalPosts(): Promise<BlogPostWithContent[]> {
-  const contentDir = getContentDir();
+  const glob = new Bun.Glob("*.md");
+  const files = Array.from(glob.scanSync(CONTENT_DIR));
 
-  if (!fs.existsSync(contentDir)) {
+  if (files.length === 0) {
     return [];
   }
 
-  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".md"));
   const posts: BlogPostWithContent[] = [];
   const allErrors: string[] = [];
 
   for (const file of files) {
-    const filePath = path.join(contentDir, file);
-    const fileContent = fs.readFileSync(filePath, "utf-8");
+    const fileContent = await Bun.file(`${CONTENT_DIR}/${file}`).text();
     const post = extractPost(fileContent, file);
 
     const errors = validatePost(post);

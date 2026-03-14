@@ -5,7 +5,8 @@ Source code for [hashiiiii.com](https://hashiiiii.com)
 ## Stack
 
 - [Bun](https://bun.sh/) (>= 1.3)
-- [Astro](https://astro.build/) (Static Site Generation)
+- [Eleventy (11ty)](https://www.11ty.dev/) v3 — Static Site Generation
+- HTML + [Liquid](https://liquidjs.com/) templates
 - TypeScript (strict)
 - [Biome](https://biomejs.dev/) (lint / format)
 - [Vitest](https://vitest.dev/)
@@ -24,8 +25,8 @@ bun install
 | Command | Description |
 |---|---|
 | `bun run dev` | Start dev server |
-| `bun run build` | Production build (`dist/`) |
-| `bun run typecheck` | Type check (`astro check` + `tsc --noEmit`) |
+| `bun run build` | Production build (`_site/`) |
+| `bun run typecheck` | Type check (`tsc`) |
 | `bun run lint` | Lint with Biome |
 | `bun run format` | Auto-format with Biome |
 | `bun run test` | Run Vitest |
@@ -60,15 +61,16 @@ Zenn-compatible markdown syntax is supported. Articles from [Zenn](https://zenn.
 
 ```
 ├── content/blog/       # Markdown blog posts
-├── docs/               # Project documentation
-├── public/images/      # Static assets
-└── src/
-    ├── components/     # Astro components
-    ├── layouts/        # Base layout
-    ├── lib/            # Blog logic + tests
-    ├── pages/          # Routes
-    ├── styles/         # Global CSS
-    └── types/          # TypeScript type definitions
+├── lib/                # Blog logic + tests
+├── types/              # TypeScript type definitions
+├── styles/             # CSS (global.css, pages.css)
+├── public/             # Static assets (images, favicon)
+└── src/                # 11ty templates only
+    ├── _data/          # Global data files (blog.ts, resume.ts)
+    ├── _includes/      # Layouts and partials (base.html, header.html)
+    ├── blog/           # Blog pages (index.html, post.html)
+    ├── index.html      # Landing page
+    └── resume.html     # Resume page
 ```
 
 ## CI/CD

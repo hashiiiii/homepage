@@ -1,0 +1,9 @@
+<header>
+  <nav>
+    <a href="/" class="site-title">hashiiiii</a>
+    <div class="nav-links">
+      <a href="/blog"{% if page.url contains '/blog' %} class="active"{% endif %}>Blog</a>
+      <a href="/resume"{% if page.url contains '/resume' %} class="active"{% endif %}>Resume</a>
+    </div>
+  </nav>
+</header>

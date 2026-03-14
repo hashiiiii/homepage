@@ -1,0 +1,78 @@
+---
+layout: base.html
+title: Resume
+---
+<div class="resume">
+  <h1>Resume</h1>
+
+  <section>
+    <h2>職歴</h2>
+    <div class="timeline">
+      {% for entry in resume.experience %}
+      <div class="timeline-entry">
+        <span class="period">{{ entry.period }}</span>
+        <div class="company">{{ entry.company }}</div>
+        <div class="role">{{ entry.title }}</div>
+        <div class="description-list">
+          {% for item in entry.description %}
+          <div class="desc-item">
+            <span class="desc-marker">▸</span>
+            <span>{{ item }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>個人</h2>
+    <div class="timeline">
+      {% for entry in resume.freelance %}
+      <div class="timeline-entry">
+        <div class="role">{{ entry.title }}</div>
+        <div class="description-list">
+          {% for item in entry.description %}
+          <div class="desc-item">
+            <span class="desc-marker">▸</span>
+            <span>{{ item }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>学歴</h2>
+    <div class="timeline-entry">
+      <div class="company">{{ resume.education.degree }}</div>
+      <div class="role">{{ resume.education.university }}</div>
+      <span class="period">{{ resume.education.period }}</span>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section>
+    <h2>技術スキル</h2>
+    <div class="skills-grid">
+      {% for category in resume.skills %}
+      <div class="skill-category">
+        <span class="skill-label">{{ category.category }}</span>
+        <div class="skill-tags">
+          {% for tag in category.tags %}
+          <span class="skill-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>

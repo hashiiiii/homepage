@@ -1,12 +1,12 @@
 .DS_Store
 
-.astro/
+_site/
 .idea/
 .vercel/
 .vscode/
+.playwright-mcp/
 
 .claude/settings.local.json
 
-dist/
 docs/
 node_modules/
