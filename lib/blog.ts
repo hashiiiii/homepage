@@ -133,4 +133,3 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   const all = [...localPosts, ...zennPosts];
   return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
-
