@@ -15,7 +15,7 @@ eleventyComputed:
   <header>
     <h1>{{ post.title }}</h1>
     <div class="meta">
-      <span>{{ post.date | formatDetailDate }}  &middot;  {{ post.readTime }}</span>
+      <span>{{ post.date | formatDate }}  &middot;  {{ post.readTime }}</span>
     </div>
     {% if post.tags.size > 0 %}
     <div class="tags">

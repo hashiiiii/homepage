@@ -17,7 +17,6 @@
     "gray-matter": "^4.0.3",
     "rss-parser": "^3.13.0",
     "zenn-content-css": "^0.4.6",
-    "zenn-embed-elements": "^0.4.6",
     "zenn-markdown-html": "^0.4.6"
   },
   "devDependencies": {

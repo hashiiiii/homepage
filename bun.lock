@@ -9,7 +9,6 @@
         "gray-matter": "^4.0.3",
         "rss-parser": "^3.13.0",
         "zenn-content-css": "^0.4.6",
-        "zenn-embed-elements": "^0.4.6",
         "zenn-markdown-html": "^0.4.6",
       },
       "devDependencies": {
@@ -625,8 +624,6 @@
     "yaml": ["yaml@2.8.2", "", { "bin": "bin.mjs" }, "sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A=="],
 
     "zenn-content-css": ["zenn-content-css@0.4.6", "", {}, "sha512-SpfkwXFHw/MV2T7+6gb0/kVB49rjIAqivadp/wwg+dXxrQzcQ8BVO7NIn6vceCp99r6JZ4u36z0VBQf2/QVrHQ=="],
-
-    "zenn-embed-elements": ["zenn-embed-elements@0.4.6", "", {}, "sha512-Iofdrj9BfBkup02Nwwv50ezFLbmZ7P0hf/rUxXBpF0ZlF4yTB5HOmTfti5McEfj8/yQKLlD63kMzeZCR0IWjpA=="],
 
     "zenn-markdown-html": ["zenn-markdown-html@0.4.6", "", { "dependencies": { "cheerio": "1.1.2", "markdown-it": "^14.1.0", "markdown-it-anchor": "^9.2.0", "markdown-it-container": "^4.0.0", "markdown-it-footnote": "^4.0.0", "markdown-it-inline-comments": "^1.0.1", "markdown-it-link-attributes": "^4.0.1", "markdown-it-task-lists": "^2.1.1", "sanitize-html": "^2.17.0", "shiki": "^3.21.0" } }, "sha512-ltzuQPcEhsalsUnFaw5clRaTcamW06iZzLjY/JgVPaAUUMlToPe+UPBpfOOX4cdaz69CIRgahycHaYcVl41VRA=="],
 

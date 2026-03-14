@@ -1,7 +1,7 @@
 import matter from "gray-matter";
 import Parser from "rss-parser";
 import markdownToHtml from "zenn-markdown-html";
-import type { BlogArchive, BlogMetadata, BlogPost, BlogPostWithContent, TagCount } from "../types/blog";
+import type { BlogPost, BlogPostWithContent } from "../types/blog";
 
 const ZENN_USERNAME = "hashiiiii";
 const CONTENT_DIR = `${process.cwd()}/content/blog`;
@@ -134,46 +134,3 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-/**
- * Get a single post by slug with HTML content
- */
-export async function getPostBySlug(slug: string): Promise<BlogPostWithContent | null> {
-  const posts = await loadLocalPosts();
-  return posts.find((p) => p.id === slug) || null;
-}
-
-/**
- * Calculate blog metadata (tag counts, archives)
- */
-export function calculateMetadata(posts: BlogPost[]): BlogMetadata {
-  const tagCounts: Record<string, number> = {};
-  for (const post of posts) {
-    for (const tag of post.tags) {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-    }
-  }
-
-  const tagCountsArray: TagCount[] = Object.entries(tagCounts)
-    .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count);
-
-  const monthlyArchives: Record<string, BlogArchive> = {};
-  for (const post of posts) {
-    const date = new Date(post.date);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const key = `${year}-${month.toString().padStart(2, "0")}`;
-
-    if (!monthlyArchives[key]) {
-      monthlyArchives[key] = { year, month, count: 0 };
-    }
-    monthlyArchives[key].count++;
-  }
-
-  const archives: BlogArchive[] = Object.values(monthlyArchives).sort((a, b) => {
-    if (a.year !== b.year) return b.year - a.year;
-    return b.month - a.month;
-  });
-
-  return { posts, archives, tagCounts: tagCountsArray };
-}
