@@ -20,7 +20,7 @@ eleventyComputed:
     {% if post.tags.size > 0 %}
     <div class="tags">
       {% for tag in post.tags %}
-      <a href="/blog?tag={{ tag | encodeURIComponent }}" class="tag">{{ tag }}</a>
+      <a href="/blog?tag={{ tag | url_encode }}" class="tag">{{ tag }}</a>
       {% endfor %}
     </div>
     {% endif %}
