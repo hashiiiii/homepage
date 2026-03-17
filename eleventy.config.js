@@ -1,24 +1,28 @@
 export default function (eleventyConfig) {
-  // Passthrough copy
+  // 静的アセットを _site 配下にコピー
   eleventyConfig.addPassthroughCopy({ public: "/" });
   eleventyConfig.addPassthroughCopy({ styles: "/styles/" });
   eleventyConfig.addPassthroughCopy({
     "node_modules/zenn-content-css/lib/index.css": "/styles/zenn-content.css",
   });
 
-  // TypeScript data files (requires bunx --bun to run)
+  // _data 配下の .ts データファイルを読み込むために必須
+  // また 11ty はデフォルトで Node.js で動作するため
+  // bunx --bun で実行しないと .ts を解釈できず import() でエラーになる
   eleventyConfig.addDataExtension("ts", {
-    parser: async (_contents, filePath) => {
-      const mod = await import(filePath);
-      if (typeof mod.default === "function") return mod.default();
-      return mod.default;
-    },
+    parser: async (_, path) => (await import(path)).default(),
   });
 
-  // Watch targets
+  // このディレクトリを監視して、変更があったらホットリロードする
   eleventyConfig.addWatchTarget("styles/");
 
-  // Filters
+  // ユーザー定義のフィルター
+  // built-in:
+  // https://liquidjs.com/filters/overview.html
+  // https://www.11ty.dev/docs/filters/
+  //
+  // Liquid の date フィルターは記述が面倒なので自前で定義する
+  // see: https://liquidjs.com/filters/date.html
   eleventyConfig.addFilter("formatDate", (dateStr) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString("en-US", {
@@ -26,14 +30,6 @@ export default function (eleventyConfig) {
       day: "numeric",
       year: "numeric",
     });
-  });
-
-  eleventyConfig.addFilter("jsonify", (value) => {
-    return JSON.stringify(value);
-  });
-
-  eleventyConfig.addFilter("encodeURIComponent", (value) => {
-    return encodeURIComponent(value);
   });
 
   return {
