@@ -23,7 +23,7 @@ title: Blog
       {% assign href = '/blog/' | append: post.id | append: '/' %}
       {% assign isExternal = false %}
     {% endif %}
-    <li data-tags="{{ post.tags | json }}">
+    <li data-tags='{{ post.tags | json }}'>
       <a
         href="{{ href }}"
         class="post-row"
