@@ -8,6 +8,5 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["lib/**/*.ts", "types/**/*.ts", "src/_data/**/*.ts"],
-  "exclude": ["node_modules", "_site"]
+  "include": ["lib/**/*.ts", "src/_data/**/*.ts"]
 }

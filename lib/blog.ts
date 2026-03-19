@@ -1,10 +1,26 @@
 import matter from "gray-matter";
 import Parser from "rss-parser";
 import markdownToHtml from "zenn-markdown-html";
-import type { BlogPost, BlogPostWithContent } from "../types/blog";
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  tags: string[];
+  readTime: string;
+  published?: boolean;
+  source?: "local" | "zenn";
+  externalUrl?: string;
+}
+
+export interface BlogPostWithContent extends BlogPost {
+  content: string;
+  html: string;
+}
 
 const ZENN_USERNAME = "hashiiiii";
-const CONTENT_DIR = `${process.cwd()}/content/blog`;
+const CONTENT_DIR = `${process.cwd()}/content`;
 
 /**
  * Parse markdown file and extract blog post data

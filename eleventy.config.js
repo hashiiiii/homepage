@@ -1,9 +1,9 @@
 export default function (eleventyConfig) {
   // 静的アセットを _site 配下にコピー
-  eleventyConfig.addPassthroughCopy({ public: "/" });
-  eleventyConfig.addPassthroughCopy({ styles: "/styles/" });
+  eleventyConfig.addPassthroughCopy("public");
+  eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({
-    "node_modules/zenn-content-css/lib/index.css": "/styles/zenn-content.css",
+    "node_modules/zenn-content-css/lib/index.css": "css/zenn-content.css",
   });
 
   // _data 配下の .ts データファイルを読み込むために必須
@@ -14,7 +14,7 @@ export default function (eleventyConfig) {
   });
 
   // このディレクトリを監視して、変更があったらホットリロードする
-  eleventyConfig.addWatchTarget("styles/");
+  eleventyConfig.addWatchTarget("css");
 
   // ユーザー定義のフィルター
   // built-in:

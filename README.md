@@ -42,7 +42,7 @@ bun install
 
 ## Blog
 
-Blog posts live in `content/blog/` as Markdown with the following frontmatter:
+Blog posts live in `content` as Markdown with the following frontmatter:
 
 ```yaml
 ---
@@ -60,10 +60,10 @@ Zenn-compatible markdown syntax is supported. Articles from [Zenn](https://zenn.
 ## Project Structure
 
 ```
-├── content/blog/       # Markdown blog posts
+├── content/            # Markdown blog posts
 ├── lib/                # Blog logic + tests
 ├── types/              # TypeScript type definitions
-├── styles/             # CSS (global.css, pages.css)
+├── css/                # CSS (global.css, pages.css)
 ├── public/             # Static assets (images, favicon)
 └── src/                # 11ty templates only
     ├── _data/          # Global data files (blog.ts, resume.ts)

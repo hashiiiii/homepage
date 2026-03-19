@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { loadLocalPosts } from "./blog";
 
 describe("loadLocalPosts", () => {
-  it("should load markdown files from content/blog", async () => {
+  it("should load markdown files from content", async () => {
     const posts = await loadLocalPosts();
     expect(Array.isArray(posts)).toBe(true);
     expect(posts.length).toBeGreaterThan(0);
