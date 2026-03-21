@@ -13,9 +13,6 @@ export default function (eleventyConfig) {
     parser: async (_, path) => (await import(path)).default(),
   });
 
-  // このディレクトリを監視して、変更があったらホットリロードする
-  eleventyConfig.addWatchTarget("css");
-
   // ユーザー定義のフィルター
   // built-in:
   // https://liquidjs.com/filters/overview.html
