@@ -36,5 +36,6 @@ export default function (eleventyConfig) {
       data: "_data",
       output: "_site",
     },
+    htmlTemplateEngine: "liquid",
   };
 }
