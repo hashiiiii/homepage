@@ -1,5 +1,6 @@
 export default function (eleventyConfig) {
-  // 静的アセットを _site 配下にコピー
+  // トップレベルディレクトリ (src) の外にあるため
+  // _site 配下にコピーされるよう別途に設定が必要
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy({
