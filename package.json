@@ -13,11 +13,11 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy": "^3.1.5",
     "gray-matter": "^4.0.3",
     "rss-parser": "^3.13.0",
-    "zenn-content-css": "^0.4.6",
-    "zenn-markdown-html": "^0.4.6"
+    "zenn-content-css": "^0.4.7",
+    "zenn-markdown-html": "^0.4.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.6",
