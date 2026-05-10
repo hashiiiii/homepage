@@ -6,7 +6,8 @@
     "moduleResolution": "bundler",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["bun"]
   },
   "include": ["lib/**/*.ts", "src/_data/**/*.ts"]
 }
