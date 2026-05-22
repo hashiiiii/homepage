@@ -61,6 +61,13 @@
   ],
   "freelance": [
     {
+      "title": "AI キャラクター会話アプリ開発",
+      "description": [
+        "Unity (Android / iOS) クライアント開発",
+        "TypeScript モノレポによるサーバー・管理画面機能開発 (NestJS / Next.js)"
+      ]
+    },
+    {
       "title": "Web 3 モバイルゲーム開発",
       "description": [
         "Unity (Android / iOS) クライアント開発 — アーキテクチャ設計補助・コードレビュー",
