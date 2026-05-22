@@ -64,7 +64,7 @@
       "title": "AI キャラクター会話アプリ開発",
       "description": [
         "Unity (Android / iOS) クライアント開発",
-        "TypeScript モノレポによるサーバー・管理画面機能開発 (NestJS / Next.js)"
+        "サーバー・管理画面機能開発 (NestJS / Next.js)"
       ]
     },
     {
