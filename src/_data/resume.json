@@ -61,6 +61,14 @@
   ],
   "freelance": [
     {
+      "title": "金融系 Web プラットフォーム開発",
+      "description": [
+        "個人向け金融系の複数サービスを束ねる Web プラットフォーム",
+        "Ruby on Rails によるバックエンド開発・管理画面機能の実装",
+        "MySQL / Redis / Sidekiq / AWS"
+      ]
+    },
+    {
       "title": "AI キャラクター会話アプリ開発",
       "description": [
         "Unity (Android / iOS) クライアント開発",
