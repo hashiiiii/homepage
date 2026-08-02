@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadLocalPosts } from "./blog";
+import { loadLocalPosts, validatePost } from "./blog";
 
 describe("loadLocalPosts", () => {
   it("should load markdown files from content", async () => {
@@ -18,6 +18,25 @@ describe("loadLocalPosts", () => {
       expect(post.html).toBeTruthy();
       expect(post.source).toBe("local");
     }
+  });
+
+  it("should reject whitespace-only content as missing", () => {
+    // gray-matter returns "\n" for a markdown file that has front matter but no
+    // body. That is truthy, so a naive `!content` check lets the post through
+    // and markdownToHtml renders it to an empty string.
+    const errors = validatePost({
+      id: "draft",
+      title: "Draft",
+      excerpt: "",
+      content: "\n",
+      html: "",
+      date: "2026-06-21",
+      tags: [],
+      readTime: "5 min",
+      published: false,
+      source: "local",
+    });
+    expect(errors).toContain("[draft] content is required");
   });
 
   it("should convert markdown to HTML via zenn-markdown-html", async () => {

@@ -46,7 +46,7 @@ function extractPost(fileContent: string, filename: string): BlogPostWithContent
 /**
  * Validate a blog post's required fields
  */
-function validatePost(post: BlogPostWithContent): string[] {
+export function validatePost(post: BlogPostWithContent): string[] {
   const errors: string[] = [];
 
   if (!post.title) errors.push(`[${post.id}] title is required`);
@@ -63,7 +63,7 @@ function validatePost(post: BlogPostWithContent): string[] {
     errors.push(`[${post.id}] tags must be an array`);
   }
 
-  if (!post.content) errors.push(`[${post.id}] content is required`);
+  if (!post.content.trim()) errors.push(`[${post.id}] content is required`);
 
   return errors;
 }
