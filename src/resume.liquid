@@ -6,7 +6,7 @@ title: Resume
   <h1>Resume</h1>
 
   <section>
-    <h2>職歴</h2>
+    <h2>Experience</h2>
     <div class="timeline">
       {% for entry in resume.experience %}
       <div class="timeline-entry">
@@ -29,7 +29,7 @@ title: Resume
   <hr class="divider" />
 
   <section>
-    <h2>個人</h2>
+    <h2>Freelance</h2>
     <div class="timeline">
       {% for entry in resume.freelance %}
       <div class="timeline-entry">
@@ -50,7 +50,7 @@ title: Resume
   <hr class="divider" />
 
   <section>
-    <h2>学歴</h2>
+    <h2>Education</h2>
     <div class="timeline-entry">
       <div class="company">{{ resume.education.degree }}</div>
       <div class="role">{{ resume.education.university }}</div>
@@ -61,7 +61,7 @@ title: Resume
   <hr class="divider" />
 
   <section>
-    <h2>技術スキル</h2>
+    <h2>Technical Skills</h2>
     <div class="skills-grid">
       {% for category in resume.skills %}
       <div class="skill-category">

@@ -1,108 +1,108 @@
 {
   "experience": [
     {
-      "title": "バックエンドプラットフォーム開発",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2025年1月 - 現在",
+      "title": "Backend Platform Development",
+      "company": "DeNA Co., Ltd.",
+      "period": "Jan 2025 - Present",
       "current": true,
       "description": [
-        "モバイルゲーム向け共通基盤の運用・開発 (Ruby on Rails / C++)",
-        "API 開発、DB 設計、レガシーコンポーネントの移行",
-        "C++ SDK のプロトコル改修・ミドルウェア開発"
+        "Operate and develop a shared platform for mobile games (Ruby on Rails / C++)",
+        "Develop APIs, design databases, and migrate legacy components",
+        "Modify the protocol of the C++ SDK and develop middleware"
       ]
     },
     {
-      "title": "新規モバイルゲーム開発 — リードエンジニア",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2024年5月 - 2024年12月",
+      "title": "New Mobile Game Development — Lead Engineer",
+      "company": "DeNA Co., Ltd.",
+      "period": "May 2024 - Dec 2024",
       "description": [
-        "Unity (Android / iOS) 大規模タイトルのアーキテクト・技術選定",
-        "複数の協業各社とのステークホルダー連携・役務調整",
-        "Clean Architecture ベースのクライアント基盤設計・パフォーマンスチューニング"
+        "Designed the architecture and selected technologies for a large-scale Unity (Android / iOS) title",
+        "Coordinated stakeholder communication and work assignments with multiple partner companies",
+        "Designed a client foundation based on Clean Architecture and tuned performance"
       ]
     },
     {
-      "title": "新規サービス開発",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2023年9月 - 2024年5月",
+      "title": "New Service Development",
+      "company": "DeNA Co., Ltd.",
+      "period": "Sep 2023 - May 2024",
       "description": [
-        "Unity クライアント (Clean Architecture) + C++ ネイティブプラグイン開発",
-        "Go + GCP マネージドサービスを用いたサーバー開発"
+        "Developed a Unity client (Clean Architecture) and C++ native plugins",
+        "Developed the server with Go and GCP managed services"
       ]
     },
     {
-      "title": "PC / WebGL ゲーム開発 — リードエンジニア",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2022年9月 - 2023年9月",
+      "title": "PC / WebGL Game Development — Lead Engineer",
+      "company": "DeNA Co., Ltd.",
+      "period": "Sep 2022 - Sep 2023",
       "description": [
-        "マルチプラットフォーム (macOS / Windows / WebGL) 対応のクライアント設計・開発",
-        "PlayFab + Azure Functions (C#) によるサーバー開発",
-        "GitHub Actions での CI/CD・Steam デプロイパイプライン構築",
-        "GDPR 対応や Steam デベロッパー登録など非エンジニア領域もカバー"
+        "Designed and developed a multi-platform client (macOS / Windows / WebGL)",
+        "Developed the server with PlayFab and Azure Functions (C#)",
+        "Built CI/CD and a Steam deployment pipeline with GitHub Actions",
+        "Covered non-engineering areas, for example GDPR compliance and Steam developer registration"
       ]
     },
     {
-      "title": "WebGL ゲーム開発 — リードエンジニア",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2022年3月 - 2022年8月",
-      "description": ["ライブゲーミングプラットフォーム (fingger) 向けカジュアルゲームの開発"]
+      "title": "WebGL Game Development — Lead Engineer",
+      "company": "DeNA Co., Ltd.",
+      "period": "Mar 2022 - Aug 2022",
+      "description": ["Developed a casual game for the live gaming platform (fingger)"]
     },
     {
-      "title": "運用モバイルゲーム — リードエンジニア",
-      "company": "株式会社ディー・エヌ・エー",
-      "period": "2019年4月 - 2022年3月",
+      "title": "Live Mobile Game Operations — Lead Engineer",
+      "company": "DeNA Co., Ltd.",
+      "period": "Apr 2019 - Mar 2022",
       "description": [
-        "エンジニア 10 名規模のチームマネジメント・開発計画策定",
-        "Unity クライアント開発全般 (リアルタイム PvP、UI / Animation)",
-        "Ruby on Rails によるサーバー開発 (GvG グルーピング、チャット API 等)",
-        "Jenkins CI/CD 構築、Unity 大型アップデート対応"
+        "Managed a team of 10 engineers and prepared development plans",
+        "Developed all areas of the Unity client (real-time PvP, UI / Animation)",
+        "Developed the server with Ruby on Rails (GvG grouping, chat API, and more)",
+        "Built CI/CD with Jenkins and upgraded Unity across major versions"
       ]
     }
   ],
   "freelance": [
     {
-      "title": "金融系 Web プラットフォーム開発",
+      "title": "Financial Web Platform Development",
       "description": [
-        "個人向け金融系の複数サービスを束ねる Web プラットフォーム",
-        "Ruby on Rails によるバックエンド開発・管理画面機能の実装",
+        "A web platform that combines multiple consumer financial services",
+        "Developed the backend and admin panel features with Ruby on Rails",
         "MySQL / Redis / Sidekiq / AWS"
       ]
     },
     {
-      "title": "AI キャラクター会話アプリ開発",
+      "title": "AI Character Chat App Development",
       "description": [
-        "Unity (Android / iOS) クライアント開発",
-        "サーバー・管理画面機能開発 (NestJS / Next.js)"
+        "Developed the Unity (Android / iOS) client",
+        "Developed the server and admin panel features (NestJS / Next.js)"
       ]
     },
     {
-      "title": "Web 3 モバイルゲーム開発",
+      "title": "Web3 Mobile Game Development",
       "description": [
-        "Unity (Android / iOS) クライアント開発 — アーキテクチャ設計補助・コードレビュー",
-        "IAP、ガチャ等のシステム実装、AssetBundle ビルドパイプライン構築"
+        "Developed the Unity (Android / iOS) client — helped design the architecture and reviewed code",
+        "Implemented IAP, gacha, and other systems, and built the AssetBundle build pipeline"
       ]
     }
   ],
   "education": {
-    "degree": "理学修士（惑星大気科学専攻）",
-    "university": "岡山大学大学院自然科学研究科",
-    "period": "2017年 - 2019年"
+    "degree": "Master of Science (Planetary Atmospheric Science)",
+    "university": "Graduate School of Natural Science and Technology, Okayama University",
+    "period": "2017 - 2019"
   },
   "skills": [
     {
-      "category": "プログラミング言語",
+      "category": "Programming Languages",
       "tags": ["C#", "Ruby", "Go", "TypeScript"]
     },
     {
-      "category": "フロントエンド",
+      "category": "Frontend",
       "tags": ["Unity (iOS, Android, WebGL)", "11ty (Liquid)", "Expo", "React", "React Native"]
     },
     {
-      "category": "バックエンド",
+      "category": "Backend",
       "tags": ["Ruby on Rails", "MySQL", "Memcached", "Hono", "NestJS"]
     },
     {
-      "category": "クラウド・インフラ",
+      "category": "Cloud / Infrastructure",
       "tags": ["AWS", "GCP"]
     },
     {
