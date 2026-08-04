@@ -1,21 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":dependencyDashboard"
-  ],
-  "timezone": "Asia/Tokyo",
-  "schedule": ["before 9am on monday"],
+  "extends": ["config:recommended"],
   "labels": ["dependencies"],
   "rangeStrategy": "bump",
   "prConcurrentLimit": 10,
   "prHourlyLimit": 0,
   "minimumReleaseAge": "7 days",
   "osvVulnerabilityAlerts": true,
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["on monday"]
-  },
   "packageRules": [
     {
       "matchManagers": ["bun"],
@@ -37,13 +28,11 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "github-actions",
-      "addLabels": ["github-actions"]
+      "pinDigests": false
     }
   ],
   "vulnerabilityAlerts": {
-    "enabled": true,
     "labels": ["dependencies", "security"],
-    "minimumReleaseAge": null,
-    "schedule": ["at any time"]
+    "minimumReleaseAge": null
   }
 }
