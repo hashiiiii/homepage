@@ -78,8 +78,9 @@
     {
       "title": "Web3 Mobile Game Development",
       "description": [
-        "Developed the Unity (Android / iOS) client — helped design the architecture and reviewed code",
-        "Implemented IAP, gacha, and other systems, and built the AssetBundle build pipeline"
+        "Developed the Unity (Android / iOS) client",
+        "Helped design the architecture and reviewed code",
+        "Developed IAP, gacha, and other systems, and built the AssetBundle build pipeline"
       ]
     }
   ],
