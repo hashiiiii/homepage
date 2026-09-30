@@ -48,6 +48,7 @@ html {
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.7;
+  scrollbar-gutter: stable both-edges;
 }
 
 a {
