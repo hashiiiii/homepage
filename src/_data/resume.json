@@ -1,86 +1,86 @@
 {
   "experience": [
     {
-      "title": "Backend Platform Development",
+      "title": "Backend platform development",
       "company": "DeNA Co., Ltd.",
       "period": "Jan 2025 - Present",
       "current": true,
       "description": [
-        "Operate and develop a shared platform for mobile games (Ruby on Rails / C++)",
+        "Develop and operate a shared mobile game platform using Ruby on Rails and C++",
         "Develop APIs, design databases, and migrate legacy components",
-        "Modify the protocol of the C++ SDK and develop middleware"
+        "Update the C++ SDK protocol and develop middleware"
       ]
     },
     {
-      "title": "New Mobile Game Development — Lead Engineer",
+      "title": "Lead engineer, new mobile game development",
       "company": "DeNA Co., Ltd.",
       "period": "May 2024 - Dec 2024",
       "description": [
-        "Designed the architecture and selected technologies for a large-scale Unity (Android / iOS) title",
+        "Designed the architecture and selected technologies for a large-scale Unity game for Android and iOS",
         "Coordinated stakeholder communication and work assignments with multiple partner companies",
-        "Designed a client foundation based on Clean Architecture and tuned performance"
+        "Designed the client's foundation using Clean Architecture and tuned performance"
       ]
     },
     {
-      "title": "New Service Development",
+      "title": "New service development",
       "company": "DeNA Co., Ltd.",
       "period": "Sep 2023 - May 2024",
       "description": [
-        "Developed a Unity client (Clean Architecture) and C++ native plugins",
-        "Developed the server with Go and GCP managed services"
+        "Developed a Unity client (Clean Architecture) and native C++ plugins",
+        "Developed the server using Go and managed services on GCP"
       ]
     },
     {
-      "title": "PC / WebGL Game Development — Lead Engineer",
+      "title": "Lead engineer, PC and WebGL game development",
       "company": "DeNA Co., Ltd.",
       "period": "Sep 2022 - Sep 2023",
       "description": [
-        "Designed and developed a multi-platform client (macOS / Windows / WebGL)",
-        "Developed the server with PlayFab and Azure Functions (C#)",
-        "Built CI/CD and a Steam deployment pipeline with GitHub Actions",
-        "Covered non-engineering areas, for example GDPR compliance and Steam developer registration"
+        "Designed and developed a client for macOS, Windows, and WebGL",
+        "Developed the server using PlayFab and Azure Functions (C#)",
+        "Built CI/CD workflows and a Steam deployment pipeline with GitHub Actions",
+        "Handled tasks outside engineering, including GDPR compliance and Steam developer registration"
       ]
     },
     {
-      "title": "WebGL Game Development — Lead Engineer",
+      "title": "Lead engineer, WebGL game development",
       "company": "DeNA Co., Ltd.",
       "period": "Mar 2022 - Aug 2022",
-      "description": ["Developed a casual game for the live gaming platform (fingger)"]
+      "description": ["Developed a casual game for fingger, a live gaming platform"]
     },
     {
-      "title": "Live Mobile Game Operations — Lead Engineer",
+      "title": "Lead engineer, live mobile game operations",
       "company": "DeNA Co., Ltd.",
       "period": "Apr 2019 - Mar 2022",
       "description": [
         "Managed a team of 10 engineers and prepared development plans",
-        "Developed all areas of the Unity client (real-time PvP, UI / Animation)",
-        "Developed the server with Ruby on Rails (GvG grouping, chat API, and more)",
-        "Built CI/CD with Jenkins and upgraded Unity across major versions"
+        "Developed all areas of the Unity client, including real-time PvP, UI, and animation",
+        "Developed the server using Ruby on Rails, including GvG grouping and a chat API",
+        "Built CI/CD pipelines with Jenkins and upgraded Unity across major versions"
       ]
     }
   ],
   "freelance": [
     {
-      "title": "Financial Web Platform Development",
+      "title": "Financial web platform development",
       "description": [
         "A web platform that combines multiple consumer financial services",
         "Developed the backend and admin panel features with Ruby on Rails",
-        "MySQL / Redis / Sidekiq / AWS"
+        "MySQL, Redis, Sidekiq, AWS"
       ]
     },
     {
-      "title": "AI Character Chat App Development",
+      "title": "AI character chat app development",
       "description": [
-        "Developed the Unity (Android / iOS) client",
-        "Developed the server and admin panel features (NestJS / Next.js)"
+        "Developed the Unity client for Android and iOS",
+        "Developed the server and admin panel features using NestJS and Next.js"
       ]
     },
     {
-      "title": "Web3 Mobile Game Development",
+      "title": "Web3 mobile game development",
       "description": [
-        "Developed the Unity (Android / iOS) client",
+        "Developed the Unity client for Android and iOS",
         "Helped design the architecture and reviewed code",
-        "Developed IAP, gacha, and other systems, and built the AssetBundle build pipeline"
+        "Developed in-app purchase (IAP), gacha, and other systems, and built the AssetBundle build pipeline"
       ]
     }
   ],
@@ -91,19 +91,19 @@
   },
   "skills": [
     {
-      "category": "Programming Languages",
-      "tags": ["C#", "Ruby", "Go", "TypeScript"]
+      "category": "Programming languages",
+      "tags": ["C#", "Ruby", "Go", "TypeScript", "Zig", "C++"]
     },
     {
       "category": "Frontend",
-      "tags": ["Unity (iOS, Android, WebGL)", "11ty (Liquid)", "Expo", "React", "React Native"]
+      "tags": ["Unity (iOS, Android, WebGL)", "11ty (Liquid)", "Expo"]
     },
     {
       "category": "Backend",
-      "tags": ["Ruby on Rails", "MySQL", "Memcached", "Hono", "NestJS"]
+      "tags": ["Ruby on Rails", "MySQL", "PostgreSQL", "Memcached", "Redis", "Hono", "NestJS", "Go"]
     },
     {
-      "category": "Cloud / Infrastructure",
+      "category": "Cloud and infrastructure",
       "tags": ["AWS", "GCP"]
     },
     {
