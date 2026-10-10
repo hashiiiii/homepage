@@ -1,48 +1,41 @@
 # homepage
 
-Source code for [hashiiiii.com](https://hashiiiii.com)
+Source code for [hashiiiii.com](https://hashiiiii.com), a personal website and blog.
 
-## Stack
+Built with [Eleventy (11ty)](https://www.11ty.dev/) v3, [Liquid](https://liquidjs.com/) templates, and TypeScript in strict mode.
 
-- [Bun](https://bun.sh/) (>= 1.3)
-- [Eleventy (11ty)](https://www.11ty.dev/) v3 — Static Site Generation
-- HTML + [Liquid](https://liquidjs.com/) templates
-- TypeScript (strict)
-- [Biome](https://biomejs.dev/) (lint / format)
-- [Vitest](https://vitest.dev/)
-- [Husky](https://typicode.github.io/husky/) (Git hooks)
-- [Vercel](https://vercel.com/) (hosting)
-- [zenn-markdown-html](https://github.com/zenn-dev/zenn-editor) (Markdown rendering)
+## Development
 
-## Setup
+Requires [Bun](https://bun.sh/) 1.4.2 or later.
 
 ```bash
 bun install
+bun run dev
 ```
 
-## Scripts
-
 | Command | Description |
-|---|---|
-| `bun run dev` | Start dev server |
-| `bun run build` | Production build (`_site/`) |
-| `bun run typecheck` | Type check (`tsc`) |
-| `bun run lint` | Lint with Biome |
-| `bun run format` | Auto-format with Biome |
-| `bun run test` | Run Vitest |
+| --- | --- |
+| `bun run dev` | Start the local server |
+| `bun run build` | Build the static site in `_site/` |
+| `bun run typecheck` | Check TypeScript types without emitting files |
+| `bun run lint` | Check formatting and lint rules with [Biome](https://biomejs.dev/) |
+| `bun run format` | Apply Biome fixes and formatting |
+| `bun run test` | Run the [Vitest](https://vitest.dev/) suite once |
 
-## Pages
+## Content
+
+### Pages
 
 | Route | Description |
-|---|---|
+| --- | --- |
 | `/` | Landing page |
 | `/blog` | Blog index with tag filtering |
-| `/blog/[slug]` | Blog post detail |
+| `/blog/[slug]` | Local blog post |
 | `/resume` | Resume |
 
-## Blog
+### Blog posts
 
-Blog posts live in `content` as Markdown with the following frontmatter:
+Create Markdown posts in `content/` with this frontmatter:
 
 ```yaml
 ---
@@ -55,29 +48,30 @@ published: true
 ---
 ```
 
-Zenn-compatible markdown syntax is supported. Articles from [Zenn](https://zenn.dev/hashiiiii) are also fetched via RSS and displayed alongside local posts.
+The filename becomes the URL slug: `content/example.md` generates `/blog/example/`. Set `published: false` to hide a post.
 
-## Project Structure
+Posts use [zenn-markdown-html](https://github.com/zenn-dev/zenn-editor) for Zenn-compatible Markdown syntax.
+The build fetches articles from [Zenn](https://zenn.dev/hashiiiii) via RSS and lists them alongside local posts, newest first.
+Zenn entries link to the original articles.
 
-```
-├── content/            # Markdown blog posts
-├── lib/                # Blog logic + tests
-├── types/              # TypeScript type definitions
-├── css/                # CSS (global.css, pages.css)
-├── public/             # Static assets (images, favicon)
-└── src/                # 11ty templates only
-    ├── _data/          # Global data files (blog.ts, resume.ts)
-    ├── _includes/      # Layouts and partials (base.html, header.html)
-    ├── blog/           # Blog pages (index.html, post.html)
-    ├── index.html      # Landing page
-    └── resume.html     # Resume page
-```
+## Project structure
 
-## CI/CD
+| Path | Contents |
+| --- | --- |
+| `content/` | Local Markdown posts |
+| `lib/` | Blog loading, validation, rendering, RSS fetching, and tests |
+| `src/` | Liquid pages, layouts, and partials |
+| `src/_data/blog.ts` | Global blog data |
+| `src/_data/resume.json` | Resume data |
+| `css/` | Site styles |
+| `public/` | Images and favicons |
+| `_site/` | Generated site |
 
-- **GitHub Actions** runs lint, typecheck, test, and build on push/PR to `main`
-- **Vercel** auto-deploys from the `main` branch
-- **Husky** pre-commit hook runs `bun run format`
+## Automation
+
+- [GitHub Actions](.github/workflows/ci.yml) runs lint, type checking, tests, and the build for pushes and pull requests to `main`.
+- [Vercel](https://vercel.com/) hosts `_site/`. The [deployment workflow](.github/workflows/deploy.yml) supports manual preview and production deployments.
+- The [Husky](https://typicode.github.io/husky/) pre-commit hook runs `bun run format`.
 
 ## License
 
