@@ -126,7 +126,7 @@ export async function fetchZennPosts(): Promise<BlogPost[]> {
         title: item.title || "Untitled",
         excerpt: item.contentSnippet || item.content?.substring(0, 150) || "",
         date,
-        tags: item.categories || ["Zenn"],
+        tags: item.categories || ["zenn"],
         readTime: "zenn",
         published: true,
         source: "zenn" as const,

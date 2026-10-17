@@ -7,7 +7,7 @@ title: Blog
 
   {% if blog.allTags.size > 0 %}
   <div class="tag-filters" id="tag-filters">
-    <button class="tag-btn active" data-tag="">All</button>
+    <button class="tag-btn active" data-tag="">all</button>
     {% for tag in blog.allTags %}
     <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
     {% endfor %}
