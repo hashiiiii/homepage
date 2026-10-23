@@ -6,7 +6,7 @@ Built with [Eleventy (11ty)](https://www.11ty.dev/) v3, [Liquid](https://liquidj
 
 ## Development
 
-Requires [Bun](https://bun.sh/) 1.4.2 or later.
+Requires [Bun](https://bun.sh/) 1.4.4 or later.
 
 ```bash
 bun install

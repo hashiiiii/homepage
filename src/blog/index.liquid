@@ -9,7 +9,7 @@ title: Blog
   <div class="tag-filters" id="tag-filters">
     <button class="tag-btn active" data-tag="">all</button>
     {% for tag in blog.allTags %}
-    <button class="tag-btn" data-tag="{{ tag }}">{{ tag }}</button>
+    <button class="tag-btn" data-tag="{{ tag | escape }}">{{ tag | escape }}</button>
     {% endfor %}
   </div>
   {% endif %}
@@ -23,17 +23,17 @@ title: Blog
       {% assign href = '/blog/' | append: post.id | append: '/' %}
       {% assign isExternal = false %}
     {% endif %}
-    <li data-tags='{{ post.tags | json }}'>
+    <li data-tags='{{ post.tags | json | escape }}'>
       <a
-        href="{{ href }}"
+        href="{{ href | escape }}"
         class="post-row"
         {% if isExternal %}target="_blank" rel="noopener noreferrer"{% endif %}
       >
-        <span class="post-title">{{ post.title }}</span>
+        <span class="post-title">{{ post.title | escape }}</span>
         <span class="post-meta">
           <span class="post-date">{{ post.date | formatDate }}</span>
           <span class="post-meta-sep">&middot;</span>
-          <span class="post-readtime">{{ post.readTime }}</span>
+          <span class="post-readtime">{{ post.readTime | escape }}</span>
         </span>
       </a>
     </li>
