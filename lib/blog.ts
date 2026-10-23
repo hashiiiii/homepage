@@ -106,6 +106,31 @@ export async function loadLocalPosts(): Promise<BlogPostWithContent[]> {
   return posts;
 }
 
+export function zennItemsToPosts(items: Parser.Item[]): BlogPost[] {
+  return items.flatMap((item) => {
+    const url = URL.parse(item.link || "");
+    if (!url || (url.protocol !== "https:" && url.protocol !== "http:")) return [];
+
+    const urlParts = item.link?.split("/") || [];
+    const id = `zenn-${urlParts[urlParts.length - 1] || item.guid || Date.now().toString()}`;
+    const date = item.pubDate
+      ? new Date(item.pubDate).toISOString().split("T")[0]
+      : new Date().toISOString().split("T")[0];
+
+    return {
+      id,
+      title: item.title || "Untitled",
+      excerpt: item.contentSnippet || item.content?.substring(0, 150) || "",
+      date,
+      tags: item.categories || ["zenn"],
+      readTime: "zenn",
+      published: true,
+      source: "zenn" as const,
+      externalUrl: url.href,
+    };
+  });
+}
+
 /**
  * Fetch posts from Zenn RSS feed
  */
@@ -114,25 +139,7 @@ export async function fetchZennPosts(): Promise<BlogPost[]> {
     const parser = new Parser();
     const feed = await parser.parseURL(`https://zenn.dev/${ZENN_USERNAME}/feed`);
 
-    return feed.items.map((item) => {
-      const urlParts = item.link?.split("/") || [];
-      const id = `zenn-${urlParts[urlParts.length - 1] || item.guid || Date.now().toString()}`;
-      const date = item.pubDate
-        ? new Date(item.pubDate).toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0];
-
-      return {
-        id,
-        title: item.title || "Untitled",
-        excerpt: item.contentSnippet || item.content?.substring(0, 150) || "",
-        date,
-        tags: item.categories || ["zenn"],
-        readTime: "zenn",
-        published: true,
-        source: "zenn" as const,
-        externalUrl: item.link,
-      };
-    });
+    return zennItemsToPosts(feed.items);
   } catch (error) {
     console.error("Failed to fetch Zenn posts:", error);
     return [];
