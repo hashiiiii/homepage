@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="{{ excerpt | default: 'hashiiiii - personal homepage' }}" />
+  <meta name="description" content="{{ excerpt | default: 'hashiiiii - personal homepage' | escape }}" />
   <link rel="icon" href="/public/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,7 @@
   <script src="https://embed.zenn.studio/js/listen-embed-event.js"></script>
   {% endif %}
   <link rel="stylesheet" href="/css/pages.css" />
-  <title>{% if title %}{{ title }} | {% endif %}hashiiiii</title>
+  <title>{% if title %}{{ title | escape }} | {% endif %}hashiiiii</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EW66F2QF0H"></script>
   <script>
     window.dataLayer = window.dataLayer || [];

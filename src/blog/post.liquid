@@ -13,14 +13,14 @@ eleventyComputed:
 <article class="post-detail">
   <a href="/blog" class="back-link">&larr; Blog</a>
   <header>
-    <h1>{{ post.title }}</h1>
+    <h1>{{ post.title | escape }}</h1>
     <div class="meta">
-      <span>{{ post.date | formatDate }}  &middot;  {{ post.readTime }}</span>
+      <span>{{ post.date | formatDate }}  &middot;  {{ post.readTime | escape }}</span>
     </div>
     {% if post.tags.size > 0 %}
     <div class="tags">
       {% for tag in post.tags %}
-      <a href="/blog?tag={{ tag | url_encode }}" class="tag">{{ tag }}</a>
+      <a href="/blog?tag={{ tag | url_encode | escape }}" class="tag">{{ tag | escape }}</a>
       {% endfor %}
     </div>
     {% endif %}
