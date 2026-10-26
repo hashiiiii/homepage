@@ -16,8 +16,8 @@
     "@11ty/eleventy": "^3.1.7",
     "gray-matter": "^4.0.3",
     "rss-parser": "^3.13.0",
-    "zenn-content-css": "^0.5.6",
-    "zenn-markdown-html": "^0.5.6"
+    "zenn-content-css": "^0.5.7",
+    "zenn-markdown-html": "^0.5.7"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
