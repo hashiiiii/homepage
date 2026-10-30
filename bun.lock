@@ -8,8 +8,8 @@
         "@11ty/eleventy": "^3.1.7",
         "gray-matter": "^4.0.3",
         "rss-parser": "^3.13.0",
-        "zenn-content-css": "^0.5.7",
-        "zenn-markdown-html": "^0.5.7",
+        "zenn-content-css": "^0.5.8",
+        "zenn-markdown-html": "^0.5.8",
       },
       "devDependencies": {
         "@biomejs/biome": "2.6.2",
